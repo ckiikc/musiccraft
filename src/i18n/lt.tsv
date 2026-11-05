@@ -1,0 +1,321 @@
+File	Failas
+Library	Biblioteka
+Playback	Atkūrimas
+Settings	Nuostatos
+Interface	Sąsaja
+Audio	Garsas
+Multiroom	Keli kambariai
+Language	Kalba
+System language	Sistemos kalba
+MusicCraft settings	MusicCraft nuostatos
+All settings…	Visos nuostatos…
+Server and multiroom…	Serveris ir keli kambariai…
+Add files or playlist…	Pridėti failų ar grojaraštį…
+Add local / NAS folder…	Pridėti vietinį / NAS aplanką…
+Add source…	Pridėti šaltinį…
+Connect smartphone / FTP…	Prijungti telefoną / FTP…
+Connect smartphone / FTP	Prijungti telefoną / FTP
+Quit MusicCraft	Baigti MusicCraft
+Sources and synchronization…	Šaltiniai ir sinchronizavimas…
+Sources and synchronization	Šaltiniai ir sinchronizavimas
+Cancel synchronization	Atšaukti sinchronizavimą
+Faceted browser	Filtrų naršyklė
+Clear search and filters	Išvalyti paiešką ir filtrus
+Previous track	Ankstesnis kūrinys
+Next track	Kitas kūrinys
+Play	Atkurti
+Pause	Pristabdyti
+Stop	Stabdyti
+Previous	Ankstesnis
+Next	Kitas
+Repeat track	Kartoti kūrinį
+Track details…	Kūrinio informacija…
+Artist and lyrics…	Atlikėjas ir žodžiai…
+Artist and lyrics	Atlikėjas ir žodžiai
+Audio output…	Garso išvestis…
+Audio output and quality	Garso išvestis ir kokybė
+Always on top	Visada viršuje
+Mini player	Mini grotuvas
+Mini player options	Mini grotuvo parinktys
+Gold	Auksinė
+Graphite	Grafito
+Light	Šviesi
+All music	Visa muzika
+YOUR MUSIC	JŪSŲ MUZIKA
+SMARTPHONE AND NETWORK	TELEFONAS IR TINKLAS
+FOLDERS AND NAS	APLANKAI IR NAS
+SIGNAL LEVELS	SIGNALO LYGIAI
+Choose your next listen	Pasirinkite kitą kūrinį
+Your library awaits	Jūsų biblioteka laukia
+Loading…	Įkeliama…
+System output	Sistemos išvestis
+Shared	Bendra
+Exclusive	Išskirtinė
+SHARED	BENDRA
+EXCLUSIVE	IŠSKIRTINĖ
+Mute	Nutildyti
+Volume	Garsumas
+Hardware volume	Įrenginio garsumas
+Hardware volume · Open audio output	Įrenginio garsumas · Atverti išvestį
+Configure audio output and exclusive mode	Nustatyti išvestį ir išskirtinį režimą
+Playback position	Atkūrimo padėtis
+Output device	Išvesties įrenginys
+Choose where to listen to your music.	Pasirinkite muzikos klausymo įrenginį.
+Refresh devices	Atnaujinti įrenginius
+Listening mode	Klausymo režimas
+Applies when the next track starts.	Taikoma nuo kito kūrinio pradžios.
+Follow source sample rate	Naudoti šaltinio diskretizavimo dažnį
+Strict integer	Griežtas sveikųjų skaičių režimas
+Current signal path	Dabartinis signalo kelias
+Check device formats	Tikrinti įrenginio formatus
+Select a track to open audio output	Pasirinkite kūrinį garso išvesčiai atverti
+Output updated: applies when the next track starts	Išvestis atnaujinta: nuo kito kūrinio
+Shared listening with other apps; MusicCraft controls the volume.	Klausykite kartu su kitomis programomis; garsumą valdo MusicCraft.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	MusicCraft prašo įrenginio ir pradinio dažnio. Garsumą reguliuokite garso įrenginyje.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	Griežtam režimui reikia nenuostolingo PCM ir suderinamos sveikųjų skaičių išvesties ties 0 dB. Kitu atveju atkūrimas sustoja.
+Level and dynamics	Lygis ir dinamika
+Optional processing, applied to the next track in shared mode.	Pasirenkamas apdorojimas nuo kito kūrinio bendru režimu.
+Off	Išjungta
+ReplayGain track	Kūrinio ReplayGain
+ReplayGain album	Albumo ReplayGain
+Preamp	Pradinis stiprinimas
+Prevent clipping using ReplayGain peaks	Vengti iškraipymo pagal ReplayGain pikus
+Exclusive output bypasses ReplayGain and preamp.	Išskirtinė išvestis apeina ReplayGain ir pradinį stiprinimą.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	Albumo režimas išlaiko kūrinių dinamiką. Nesant albumo duomenų naudojamas kūrinio stiprinimas, be žymų – 0 dB.
+Original PCM → exclusive HAL → output · no DSP	Pradinis PCM → išskirtinis HAL → išvestis · be DSP
+Float PCM → software gain → shared CoreAudio	PCM float → programinis stiprinimas → bendra CoreAudio
+Sequence	Iš eilės
+Shuffle tracks	Atsitiktiniai kūriniai
+Shuffle albums	Atsitiktiniai albumai
+Open full library	Atverti visą biblioteką
+Collapse / expand panel	Sutraukti / išskleisti skydelį
+Vinyl	Vinilas
+Album playing	Atkuriamas albumas
+Artist	Atlikėjas
+Lyrics	Žodžiai
+Album	Albumas
+Title	Pavadinimas
+Duration	Trukmė
+Genre	Žanras
+Year	Metai
+Format	Formatas
+Folder	Aplankas
+TITLE	PAVADINIMAS
+ARTIST	ATLIKĖJAS
+ALBUM	ALBUMAS
+DURATION	TRUKMĖ
+Search	Ieškoti
+Search this source	Ieškoti šiame šaltinyje
+Search title, artist, album or folder…	Ieškoti pavadinimo, atlikėjo, albumo ar aplanko…
+Filter values…	Filtruoti reikšmes…
+All	Visi
+Album order	Albumų tvarka
+Original order	Pradinė tvarka
+Choose field…	Pasirinkti lauką…
+Choose this column’s field	Pasirinkti šio stulpelio lauką
+Show or hide linked filters	Rodyti arba slėpti susietus filtrus
+Filtered selection	Filtruotas pasirinkimas
+Tracks in the selected source	Pasirinkto šaltinio kūriniai
+Double-click to play	Dukart spustelėkite, kad atkurtumėte
+Click to play from this row	Spustelėkite, kad atkurtumėte nuo šios eilutės
+Play from here	Atkurti nuo čia
+No matching tracks	Nėra atitinkančių kūrinių
+No tracks found	Kūrinių nerasta
+Try a different search, filter or source.	Bandykite kitą paiešką, filtrą ar šaltinį.
+Your library, here	Jūsų biblioteka čia
+Add a local folder, NAS or smartphone from the File menu.	Meniu Failas pridėkite vietinį aplanką, NAS ar telefoną.
+Select a track and start listening	Pasirinkite kūrinį ir klausykitės
+Ready	Parengta
+Library ready	Biblioteka parengta
+Playing	Atkuriama
+Playback paused	Atkūrimas pristabdytas
+Output closed after an error	Išvestis uždaryta dėl klaidos
+Preparing track…	Ruošiamas kūrinys…
+Configure	Nustatyti
+Synchronize	Sinchronizuoti
+Synchronize folder	Sinchronizuoti aplanką
+Synchronize automatically	Sinchronizuoti automatiškai
+Synchronizing…	Sinchronizuojama…
+Synchronizing folders…	Sinchronizuojami aplankai…
+Synchronizing source…	Sinchronizuojamas šaltinis…
+Synchronization complete	Sinchronizavimas baigtas
+Synchronization cancelled	Sinchronizavimas atšauktas
+Find new tracks without changing existing ones.	Rasti naujų kūrinių nekeičiant esamų.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	Tikrina kas 2 minutes, rečiau nepasiekiamus šaltinius; visa patikra kas 30 minučių.
+Search online for missing covers	Ieškoti trūkstamų viršelių internete
+Save found covers in the album folder	Išsaugoti rastus viršelius albumo aplanke
+No folders added	Aplankų nepridėta
+No phone connected	Telefonas neprijungtas
+Smartphone / FTP	Telefonas / FTP
+Local / NAS folder	Vietinis / NAS aplankas
+Source unavailable	Šaltinis nepasiekiamas
+Source not fully reachable	Šaltinis pasiekiamas tik iš dalies
+Source name	Šaltinio pavadinimas
+Host / IP	Pagrindinis kompiuteris / IP
+Port	Prievadas
+Protocol	Protokolas
+Connection	Ryšys
+Enter the server address and music folder.	Įveskite serverio adresą ir muzikos aplanką.
+Read URL	Skaityti URL
+Access	Prieiga
+User	Naudotojas
+Password	Slaptažodis
+Remember in macOS Keychain	Įsiminti macOS raktinėje
+FTP sends unencrypted data: use a trusted network.	FTP siunčia nešifruotus duomenis: naudokite patikimą tinklą.
+Implicit FTPS	Numanomas FTPS
+Automatic reconnection	Automatinis pakartotinis jungimas
+Find the phone when its IP changes	Rasti telefoną pasikeitus IP
+MusicCraft checks the configured port and verifies the library before changing the connection.	MusicCraft patikrina prievadą ir biblioteką prieš keisdamas ryšį.
+Check and save	Patikrinti ir išsaugoti
+Checking…	Tikrinama…
+Checking new path…	Tikrinamas naujas kelias…
+Connection verified and saved. Update IP, port and folder here.	Ryšys patikrintas ir išsaugotas. Čia keiskite IP, prievadą ir aplanką.
+Connection already in progress	Jau jungiamasi
+Server folders	Serverio aplankai
+Parent folder	Aukštesnis aplankas
+Use as root	Naudoti kaip šaknį
+Browse	Naršyti
+Close	Užverti
+Cancel	Atšaukti
+Check complete	Patikra baigta
+Check cancelled	Patikra atšaukta
+Search cancelled	Paieška atšaukta
+Searching…	Ieškoma…
+Waiting for a compatible Wi-Fi or Ethernet network	Laukiama suderinamo Wi-Fi ar Ethernet tinklo
+Phone not found: another automatic attempt is scheduled	Telefonas nerastas: suplanuotas kitas bandymas
+Connect and index the phone once so it can be recognized	Vieną kartą prijunkite ir indeksuokite telefoną, kad jį atpažintų
+Multiple matching libraries found: choose a connection in Network	Rastos kelios bibliotekos: pasirinkite ryšį tinklo nuostatose
+Password unavailable: open Network to enter it	Slaptažodis nepasiekiamas: įveskite jį tinklo nuostatose
+Authorize Keychain or enter the password in Network	Leiskite raktinę arba įveskite slaptažodį tinklo nuostatose
+Wait or cancel the current scan	Palaukite arba atšaukite dabartinį skenavimą
+Waiting for the new track…	Laukiama naujo kūrinio…
+Instrumental track	Instrumentinis kūrinys
+Karaoke · line synchronization	Karaokė · eilučių sinchronizavimas
+Unsynchronized lyrics	Nesinchronizuoti žodžiai
+Follow	Sekti
+Follow the playing line	Sekti atkuriamą eilutę
+Retry	Bandyti dar kartą
+Just music, no sung lyrics.	Tik muzika, be dainuojamų žodžių.
+Lyrics unavailable for this track version.	Šios kūrinio versijos žodžiai nepasiekiami.
+No matching artist biography found on Italian Wikipedia.	Itališkoje Vikipedijoje atitinkamos biografijos nerasta.
+Artist not specified	Atlikėjas nenurodytas
+Play a track with artist and title tags to see its biography and lyrics.	Atkurkite kūrinį su atlikėjo ir pavadinimo žymomis biografijai ir žodžiams matyti.
+The story behind the music	Istorija už muzikos
+Your listening session	Jūsų klausymo sesija
+Authors and history	Autoriai ir istorija
+Unavailable	Nepasiekiama
+Library and content	Biblioteka ir turinys
+Manage synchronization, covers and sources.	Tvarkykite sinchronizavimą, viršelius ir šaltinius.
+Appearance and readability	Išvaizda ir skaitomumas
+Preferences shared by the full and mini views.	Bendros viso ir mini rodinio nuostatos.
+Reduce vinyl animation	Mažinti vinilo animaciją
+Interface size	Sąsajos dydis
+Use ⌘+ and ⌘− to adjust text size.	Teksto dydį keiskite su ⌘+ ir ⌘−.
+Music server and rooms	Muzikos serveris ir kambariai
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	MusicCraft pateikia pradinius failus. LMS valdo piCorePlayer, Squeezelite ir sinchronizuotas grupes.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	Nuotolinis atkūrimas naudoja kambario nuostatas. Mac DSP ir išskirtinis režimas galioja tik vietoje.
+Source sharing	Šaltinio bendrinimas
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	Nauji kūriniai bendrinami automatiškai. Atnaujinimas pakeičia bendrinamą šaltinį nestabdydamas atkūrimo.
+Local address and port	Vietinis adresas ir prievadas
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	Raspberry naudokite privatų Mac Wi-Fi ar Ethernet IP. 127.0.0.1 veikia tik šiame Mac.
+Start music server	Paleisti muzikos serverį
+Stop music server	Sustabdyti muzikos serverį
+Copy library URL	Kopijuoti bibliotekos URL
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	Nuorodoje yra laikinas raktas: dalykitės tik su savo grotuvais. Uždarius MusicCraft serveris sustoja.
+LMS can run on a Mac, NAS or Raspberry.	LMS gali veikti Mac, NAS ar Raspberry įrenginyje.
+LMS address	LMS adresas
+LMS password is kept only for this session.	LMS slaptažodis saugomas tik šioje sesijoje.
+Connect and refresh rooms	Prijungti ir atnaujinti kambarius
+LMS connection verified	LMS ryšys patikrintas
+Group	Grupuoti
+Ungroup room	Atskirti kambarį
+Play source in room	Atkurti šaltinį kambaryje
+Start the music server first	Pirma paleiskite muzikos serverį
+piCorePlayer / LMS guide	piCorePlayer / LMS vadovas
+Offline	Atsijungęs
+Audio and playlists	Garsas ir grojaraščiai
+Files or playlists	Failai ar grojaraščiai
+Sources	Šaltiniai
+Track count	Kūrinių skaičius
+Playback order: {mode}	Atkūrimo tvarka: {mode}
+Click to switch to {mode}	Spustelėkite perjungti į {mode}
+Searching for {source} on the local network…	Ieškoma {source} vietiniame tinkle…
+{source} found · connection updated to {address}	{source} rastas · ryšys atnaujintas į {address}
+Loading · {size} MiB	Įkeliama · {size} MiB
+Tags unavailable	Žymos nepasiekiamos
+Cover · {provider}	Viršelis · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · Pridėta: {added} · Perskaityta: {read} · Nepakeista: {skipped} · Klaidos: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · Pridėta: {added} · Nepasiekiami aplankai: {errors}{limit}
+ · Library limit reached	 · Pasiekta bibliotekos riba
+The saved connection has not been changed.	Išsaugotas ryšys nepakeistas.
+Folder /{name}	Aplankas /{name}
+Add {name}	Pridėti {name}
+Server active · {count} · {address}	Serveris veikia · {count} · {address}
+Invalid local address	Netinkamas vietinis adresas
+Gapless: next track queued in the same stream	Gapless: kitas kūrinys tame pačiame sraute
+Exclusive gapless: next track ready	Išskirtinis gapless: kitas kūrinys parengtas
+Format change: the output will reopen for the next track	Formato keitimas: išvestis bus atverta kitam kūriniui
+Audio preload failed: {reason}	Nepavyko iš anksto įkelti garso: {reason}
+Exclusive output unavailable: {reason}	Išskirtinė išvestis nepasiekiama: {reason}
+hardware volume, bit-perfect unverified	įrenginio garsumas, bit-perfect nepatikrintas
+Connection unavailable or timed out	Ryšys nepasiekiamas arba baigėsi laikas
+Service busy. Try again later.	Paslauga užimta. Bandykite vėliau.
+Invalid server response	Netinkamas serverio atsakymas
+Invalid server address	Netinkamas serverio adresas
+Enter a port from 1 to 65535	Įveskite prievadą nuo 1 iki 65535
+Invalid credentials	Netinkami prisijungimo duomenys
+FTP or FTPS is required	Reikalingas FTP arba FTPS
+Cache unavailable or not writable	Podėlis nepasiekiamas arba nerašomas
+File unavailable. Check the NAS connection.	Failas nepasiekiamas. Patikrinkite NAS ryšį.
+Track exceeds the 1 GiB cache limit	Kūrinys viršija 1 GiB podėlio ribą
+Operation cancelled	Veiksmas atšauktas
+Unsupported or damaged audio file	Nepalaikomas arba sugadintas garso failas
+Audio device unavailable	Garso įrenginys nepasiekiamas
+The device does not support this audio format	Įrenginys nepalaiko šio garso formato
+Seek unavailable for this file	Šiame faile negalima keisti padėties
+Keychain save failed. The password stays in memory.	Nepavyko išsaugoti raktinėje. Slaptažodis lieka atmintyje.
+Network transfer failed	Nepavyko perduoti tinklu
+Folder unavailable	Aplankas nepasiekiamas
+Output interrupted by the audio device	Garso įrenginys nutraukė išvestį
+Service unavailable. Try again later.	Paslauga nepasiekiama. Bandykite vėliau.
+Cannot save the cover	Negalima išsaugoti viršelio
+Invalid network path	Netinkamas tinklo kelias
+Application theme	Programos tema
+Peak protection needs peak tags; without them, positive gain can clip.	Apsaugai reikia pikų žymų; be jų teigiamas stiprinimas gali iškraipyti garsą.
+Cannot start server. Check the local address and port.	Nepavyko paleisti serverio. Patikrinkite vietinį adresą ir prievadą.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	Uždarius MusicCraft serveris sustabdomas. Mac turi likti aktyvus ir prijungtas.
+Cover	Viršelis
+External LMS	Išorinis LMS
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	Tarpas paleidžia arba pristabdo, rodyklės peršoka penkias sekundes. Tvarkos piktograma keičia seką, atsitiktinius kūrinius ir albumus. Kartojamas vienas kūrinys. Filtruotą rezultatą paleiskite dukart spustelėję. Spustelėkite kūrinį šalia plokštelės, kad jį paleistumėte.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	Meniu Failas pridėkite aplankus arba prijungtus NAS tomus. Pasirinkus šaltinį grojami tik jo kūriniai; Visa muzika apima visus šaltinius. Dukart spustelėkite, kad grotų.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	Viršelis ieškomas žymose, albumo aplanke ir internete. Pasirinktinis įrašymas prideda tik trūkstamą paveikslėlį. Esami vaizdai ir žymos išsaugomi.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	Automatinis sinchronizavimas prideda naujus pasiekiamų šaltinių kūrinius. Atnaujinimo piktograma pradeda visą patikrą. Muzikos failai neperrašomi ir neištrinami.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	Nustatymuose pasirinkite įrenginį ir bendrą arba išskirtinę išvestį. Išskirtinė apeina programinį garsumą ir ReplayGain. Griežtas integer atmeta nesuderinamus formatus. ReplayGain ir stiprinimas taikomi kitam bendro režimo kūriniui.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	Įveskite telefono FTP adresą, prievadą, muzikos aplanką ir prisijungimo duomenis. Įjunkite automatinę paiešką pasikeitus IP. Telefono serveris turi veikti tame pačiame tinkle.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	Pasirinkite šaltinį ir Nustatymuose paleiskite integruotą kelių kambarių režimą. piCorePlayer pasirinkite MusicCraft arba rodomą IP. Pasirinkite kambarį, grokite šaltinį ir grupuokite kitus. MusicCraft ir Mac turi likti aktyvūs. Nauji kūriniai automatiškai pasirodo sinchronizavus šaltinį.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	Biografija atitinka sąsajos kalbą, prireikus naudojama anglų. Dainų tekstai lieka originalūs. Sinchronizuoti tekstai seka atkūrimą; spustelėkite eilutę, kad peršoktumėte. Bandyti vėl pakartoja nepavykusią paiešką.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	Mini išlaiko dydį tarp kortelių. Nustatymai valdo temą, kalbą, 100–130% mastelį ir sumažintą animaciją. F1 abiejuose rodiniuose atveria vadovą.
+Help	Pagalba
+Integrated server	Integruotas serveris
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	MusicCraft turi serverį ir jį sukonfigūruoja. Paleiskite jį ir piCorePlayer serveriu pasirinkite MusicCraft.
+No matching artist biography found on Wikipedia.	Vikipedijoje nerasta atitinkama atlikėjo biografija.
+Refresh shared source	Atnaujinti bendrinamą šaltinį
+Search the guide…	Ieškoti vadove…
+Server ready · automatic player discovery enabled	Serveris paruoštas · automatinė grotuvų paieška įjungta
+Start integrated multiroom	Paleisti integruotą kelių kambarių režimą
+Start multiroom when MusicCraft opens	Paleisti kelių kambarių režimą atidarant MusicCraft
+Starting integrated server…	Paleidžiamas integruotas serveris…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	Integruotas serveris prijungia piCorePlayer ir Squeezelite be atskiro diegimo.
+User guide	Naudotojo vadovas
+piCorePlayer server address: {address}	piCorePlayer serverio adresas: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	Atsitiktiniai kūriniai groja pasirinkimą be pasikartojimų. Skaičiuojami tik pradėti kūriniai. Ankstesnis, rankinis pasirinkimas ir kūrinio kartojimas leidžia klausytis dar kartą. Kitas šaltinis ar pasirinkimas pradeda naują ciklą; programos uždarymas ir eilės režimo pakeitimas jį išsaugo.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	Abu grotuvo rodiniai po paleidimo iš naujo prisimena savo dydžius. Mažesniame ekrane jie telpa į naudojamą sritį su 24 punktų paraštėmis, išsaugodami pageidaujamą dydį didesniems ekranams.
+Tags: {read}/{total} · {remaining} remaining	Žymos: {read}/{total} · liko {remaining}
+Tag indexing complete	Žymų indeksavimas baigtas
+Tag indexing paused	Žymų indeksavimas pristabdytas
+Tag indexing in progress	Vyksta žymų indeksavimas
+Waiting for tag sources	Laukiama žymų šaltinių
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	Vilkite garsumui reguliuoti; laikykite Shift tiksliam reguliavimui. Nedideliems pakeitimams slinkite arba naudokite rodykles.
+Tag read errors: {n}	Žymų skaitymo klaidos: {n}
+Tag indexing complete: {read} read · {failed} errors	Indeksavimas baigtas: perskaityta {read} · klaidos {failed}
+LAN scan interval	Vietinio tinklo paieškos intervalas

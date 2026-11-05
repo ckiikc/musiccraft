@@ -1,0 +1,323 @@
+# Vietnamese (vi). Columns: English source<TAB>translation.
+# Original AI-assisted translation for MusicCraft; native review pending.
+File	Tệp
+Library	Thư viện
+Playback	Phát nhạc
+Settings	Cài đặt
+Interface	Giao diện
+Audio	Âm thanh
+Multiroom	Đa phòng
+Language	Ngôn ngữ
+System language	Ngôn ngữ hệ thống
+MusicCraft settings	Cài đặt MusicCraft
+All settings…	Tất cả cài đặt…
+Server and multiroom…	Máy chủ và phát đa phòng…
+Add files or playlist…	Thêm tệp hoặc danh sách phát…
+Add local / NAS folder…	Thêm thư mục cục bộ hoặc NAS…
+Add source…	Thêm nguồn…
+Connect smartphone / FTP…	Kết nối điện thoại qua FTP…
+Connect smartphone / FTP	Kết nối điện thoại qua FTP
+Quit MusicCraft	Thoát MusicCraft
+Sources and synchronization…	Nguồn và đồng bộ hóa…
+Sources and synchronization	Nguồn và đồng bộ hóa
+Cancel synchronization	Hủy đồng bộ hóa
+Faceted browser	Duyệt theo thuộc tính
+Clear search and filters	Xóa nội dung tìm kiếm và bộ lọc
+Previous track	Bài trước
+Next track	Bài tiếp theo
+Play	Phát
+Pause	Tạm dừng
+Stop	Dừng
+Previous	Trước
+Next	Tiếp theo
+Repeat track	Lặp lại bài
+Track details…	Chi tiết bài hát…
+Artist and lyrics…	Nghệ sĩ và lời bài hát…
+Artist and lyrics	Nghệ sĩ và lời bài hát
+Audio output…	Đầu ra âm thanh…
+Audio output and quality	Đầu ra và chất lượng âm thanh
+Always on top	Luôn ở trên cùng
+Mini player	Trình phát thu gọn
+Mini player options	Tùy chọn trình phát thu gọn
+Gold	Vàng
+Graphite	Than chì
+Light	Sáng
+All music	Tất cả nhạc
+YOUR MUSIC	NHẠC CỦA BẠN
+SMARTPHONE AND NETWORK	ĐIỆN THOẠI VÀ MẠNG
+FOLDERS AND NAS	THƯ MỤC VÀ NAS
+SIGNAL LEVELS	MỨC TÍN HIỆU
+Choose your next listen	Chọn bài muốn nghe tiếp
+Your library awaits	Thư viện đã sẵn sàng
+Loading…	Đang tải…
+System output	Đầu ra hệ thống
+Shared	Dùng chung
+Exclusive	Độc quyền
+SHARED	DÙNG CHUNG
+EXCLUSIVE	ĐỘC QUYỀN
+Mute	Tắt tiếng
+Volume	Âm lượng
+Hardware volume	Âm lượng thiết bị
+Hardware volume · Open audio output	Âm lượng thiết bị · Mở cài đặt đầu ra
+Configure audio output and exclusive mode	Cấu hình đầu ra âm thanh và chế độ độc quyền
+Playback position	Vị trí phát
+Output device	Thiết bị đầu ra
+Choose where to listen to your music.	Chọn thiết bị để nghe nhạc.
+Refresh devices	Làm mới danh sách thiết bị
+Listening mode	Chế độ nghe
+Applies when the next track starts.	Áp dụng khi bài tiếp theo bắt đầu.
+Follow source sample rate	Theo tần số lấy mẫu của nguồn
+Strict integer	Bắt buộc dùng số nguyên
+Current signal path	Đường đi tín hiệu hiện tại
+Check device formats	Kiểm tra định dạng của thiết bị
+Select a track to open audio output	Chọn một bài để mở đầu ra âm thanh
+Output updated: applies when the next track starts	Đã cập nhật đầu ra. Thay đổi áp dụng khi bài tiếp theo bắt đầu
+Shared listening with other apps; MusicCraft controls the volume.	Dùng chung thiết bị với các ứng dụng khác. MusicCraft điều chỉnh âm lượng.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	MusicCraft yêu cầu sử dụng thiết bị và tần số lấy mẫu của nguồn. Điều chỉnh âm lượng trên thiết bị âm thanh.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	Chế độ số nguyên nghiêm ngặt yêu cầu PCM không mất dữ liệu và đầu ra số nguyên tương thích ở 0 dB. Quá trình phát sẽ dừng nếu không đáp ứng được.
+Level and dynamics	Mức âm lượng và dải động
+Optional processing, applied to the next track in shared mode.	Xử lý tùy chọn, áp dụng từ bài tiếp theo ở chế độ dùng chung.
+Off	Tắt
+ReplayGain track	ReplayGain theo bài
+ReplayGain album	ReplayGain theo album
+Preamp	Tiền khuếch đại
+Prevent clipping using ReplayGain peaks	Dùng mức đỉnh ReplayGain để tránh cắt đỉnh
+Exclusive output bypasses ReplayGain and preamp.	Đầu ra độc quyền bỏ qua ReplayGain và tiền khuếch đại.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	Chế độ album giữ nguyên chênh lệch âm lượng giữa các bài. Nếu thiếu thẻ album, dùng mức điều chỉnh theo bài. Nếu không có thẻ nào, dùng 0 dB.
+Original PCM → exclusive HAL → output · no DSP	PCM gốc → HAL độc quyền → đầu ra · không xử lý DSP
+Float PCM → software gain → shared CoreAudio	PCM dấu phẩy động → điều chỉnh mức bằng phần mềm → CoreAudio dùng chung
+Sequence	Theo thứ tự
+Shuffle tracks	Xáo trộn bài hát
+Shuffle albums	Xáo trộn album
+Open full library	Mở thư viện đầy đủ
+Collapse / expand panel	Thu gọn hoặc mở rộng bảng
+Vinyl	Đĩa than
+Album playing	Album đang phát
+Artist	Nghệ sĩ
+Lyrics	Lời bài hát
+Album	Album
+Title	Tiêu đề
+Duration	Thời lượng
+Genre	Thể loại
+Year	Năm
+Format	Định dạng
+Folder	Thư mục
+TITLE	TIÊU ĐỀ
+ARTIST	NGHỆ SĨ
+ALBUM	ALBUM
+DURATION	THỜI LƯỢNG
+Search	Tìm kiếm
+Search this source	Tìm trong nguồn này
+Search title, artist, album or folder…	Tìm theo tiêu đề, nghệ sĩ, album hoặc thư mục…
+Filter values…	Lọc giá trị…
+All	Tất cả
+Album order	Thứ tự trong album
+Original order	Thứ tự gốc
+Choose field…	Chọn trường…
+Choose this column’s field	Chọn trường cho cột này
+Show or hide linked filters	Hiện hoặc ẩn các bộ lọc liên kết
+Filtered selection	Các bài đã lọc
+Tracks in the selected source	Bài hát trong nguồn đã chọn
+Double-click to play	Bấm đúp để phát
+Click to play from this row	Bấm để phát từ hàng này
+Play from here	Phát từ đây
+No matching tracks	Không có bài nào phù hợp
+No tracks found	Không tìm thấy bài hát
+Try a different search, filter or source.	Hãy thử từ khóa, bộ lọc hoặc nguồn khác.
+Your library, here	Thư viện nhạc của bạn
+Add a local folder, NAS or smartphone from the File menu.	Thêm thư mục cục bộ, NAS hoặc điện thoại từ trình đơn Tệp.
+Select a track and start listening	Chọn một bài để bắt đầu nghe
+Ready	Sẵn sàng
+Library ready	Thư viện sẵn sàng
+Playing	Đang phát
+Playback paused	Đã tạm dừng
+Output closed after an error	Đầu ra đã đóng sau khi xảy ra lỗi
+Preparing track…	Đang chuẩn bị bài hát…
+Configure	Cấu hình
+Synchronize	Đồng bộ hóa
+Synchronize folder	Đồng bộ hóa thư mục
+Synchronize automatically	Đồng bộ hóa tự động
+Synchronizing…	Đang đồng bộ hóa…
+Synchronizing folders…	Đang đồng bộ hóa các thư mục…
+Synchronizing source…	Đang đồng bộ hóa nguồn…
+Synchronization complete	Đã đồng bộ hóa xong
+Synchronization cancelled	Đã hủy đồng bộ hóa
+Find new tracks without changing existing ones.	Tìm bài hát mới và giữ nguyên các bài hiện có.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	Khi MusicCraft đang mở, ứng dụng kiểm tra mỗi 2 phút, giãn khoảng cách thử lại với nguồn ngoại tuyến và kiểm tra kỹ mỗi 30 phút.
+Search online for missing covers	Tìm ảnh bìa còn thiếu trên mạng
+Save found covers in the album folder	Lưu ảnh bìa tìm được vào thư mục album
+No folders added	Chưa thêm thư mục
+No phone connected	Chưa kết nối điện thoại
+Smartphone / FTP	Điện thoại / FTP
+Local / NAS folder	Thư mục cục bộ hoặc NAS
+Source unavailable	Nguồn không khả dụng
+Source not fully reachable	Không thể truy cập toàn bộ nguồn
+Source name	Tên nguồn
+Host / IP	Máy chủ / IP
+Port	Cổng
+Protocol	Giao thức
+Connection	Kết nối
+Enter the server address and music folder.	Nhập địa chỉ máy chủ và thư mục nhạc.
+Read URL	Đọc URL
+Access	Thông tin truy cập
+User	Tên người dùng
+Password	Mật khẩu
+Remember in macOS Keychain	Lưu trong Chuỗi khóa macOS
+FTP sends unencrypted data: use a trusted network.	FTP truyền dữ liệu không mã hóa. Hãy dùng mạng đáng tin cậy.
+Implicit FTPS	FTPS ngầm định
+Automatic reconnection	Tự động kết nối lại
+Find the phone when its IP changes	Tìm lại điện thoại khi địa chỉ IP thay đổi
+MusicCraft checks the configured port and verifies the library before changing the connection.	MusicCraft kiểm tra cổng đã cấu hình và xác minh thư viện trước khi đổi kết nối.
+Check and save	Kiểm tra và lưu
+Checking…	Đang kiểm tra…
+Checking new path…	Đang kiểm tra đường dẫn mới…
+Connection verified and saved. Update IP, port and folder here.	Đã xác minh và lưu kết nối. Bạn có thể cập nhật IP, cổng và thư mục tại đây.
+Connection already in progress	Đang thực hiện kết nối
+Server folders	Thư mục trên máy chủ
+Parent folder	Thư mục cha
+Use as root	Dùng làm thư mục gốc
+Browse	Duyệt
+Close	Đóng
+Cancel	Hủy
+Check complete	Đã kiểm tra xong
+Check cancelled	Đã hủy kiểm tra
+Search cancelled	Đã hủy tìm kiếm
+Searching…	Đang tìm…
+Waiting for a compatible Wi-Fi or Ethernet network	Đang chờ mạng Wi-Fi hoặc Ethernet phù hợp
+Phone not found: another automatic attempt is scheduled	Không tìm thấy điện thoại. Ứng dụng sẽ tự động thử lại
+Connect and index the phone once so it can be recognized	Kết nối điện thoại và lập chỉ mục lần đầu để MusicCraft có thể nhận diện thiết bị
+Multiple matching libraries found: choose a connection in Network	Tìm thấy nhiều thư viện trùng khớp. Hãy chọn kết nối trong phần Mạng
+Password unavailable: open Network to enter it	Không có mật khẩu. Hãy mở phần Mạng để nhập
+Authorize Keychain or enter the password in Network	Cho phép truy cập Chuỗi khóa hoặc nhập mật khẩu trong phần Mạng
+Wait or cancel the current scan	Chờ hoặc hủy lần quét hiện tại
+Waiting for the new track…	Đang chờ bài hát mới…
+Instrumental track	Bản nhạc không lời
+Karaoke · line synchronization	Karaoke · Đồng bộ theo từng dòng
+Unsynchronized lyrics	Lời bài hát chưa đồng bộ
+Follow	Theo dõi
+Follow the playing line	Theo dõi dòng đang phát
+Retry	Thử lại
+Just music, no sung lyrics.	Bản nhạc này không có lời hát.
+Lyrics unavailable for this track version.	Không có lời cho phiên bản này của bài hát.
+No matching artist biography found on Italian Wikipedia.	Không tìm thấy tiểu sử phù hợp của nghệ sĩ trên Wikipedia tiếng Ý.
+Artist not specified	Chưa có tên nghệ sĩ
+Play a track with artist and title tags to see its biography and lyrics.	Phát một bài có thẻ nghệ sĩ và tiêu đề để xem tiểu sử và lời bài hát.
+The story behind the music	Câu chuyện đằng sau âm nhạc
+Your listening session	Phiên nghe nhạc của bạn
+Authors and history	Tác giả và lịch sử
+Unavailable	Không khả dụng
+Library and content	Thư viện và nội dung
+Manage synchronization, covers and sources.	Quản lý đồng bộ hóa, ảnh bìa và nguồn.
+Appearance and readability	Giao diện và khả năng đọc
+Preferences shared by the full and mini views.	Các tùy chọn chung cho chế độ đầy đủ và thu gọn.
+Reduce vinyl animation	Giảm hiệu ứng chuyển động của đĩa than
+Interface size	Kích thước giao diện
+Use ⌘+ and ⌘− to adjust text size.	Dùng ⌘+ và ⌘− để điều chỉnh kích thước chữ.
+Music server and rooms	Máy chủ nhạc và phòng
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	MusicCraft cung cấp tệp gốc. LMS điều phối piCorePlayer và Squeezelite, kể cả các nhóm phòng phát đồng bộ.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	Phát từ xa dùng cài đặt của từng phòng. DSP và chế độ độc quyền trên máy Mac này chỉ áp dụng khi nghe tại máy.
+Source sharing	Chia sẻ nguồn nhạc
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	Bài mới được chia sẻ tự động. Làm mới cập nhật nguồn đang chia sẻ mà không dừng phát.
+Local address and port	Địa chỉ và cổng cục bộ
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	Dùng IP riêng của máy Mac trên Wi-Fi hoặc Ethernet để Raspberry truy cập. Địa chỉ 127.0.0.1 chỉ hoạt động trên máy Mac này.
+Start music server	Khởi động máy chủ nhạc
+Stop music server	Dừng máy chủ nhạc
+Copy library URL	Sao chép URL thư viện
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	Liên kết có khóa tạm thời. Chỉ chia sẻ liên kết với các trình phát của bạn. Đóng MusicCraft sẽ dừng máy chủ.
+LMS can run on a Mac, NAS or Raspberry.	LMS có thể chạy trên Mac, NAS hoặc Raspberry.
+LMS address	Địa chỉ LMS
+LMS password is kept only for this session.	Mật khẩu LMS chỉ được giữ trong phiên này.
+Connect and refresh rooms	Kết nối và làm mới danh sách phòng
+LMS connection verified	Đã xác minh kết nối LMS
+Group	Tạo nhóm
+Ungroup room	Tách phòng khỏi nhóm
+Play source in room	Phát nguồn trong phòng
+Start the music server first	Hãy khởi động máy chủ nhạc trước
+piCorePlayer / LMS guide	Hướng dẫn piCorePlayer / LMS
+Offline	Ngoại tuyến
+Audio and playlists	Âm thanh và danh sách phát
+Files or playlists	Tệp hoặc danh sách phát
+Sources	Nguồn
+Track count	Số bài hát
+Playback order: {mode}	Thứ tự phát: {mode}
+Click to switch to {mode}	Bấm để chuyển sang {mode}
+Searching for {source} on the local network…	Đang tìm {source} trên mạng cục bộ…
+{source} found · connection updated to {address}	Đã tìm thấy {source} · Đã cập nhật kết nối sang {address}
+Loading · {size} MiB	Đang tải · {size} MiB
+Tags unavailable	Không có thẻ
+Cover · {provider}	Ảnh bìa · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · Đã thêm: {added} · Đã đọc: {read} · Không đổi: {skipped} · Lỗi: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · Đã thêm: {added} · Thư mục không truy cập được: {errors}{limit}
+ · Library limit reached	 · Đã đạt giới hạn thư viện
+The saved connection has not been changed.	Kết nối đã lưu vẫn được giữ nguyên.
+Folder /{name}	Thư mục /{name}
+Add {name}	Thêm {name}
+Server active · {count} · {address}	Máy chủ đang chạy · {count} · {address}
+Invalid local address	Địa chỉ cục bộ không hợp lệ
+Gapless: next track queued in the same stream	Phát liền mạch: đã xếp bài tiếp theo vào cùng luồng âm thanh
+Exclusive gapless: next track ready	Phát liền mạch ở chế độ độc quyền: bài tiếp theo đã sẵn sàng
+Format change: the output will reopen for the next track	Định dạng thay đổi: đầu ra sẽ mở lại khi phát bài tiếp theo
+Audio preload failed: {reason}	Không thể tải trước âm thanh: {reason}
+Exclusive output unavailable: {reason}	Đầu ra độc quyền không khả dụng: {reason}
+hardware volume, bit-perfect unverified	âm lượng thiết bị, chưa xác minh bit-perfect
+Connection unavailable or timed out	Không kết nối được hoặc đã hết thời gian chờ
+Service busy. Try again later.	Dịch vụ đang bận. Hãy thử lại sau.
+Invalid server response	Phản hồi của máy chủ không hợp lệ
+Invalid server address	Địa chỉ máy chủ không hợp lệ
+Enter a port from 1 to 65535	Nhập số cổng từ 1 đến 65535
+Invalid credentials	Thông tin đăng nhập không hợp lệ
+FTP or FTPS is required	Cần dùng FTP hoặc FTPS
+Cache unavailable or not writable	Không thể truy cập hoặc ghi vào bộ nhớ đệm
+File unavailable. Check the NAS connection.	Tệp không khả dụng. Hãy kiểm tra kết nối NAS.
+Track exceeds the 1 GiB cache limit	Bài hát vượt quá giới hạn bộ nhớ đệm 1 GiB
+Operation cancelled	Đã hủy thao tác
+Unsupported or damaged audio file	Tệp âm thanh bị hỏng hoặc không được hỗ trợ
+Audio device unavailable	Thiết bị âm thanh không khả dụng
+The device does not support this audio format	Thiết bị không hỗ trợ định dạng âm thanh này
+Seek unavailable for this file	Không thể tua trong tệp này
+Keychain save failed. The password stays in memory.	Không thể lưu vào Chuỗi khóa. Mật khẩu vẫn được giữ trong bộ nhớ.
+Network transfer failed	Truyền dữ liệu qua mạng thất bại
+Folder unavailable	Thư mục không khả dụng
+Output interrupted by the audio device	Thiết bị âm thanh đã ngắt đầu ra
+Service unavailable. Try again later.	Dịch vụ không khả dụng. Hãy thử lại sau.
+Cannot save the cover	Không thể lưu ảnh bìa
+Invalid network path	Đường dẫn mạng không hợp lệ
+Application theme	Chủ đề ứng dụng
+Peak protection needs peak tags; without them, positive gain can clip.	Chức năng bảo vệ mức đỉnh cần thẻ mức đỉnh. Nếu thiếu thẻ, tăng mức âm có thể gây cắt đỉnh.
+Cannot start server. Check the local address and port.	Không thể khởi động máy chủ. Hãy kiểm tra địa chỉ và cổng cục bộ.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	Đóng MusicCraft sẽ dừng máy chủ. Máy Mac phải duy trì kết nối và không chuyển sang chế độ ngủ.
+Cover	Ảnh bìa
+External LMS	LMS bên ngoài
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	Nhấn phím cách để phát hoặc tạm dừng. Dùng phím mũi tên trái và phải để tua 5 giây. Bấm biểu tượng thứ tự để chuyển lần lượt giữa phát theo thứ tự, xáo trộn bài hát và xáo trộn album. Bật Lặp lại bài để nghe lại bài hiện tại. Bấm đúp vào một kết quả đã lọc để phát nhóm bài đó. Bấm vào một bài bên cạnh đĩa than để phát.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	Trong trình đơn Tệp, thêm thư mục hoặc ổ NAS đã gắn. Chọn một nguồn để chỉ nghe các bài từ nguồn đó. Mục Tất cả nhạc bao gồm mọi nguồn. Bấm đúp vào bài hát để phát.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	MusicCraft đọc ảnh bìa từ thẻ trước, rồi tìm trong thư mục album và cuối cùng tìm trên mạng. Nếu bật tùy chọn lưu, ứng dụng chỉ lưu ảnh mới khi thư mục chưa có ảnh bìa. Ảnh và thẻ âm thanh hiện có được giữ nguyên.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	Đồng bộ hóa tự động thêm bài mới khi có thể truy cập nguồn. Bấm biểu tượng làm mới để kiểm tra toàn bộ nguồn. Quá trình đồng bộ hóa giữ nguyên các tệp nhạc hiện có.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	Trong Cài đặt, chọn thiết bị và chế độ đầu ra dùng chung hoặc độc quyền. Chế độ độc quyền bỏ qua điều chỉnh âm lượng bằng phần mềm và ReplayGain. Chế độ số nguyên nghiêm ngặt dừng phát nếu định dạng không tương thích. ReplayGain và tiền khuếch đại áp dụng từ bài tiếp theo ở chế độ dùng chung.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	Nhập địa chỉ FTP, cổng và thư mục nhạc của điện thoại, rồi nhập thông tin đăng nhập. Bật tính năng tự động tìm lại khi IP thay đổi. Giữ máy chủ FTP trên điện thoại hoạt động và kết nối cùng mạng.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	Chọn một nguồn và khởi động tính năng phát đa phòng tích hợp trong Cài đặt. Trong piCorePlayer, chọn MusicCraft hoặc địa chỉ IP của máy Mac đang hiển thị. Chọn một phòng, phát nguồn và thêm các phòng khác vào nhóm. Giữ MusicCraft mở và máy Mac không ở chế độ ngủ. Bài mới tự xuất hiện sau khi đồng bộ hóa nguồn.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	Tiểu sử nghệ sĩ theo ngôn ngữ giao diện. Nếu không có tiểu sử bằng ngôn ngữ đó, ứng dụng dùng tiếng Anh. Lời bài hát giữ nguyên ngôn ngữ gốc. Lời có mốc thời gian chạy theo bài đang phát. Bấm một dòng để tua đến đó. Bấm Thử lại nếu lần tra cứu trước thất bại.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	Trình phát thu gọn giữ kích thước khi chuyển thẻ. Trong Cài đặt, bạn có thể chọn chủ đề, ngôn ngữ, mức thu phóng 100–130% và giảm hiệu ứng chuyển động. Nhấn F1 để mở hướng dẫn ở cả hai chế độ.
+Help	Trợ giúp
+Integrated server	Máy chủ tích hợp
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	MusicCraft có sẵn máy chủ và quản lý cấu hình của máy chủ. Hãy khởi động rồi chọn MusicCraft làm máy chủ trong piCorePlayer.
+No matching artist biography found on Wikipedia.	Không tìm thấy tiểu sử phù hợp của nghệ sĩ trên Wikipedia.
+Refresh shared source	Làm mới nguồn đã chia sẻ
+Search the guide…	Tìm trong hướng dẫn…
+Server ready · automatic player discovery enabled	Máy chủ sẵn sàng · Đã bật tự động tìm trình phát
+Start integrated multiroom	Bật phát đa phòng tích hợp
+Start multiroom when MusicCraft opens	Bật phát đa phòng khi mở MusicCraft
+Starting integrated server…	Đang khởi động máy chủ tích hợp…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	Máy chủ tích hợp kết nối piCorePlayer và Squeezelite mà không cần cài đặt riêng.
+User guide	Hướng dẫn sử dụng
+piCorePlayer server address: {address}	Địa chỉ máy chủ piCorePlayer: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	Chế độ xáo trộn bài hát phát các bài trong nhóm đã chọn mà không lặp lại. Chỉ những bài đã bắt đầu phát mới được tính. Bạn vẫn có thể nghe lại bằng nút Trước, chọn bài trực tiếp hoặc bật Lặp lại bài. Đổi nguồn hoặc nhóm bài sẽ bắt đầu một vòng mới. Vòng hiện tại được giữ khi đóng ứng dụng hoặc đổi thứ tự phát.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	Cả hai chế độ hiển thị đều nhớ kích thước riêng khi khởi động lại. Trên màn hình nhỏ hơn, cửa sổ vừa với vùng hiển thị với lề 24 điểm. Kích thước ưu tiên được giữ để dùng lại trên màn hình lớn hơn.
+Tags: {read}/{total} · {remaining} remaining	Thẻ: {read}/{total} · Còn {remaining}
+Tag indexing complete	Đã lập chỉ mục thẻ xong
+Tag indexing paused	Đã tạm dừng lập chỉ mục thẻ
+Tag indexing in progress	Đang lập chỉ mục thẻ
+Waiting for tag sources	Đang chờ nguồn thẻ
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	Kéo để chỉnh âm lượng. Giữ Shift để chỉnh chính xác hơn. Cuộn hoặc dùng phím mũi tên để chỉnh từng bước nhỏ.
+Tag read errors: {n}	Lỗi đọc thẻ: {n}
+Tag indexing complete: {read} read · {failed} errors	Đã lập chỉ mục thẻ · Đã đọc: {read} · Lỗi: {failed}
+LAN scan interval	Khoảng cách giữa các lần dò mạng LAN

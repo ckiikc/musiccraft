@@ -1,0 +1,321 @@
+File	Datei
+Library	Mediathek
+Playback	Wiedergabe
+Settings	Einstellungen
+Interface	Oberfläche
+Audio	Audio
+Multiroom	Multiroom
+Language	Sprache
+System language	Systemsprache
+MusicCraft settings	MusicCraft-Einstellungen
+All settings…	Alle Einstellungen…
+Server and multiroom…	Server und Multiroom…
+Add files or playlist…	Dateien oder Wiedergabeliste hinzufügen…
+Add local / NAS folder…	Lokalen / NAS-Ordner hinzufügen…
+Add source…	Quelle hinzufügen…
+Connect smartphone / FTP…	Smartphone / FTP verbinden…
+Connect smartphone / FTP	Smartphone / FTP verbinden
+Quit MusicCraft	MusicCraft beenden
+Sources and synchronization…	Quellen und Synchronisierung…
+Sources and synchronization	Quellen und Synchronisierung
+Cancel synchronization	Synchronisierung abbrechen
+Faceted browser	Facettenbrowser
+Clear search and filters	Suche und Filter löschen
+Previous track	Vorheriger Titel
+Next track	Nächster Titel
+Play	Wiedergeben
+Pause	Pause
+Stop	Stopp
+Previous	Zurück
+Next	Weiter
+Repeat track	Titel wiederholen
+Track details…	Titeldetails…
+Artist and lyrics…	Künstler und Liedtext…
+Artist and lyrics	Künstler und Liedtext
+Audio output…	Audioausgabe…
+Audio output and quality	Audioausgabe und Qualität
+Always on top	Immer im Vordergrund
+Mini player	Miniplayer
+Mini player options	Miniplayer-Optionen
+Gold	Gold
+Graphite	Graphit
+Light	Hell
+All music	Gesamte Musik
+YOUR MUSIC	DEINE MUSIK
+SMARTPHONE AND NETWORK	SMARTPHONE UND NETZWERK
+FOLDERS AND NAS	ORDNER UND NAS
+SIGNAL LEVELS	SIGNALPEGEL
+Choose your next listen	Nächsten Titel auswählen
+Your library awaits	Deine Mediathek wartet
+Loading…	Laden…
+System output	Systemausgabe
+Shared	Geteilt
+Exclusive	Exklusiv
+SHARED	GETEILT
+EXCLUSIVE	EXKLUSIV
+Mute	Stumm
+Volume	Lautstärke
+Hardware volume	Hardwarelautstärke
+Hardware volume · Open audio output	Hardwarelautstärke · Audioausgabe öffnen
+Configure audio output and exclusive mode	Audioausgabe und Exklusivmodus konfigurieren
+Playback position	Wiedergabeposition
+Output device	Ausgabegerät
+Choose where to listen to your music.	Wähle dein Audiogerät.
+Refresh devices	Geräte aktualisieren
+Listening mode	Wiedergabemodus
+Applies when the next track starts.	Gilt ab dem nächsten Titelstart.
+Follow source sample rate	Quellabtastrate folgen
+Strict integer	Striktes Integer
+Current signal path	Aktueller Signalweg
+Check device formats	Geräteformate prüfen
+Select a track to open audio output	Titel auswählen, um die Audioausgabe zu öffnen
+Output updated: applies when the next track starts	Ausgabe aktualisiert: gilt ab dem nächsten Titel
+Shared listening with other apps; MusicCraft controls the volume.	Gemeinsame Wiedergabe mit anderen Apps; MusicCraft regelt die Lautstärke.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	MusicCraft fordert Gerät und Quellabtastrate an. Lautstärke am Audiogerät regeln.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	Striktes Integer benötigt verlustfreies PCM und eine kompatible Integer-Ausgabe bei 0 dB. Sonst stoppt die Wiedergabe.
+Level and dynamics	Pegel und Dynamik
+Optional processing, applied to the next track in shared mode.	Optionale Verarbeitung ab dem nächsten Titel im geteilten Modus.
+Off	Aus
+ReplayGain track	ReplayGain Titel
+ReplayGain album	ReplayGain Album
+Preamp	Vorverstärkung
+Prevent clipping using ReplayGain peaks	Clipping anhand der ReplayGain-Spitzen vermeiden
+Exclusive output bypasses ReplayGain and preamp.	Exklusive Ausgabe umgeht ReplayGain und Vorverstärkung.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	Albummodus bewahrt Pegelverhältnisse. Ohne Albumwerte gilt Titel-Gain; ohne Tags 0 dB.
+Original PCM → exclusive HAL → output · no DSP	Original-PCM → exklusives HAL → Ausgabe · kein DSP
+Float PCM → software gain → shared CoreAudio	Float-PCM → Softwarepegel → geteiltes CoreAudio
+Sequence	Reihenfolge
+Shuffle tracks	Titel zufällig
+Shuffle albums	Alben zufällig
+Open full library	Vollständige Mediathek öffnen
+Collapse / expand panel	Bereich ein- / ausklappen
+Vinyl	Vinyl
+Album playing	Aktuelles Album
+Artist	Künstler
+Lyrics	Liedtext
+Album	Album
+Title	Titel
+Duration	Dauer
+Genre	Genre
+Year	Jahr
+Format	Format
+Folder	Ordner
+TITLE	TITEL
+ARTIST	KÜNSTLER
+ALBUM	ALBUM
+DURATION	DAUER
+Search	Suchen
+Search this source	Diese Quelle durchsuchen
+Search title, artist, album or folder…	Titel, Künstler, Album oder Ordner suchen…
+Filter values…	Werte filtern…
+All	Alle
+Album order	Albumreihenfolge
+Original order	Ursprüngliche Reihenfolge
+Choose field…	Feld auswählen…
+Choose this column’s field	Feld dieser Spalte auswählen
+Show or hide linked filters	Verknüpfte Filter ein- oder ausblenden
+Filtered selection	Gefilterte Auswahl
+Tracks in the selected source	Titel der ausgewählten Quelle
+Double-click to play	Doppelklick zur Wiedergabe
+Click to play from this row	Klicken, um ab dieser Zeile abzuspielen
+Play from here	Ab hier wiedergeben
+No matching tracks	Keine passenden Titel
+No tracks found	Keine Titel gefunden
+Try a different search, filter or source.	Andere Suche, Filter oder Quelle versuchen.
+Your library, here	Deine Mediathek, hier
+Add a local folder, NAS or smartphone from the File menu.	Lokalen Ordner, NAS oder Smartphone über Datei hinzufügen.
+Select a track and start listening	Titel auswählen und Musik hören
+Ready	Bereit
+Library ready	Mediathek bereit
+Playing	Wiedergabe läuft
+Playback paused	Wiedergabe pausiert
+Output closed after an error	Ausgabe nach einem Fehler geschlossen
+Preparing track…	Titel wird vorbereitet…
+Configure	Konfigurieren
+Synchronize	Synchronisieren
+Synchronize folder	Ordner synchronisieren
+Synchronize automatically	Automatisch synchronisieren
+Synchronizing…	Synchronisierung…
+Synchronizing folders…	Ordner werden synchronisiert…
+Synchronizing source…	Quelle wird synchronisiert…
+Synchronization complete	Synchronisierung abgeschlossen
+Synchronization cancelled	Synchronisierung abgebrochen
+Find new tracks without changing existing ones.	Neue Titel finden, ohne vorhandene zu ändern.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	Prüfung alle 2 Minuten, seltener bei Offline-Quellen; vollständige Prüfung alle 30 Minuten.
+Search online for missing covers	Fehlende Cover online suchen
+Save found covers in the album folder	Gefundene Cover im Albumordner speichern
+No folders added	Keine Ordner hinzugefügt
+No phone connected	Kein Telefon verbunden
+Smartphone / FTP	Smartphone / FTP
+Local / NAS folder	Lokaler / NAS-Ordner
+Source unavailable	Quelle nicht verfügbar
+Source not fully reachable	Quelle nur teilweise erreichbar
+Source name	Quellenname
+Host / IP	Host / IP
+Port	Port
+Protocol	Protokoll
+Connection	Verbindung
+Enter the server address and music folder.	Serveradresse und Musikordner angeben.
+Read URL	URL lesen
+Access	Zugang
+User	Benutzer
+Password	Passwort
+Remember in macOS Keychain	Im macOS-Schlüsselbund merken
+FTP sends unencrypted data: use a trusted network.	FTP überträgt unverschlüsselt: nur in vertrauten Netzwerken verwenden.
+Implicit FTPS	Implizites FTPS
+Automatic reconnection	Automatisch neu verbinden
+Find the phone when its IP changes	Telefon bei geänderter IP finden
+MusicCraft checks the configured port and verifies the library before changing the connection.	MusicCraft prüft Port und Mediathek, bevor die Verbindung geändert wird.
+Check and save	Prüfen und speichern
+Checking…	Prüfung…
+Checking new path…	Neuer Pfad wird geprüft…
+Connection verified and saved. Update IP, port and folder here.	Verbindung geprüft und gespeichert. IP, Port und Ordner hier ändern.
+Connection already in progress	Verbindung wird bereits aufgebaut
+Server folders	Serverordner
+Parent folder	Übergeordneter Ordner
+Use as root	Als Stamm verwenden
+Browse	Durchsuchen
+Close	Schließen
+Cancel	Abbrechen
+Check complete	Prüfung abgeschlossen
+Check cancelled	Prüfung abgebrochen
+Search cancelled	Suche abgebrochen
+Searching…	Suche läuft…
+Waiting for a compatible Wi-Fi or Ethernet network	Warten auf ein kompatibles WLAN- oder Ethernet-Netzwerk
+Phone not found: another automatic attempt is scheduled	Telefon nicht gefunden: weiterer Versuch geplant
+Connect and index the phone once so it can be recognized	Telefon einmal verbinden und indexieren, damit es erkannt wird
+Multiple matching libraries found: choose a connection in Network	Mehrere passende Mediatheken: Verbindung unter Netzwerk auswählen
+Password unavailable: open Network to enter it	Passwort fehlt: unter Netzwerk eingeben
+Authorize Keychain or enter the password in Network	Schlüsselbund freigeben oder Passwort unter Netzwerk eingeben
+Wait or cancel the current scan	Warten oder aktuellen Scan abbrechen
+Waiting for the new track…	Warten auf den neuen Titel…
+Instrumental track	Instrumentaltitel
+Karaoke · line synchronization	Karaoke · zeilenweise Synchronisierung
+Unsynchronized lyrics	Nicht synchronisierter Liedtext
+Follow	Folgen
+Follow the playing line	Der abgespielten Zeile folgen
+Retry	Erneut versuchen
+Just music, no sung lyrics.	Nur Musik, ohne gesungenen Text.
+Lyrics unavailable for this track version.	Kein Liedtext für diese Titelversion verfügbar.
+No matching artist biography found on Italian Wikipedia.	Keine passende Biografie in der italienischen Wikipedia gefunden.
+Artist not specified	Künstler nicht angegeben
+Play a track with artist and title tags to see its biography and lyrics.	Titel mit Künstler- und Titel-Tags abspielen, um Biografie und Liedtext zu sehen.
+The story behind the music	Die Geschichte hinter der Musik
+Your listening session	Deine Hörsitzung
+Authors and history	Autoren und Versionsgeschichte
+Unavailable	Nicht verfügbar
+Library and content	Mediathek und Inhalte
+Manage synchronization, covers and sources.	Synchronisierung, Cover und Quellen verwalten.
+Appearance and readability	Darstellung und Lesbarkeit
+Preferences shared by the full and mini views.	Gemeinsame Einstellungen für Vollansicht und Miniansicht.
+Reduce vinyl animation	Vinylanimation reduzieren
+Interface size	Oberflächengröße
+Use ⌘+ and ⌘− to adjust text size.	Textgröße mit ⌘+ und ⌘− anpassen.
+Music server and rooms	Musikserver und Räume
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	MusicCraft liefert Originaldateien. LMS koordiniert piCorePlayer, Squeezelite und synchronisierte Gruppen.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	Jeder Raum nutzt seine Audioeinstellungen. DSP und Exklusivmodus dieses Macs gelten nur lokal.
+Source sharing	Quelle freigeben
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	Neue Titel werden automatisch geteilt. Aktualisieren wechselt die geteilte Quelle, ohne die Wiedergabe zu unterbrechen.
+Local address and port	Lokale Adresse und Port
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	Für Raspberry die private WLAN- oder Ethernet-IP des Macs nutzen. 127.0.0.1 gilt nur auf diesem Mac.
+Start music server	Musikserver starten
+Stop music server	Musikserver stoppen
+Copy library URL	Mediathek-URL kopieren
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	Der Link enthält einen temporären Schlüssel: nur mit eigenen Playern teilen. Beenden stoppt den Server.
+LMS can run on a Mac, NAS or Raspberry.	LMS kann auf Mac, NAS oder Raspberry laufen.
+LMS address	LMS-Adresse
+LMS password is kept only for this session.	Das LMS-Passwort bleibt nur für diese Sitzung erhalten.
+Connect and refresh rooms	Verbinden und Räume aktualisieren
+LMS connection verified	LMS-Verbindung geprüft
+Group	Gruppieren
+Ungroup room	Raum trennen
+Play source in room	Quelle im Raum wiedergeben
+Start the music server first	Zuerst den Musikserver starten
+piCorePlayer / LMS guide	piCorePlayer- / LMS-Anleitung
+Offline	Offline
+Audio and playlists	Audio und Wiedergabelisten
+Files or playlists	Dateien oder Wiedergabelisten
+Sources	Quellen
+Track count	Titelanzahl
+Playback order: {mode}	Wiedergabereihenfolge: {mode}
+Click to switch to {mode}	Klicken zum Wechsel zu {mode}
+Searching for {source} on the local network…	{source} wird im lokalen Netzwerk gesucht…
+{source} found · connection updated to {address}	{source} gefunden · Verbindung auf {address} aktualisiert
+Loading · {size} MiB	Laden · {size} MiB
+Tags unavailable	Tags nicht verfügbar
+Cover · {provider}	Cover · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · Neu: {added} · Gelesen: {read} · Unverändert: {skipped} · Fehler: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · Neu: {added} · Unerreichbare Ordner: {errors}{limit}
+ · Library limit reached	 · Mediatheklimit erreicht
+The saved connection has not been changed.	Die gespeicherte Verbindung wurde nicht geändert.
+Folder /{name}	Ordner /{name}
+Add {name}	{name} hinzufügen
+Server active · {count} · {address}	Server aktiv · {count} · {address}
+Invalid local address	Ungültige lokale Adresse
+Gapless: next track queued in the same stream	Gapless: nächster Titel im selben Stream
+Exclusive gapless: next track ready	Exklusives Gapless: nächster Titel bereit
+Format change: the output will reopen for the next track	Formatwechsel: Ausgabe wird für den nächsten Titel neu geöffnet
+Audio preload failed: {reason}	Audio-Vorladen fehlgeschlagen: {reason}
+Exclusive output unavailable: {reason}	Exklusive Ausgabe nicht verfügbar: {reason}
+hardware volume, bit-perfect unverified	Hardwarelautstärke, Bit-Perfect nicht geprüft
+Connection unavailable or timed out	Verbindung nicht verfügbar oder Zeitüberschreitung
+Service busy. Try again later.	Dienst ausgelastet. Später erneut versuchen.
+Invalid server response	Ungültige Serverantwort
+Invalid server address	Ungültige Serveradresse
+Enter a port from 1 to 65535	Port von 1 bis 65535 eingeben
+Invalid credentials	Ungültige Zugangsdaten
+FTP or FTPS is required	FTP oder FTPS erforderlich
+Cache unavailable or not writable	Cache nicht verfügbar oder schreibgeschützt
+File unavailable. Check the NAS connection.	Datei nicht verfügbar. NAS-Verbindung prüfen.
+Track exceeds the 1 GiB cache limit	Titel überschreitet das Cachelimit von 1 GiB
+Operation cancelled	Vorgang abgebrochen
+Unsupported or damaged audio file	Nicht unterstützte oder beschädigte Audiodatei
+Audio device unavailable	Audiogerät nicht verfügbar
+The device does not support this audio format	Gerät unterstützt dieses Audioformat nicht
+Seek unavailable for this file	Spulen für diese Datei nicht verfügbar
+Keychain save failed. The password stays in memory.	Speichern im Schlüsselbund fehlgeschlagen. Passwort bleibt im Speicher.
+Network transfer failed	Netzwerkübertragung fehlgeschlagen
+Folder unavailable	Ordner nicht verfügbar
+Output interrupted by the audio device	Ausgabe vom Audiogerät unterbrochen
+Service unavailable. Try again later.	Dienst nicht verfügbar. Später erneut versuchen.
+Cannot save the cover	Cover kann nicht gespeichert werden
+Invalid network path	Ungültiger Netzwerkpfad
+Application theme	Anwendungsdesign
+Peak protection needs peak tags; without them, positive gain can clip.	Der Schutz benötigt Peak-Tags; ohne sie kann positive Verstärkung übersteuern.
+Cannot start server. Check the local address and port.	Serverstart fehlgeschlagen. Lokale Adresse und Port prüfen.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	Beim Schließen von MusicCraft wird der Server beendet. Der Mac muss wach und verbunden bleiben.
+Cover	Cover
+External LMS	Externes LMS
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	Leertaste startet oder pausiert; Pfeile springen fünf Sekunden. Das Reihenfolgesymbol wechselt zwischen Reihenfolge, Zufallstiteln und Zufallsalben. Wiederholen gilt für einen Titel. Gefilterte Ergebnisse per Doppelklick starten. Klicke auf einen Titel neben der Schallplatte, um ihn abzuspielen.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	Ordner oder eingebundene NAS-Volumes über Datei hinzufügen. Eine Quelle begrenzt die Wiedergabe auf ihre Titel; Alle Musik umfasst alle Quellen. Doppelklick startet einen Titel.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	Cover werden zuerst aus Tags, dann aus dem Albumordner und online gelesen. Optionales Speichern ergänzt nur fehlende Bilder. Vorhandene Bilder und Audiotags bleiben erhalten.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	Automatische Synchronisierung ergänzt neue Titel erreichbarer Quellen. Das Aktualisierungssymbol erzwingt eine vollständige Prüfung. Musikdateien werden weder überschrieben noch gelöscht.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	Gerät und gemeinsamen oder exklusiven Ausgang in Einstellungen wählen. Exklusiv umgeht Softwarelautstärke und ReplayGain. Strenges Integer lehnt inkompatible Formate ab. ReplayGain und Vorverstärkung gelten ab dem nächsten gemeinsamen Titel.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	FTP-Adresse, Port, Musikordner und Zugangsdaten des Telefons eingeben. Automatische Suche bei wechselnder IP aktivieren. Der Telefonserver muss im selben Netzwerk laufen.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	Quelle wählen und integriertes Multiroom in Einstellungen starten. In piCorePlayer MusicCraft oder die angezeigte Mac-IP wählen. Raum auswählen, Quelle abspielen und weitere Räume gruppieren. MusicCraft geöffnet und Mac wach halten. Neue Titel erscheinen automatisch nach der Quellensynchronisierung.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	Biografien folgen der Oberflächensprache, ersatzweise Englisch. Liedtexte bleiben original. Synchronisierte Texte folgen der Wiedergabe; Zeilen anklicken zum Springen. Wiederholen startet fehlgeschlagene Suchen erneut.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	Der Mini-Player behält seine Größe zwischen Ansichten. Einstellungen steuert Thema, Sprache, Zoom 100–130% und reduzierte Animation. F1 öffnet diese Anleitung in beiden Ansichten.
+Help	Hilfe
+Integrated server	Integrierter Server
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	MusicCraft enthält und konfiguriert den Server. Starten und anschließend MusicCraft als Server in piCorePlayer wählen.
+No matching artist biography found on Wikipedia.	Keine passende Künstlerbiografie auf Wikipedia gefunden.
+Refresh shared source	Freigegebene Quelle aktualisieren
+Search the guide…	Anleitung durchsuchen…
+Server ready · automatic player discovery enabled	Server bereit · automatische Player-Erkennung aktiv
+Start integrated multiroom	Integriertes Multiroom starten
+Start multiroom when MusicCraft opens	Multiroom beim Öffnen von MusicCraft starten
+Starting integrated server…	Integrierter Server startet…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	Der integrierte Server verbindet piCorePlayer und Squeezelite ohne separate Installation.
+User guide	Benutzerhandbuch
+piCorePlayer server address: {address}	piCorePlayer-Serveradresse: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	Zufällige Titel spielt die Auswahl ohne Wiederholungen ab. Nur gestartete Titel zählen. Zurück, manuelle Auswahl und Titel wiederholen erlauben erneutes Abspielen. Eine andere Quelle oder Auswahl startet einen neuen Durchlauf; Schließen der App und Wechsel des Ordnungsmodus erhalten ihn.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	Beide Playeransichten behalten ihre eigenen Größen nach einem Neustart. Auf kleineren Bildschirmen passen sie sich dem nutzbaren Bereich mit 24 Punkten Abstand an und behalten die bevorzugte Größe für größere Bildschirme.
+Tags: {read}/{total} · {remaining} remaining	Tags: {read}/{total} · {remaining} verbleibend
+Tag indexing complete	Tag-Indizierung abgeschlossen
+Tag indexing paused	Tag-Indizierung pausiert
+Tag indexing in progress	Tag-Indizierung läuft
+Waiting for tag sources	Warten auf Tag-Quellen
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	Zum Regeln der Lautstärke ziehen; Umschalt für Feinsteuerung halten. Scrollen oder Pfeiltasten für kleine Änderungen.
+Tag read errors: {n}	Fehler beim Lesen der Tags: {n}
+Tag indexing complete: {read} read · {failed} errors	Indizierung abgeschlossen: {read} gelesen · {failed} Fehler
+LAN scan interval	Intervall für LAN-Suche

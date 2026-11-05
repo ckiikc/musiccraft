@@ -1,0 +1,221 @@
+use super::*;
+use unicode_normalization::UnicodeNormalization;
+
+const CHAPTERS: [(&str, &[&str]); 9] = [
+    (
+        "Library",
+        &[
+            "Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.",
+        ],
+    ),
+    (
+        "Connect smartphone / FTP",
+        &[
+            "Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.",
+        ],
+    ),
+    (
+        "Sources and synchronization",
+        &[
+            "Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.",
+        ],
+    ),
+    (
+        "Playback",
+        &[
+            "Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.",
+            "Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.",
+        ],
+    ),
+    (
+        "Audio",
+        &[
+            "Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.",
+        ],
+    ),
+    (
+        "Artist and lyrics",
+        &[
+            "Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.",
+        ],
+    ),
+    (
+        "Cover",
+        &[
+            "Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.",
+        ],
+    ),
+    (
+        "Multiroom",
+        &[
+            "Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.",
+        ],
+    ),
+    (
+        "Interface",
+        &[
+            "Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.",
+            "Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.",
+        ],
+    ),
+];
+
+fn search_key(text: &str) -> String {
+    text.to_lowercase().nfc().collect()
+}
+
+fn matches_chapter(title: &'static str, paragraphs: &[&'static str], query: &str) -> bool {
+    query.is_empty()
+        || std::iter::once(&title)
+            .chain(paragraphs)
+            .any(|&key| search_key(crate::i18n::logical_text(key)).contains(query))
+}
+
+impl Aurea {
+    pub(super) fn help_window(&mut self, ctx: &egui::Context) {
+        if !self.help_dialog {
+            return;
+        }
+        let area = ctx.content_rect();
+        let mut open = true;
+        egui::Window::new(tr!("User guide"))
+            .id(egui::Id::new("musiccraft-help"))
+            .open(&mut open)
+            .default_size(vec2(650.0, 560.0))
+            .max_width((area.width() - 32.0).max(300.0))
+            .max_height((area.height() - 40.0).max(160.0))
+            .show(ctx, |ui| {
+                ui.label(
+                    RichText::new(format!("MusicCraft {}", env!("CARGO_PKG_VERSION")))
+                        .color(palette::accent()),
+                );
+                ui.add(
+                    egui::TextEdit::singleline(&mut self.help_query)
+                        .hint_text(tr!("Search the guide…"))
+                        .desired_width(f32::INFINITY),
+                );
+                ui.separator();
+                let query = search_key(self.help_query.trim());
+                egui::ScrollArea::vertical()
+                    .id_salt("help-content")
+                    .max_height((area.height() - 170.0).max(100.0))
+                    .show(ui, |ui| {
+                        for (index, (title, paragraphs)) in CHAPTERS.into_iter().enumerate() {
+                            if !matches_chapter(title, paragraphs, &query) {
+                                continue;
+                            }
+                            let title = crate::i18n::text(title);
+                            egui::CollapsingHeader::new(RichText::new(title).strong())
+                                .id_salt(("guide", index))
+                                .default_open(true)
+                                .show(ui, |ui| {
+                                    let body = paragraphs
+                                        .iter()
+                                        .map(|key| crate::i18n::text(key))
+                                        .collect::<Vec<_>>()
+                                        .join("\n\n");
+                                    ui.add(
+                                        egui::Label::new(
+                                            RichText::new(body).color(palette::text()),
+                                        )
+                                        .wrap(),
+                                    );
+                                });
+                            ui.add_space(8.0);
+                        }
+                    });
+            });
+        self.help_dialog = open;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::i18n::{LANGUAGES, logical_text, set};
+
+    #[test]
+    fn every_language_renders_and_searches_the_whole_guide() {
+        let dir = tempfile::tempdir().unwrap();
+        let ctx = egui::Context::default();
+        let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+        app.help_dialog = true;
+
+        for (code, _) in LANGUAGES {
+            set(code);
+            listening_ui::configure_language_font(&ctx);
+            let mut queries = Vec::new();
+            for (title, paragraphs) in CHAPTERS {
+                assert!(!logical_text(title).is_empty(), "{code}: {title}");
+                for &paragraph in paragraphs {
+                    let english = paragraph.strip_prefix("Guide: ").unwrap();
+                    let localized = logical_text(paragraph);
+                    assert!(!localized.is_empty(), "{code}: {title}");
+                    assert_eq!(localized == english, code == "en", "{code}: {title}");
+                    queries.push((title, paragraphs, search_key(localized)));
+                }
+            }
+            for (title, paragraphs, query) in queries {
+                assert!(
+                    matches_chapter(title, paragraphs, &query),
+                    "{code}: {title}"
+                );
+            }
+
+            let mut output = ctx.run_ui(
+                egui::RawInput {
+                    screen_rect: Some(egui::Rect::from_min_size(
+                        pos2(0.0, 0.0),
+                        vec2(1280.0, 1600.0),
+                    )),
+                    ..Default::default()
+                },
+                |_| {
+                    app.help_window(&ctx);
+                    #[cfg(target_os = "macos")]
+                    ctx.fonts_mut(|fonts| {
+                        for key in CHAPTERS.iter().flat_map(|(title, paragraphs)| {
+                            std::iter::once(title).chain(paragraphs.iter())
+                        }) {
+                            for c in crate::i18n::text(key)
+                                .chars()
+                                .filter(|c| c.is_alphanumeric())
+                            {
+                                assert!(
+                                    fonts.has_glyph(&egui::FontId::proportional(14.0), c),
+                                    "{code}: missing glyph {c:?} in {key}"
+                                );
+                            }
+                        }
+                    });
+                },
+            );
+            output.textures_delta.clear();
+            assert!(!output.shapes.is_empty(), "{code}: manual did not render");
+            let nodes = output.platform_output.accesskit_update.unwrap().nodes;
+            for (title, paragraphs) in CHAPTERS {
+                let title = crate::i18n::text(title);
+                let has_text = |text: &str| {
+                    nodes
+                        .iter()
+                        .any(|(_, node)| node.label() == Some(text) || node.value() == Some(text))
+                };
+                assert!(has_text(title), "{code}: chapter missing: {title}");
+                let body = paragraphs
+                    .iter()
+                    .map(|key| crate::i18n::text(key))
+                    .collect::<Vec<_>>()
+                    .join("\n\n");
+                assert!(has_text(&body), "{code}: chapter text missing: {title}");
+            }
+            assert!(app.help_dialog);
+        }
+        set("vi");
+        let (title, paragraphs) = CHAPTERS[0];
+        let decomposed = "Thêm thư mục".nfd().collect::<String>();
+        assert!(matches_chapter(title, paragraphs, &search_key(&decomposed)));
+        assert!(!matches_chapter(title, paragraphs, "không có kết quả"));
+        set("en");
+    }
+}

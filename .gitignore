@@ -1,0 +1,16 @@
+/target/
+/dist/
+/vendor/
+/test-output/
+/.venv/
+/.env
+/.env.*
+__pycache__/
+*.pyc
+.DS_Store
+state.ron
+ftp-sources.json
+tracks-seed.json
+tags.jsonl
+retries.json
+*.log

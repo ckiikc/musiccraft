@@ -1,0 +1,321 @@
+File	Soubor
+Library	Knihovna
+Playback	Přehrávání
+Settings	Nastavení
+Interface	Rozhraní
+Audio	Zvuk
+Multiroom	Více místností
+Language	Jazyk
+System language	Jazyk systému
+MusicCraft settings	Nastavení MusicCraft
+All settings…	Všechna nastavení…
+Server and multiroom…	Server a více místností…
+Add files or playlist…	Přidat soubory nebo seznam…
+Add local / NAS folder…	Přidat místní / NAS složku…
+Add source…	Přidat zdroj…
+Connect smartphone / FTP…	Připojit telefon / FTP…
+Connect smartphone / FTP	Připojit telefon / FTP
+Quit MusicCraft	Ukončit MusicCraft
+Sources and synchronization…	Zdroje a synchronizace…
+Sources and synchronization	Zdroje a synchronizace
+Cancel synchronization	Zrušit synchronizaci
+Faceted browser	Prohlížeč s filtry
+Clear search and filters	Vymazat hledání a filtry
+Previous track	Předchozí skladba
+Next track	Další skladba
+Play	Přehrát
+Pause	Pozastavit
+Stop	Zastavit
+Previous	Předchozí
+Next	Další
+Repeat track	Opakovat skladbu
+Track details…	Podrobnosti skladby…
+Artist and lyrics…	Interpret a text…
+Artist and lyrics	Interpret a text
+Audio output…	Zvukový výstup…
+Audio output and quality	Zvukový výstup a kvalita
+Always on top	Vždy navrchu
+Mini player	Minipřehrávač
+Mini player options	Možnosti minipřehrávače
+Gold	Zlatá
+Graphite	Grafitová
+Light	Světlá
+All music	Veškerá hudba
+YOUR MUSIC	VAŠE HUDBA
+SMARTPHONE AND NETWORK	TELEFON A SÍŤ
+FOLDERS AND NAS	SLOŽKY A NAS
+SIGNAL LEVELS	ÚROVNĚ SIGNÁLU
+Choose your next listen	Vyberte další poslech
+Your library awaits	Vaše knihovna čeká
+Loading…	Načítání…
+System output	Systémový výstup
+Shared	Sdílený
+Exclusive	Výhradní
+SHARED	SDÍLENÝ
+EXCLUSIVE	VÝHRADNÍ
+Mute	Ztlumit
+Volume	Hlasitost
+Hardware volume	Hardwarová hlasitost
+Hardware volume · Open audio output	Hardwarová hlasitost · Otevřít výstup
+Configure audio output and exclusive mode	Nastavit výstup a výhradní režim
+Playback position	Pozice přehrávání
+Output device	Výstupní zařízení
+Choose where to listen to your music.	Vyberte zařízení pro poslech hudby.
+Refresh devices	Obnovit zařízení
+Listening mode	Režim poslechu
+Applies when the next track starts.	Použije se při spuštění další skladby.
+Follow source sample rate	Sledovat vzorkovací frekvenci zdroje
+Strict integer	Striktní celočíselný režim
+Current signal path	Aktuální cesta signálu
+Check device formats	Ověřit formáty zařízení
+Select a track to open audio output	Vyberte skladbu pro otevření výstupu
+Output updated: applies when the next track starts	Výstup aktualizován: od další skladby
+Shared listening with other apps; MusicCraft controls the volume.	Poslech spolu s jinými aplikacemi; hlasitost řídí MusicCraft.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	MusicCraft žádá zařízení a původní frekvenci. Hlasitost nastavte na zvukovém zařízení.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	Striktní režim vyžaduje bezztrátové PCM a kompatibilní celočíselný výstup při 0 dB. Jinak se přehrávání zastaví.
+Level and dynamics	Úroveň a dynamika
+Optional processing, applied to the next track in shared mode.	Volitelné zpracování od další skladby ve sdíleném režimu.
+Off	Vypnuto
+ReplayGain track	ReplayGain skladby
+ReplayGain album	ReplayGain alba
+Preamp	Předzesílení
+Prevent clipping using ReplayGain peaks	Zabránit přebuzení podle špiček ReplayGain
+Exclusive output bypasses ReplayGain and preamp.	Výhradní výstup obchází ReplayGain i předzesílení.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	Režim alba zachovává poměry hlasitosti. Bez údajů alba použije zisk skladby; bez tagů 0 dB.
+Original PCM → exclusive HAL → output · no DSP	Původní PCM → výhradní HAL → výstup · bez DSP
+Float PCM → software gain → shared CoreAudio	PCM float → softwarový zisk → sdílené CoreAudio
+Sequence	Pořadí
+Shuffle tracks	Náhodné skladby
+Shuffle albums	Náhodná alba
+Open full library	Otevřít celou knihovnu
+Collapse / expand panel	Sbalit / rozbalit panel
+Vinyl	Vinyl
+Album playing	Přehrávané album
+Artist	Interpret
+Lyrics	Text
+Album	Album
+Title	Název
+Duration	Délka
+Genre	Žánr
+Year	Rok
+Format	Formát
+Folder	Složka
+TITLE	NÁZEV
+ARTIST	INTERPRET
+ALBUM	ALBUM
+DURATION	DÉLKA
+Search	Hledat
+Search this source	Hledat v tomto zdroji
+Search title, artist, album or folder…	Hledat název, interpreta, album či složku…
+Filter values…	Filtrovat hodnoty…
+All	Vše
+Album order	Pořadí alb
+Original order	Původní pořadí
+Choose field…	Vybrat pole…
+Choose this column’s field	Vybrat pole tohoto sloupce
+Show or hide linked filters	Zobrazit či skrýt propojené filtry
+Filtered selection	Filtrovaný výběr
+Tracks in the selected source	Skladby vybraného zdroje
+Double-click to play	Dvojklikem přehrajete
+Click to play from this row	Kliknutím přehrajete od tohoto řádku
+Play from here	Přehrát odtud
+No matching tracks	Žádné odpovídající skladby
+No tracks found	Nenalezeny žádné skladby
+Try a different search, filter or source.	Zkuste jiné hledání, filtr nebo zdroj.
+Your library, here	Vaše knihovna zde
+Add a local folder, NAS or smartphone from the File menu.	Přidejte místní složku, NAS nebo telefon v nabídce Soubor.
+Select a track and start listening	Vyberte skladbu a začněte poslouchat
+Ready	Připraveno
+Library ready	Knihovna připravena
+Playing	Přehrává se
+Playback paused	Přehrávání pozastaveno
+Output closed after an error	Výstup uzavřen po chybě
+Preparing track…	Příprava skladby…
+Configure	Nastavit
+Synchronize	Synchronizovat
+Synchronize folder	Synchronizovat složku
+Synchronize automatically	Synchronizovat automaticky
+Synchronizing…	Synchronizace…
+Synchronizing folders…	Synchronizace složek…
+Synchronizing source…	Synchronizace zdroje…
+Synchronization complete	Synchronizace dokončena
+Synchronization cancelled	Synchronizace zrušena
+Find new tracks without changing existing ones.	Najde nové skladby beze změny stávajících.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	Kontrola každé 2 minuty, méně pokusů offline a úplná kontrola každých 30 minut.
+Search online for missing covers	Hledat chybějící obaly online
+Save found covers in the album folder	Ukládat nalezené obaly do složky alba
+No folders added	Žádné přidané složky
+No phone connected	Žádný připojený telefon
+Smartphone / FTP	Telefon / FTP
+Local / NAS folder	Místní / NAS složka
+Source unavailable	Zdroj nedostupný
+Source not fully reachable	Zdroj není plně dostupný
+Source name	Název zdroje
+Host / IP	Hostitel / IP
+Port	Port
+Protocol	Protokol
+Connection	Připojení
+Enter the server address and music folder.	Zadejte adresu serveru a hudební složku.
+Read URL	Načíst URL
+Access	Přístup
+User	Uživatel
+Password	Heslo
+Remember in macOS Keychain	Zapamatovat v Klíčence macOS
+FTP sends unencrypted data: use a trusted network.	FTP přenáší nešifrovaně: používejte důvěryhodnou síť.
+Implicit FTPS	Implicitní FTPS
+Automatic reconnection	Automatické připojení
+Find the phone when its IP changes	Najít telefon při změně IP
+MusicCraft checks the configured port and verifies the library before changing the connection.	MusicCraft před změnou připojení ověří port a knihovnu.
+Check and save	Ověřit a uložit
+Checking…	Ověřování…
+Checking new path…	Ověřování nové cesty…
+Connection verified and saved. Update IP, port and folder here.	Připojení ověřeno a uloženo. Zde změňte IP, port či složku.
+Connection already in progress	Připojování již probíhá
+Server folders	Složky serveru
+Parent folder	Nadřazená složka
+Use as root	Použít jako kořen
+Browse	Procházet
+Close	Zavřít
+Cancel	Zrušit
+Check complete	Kontrola dokončena
+Check cancelled	Kontrola zrušena
+Search cancelled	Hledání zrušeno
+Searching…	Hledání…
+Waiting for a compatible Wi-Fi or Ethernet network	Čekání na kompatibilní Wi-Fi nebo Ethernet
+Phone not found: another automatic attempt is scheduled	Telefon nenalezen: další pokus je naplánován
+Connect and index the phone once so it can be recognized	Jednou připojte a indexujte telefon, aby jej bylo možné rozpoznat
+Multiple matching libraries found: choose a connection in Network	Více odpovídajících knihoven: vyberte připojení v Síti
+Password unavailable: open Network to enter it	Heslo není dostupné: zadejte jej v Síti
+Authorize Keychain or enter the password in Network	Povolte Klíčenku nebo zadejte heslo v Síti
+Wait or cancel the current scan	Počkejte nebo zrušte aktuální skenování
+Waiting for the new track…	Čekání na novou skladbu…
+Instrumental track	Instrumentální skladba
+Karaoke · line synchronization	Karaoke · synchronizace po řádcích
+Unsynchronized lyrics	Nesynchronizovaný text
+Follow	Sledovat
+Follow the playing line	Sledovat přehrávaný řádek
+Retry	Zkusit znovu
+Just music, no sung lyrics.	Pouze hudba, bez zpívaného textu.
+Lyrics unavailable for this track version.	Text pro tuto verzi skladby není dostupný.
+No matching artist biography found on Italian Wikipedia.	Na italské Wikipedii nebyl nalezen odpovídající životopis.
+Artist not specified	Interpret neuveden
+Play a track with artist and title tags to see its biography and lyrics.	Přehrajte skladbu s tagy interpreta a názvu pro zobrazení životopisu a textu.
+The story behind the music	Příběh za hudbou
+Your listening session	Váš poslech
+Authors and history	Autoři a historie
+Unavailable	Nedostupné
+Library and content	Knihovna a obsah
+Manage synchronization, covers and sources.	Správa synchronizace, obalů a zdrojů.
+Appearance and readability	Vzhled a čitelnost
+Preferences shared by the full and mini views.	Společné předvolby úplného i mini zobrazení.
+Reduce vinyl animation	Omezit animaci vinylu
+Interface size	Velikost rozhraní
+Use ⌘+ and ⌘− to adjust text size.	Velikost textu upravíte pomocí ⌘+ a ⌘−.
+Music server and rooms	Hudební server a místnosti
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	MusicCraft poskytuje původní soubory. LMS řídí piCorePlayer, Squeezelite a synchronizované skupiny.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	Vzdálené přehrávání používá nastavení místností. DSP a výhradní režim Macu platí pouze místně.
+Source sharing	Sdílení zdroje
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	Nové skladby se sdílejí automaticky. Obnovení změní sdílený zdroj bez přerušení přehrávání.
+Local address and port	Místní adresa a port
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	Pro Raspberry použijte soukromou Wi-Fi či Ethernet IP Macu. 127.0.0.1 funguje jen na tomto Macu.
+Start music server	Spustit hudební server
+Stop music server	Zastavit hudební server
+Copy library URL	Kopírovat URL knihovny
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	Odkaz obsahuje dočasný klíč: sdílejte jej jen se svými přehrávači. Ukončení MusicCraft zastaví server.
+LMS can run on a Mac, NAS or Raspberry.	LMS může běžet na Macu, NAS či Raspberry.
+LMS address	Adresa LMS
+LMS password is kept only for this session.	Heslo LMS zůstane jen v této relaci.
+Connect and refresh rooms	Připojit a obnovit místnosti
+LMS connection verified	Připojení LMS ověřeno
+Group	Seskupit
+Ungroup room	Oddělit místnost
+Play source in room	Přehrát zdroj v místnosti
+Start the music server first	Nejprve spusťte hudební server
+piCorePlayer / LMS guide	Průvodce piCorePlayer / LMS
+Offline	Offline
+Audio and playlists	Zvuk a seznamy skladeb
+Files or playlists	Soubory nebo seznamy skladeb
+Sources	Zdroje
+Track count	Počet skladeb
+Playback order: {mode}	Pořadí přehrávání: {mode}
+Click to switch to {mode}	Kliknutím přepnete na {mode}
+Searching for {source} on the local network…	Hledání {source} v místní síti…
+{source} found · connection updated to {address}	{source} nalezen · připojení změněno na {address}
+Loading · {size} MiB	Načítání · {size} MiB
+Tags unavailable	Tagy nejsou dostupné
+Cover · {provider}	Obal · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · Nové: {added} · Načtené: {read} · Beze změny: {skipped} · Chyby: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · Nové: {added} · Nedostupné složky: {errors}{limit}
+ · Library limit reached	 · Dosažen limit knihovny
+The saved connection has not been changed.	Uložené připojení nebylo změněno.
+Folder /{name}	Složka /{name}
+Add {name}	Přidat {name}
+Server active · {count} · {address}	Server běží · {count} · {address}
+Invalid local address	Neplatná místní adresa
+Gapless: next track queued in the same stream	Gapless: další skladba ve stejném streamu
+Exclusive gapless: next track ready	Výhradní gapless: další skladba připravena
+Format change: the output will reopen for the next track	Změna formátu: výstup se znovu otevře pro další skladbu
+Audio preload failed: {reason}	Přednačtení zvuku selhalo: {reason}
+Exclusive output unavailable: {reason}	Výhradní výstup nedostupný: {reason}
+hardware volume, bit-perfect unverified	hardwarová hlasitost, bit-perfect neověřeno
+Connection unavailable or timed out	Připojení nedostupné nebo vypršel čas
+Service busy. Try again later.	Služba je zaneprázdněná. Zkuste to později.
+Invalid server response	Neplatná odpověď serveru
+Invalid server address	Neplatná adresa serveru
+Enter a port from 1 to 65535	Zadejte port od 1 do 65535
+Invalid credentials	Neplatné přihlašovací údaje
+FTP or FTPS is required	Je vyžadováno FTP nebo FTPS
+Cache unavailable or not writable	Cache není dostupná nebo zapisovatelná
+File unavailable. Check the NAS connection.	Soubor nedostupný. Ověřte připojení NAS.
+Track exceeds the 1 GiB cache limit	Skladba překračuje limit cache 1 GiB
+Operation cancelled	Operace zrušena
+Unsupported or damaged audio file	Nepodporovaný či poškozený zvukový soubor
+Audio device unavailable	Zvukové zařízení nedostupné
+The device does not support this audio format	Zařízení nepodporuje tento zvukový formát
+Seek unavailable for this file	Posun v tomto souboru není dostupný
+Keychain save failed. The password stays in memory.	Uložení do Klíčenky selhalo. Heslo zůstává v paměti.
+Network transfer failed	Síťový přenos selhal
+Folder unavailable	Složka nedostupná
+Output interrupted by the audio device	Výstup přerušilo zvukové zařízení
+Service unavailable. Try again later.	Služba nedostupná. Zkuste to později.
+Cannot save the cover	Obal nelze uložit
+Invalid network path	Neplatná síťová cesta
+Application theme	Motiv aplikace
+Peak protection needs peak tags; without them, positive gain can clip.	Ochrana vyžaduje tagy špiček; bez nich může kladný zisk způsobit přebuzení.
+Cannot start server. Check the local address and port.	Server nelze spustit. Ověřte místní adresu a port.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	Zavřením MusicCraft se server zastaví. Mac musí zůstat vzhůru a připojený.
+Cover	Obal
+External LMS	Externí LMS
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	Mezerník spouští nebo pozastaví, šipky posouvají o pět sekund. Ikona pořadí střídá sekvenci, náhodné skladby a alba. Opakování platí pro skladbu. Dvojklik spustí filtrovaný výsledek. Kliknutím na skladbu vedle desky ji přehrajete.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	Přidejte složky nebo připojené svazky NAS v nabídce Soubor. Výběr zdroje omezí poslech na jeho skladby; Veškerá hudba zahrnuje všechny zdroje. Dvojklik přehrává.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	Obal se hledá v tazích, složce alba a online. Volitelné ukládání doplní pouze chybějící obrázek. Stávající obrázky a tagy zůstanou zachovány.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	Automatická synchronizace doplní nové skladby dostupných zdrojů. Ikona obnovení vynutí úplnou kontrolu. Hudební soubory nepřepisuje ani nemaže.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	V Nastavení vyberte zařízení a sdílený či výhradní výstup. Výhradní obchází softwarovou hlasitost a ReplayGain. Přísný integer odmítne nekompatibilní formáty. ReplayGain a předzesílení platí od další sdílené skladby.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	Zadejte FTP adresu telefonu, port, hudební složku a přihlašovací údaje. Zapněte automatické hledání při změně IP. Server telefonu musí běžet ve stejné síti.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	Vyberte zdroj a spusťte integrovaný multiroom v Nastavení. V piCorePlayer zvolte MusicCraft nebo zobrazenou IP. Vyberte místnost, přehrajte zdroj a seskupte ostatní. MusicCraft i Mac musí zůstat aktivní. Nové skladby se objeví automaticky po synchronizaci zdroje.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	Biografie používá jazyk rozhraní, případně angličtinu. Texty písní zůstávají původní. Synchronizované texty sledují přehrávání; kliknutí na řádek posune skladbu. Zkusit znovu opakuje neúspěšné hledání.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	Mini přehrávač zachová velikost mezi kartami. Nastavení ovládá motiv, jazyk, měřítko 100–130% a omezení animací. F1 otevře příručku v obou zobrazeních.
+Help	Nápověda
+Integrated server	Integrovaný server
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	MusicCraft obsahuje a nastaví server. Spusťte jej a v piCorePlayer vyberte MusicCraft jako server.
+No matching artist biography found on Wikipedia.	Na Wikipedii nebyla nalezena odpovídající biografie.
+Refresh shared source	Obnovit sdílený zdroj
+Search the guide…	Hledat v příručce…
+Server ready · automatic player discovery enabled	Server připraven · automatické hledání přehrávačů aktivní
+Start integrated multiroom	Spustit integrovaný multiroom
+Start multiroom when MusicCraft opens	Spustit multiroom při otevření MusicCraft
+Starting integrated server…	Spouštění integrovaného serveru…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	Integrovaný server připojí piCorePlayer a Squeezelite bez samostatné instalace.
+User guide	Uživatelská příručka
+piCorePlayer server address: {address}	Adresa serveru piCorePlayer: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	Náhodné skladby přehrávají výběr bez opakování. Počítají se jen spuštěné skladby. Předchozí, ruční výběr a Opakovat skladbu umožňují opětovný poslech. Jiný zdroj nebo výběr zahájí nový cyklus; zavření aplikace a změna pořadí jej zachovají.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	Obě zobrazení si po restartu pamatují vlastní rozměry. Na menší obrazovce se přizpůsobí využitelné ploše s okrajem 24 bodů a uchovají preferovanou velikost pro větší obrazovky.
+Tags: {read}/{total} · {remaining} remaining	Tagy: {read}/{total} · zbývá {remaining}
+Tag indexing complete	Indexování tagů dokončeno
+Tag indexing paused	Indexování tagů pozastaveno
+Tag indexing in progress	Probíhá indexování tagů
+Waiting for tag sources	Čekání na zdroje tagů
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	Tažením upravte hlasitost; podržte Shift pro jemné nastavení. Posouváním nebo šipkami proveďte malé změny.
+Tag read errors: {n}	Chyby čtení tagů: {n}
+Tag indexing complete: {read} read · {failed} errors	Indexování dokončeno: přečteno {read} · chyby {failed}
+LAN scan interval	Interval skenování místní sítě

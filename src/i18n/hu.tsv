@@ -1,0 +1,321 @@
+File	Fájl
+Library	Könyvtár
+Playback	Lejátszás
+Settings	Beállítások
+Interface	Felület
+Audio	Hang
+Multiroom	Több szoba
+Language	Nyelv
+System language	Rendszer nyelve
+MusicCraft settings	MusicCraft beállításai
+All settings…	Összes beállítás…
+Server and multiroom…	Szerver és több szoba…
+Add files or playlist…	Fájlok vagy lejátszási lista hozzáadása…
+Add local / NAS folder…	Helyi / NAS mappa hozzáadása…
+Add source…	Forrás hozzáadása…
+Connect smartphone / FTP…	Telefon / FTP csatlakoztatása…
+Connect smartphone / FTP	Telefon / FTP csatlakoztatása
+Quit MusicCraft	Kilépés a MusicCraftból
+Sources and synchronization…	Források és szinkronizálás…
+Sources and synchronization	Források és szinkronizálás
+Cancel synchronization	Szinkronizálás megszakítása
+Faceted browser	Szűrős böngésző
+Clear search and filters	Keresés és szűrők törlése
+Previous track	Előző szám
+Next track	Következő szám
+Play	Lejátszás
+Pause	Szünet
+Stop	Leállítás
+Previous	Előző
+Next	Következő
+Repeat track	Szám ismétlése
+Track details…	Szám részletei…
+Artist and lyrics…	Előadó és dalszöveg…
+Artist and lyrics	Előadó és dalszöveg
+Audio output…	Hangkimenet…
+Audio output and quality	Hangkimenet és minőség
+Always on top	Mindig felül
+Mini player	Mini lejátszó
+Mini player options	Mini lejátszó beállításai
+Gold	Arany
+Graphite	Grafit
+Light	Világos
+All music	Minden zene
+YOUR MUSIC	SAJÁT ZENE
+SMARTPHONE AND NETWORK	TELEFON ÉS HÁLÓZAT
+FOLDERS AND NAS	MAPPÁK ÉS NAS
+SIGNAL LEVELS	JELSZINTEK
+Choose your next listen	Válassza ki a következő zenét
+Your library awaits	A könyvtár készen áll
+Loading…	Betöltés…
+System output	Rendszerkimenet
+Shared	Megosztott
+Exclusive	Kizárólagos
+SHARED	MEGOSZTOTT
+EXCLUSIVE	KIZÁRÓLAGOS
+Mute	Némítás
+Volume	Hangerő
+Hardware volume	Hardveres hangerő
+Hardware volume · Open audio output	Hardveres hangerő · Kimenet megnyitása
+Configure audio output and exclusive mode	Kimenet és kizárólagos mód beállítása
+Playback position	Lejátszási pozíció
+Output device	Kimeneti eszköz
+Choose where to listen to your music.	Válassza ki a zenehallgatás eszközét.
+Refresh devices	Eszközök frissítése
+Listening mode	Hallgatási mód
+Applies when the next track starts.	A következő szám indításakor lép érvénybe.
+Follow source sample rate	Forrás mintavételi frekvenciájának követése
+Strict integer	Szigorú egészszámos mód
+Current signal path	Jelenlegi jelút
+Check device formats	Eszközformátumok ellenőrzése
+Select a track to open audio output	Válasszon számot a hangkimenet megnyitásához
+Output updated: applies when the next track starts	Kimenet frissítve: a következő számtól
+Shared listening with other apps; MusicCraft controls the volume.	Hallgatás más alkalmazásokkal együtt; a hangerőt a MusicCraft kezeli.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	A MusicCraft az eszközt és az eredeti frekvenciát kéri. A hangerőt a hangeszközön állítsa.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	A szigorú mód veszteségmentes PCM-et és 0 dB-es kompatibilis egészszámos kimenetet igényel. Enélkül a lejátszás leáll.
+Level and dynamics	Szint és dinamika
+Optional processing, applied to the next track in shared mode.	Választható feldolgozás a következő számtól, megosztott módban.
+Off	Kikapcsolva
+ReplayGain track	Szám ReplayGain
+ReplayGain album	Album ReplayGain
+Preamp	Előerősítés
+Prevent clipping using ReplayGain peaks	Túlvezérlés megelőzése a ReplayGain csúcsértékeivel
+Exclusive output bypasses ReplayGain and preamp.	A kizárólagos kimenet megkerüli a ReplayGaint és az előerősítést.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	Az album mód megőrzi a számok dinamikai arányait. Albumadat nélkül a szám erősítését, címkék nélkül 0 dB-t használ.
+Original PCM → exclusive HAL → output · no DSP	Eredeti PCM → kizárólagos HAL → kimenet · DSP nélkül
+Float PCM → software gain → shared CoreAudio	Lebegőpontos PCM → szoftveres erősítés → megosztott CoreAudio
+Sequence	Sorrendben
+Shuffle tracks	Véletlen számok
+Shuffle albums	Véletlen albumok
+Open full library	Teljes könyvtár megnyitása
+Collapse / expand panel	Panel összecsukása / kibontása
+Vinyl	Bakelit
+Album playing	Lejátszott album
+Artist	Előadó
+Lyrics	Dalszöveg
+Album	Album
+Title	Cím
+Duration	Időtartam
+Genre	Műfaj
+Year	Év
+Format	Formátum
+Folder	Mappa
+TITLE	CÍM
+ARTIST	ELŐADÓ
+ALBUM	ALBUM
+DURATION	IDŐTARTAM
+Search	Keresés
+Search this source	Keresés ebben a forrásban
+Search title, artist, album or folder…	Cím, előadó, album vagy mappa keresése…
+Filter values…	Értékek szűrése…
+All	Mind
+Album order	Albumsorrend
+Original order	Eredeti sorrend
+Choose field…	Mező kiválasztása…
+Choose this column’s field	Oszlop mezőjének kiválasztása
+Show or hide linked filters	Kapcsolt szűrők megjelenítése vagy elrejtése
+Filtered selection	Szűrt kijelölés
+Tracks in the selected source	A kijelölt forrás számai
+Double-click to play	Dupla kattintás a lejátszáshoz
+Click to play from this row	Kattintson a sorból való lejátszáshoz
+Play from here	Lejátszás innen
+No matching tracks	Nincs megfelelő szám
+No tracks found	Nem található szám
+Try a different search, filter or source.	Próbáljon más keresést, szűrőt vagy forrást.
+Your library, here	Saját könyvtára itt
+Add a local folder, NAS or smartphone from the File menu.	Adjon hozzá helyi mappát, NAS-t vagy telefont a Fájl menüből.
+Select a track and start listening	Válasszon számot, és kezdje a hallgatást
+Ready	Kész
+Library ready	Könyvtár kész
+Playing	Lejátszás folyamatban
+Playback paused	Lejátszás szüneteltetve
+Output closed after an error	Kimenet lezárva hiba után
+Preparing track…	Szám előkészítése…
+Configure	Beállítás
+Synchronize	Szinkronizálás
+Synchronize folder	Mappa szinkronizálása
+Synchronize automatically	Automatikus szinkronizálás
+Synchronizing…	Szinkronizálás…
+Synchronizing folders…	Mappák szinkronizálása…
+Synchronizing source…	Forrás szinkronizálása…
+Synchronization complete	Szinkronizálás kész
+Synchronization cancelled	Szinkronizálás megszakítva
+Find new tracks without changing existing ones.	Új számok keresése a meglévők módosítása nélkül.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	Ellenőrzés 2 percenként, ritkábban az offline forrásoknál; teljes ellenőrzés 30 percenként.
+Search online for missing covers	Hiányzó borítók keresése online
+Save found covers in the album folder	Talált borítók mentése az album mappájába
+No folders added	Nincs hozzáadott mappa
+No phone connected	Nincs csatlakoztatott telefon
+Smartphone / FTP	Telefon / FTP
+Local / NAS folder	Helyi / NAS mappa
+Source unavailable	A forrás nem érhető el
+Source not fully reachable	A forrás részben érhető el
+Source name	Forrás neve
+Host / IP	Gép / IP
+Port	Port
+Protocol	Protokoll
+Connection	Kapcsolat
+Enter the server address and music folder.	Adja meg a szerver címét és a zenemappát.
+Read URL	URL beolvasása
+Access	Hozzáférés
+User	Felhasználó
+Password	Jelszó
+Remember in macOS Keychain	Megjegyzés a macOS Kulcskarikában
+FTP sends unencrypted data: use a trusted network.	Az FTP titkosítás nélkül küld adatot: használjon megbízható hálózatot.
+Implicit FTPS	Implicit FTPS
+Automatic reconnection	Automatikus újracsatlakozás
+Find the phone when its IP changes	Telefon keresése IP-változáskor
+MusicCraft checks the configured port and verifies the library before changing the connection.	A MusicCraft a kapcsolat módosítása előtt ellenőrzi a portot és a könyvtárat.
+Check and save	Ellenőrzés és mentés
+Checking…	Ellenőrzés…
+Checking new path…	Új útvonal ellenőrzése…
+Connection verified and saved. Update IP, port and folder here.	Kapcsolat ellenőrizve és mentve. Itt módosíthatja az IP-t, portot és mappát.
+Connection already in progress	A csatlakozás már folyamatban van
+Server folders	Szervermappák
+Parent folder	Szülőmappa
+Use as root	Használat gyökérként
+Browse	Tallózás
+Close	Bezárás
+Cancel	Mégse
+Check complete	Ellenőrzés kész
+Check cancelled	Ellenőrzés megszakítva
+Search cancelled	Keresés megszakítva
+Searching…	Keresés…
+Waiting for a compatible Wi-Fi or Ethernet network	Várakozás megfelelő Wi-Fi- vagy Ethernet-hálózatra
+Phone not found: another automatic attempt is scheduled	Telefon nem található: új automatikus próbálkozás ütemezve
+Connect and index the phone once so it can be recognized	Csatlakoztassa és indexelje egyszer a telefont a felismeréshez
+Multiple matching libraries found: choose a connection in Network	Több könyvtár egyezik: válasszon kapcsolatot a Hálózat alatt
+Password unavailable: open Network to enter it	Jelszó nem érhető el: adja meg a Hálózat alatt
+Authorize Keychain or enter the password in Network	Engedélyezze a Kulcskarikát, vagy adja meg a jelszót a Hálózat alatt
+Wait or cancel the current scan	Várjon, vagy szakítsa meg a jelenlegi vizsgálatot
+Waiting for the new track…	Várakozás az új számra…
+Instrumental track	Hangszeres szám
+Karaoke · line synchronization	Karaoke · soronkénti szinkronizálás
+Unsynchronized lyrics	Nem szinkronizált dalszöveg
+Follow	Követés
+Follow the playing line	Lejátszott sor követése
+Retry	Újra
+Just music, no sung lyrics.	Csak zene, énekelt szöveg nélkül.
+Lyrics unavailable for this track version.	Ehhez a számverzióhoz nincs dalszöveg.
+No matching artist biography found on Italian Wikipedia.	Nem található megfelelő életrajz az olasz Wikipédián.
+Artist not specified	Az előadó nincs megadva
+Play a track with artist and title tags to see its biography and lyrics.	Életrajzhoz és dalszöveghez játsszon le előadó- és címcímkével ellátott számot.
+The story behind the music	A zene mögötti történet
+Your listening session	Az Ön zenehallgatása
+Authors and history	Szerzők és előzmények
+Unavailable	Nem érhető el
+Library and content	Könyvtár és tartalom
+Manage synchronization, covers and sources.	Szinkronizálás, borítók és források kezelése.
+Appearance and readability	Megjelenés és olvashatóság
+Preferences shared by the full and mini views.	Közös beállítások a teljes és mini nézethez.
+Reduce vinyl animation	Bakelitanimáció csökkentése
+Interface size	Felület mérete
+Use ⌘+ and ⌘− to adjust text size.	A szövegméretet a ⌘+ és ⌘− billentyűkkel állíthatja.
+Music server and rooms	Zeneszerver és szobák
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	A MusicCraft eredeti fájlokat szolgál ki. Az LMS kezeli a piCorePlayert, a Squeezelite-ot és a szinkronizált csoportokat.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	A távoli lejátszás a szobák beállításait használja. A Mac DSP-je és kizárólagos módja csak helyben érvényes.
+Source sharing	Forrás megosztása
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	Az új számok megosztása automatikus. A frissítés a lejátszás megszakítása nélkül váltja a megosztott forrást.
+Local address and port	Helyi cím és port
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	A Raspberryhez használja a Mac privát Wi-Fi- vagy Ethernet-IP-jét. A 127.0.0.1 csak ezen a Macen működik.
+Start music server	Zeneszerver indítása
+Stop music server	Zeneszerver leállítása
+Copy library URL	Könyvtár URL-jének másolása
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	A hivatkozás ideiglenes kulcsot tartalmaz: csak saját lejátszóival ossza meg. A kilépés leállítja a szervert.
+LMS can run on a Mac, NAS or Raspberry.	Az LMS Macen, NAS-on vagy Raspberryn is futhat.
+LMS address	LMS-cím
+LMS password is kept only for this session.	Az LMS-jelszó csak ebben a munkamenetben marad meg.
+Connect and refresh rooms	Csatlakozás és szobák frissítése
+LMS connection verified	LMS-kapcsolat ellenőrizve
+Group	Csoportosítás
+Ungroup room	Szoba leválasztása
+Play source in room	Forrás lejátszása a szobában
+Start the music server first	Először indítsa el a zeneszervert
+piCorePlayer / LMS guide	piCorePlayer / LMS útmutató
+Offline	Offline
+Audio and playlists	Hang és lejátszási listák
+Files or playlists	Fájlok vagy lejátszási listák
+Sources	Források
+Track count	Számok száma
+Playback order: {mode}	Lejátszási sorrend: {mode}
+Click to switch to {mode}	Kattintson a váltáshoz: {mode}
+Searching for {source} on the local network…	{source} keresése a helyi hálózaton…
+{source} found · connection updated to {address}	{source} megtalálva · kapcsolat frissítve: {address}
+Loading · {size} MiB	Betöltés · {size} MiB
+Tags unavailable	Címkék nem érhetők el
+Cover · {provider}	Borító · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · Hozzáadva: {added} · Beolvasva: {read} · Változatlan: {skipped} · Hibák: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · Hozzáadva: {added} · Elérhetetlen mappák: {errors}{limit}
+ · Library limit reached	 · Könyvtárkorlát elérve
+The saved connection has not been changed.	A mentett kapcsolat nem változott.
+Folder /{name}	Mappa /{name}
+Add {name}	{name} hozzáadása
+Server active · {count} · {address}	Szerver aktív · {count} · {address}
+Invalid local address	Érvénytelen helyi cím
+Gapless: next track queued in the same stream	Gapless: következő szám ugyanabban az adatfolyamban
+Exclusive gapless: next track ready	Kizárólagos gapless: következő szám kész
+Format change: the output will reopen for the next track	Formátumváltás: a kimenet újranyílik a következő számhoz
+Audio preload failed: {reason}	Hang előtöltése sikertelen: {reason}
+Exclusive output unavailable: {reason}	Kizárólagos kimenet nem érhető el: {reason}
+hardware volume, bit-perfect unverified	hardveres hangerő, bit-perfect nem ellenőrzött
+Connection unavailable or timed out	A kapcsolat nem érhető el vagy időtúllépés történt
+Service busy. Try again later.	A szolgáltatás foglalt. Próbálja később.
+Invalid server response	Érvénytelen szerverválasz
+Invalid server address	Érvénytelen szervercím
+Enter a port from 1 to 65535	Adjon meg 1 és 65535 közötti portot
+Invalid credentials	Érvénytelen hitelesítő adatok
+FTP or FTPS is required	FTP vagy FTPS szükséges
+Cache unavailable or not writable	A gyorsítótár nem érhető el vagy nem írható
+File unavailable. Check the NAS connection.	Fájl nem érhető el. Ellenőrizze a NAS-kapcsolatot.
+Track exceeds the 1 GiB cache limit	A szám meghaladja az 1 GiB-os gyorsítótárkorlátot
+Operation cancelled	Művelet megszakítva
+Unsupported or damaged audio file	Nem támogatott vagy sérült hangfájl
+Audio device unavailable	A hangeszköz nem érhető el
+The device does not support this audio format	Az eszköz nem támogatja ezt a hangformátumot
+Seek unavailable for this file	A fájlban nem lehet keresni
+Keychain save failed. The password stays in memory.	A Kulcskarikába mentés sikertelen. A jelszó a memóriában marad.
+Network transfer failed	Hálózati átvitel sikertelen
+Folder unavailable	Mappa nem érhető el
+Output interrupted by the audio device	A hangeszköz megszakította a kimenetet
+Service unavailable. Try again later.	A szolgáltatás nem érhető el. Próbálja később.
+Cannot save the cover	Nem menthető a borító
+Invalid network path	Érvénytelen hálózati útvonal
+Application theme	Alkalmazás témája
+Peak protection needs peak tags; without them, positive gain can clip.	A védelem csúcscímkéket igényel; nélkülük a pozitív erősítés túlvezérelhet.
+Cannot start server. Check the local address and port.	Nem indítható a szerver. Ellenőrizze a helyi címet és portot.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	A MusicCraft bezárása leállítja a szervert. A Mac maradjon ébren és csatlakoztatva.
+Cover	Borító
+External LMS	Külső LMS
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	Szóköz: lejátszás vagy szünet; nyilak: öt másodperces ugrás. A sorrendikon sorozatot, véletlen számokat és albumokat vált. Az ismétlés egy számra vonatkozik. Szűrt találatot dupla kattintással indíthat. A lemez melletti számra kattintva elindul a lejátszás.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	A Fájl menüből adjon hozzá mappákat vagy csatlakoztatott NAS-köteteket. Egy forrás kiválasztása csak annak számait játssza; az Összes zene minden forrást tartalmaz. Dupla kattintás indít.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	A borító keresési sorrendje: címkék, albummappa, internet. Az opcionális mentés csak hiányzó képet ad hozzá. A meglévő képek és címkék változatlanok.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	Az automatikus szinkronizálás hozzáadja az elérhető források új számait. A frissítésikon teljes ellenőrzést kér. Zenefájlokat nem ír felül és nem töröl.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	A Beállításokban válasszon eszközt és megosztott vagy kizárólagos kimenetet. A kizárólagos megkerüli a szoftveres hangerőt és ReplayGaint. A szigorú integer elutasítja az inkompatibilis formátumokat. ReplayGain és előerősítés a következő megosztott számra érvényes.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	Adja meg a telefon FTP-címét, portját, zenemappáját és hitelesítő adatait. IP-változáshoz kapcsolja be az automatikus keresést. A telefon szervere ugyanazon a hálózaton fusson.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	Válasszon forrást, majd indítsa a beépített multiroomot a Beállításokban. A piCorePlayerben válassza a MusicCraftot vagy a kijelzett IP-t. Válasszon szobát, indítsa a forrást és csoportosítsa a többit. Az app és a Mac maradjon aktív. Az új számok a forrás szinkronizálása után automatikusan megjelennek.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	Az életrajz a felület nyelvét követi, angol tartalékkal. A dalszöveg eredeti marad. Az időzített szöveg követi a lejátszást; sorra kattintva ugorhat. Az Újra ismétli a sikertelen keresést.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	A mini megőrzi méretét a lapok között. A Beállítások kezeli a témát, nyelvet, 100–130% méretezést és csökkentett animációt. F1 mindkét nézetben megnyitja az útmutatót.
+Help	Súgó
+Integrated server	Beépített szerver
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	A MusicCraft tartalmazza és beállítja a szervert. Indítsa el, majd a piCorePlayerben válassza a MusicCraftot szerverként.
+No matching artist biography found on Wikipedia.	Nem található megfelelő előadói életrajz a Wikipédián.
+Refresh shared source	Megosztott forrás frissítése
+Search the guide…	Keresés az útmutatóban…
+Server ready · automatic player discovery enabled	Szerver kész · automatikus lejátszó-felderítés aktív
+Start integrated multiroom	Beépített multiroom indítása
+Start multiroom when MusicCraft opens	Multiroom indítása a MusicCraft megnyitásakor
+Starting integrated server…	Beépített szerver indítása…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	A beépített szerver külön telepítés nélkül kapcsolja a piCorePlayert és a Squeezelite-ot.
+User guide	Használati útmutató
+piCorePlayer server address: {address}	piCorePlayer-szerver címe: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	A véletlenszerű számok mód ismétlés nélkül játssza le a választékot. Csak az elindult számok számítanak. Az Előző, a kézi választás és a Szám ismétlése újrahallgatást enged. Másik forrás vagy választék új ciklust indít; az alkalmazás bezárása és a sorrend módjának váltása megőrzi azt.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	Mindkét nézet megőrzi saját méretét újraindítás után. Kisebb képernyőn 24 pontos margóval igazodnak a használható területhez, megtartva a nagyobb képernyőkhöz választott méretet.
+Tags: {read}/{total} · {remaining} remaining	Címkék: {read}/{total} · hátra: {remaining}
+Tag indexing complete	A címkék indexelése befejeződött
+Tag indexing paused	A címkék indexelése szünetel
+Tag indexing in progress	Címkék indexelése folyamatban
+Waiting for tag sources	Várakozás a címkék forrásaira
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	Húzással állítható a hangerő; a Shift lenyomásával finoman szabályozható. Görgetéssel vagy nyilakkal kis lépésekben módosítható.
+Tag read errors: {n}	Címkeolvasási hibák: {n}
+Tag indexing complete: {read} read · {failed} errors	Indexelés kész: {read} beolvasva · {failed} hiba
+LAN scan interval	Helyi hálózati keresési időköz

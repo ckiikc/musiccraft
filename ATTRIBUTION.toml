@@ -1,0 +1,10 @@
+[[asset]]
+path = "src/i18n/vi.tsv"
+title = "Vietnamese interface and user guide translation"
+author = "MusicCraft contributors"
+source = "Original AI-assisted translation from MusicCraft's English text; native review pending"
+licence = "MIT"
+licence_file = "LICENSE"
+kind = "translation"
+usage = "Vietnamese strings embedded by src/i18n/mod.rs"
+sha256 = "50730eaae85d73349b61c740bc042c16e3d44458f41536966d1aff1a85401f15"

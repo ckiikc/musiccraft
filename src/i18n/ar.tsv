@@ -1,0 +1,321 @@
+File	ملف
+Library	المكتبة
+Playback	التشغيل
+Settings	الإعدادات
+Interface	الواجهة
+Audio	الصوت
+Multiroom	غرف متعددة
+Language	اللغة
+System language	لغة النظام
+MusicCraft settings	إعدادات MusicCraft
+All settings…	كل الإعدادات…
+Server and multiroom…	الخادم والغرف المتعددة…
+Add files or playlist…	إضافة ملفات أو قائمة تشغيل…
+Add local / NAS folder…	إضافة مجلد محلي / NAS…
+Add source…	إضافة مصدر…
+Connect smartphone / FTP…	توصيل هاتف / FTP…
+Connect smartphone / FTP	توصيل هاتف / FTP
+Quit MusicCraft	إنهاء MusicCraft
+Sources and synchronization…	المصادر والمزامنة…
+Sources and synchronization	المصادر والمزامنة
+Cancel synchronization	إلغاء المزامنة
+Faceted browser	متصفح حسب الفئات
+Clear search and filters	مسح البحث والمرشحات
+Previous track	المقطع السابق
+Next track	المقطع التالي
+Play	تشغيل
+Pause	إيقاف مؤقت
+Stop	إيقاف
+Previous	السابق
+Next	التالي
+Repeat track	تكرار المقطع
+Track details…	تفاصيل المقطع…
+Artist and lyrics…	الفنان والكلمات…
+Artist and lyrics	الفنان والكلمات
+Audio output…	خرج الصوت…
+Audio output and quality	خرج الصوت والجودة
+Always on top	دائمًا في المقدمة
+Mini player	المشغل المصغر
+Mini player options	خيارات المشغل المصغر
+Gold	ذهبي
+Graphite	جرافيت
+Light	فاتح
+All music	كل الموسيقى
+YOUR MUSIC	موسيقاك
+SMARTPHONE AND NETWORK	الهاتف والشبكة
+FOLDERS AND NAS	المجلدات و NAS
+SIGNAL LEVELS	مستويات الإشارة
+Choose your next listen	اختر ما ستستمع إليه
+Your library awaits	مكتبتك بانتظارك
+Loading…	جارٍ التحميل…
+System output	خرج النظام
+Shared	مشترك
+Exclusive	حصري
+SHARED	مشترك
+EXCLUSIVE	حصري
+Mute	كتم
+Volume	مستوى الصوت
+Hardware volume	مستوى صوت الجهاز
+Hardware volume · Open audio output	صوت الجهاز · فتح خرج الصوت
+Configure audio output and exclusive mode	ضبط خرج الصوت والوضع الحصري
+Playback position	موضع التشغيل
+Output device	جهاز الإخراج
+Choose where to listen to your music.	اختر جهاز الاستماع إلى الموسيقى.
+Refresh devices	تحديث الأجهزة
+Listening mode	وضع الاستماع
+Applies when the next track starts.	يسري عند بدء المقطع التالي.
+Follow source sample rate	اتباع معدل أخذ العينات للمصدر
+Strict integer	أعداد صحيحة صارمة
+Current signal path	مسار الإشارة الحالي
+Check device formats	فحص صيغ الجهاز
+Select a track to open audio output	اختر مقطعًا لفتح خرج الصوت
+Output updated: applies when the next track starts	تم تحديث الخرج: يسري على المقطع التالي
+Shared listening with other apps; MusicCraft controls the volume.	استمع مع التطبيقات الأخرى؛ يتحكم MusicCraft في مستوى الصوت.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	يطلب MusicCraft الجهاز ومعدل العينات الأصلي. اضبط الصوت على جهازك الصوتي.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	يتطلب الوضع الصارم PCM بلا فقد وخرج أعداد صحيحة متوافقًا عند 0 dB. يتوقف التشغيل إن لم يتوفر.
+Level and dynamics	المستوى والديناميكية
+Optional processing, applied to the next track in shared mode.	معالجة اختيارية تسري على المقطع التالي في الوضع المشترك.
+Off	معطل
+ReplayGain track	ReplayGain للمقطع
+ReplayGain album	ReplayGain للألبوم
+Preamp	التضخيم المسبق
+Prevent clipping using ReplayGain peaks	منع التشويه باستخدام قمم ReplayGain
+Exclusive output bypasses ReplayGain and preamp.	يتجاوز الخرج الحصري ReplayGain والتضخيم المسبق.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	يحافظ وضع الألبوم على الفروق الديناميكية. عند غياب قيمة الألبوم تُستخدم قيمة المقطع؛ وبدون وسوم تُستخدم 0 dB.
+Original PCM → exclusive HAL → output · no DSP	PCM الأصلي ← HAL حصري ← الخرج · بدون DSP
+Float PCM → software gain → shared CoreAudio	PCM عائم ← كسب برمجي ← CoreAudio مشترك
+Sequence	بالتسلسل
+Shuffle tracks	مقاطع عشوائية
+Shuffle albums	ألبومات عشوائية
+Open full library	فتح المكتبة الكاملة
+Collapse / expand panel	طي / توسيع اللوحة
+Vinyl	أسطوانة
+Album playing	الألبوم قيد التشغيل
+Artist	الفنان
+Lyrics	الكلمات
+Album	الألبوم
+Title	العنوان
+Duration	المدة
+Genre	النوع
+Year	السنة
+Format	الصيغة
+Folder	المجلد
+TITLE	العنوان
+ARTIST	الفنان
+ALBUM	الألبوم
+DURATION	المدة
+Search	بحث
+Search this source	البحث في هذا المصدر
+Search title, artist, album or folder…	البحث بالعنوان أو الفنان أو الألبوم أو المجلد…
+Filter values…	تصفية القيم…
+All	الكل
+Album order	ترتيب الألبوم
+Original order	الترتيب الأصلي
+Choose field…	اختيار حقل…
+Choose this column’s field	اختيار حقل هذا العمود
+Show or hide linked filters	إظهار أو إخفاء المرشحات المرتبطة
+Filtered selection	التحديد المصفى
+Tracks in the selected source	مقاطع المصدر المحدد
+Double-click to play	انقر مرتين للتشغيل
+Click to play from this row	انقر للتشغيل من هذا الصف
+Play from here	التشغيل من هنا
+No matching tracks	لا توجد مقاطع مطابقة
+No tracks found	لم يتم العثور على مقاطع
+Try a different search, filter or source.	جرّب بحثًا أو مرشحًا أو مصدرًا آخر.
+Your library, here	مكتبتك هنا
+Add a local folder, NAS or smartphone from the File menu.	أضف مجلدًا محليًا أو NAS أو هاتفًا من قائمة ملف.
+Select a track and start listening	اختر مقطعًا وابدأ الاستماع
+Ready	جاهز
+Library ready	المكتبة جاهزة
+Playing	قيد التشغيل
+Playback paused	التشغيل متوقف مؤقتًا
+Output closed after an error	أُغلق الخرج بعد خطأ
+Preparing track…	جارٍ إعداد المقطع…
+Configure	ضبط
+Synchronize	مزامنة
+Synchronize folder	مزامنة المجلد
+Synchronize automatically	المزامنة تلقائيًا
+Synchronizing…	جارٍ المزامنة…
+Synchronizing folders…	جارٍ مزامنة المجلدات…
+Synchronizing source…	جارٍ مزامنة المصدر…
+Synchronization complete	اكتملت المزامنة
+Synchronization cancelled	أُلغيت المزامنة
+Find new tracks without changing existing ones.	العثور على مقاطع جديدة دون تعديل المقاطع الحالية.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	يفحص كل دقيقتين أثناء التشغيل، ويقلل المحاولات دون اتصال، ويفحص الكل كل 30 دقيقة.
+Search online for missing covers	البحث عبر الإنترنت عن الأغلفة المفقودة
+Save found covers in the album folder	حفظ الأغلفة في مجلد الألبوم
+No folders added	لم تتم إضافة مجلدات
+No phone connected	لا يوجد هاتف متصل
+Smartphone / FTP	هاتف / FTP
+Local / NAS folder	مجلد محلي / NAS
+Source unavailable	المصدر غير متاح
+Source not fully reachable	المصدر متاح جزئيًا
+Source name	اسم المصدر
+Host / IP	المضيف / IP
+Port	المنفذ
+Protocol	البروتوكول
+Connection	الاتصال
+Enter the server address and music folder.	أدخل عنوان الخادم ومجلد الموسيقى.
+Read URL	قراءة URL
+Access	الوصول
+User	المستخدم
+Password	كلمة المرور
+Remember in macOS Keychain	الحفظ في سلسلة مفاتيح macOS
+FTP sends unencrypted data: use a trusted network.	يرسل FTP البيانات دون تشفير: استخدم شبكة موثوقة.
+Implicit FTPS	FTPS ضمني
+Automatic reconnection	إعادة الاتصال تلقائيًا
+Find the phone when its IP changes	العثور على الهاتف عند تغير IP
+MusicCraft checks the configured port and verifies the library before changing the connection.	يفحص MusicCraft المنفذ والمكتبة قبل تغيير الاتصال.
+Check and save	فحص وحفظ
+Checking…	جارٍ الفحص…
+Checking new path…	جارٍ فحص المسار الجديد…
+Connection verified and saved. Update IP, port and folder here.	تم التحقق من الاتصال وحفظه. حدّث IP والمنفذ والمجلد هنا.
+Connection already in progress	الاتصال جارٍ بالفعل
+Server folders	مجلدات الخادم
+Parent folder	المجلد الأعلى
+Use as root	استخدام كمجلد جذر
+Browse	استعراض
+Close	إغلاق
+Cancel	إلغاء
+Check complete	اكتمل الفحص
+Check cancelled	أُلغي الفحص
+Search cancelled	أُلغي البحث
+Searching…	جارٍ البحث…
+Waiting for a compatible Wi-Fi or Ethernet network	بانتظار شبكة Wi-Fi أو Ethernet متوافقة
+Phone not found: another automatic attempt is scheduled	لم يُعثر على الهاتف: جُدولت محاولة تلقائية أخرى
+Connect and index the phone once so it can be recognized	وصّل الهاتف وفهرسه مرة واحدة ليتم التعرف عليه
+Multiple matching libraries found: choose a connection in Network	توجد مكتبات مطابقة متعددة: اختر الاتصال في الشبكة
+Password unavailable: open Network to enter it	كلمة المرور غير متاحة: أدخلها في الشبكة
+Authorize Keychain or enter the password in Network	اسمح بسلسلة المفاتيح أو أدخل كلمة المرور في الشبكة
+Wait or cancel the current scan	انتظر أو ألغِ الفحص الحالي
+Waiting for the new track…	بانتظار المقطع الجديد…
+Instrumental track	مقطع موسيقي دون غناء
+Karaoke · line synchronization	كاريوكي · مزامنة حسب السطر
+Unsynchronized lyrics	كلمات غير متزامنة
+Follow	متابعة
+Follow the playing line	متابعة السطر قيد التشغيل
+Retry	إعادة المحاولة
+Just music, no sung lyrics.	موسيقى فقط، دون كلمات مغناة.
+Lyrics unavailable for this track version.	لا تتوفر كلمات لهذه النسخة من المقطع.
+No matching artist biography found on Italian Wikipedia.	لم يُعثر على سيرة مطابقة في ويكيبيديا الإيطالية.
+Artist not specified	الفنان غير محدد
+Play a track with artist and title tags to see its biography and lyrics.	شغّل مقطعًا بوسوم الفنان والعنوان لعرض السيرة والكلمات.
+The story behind the music	القصة وراء الموسيقى
+Your listening session	جلسة استماعك
+Authors and history	المؤلفون والتاريخ
+Unavailable	غير متاح
+Library and content	المكتبة والمحتوى
+Manage synchronization, covers and sources.	إدارة المزامنة والأغلفة والمصادر.
+Appearance and readability	المظهر وسهولة القراءة
+Preferences shared by the full and mini views.	تفضيلات مشتركة للعرض الكامل والمصغر.
+Reduce vinyl animation	تقليل حركة الأسطوانة
+Interface size	حجم الواجهة
+Use ⌘+ and ⌘− to adjust text size.	استخدم ⌘+ و ⌘− لتعديل حجم النص.
+Music server and rooms	خادم الموسيقى والغرف
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	يقدم MusicCraft الملفات الأصلية. ينسق LMS بين piCorePlayer و Squeezelite والمجموعات المتزامنة.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	يستخدم التشغيل البعيد إعدادات كل غرفة. يطبق DSP والوضع الحصري لهذا Mac محليًا فقط.
+Source sharing	مشاركة المصدر
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	تتم مشاركة المقاطع الجديدة تلقائيا. يغير التحديث المصدر المشترك دون إيقاف التشغيل.
+Local address and port	العنوان المحلي والمنفذ
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	استخدم IP الخاص بشبكة Mac اللاسلكية أو Ethernet للوصول من Raspberry. يعمل 127.0.0.1 على هذا Mac فقط.
+Start music server	بدء خادم الموسيقى
+Stop music server	إيقاف خادم الموسيقى
+Copy library URL	نسخ URL المكتبة
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	يحتوي الرابط على مفتاح مؤقت: شاركه مع مشغلاتك فقط. إغلاق MusicCraft يوقف الخادم.
+LMS can run on a Mac, NAS or Raspberry.	يمكن تشغيل LMS على Mac أو NAS أو Raspberry.
+LMS address	عنوان LMS
+LMS password is kept only for this session.	تبقى كلمة مرور LMS في هذه الجلسة فقط.
+Connect and refresh rooms	الاتصال وتحديث الغرف
+LMS connection verified	تم التحقق من اتصال LMS
+Group	تجميع
+Ungroup room	فصل الغرفة
+Play source in room	تشغيل المصدر في الغرفة
+Start the music server first	ابدأ خادم الموسيقى أولًا
+piCorePlayer / LMS guide	دليل piCorePlayer / LMS
+Offline	دون اتصال
+Audio and playlists	الصوت وقوائم التشغيل
+Files or playlists	ملفات أو قوائم تشغيل
+Sources	المصادر
+Track count	عدد المقاطع
+Playback order: {mode}	ترتيب التشغيل: {mode}
+Click to switch to {mode}	انقر للتبديل إلى {mode}
+Searching for {source} on the local network…	البحث عن {source} في الشبكة المحلية…
+{source} found · connection updated to {address}	تم العثور على {source} · تم تحديث الاتصال إلى {address}
+Loading · {size} MiB	جارٍ التحميل · {size} MiB
+Tags unavailable	الوسوم غير متاحة
+Cover · {provider}	الغلاف · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · أُضيف: {added} · قُرئ: {read} · دون تغيير: {skipped} · أخطاء: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · أُضيف: {added} · مجلدات غير متاحة: {errors}{limit}
+ · Library limit reached	 · تم بلوغ حد المكتبة
+The saved connection has not been changed.	لم يتغير الاتصال المحفوظ.
+Folder /{name}	مجلد /{name}
+Add {name}	إضافة {name}
+Server active · {count} · {address}	الخادم نشط · {count} · {address}
+Invalid local address	العنوان المحلي غير صالح
+Gapless: next track queued in the same stream	دون فواصل: المقطع التالي في التدفق نفسه
+Exclusive gapless: next track ready	دون فواصل حصري: المقطع التالي جاهز
+Format change: the output will reopen for the next track	تغيرت الصيغة: سيُفتح الخرج للمقطع التالي
+Audio preload failed: {reason}	فشل التحميل المسبق للصوت: {reason}
+Exclusive output unavailable: {reason}	الخرج الحصري غير متاح: {reason}
+hardware volume, bit-perfect unverified	صوت الجهاز، لم يُتحقق من bit-perfect
+Connection unavailable or timed out	الاتصال غير متاح أو انتهت المهلة
+Service busy. Try again later.	الخدمة مشغولة. حاول لاحقًا.
+Invalid server response	استجابة الخادم غير صالحة
+Invalid server address	عنوان الخادم غير صالح
+Enter a port from 1 to 65535	أدخل منفذًا من 1 إلى 65535
+Invalid credentials	بيانات الدخول غير صالحة
+FTP or FTPS is required	مطلوب FTP أو FTPS
+Cache unavailable or not writable	الذاكرة المؤقتة غير متاحة أو غير قابلة للكتابة
+File unavailable. Check the NAS connection.	الملف غير متاح. تحقق من اتصال NAS.
+Track exceeds the 1 GiB cache limit	المقطع يتجاوز حد التخزين المؤقت 1 GiB
+Operation cancelled	أُلغيت العملية
+Unsupported or damaged audio file	ملف صوتي غير مدعوم أو تالف
+Audio device unavailable	جهاز الصوت غير متاح
+The device does not support this audio format	الجهاز لا يدعم صيغة الصوت هذه
+Seek unavailable for this file	الانتقال غير متاح لهذا الملف
+Keychain save failed. The password stays in memory.	فشل الحفظ في سلسلة المفاتيح. تبقى كلمة المرور في الذاكرة.
+Network transfer failed	فشل نقل الشبكة
+Folder unavailable	المجلد غير متاح
+Output interrupted by the audio device	أوقف جهاز الصوت الخرج
+Service unavailable. Try again later.	الخدمة غير متاحة. حاول لاحقًا.
+Cannot save the cover	تعذر حفظ الغلاف
+Invalid network path	مسار الشبكة غير صالح
+Application theme	سمة التطبيق
+Peak protection needs peak tags; without them, positive gain can clip.	تحتاج الحماية إلى وسوم القمم؛ بدونها قد يسبب الكسب الموجب تشويهًا.
+Cannot start server. Check the local address and port.	تعذر بدء الخادم. تحقق من العنوان المحلي والمنفذ.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	إغلاق MusicCraft يوقف الخادم. يجب إبقاء Mac مستيقظًا ومتصلًا.
+Cover	الغلاف
+External LMS	LMS خارجي
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	المسافة للتشغيل والإيقاف المؤقت، والأسهم للتنقل خمس ثوان. تبدّل أيقونة الترتيب بين التسلسل والمقاطع والألبومات العشوائية. التكرار لمقطع واحد. انقر مرتين لتشغيل نتيجة مفلترة. انقر على مقطع بجانب القرص لتشغيله.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	أضف مجلدات أو وحدات NAS المتصلة من قائمة ملف. اختيار مصدر يقصر الاستماع على مقاطعه؛ كل الموسيقى تشمل جميع المصادر. انقر مرتين لتشغيل مقطع.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	يُبحث عن الغلاف في الوسوم ثم مجلد الألبوم ثم الإنترنت. الحفظ الاختياري يضيف صورة فقط عند غيابها. تُحفظ الصور والوسوم الموجودة.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	تضيف المزامنة التلقائية المقاطع الجديدة من المصادر المتاحة. أيقونة التحديث تفرض فحصًا كاملًا. لا تعيد كتابة ملفات الموسيقى أو تحذفها.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	اختر الجهاز والمخرج المشترك أو الحصري في الإعدادات. الحصري يتجاوز مستوى الصوت البرمجي وReplayGain. وضع الأعداد الصحيحة الصارم يرفض الصيغ غير المتوافقة. يبدأ ReplayGain والتضخيم مع المقطع المشترك التالي.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	أدخل عنوان FTP للهاتف والمنفذ ومجلد الموسيقى وبيانات الدخول. فعّل الاكتشاف التلقائي عند تغير IP. أبق خادم الهاتف يعمل على الشبكة نفسها.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	اختر مصدرًا وابدأ تعدد الغرف المدمج من الإعدادات. اختر MusicCraft أو عنوان Mac الظاهر في piCorePlayer. اختر غرفة وشغّل المصدر واجمع الغرف الأخرى. أبق MusicCraft مفتوحًا وMac مستيقظًا. تظهر المقاطع الجديدة تلقائيا بعد مزامنة المصدر.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	تتبع السيرة لغة الواجهة مع الإنجليزية كبديل. تبقى الكلمات بلغتها الأصلية. تتبع الكلمات المتزامنة التشغيل؛ انقر سطرًا للانتقال إليه. إعادة المحاولة تكرر البحث الفاشل.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	يحفظ المشغل المصغر حجمه بين علامات التبويب. تضبط الإعدادات السمة واللغة والتكبير 100–130% وتقليل الحركة. يفتح F1 الدليل في العرضين.
+Help	مساعدة
+Integrated server	الخادم المدمج
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	يتضمن MusicCraft الخادم ويضبطه. شغّله ثم اختر MusicCraft خادمًا في piCorePlayer.
+No matching artist biography found on Wikipedia.	لم تُعثر على سيرة فنان مطابقة في ويكيبيديا.
+Refresh shared source	تحديث المصدر المشترك
+Search the guide…	البحث في الدليل…
+Server ready · automatic player discovery enabled	الخادم جاهز · اكتشاف المشغلات تلقائيًا مفعّل
+Start integrated multiroom	بدء تعدد الغرف المدمج
+Start multiroom when MusicCraft opens	بدء تعدد الغرف عند فتح MusicCraft
+Starting integrated server…	جار بدء الخادم المدمج…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	يربط الخادم المدمج piCorePlayer وSqueezelite دون تثبيت منفصل.
+User guide	دليل الاستخدام
+piCorePlayer server address: {address}	عنوان خادم piCorePlayer: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	يشغّل ترتيب المقاطع العشوائي مجموعة الاستماع دون تكرار. تُحتسب المقاطع التي بدأ تشغيلها فقط. يتيح السابق والاختيار اليدوي وتكرار المقطع إعادة الاستماع. يبدأ مصدر أو اختيار مختلف دورة جديدة؛ ويحافظ إغلاق التطبيق وتغيير وضع الترتيب على الدورة.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	يحفظ عرضا المشغّل أبعادهما بعد إعادة التشغيل. وعلى شاشة أصغر يتكيفان مع المساحة المتاحة بهامش 24 نقطة، مع حفظ الحجم المفضل للشاشات الأكبر.
+Tags: {read}/{total} · {remaining} remaining	الوسوم: {read}/{total} · المتبقي {remaining}
+Tag indexing complete	اكتملت فهرسة الوسوم
+Tag indexing paused	فهرسة الوسوم متوقفة مؤقتًا
+Tag indexing in progress	جارٍ فهرسة الوسوم
+Waiting for tag sources	بانتظار مصادر الوسوم
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	اسحب لضبط مستوى الصوت؛ اضغط باستمرار على Shift للتحكم الدقيق. استخدم التمرير أو مفاتيح الأسهم لتغييرات صغيرة.
+Tag read errors: {n}	أخطاء قراءة الوسوم: {n}
+Tag indexing complete: {read} read · {failed} errors	اكتملت الفهرسة: تمت قراءة {read} · أخطاء: {failed}
+LAN scan interval	الفاصل بين محاولات فحص الشبكة المحلية

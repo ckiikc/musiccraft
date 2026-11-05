@@ -1,0 +1,49 @@
+[package]
+name = "musiccraft"
+version = "0.10.37"
+edition = "2024"
+license = "MIT"
+description = "Native music player for local, NAS and FTP libraries"
+publish = false
+
+[dependencies]
+eframe = { version = "=0.36.2", default-features = false, features = ["default_fonts", "glow", "persistence", "accesskit"] }
+rodio = { version = "=0.22.2", features = ["symphonia-all"] }
+cpal = "=0.17.3"
+
+rfd = "=0.17.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+lofty = "=0.25.4"
+url = "2"
+walkdir = "2"
+rtrb = "=0.3.5"
+symphonia = { version = "=0.5.5", features = ["all"] }
+percent-encoding = "2"
+rand = "0.9"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
+curl = { version = "=0.4.51", default-features = false, features = ["protocol-ftp", "ssl", "force-system-lib-on-osx"] }
+if-addrs = "=0.15.0"
+httpdate = "=1.0.3"
+unicode-normalization = "=0.1.25"
+unicode-bidi = "=0.3.18"
+
+[dev-dependencies]
+ron = "=0.12.2"
+tempfile = "3"
+hound = "3.5"
+
+[profile.dev]
+debug = 0
+
+[profile.release]
+lto = "thin"
+strip = true
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "=0.6.5"
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["std", "NSScreen"] }
+security-framework = "=3.7.0"
+coreaudio-rs = "=0.14.2"
+objc2-core-audio = "=0.3.2"
+objc2-core-audio-types = "=0.3.2"

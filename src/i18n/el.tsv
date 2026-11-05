@@ -1,0 +1,321 @@
+File	Αρχείο
+Library	Βιβλιοθήκη
+Playback	Αναπαραγωγή
+Settings	Ρυθμίσεις
+Interface	Διεπαφή
+Audio	Ήχος
+Multiroom	Πολλά δωμάτια
+Language	Γλώσσα
+System language	Γλώσσα συστήματος
+MusicCraft settings	Ρυθμίσεις MusicCraft
+All settings…	Όλες οι ρυθμίσεις…
+Server and multiroom…	Διακομιστής και δωμάτια…
+Add files or playlist…	Προσθήκη αρχείων ή λίστας…
+Add local / NAS folder…	Προσθήκη τοπικού φακέλου / NAS…
+Add source…	Προσθήκη πηγής…
+Connect smartphone / FTP…	Σύνδεση τηλεφώνου / FTP…
+Connect smartphone / FTP	Σύνδεση τηλεφώνου / FTP
+Quit MusicCraft	Έξοδος από MusicCraft
+Sources and synchronization…	Πηγές και συγχρονισμός…
+Sources and synchronization	Πηγές και συγχρονισμός
+Cancel synchronization	Ακύρωση συγχρονισμού
+Faceted browser	Περιήγηση με φίλτρα
+Clear search and filters	Εκκαθάριση αναζήτησης και φίλτρων
+Previous track	Προηγούμενο κομμάτι
+Next track	Επόμενο κομμάτι
+Play	Αναπαραγωγή
+Pause	Παύση
+Stop	Διακοπή
+Previous	Προηγούμενο
+Next	Επόμενο
+Repeat track	Επανάληψη κομματιού
+Track details…	Λεπτομέρειες κομματιού…
+Artist and lyrics…	Καλλιτέχνης και στίχοι…
+Artist and lyrics	Καλλιτέχνης και στίχοι
+Audio output…	Έξοδος ήχου…
+Audio output and quality	Έξοδος ήχου και ποιότητα
+Always on top	Πάντα στο προσκήνιο
+Mini player	Μίνι πρόγραμμα
+Mini player options	Επιλογές μίνι προγράμματος
+Gold	Χρυσό
+Graphite	Γραφίτης
+Light	Φωτεινό
+All music	Όλη η μουσική
+YOUR MUSIC	Η ΜΟΥΣΙΚΗ ΣΑΣ
+SMARTPHONE AND NETWORK	ΤΗΛΕΦΩΝΟ ΚΑΙ ΔΙΚΤΥΟ
+FOLDERS AND NAS	ΦΑΚΕΛΟΙ ΚΑΙ NAS
+SIGNAL LEVELS	ΣΤΑΘΜΕΣ ΣΗΜΑΤΟΣ
+Choose your next listen	Επιλέξτε την επόμενη ακρόαση
+Your library awaits	Η βιβλιοθήκη σας περιμένει
+Loading…	Φόρτωση…
+System output	Έξοδος συστήματος
+Shared	Κοινόχρηστη
+Exclusive	Αποκλειστική
+SHARED	ΚΟΙΝΟΧΡΗΣΤΗ
+EXCLUSIVE	ΑΠΟΚΛΕΙΣΤΙΚΗ
+Mute	Σίγαση
+Volume	Ένταση
+Hardware volume	Ένταση συσκευής
+Hardware volume · Open audio output	Ένταση συσκευής · Άνοιγμα εξόδου
+Configure audio output and exclusive mode	Ρύθμιση εξόδου και αποκλειστικής λειτουργίας
+Playback position	Θέση αναπαραγωγής
+Output device	Συσκευή εξόδου
+Choose where to listen to your music.	Επιλέξτε πού θα ακούτε τη μουσική σας.
+Refresh devices	Ανανέωση συσκευών
+Listening mode	Λειτουργία ακρόασης
+Applies when the next track starts.	Ισχύει από την έναρξη του επόμενου κομματιού.
+Follow source sample rate	Ακολούθηση συχνότητας δειγματοληψίας πηγής
+Strict integer	Αυστηρή ακέραια έξοδος
+Current signal path	Τρέχουσα διαδρομή σήματος
+Check device formats	Έλεγχος μορφών συσκευής
+Select a track to open audio output	Επιλέξτε κομμάτι για άνοιγμα εξόδου
+Output updated: applies when the next track starts	Η έξοδος ενημερώθηκε: από το επόμενο κομμάτι
+Shared listening with other apps; MusicCraft controls the volume.	Ακρόαση μαζί με άλλες εφαρμογές· το MusicCraft ελέγχει την ένταση.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	Το MusicCraft ζητά τη συσκευή και την αρχική συχνότητα. Ρυθμίστε την ένταση στη συσκευή ήχου.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	Η αυστηρή λειτουργία απαιτεί PCM χωρίς απώλειες και συμβατή ακέραια έξοδο στα 0 dB. Διαφορετικά η αναπαραγωγή σταματά.
+Level and dynamics	Στάθμη και δυναμική
+Optional processing, applied to the next track in shared mode.	Προαιρετική επεξεργασία από το επόμενο κομμάτι σε κοινόχρηστη λειτουργία.
+Off	Ανενεργό
+ReplayGain track	ReplayGain κομματιού
+ReplayGain album	ReplayGain άλμπουμ
+Preamp	Προενίσχυση
+Prevent clipping using ReplayGain peaks	Αποφυγή ψαλιδισμού με τις κορυφές ReplayGain
+Exclusive output bypasses ReplayGain and preamp.	Η αποκλειστική έξοδος παρακάμπτει ReplayGain και προενίσχυση.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	Η λειτουργία άλμπουμ διατηρεί τις δυναμικές αναλογίες. Χωρίς τιμές άλμπουμ χρησιμοποιεί του κομματιού· χωρίς ετικέτες 0 dB.
+Original PCM → exclusive HAL → output · no DSP	Αρχικό PCM → αποκλειστικό HAL → έξοδος · χωρίς DSP
+Float PCM → software gain → shared CoreAudio	PCM float → λογισμική ενίσχυση → κοινόχρηστο CoreAudio
+Sequence	Με τη σειρά
+Shuffle tracks	Τυχαία κομμάτια
+Shuffle albums	Τυχαία άλμπουμ
+Open full library	Άνοιγμα πλήρους βιβλιοθήκης
+Collapse / expand panel	Σύμπτυξη / ανάπτυξη πλαισίου
+Vinyl	Βινύλιο
+Album playing	Άλμπουμ σε αναπαραγωγή
+Artist	Καλλιτέχνης
+Lyrics	Στίχοι
+Album	Άλμπουμ
+Title	Τίτλος
+Duration	Διάρκεια
+Genre	Είδος
+Year	Έτος
+Format	Μορφή
+Folder	Φάκελος
+TITLE	ΤΙΤΛΟΣ
+ARTIST	ΚΑΛΛΙΤΕΧΝΗΣ
+ALBUM	ΑΛΜΠΟΥΜ
+DURATION	ΔΙΑΡΚΕΙΑ
+Search	Αναζήτηση
+Search this source	Αναζήτηση σε αυτή την πηγή
+Search title, artist, album or folder…	Αναζήτηση τίτλου, καλλιτέχνη, άλμπουμ ή φακέλου…
+Filter values…	Φιλτράρισμα τιμών…
+All	Όλα
+Album order	Σειρά άλμπουμ
+Original order	Αρχική σειρά
+Choose field…	Επιλογή πεδίου…
+Choose this column’s field	Επιλογή πεδίου αυτής της στήλης
+Show or hide linked filters	Εμφάνιση ή απόκρυψη συνδεδεμένων φίλτρων
+Filtered selection	Φιλτραρισμένη επιλογή
+Tracks in the selected source	Κομμάτια της επιλεγμένης πηγής
+Double-click to play	Διπλό κλικ για αναπαραγωγή
+Click to play from this row	Κλικ για αναπαραγωγή από αυτή τη γραμμή
+Play from here	Αναπαραγωγή από εδώ
+No matching tracks	Δεν υπάρχουν αντίστοιχα κομμάτια
+No tracks found	Δεν βρέθηκαν κομμάτια
+Try a different search, filter or source.	Δοκιμάστε άλλη αναζήτηση, φίλτρο ή πηγή.
+Your library, here	Η βιβλιοθήκη σας εδώ
+Add a local folder, NAS or smartphone from the File menu.	Προσθέστε τοπικό φάκελο, NAS ή τηλέφωνο από το Αρχείο.
+Select a track and start listening	Επιλέξτε κομμάτι και ξεκινήστε την ακρόαση
+Ready	Έτοιμο
+Library ready	Η βιβλιοθήκη είναι έτοιμη
+Playing	Αναπαραγωγή σε εξέλιξη
+Playback paused	Η αναπαραγωγή είναι σε παύση
+Output closed after an error	Η έξοδος έκλεισε μετά από σφάλμα
+Preparing track…	Προετοιμασία κομματιού…
+Configure	Ρύθμιση
+Synchronize	Συγχρονισμός
+Synchronize folder	Συγχρονισμός φακέλου
+Synchronize automatically	Αυτόματος συγχρονισμός
+Synchronizing…	Συγχρονισμός…
+Synchronizing folders…	Συγχρονισμός φακέλων…
+Synchronizing source…	Συγχρονισμός πηγής…
+Synchronization complete	Ο συγχρονισμός ολοκληρώθηκε
+Synchronization cancelled	Ο συγχρονισμός ακυρώθηκε
+Find new tracks without changing existing ones.	Εύρεση νέων κομματιών χωρίς αλλαγή των υπαρχόντων.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	Έλεγχος κάθε 2 λεπτά, αραιότερα εκτός σύνδεσης, και πλήρης έλεγχος κάθε 30 λεπτά.
+Search online for missing covers	Αναζήτηση εξωφύλλων που λείπουν στο διαδίκτυο
+Save found covers in the album folder	Αποθήκευση εξωφύλλων στον φάκελο του άλμπουμ
+No folders added	Δεν προστέθηκαν φάκελοι
+No phone connected	Δεν υπάρχει συνδεδεμένο τηλέφωνο
+Smartphone / FTP	Τηλέφωνο / FTP
+Local / NAS folder	Τοπικός φάκελος / NAS
+Source unavailable	Η πηγή δεν είναι διαθέσιμη
+Source not fully reachable	Η πηγή είναι μερικώς προσβάσιμη
+Source name	Όνομα πηγής
+Host / IP	Υπολογιστής / IP
+Port	Θύρα
+Protocol	Πρωτόκολλο
+Connection	Σύνδεση
+Enter the server address and music folder.	Εισαγάγετε τη διεύθυνση διακομιστή και τον φάκελο μουσικής.
+Read URL	Ανάγνωση URL
+Access	Πρόσβαση
+User	Χρήστης
+Password	Κωδικός
+Remember in macOS Keychain	Απομνημόνευση στην Κλειδοθήκη macOS
+FTP sends unencrypted data: use a trusted network.	Το FTP στέλνει μη κρυπτογραφημένα δεδομένα: χρησιμοποιήστε έμπιστο δίκτυο.
+Implicit FTPS	Έμμεσο FTPS
+Automatic reconnection	Αυτόματη επανασύνδεση
+Find the phone when its IP changes	Εύρεση τηλεφώνου όταν αλλάζει IP
+MusicCraft checks the configured port and verifies the library before changing the connection.	Το MusicCraft ελέγχει τη θύρα και τη βιβλιοθήκη πριν αλλάξει σύνδεση.
+Check and save	Έλεγχος και αποθήκευση
+Checking…	Έλεγχος…
+Checking new path…	Έλεγχος νέας διαδρομής…
+Connection verified and saved. Update IP, port and folder here.	Η σύνδεση ελέγχθηκε και αποθηκεύτηκε. Ενημερώστε εδώ IP, θύρα και φάκελο.
+Connection already in progress	Η σύνδεση είναι ήδη σε εξέλιξη
+Server folders	Φάκελοι διακομιστή
+Parent folder	Γονικός φάκελος
+Use as root	Χρήση ως ρίζα
+Browse	Περιήγηση
+Close	Κλείσιμο
+Cancel	Ακύρωση
+Check complete	Ο έλεγχος ολοκληρώθηκε
+Check cancelled	Ο έλεγχος ακυρώθηκε
+Search cancelled	Η αναζήτηση ακυρώθηκε
+Searching…	Αναζήτηση…
+Waiting for a compatible Wi-Fi or Ethernet network	Αναμονή για συμβατό δίκτυο Wi-Fi ή Ethernet
+Phone not found: another automatic attempt is scheduled	Το τηλέφωνο δεν βρέθηκε: προγραμματίστηκε νέα προσπάθεια
+Connect and index the phone once so it can be recognized	Συνδέστε και ευρετηριάστε μία φορά το τηλέφωνο για αναγνώριση
+Multiple matching libraries found: choose a connection in Network	Πολλές βιβλιοθήκες ταιριάζουν: επιλέξτε σύνδεση στο Δίκτυο
+Password unavailable: open Network to enter it	Ο κωδικός δεν είναι διαθέσιμος: εισαγάγετέ τον στο Δίκτυο
+Authorize Keychain or enter the password in Network	Επιτρέψτε την Κλειδοθήκη ή εισαγάγετε κωδικό στο Δίκτυο
+Wait or cancel the current scan	Περιμένετε ή ακυρώστε την τρέχουσα σάρωση
+Waiting for the new track…	Αναμονή για το νέο κομμάτι…
+Instrumental track	Ορχηστρικό κομμάτι
+Karaoke · line synchronization	Καραόκε · συγχρονισμός ανά γραμμή
+Unsynchronized lyrics	Μη συγχρονισμένοι στίχοι
+Follow	Ακολούθηση
+Follow the playing line	Ακολούθηση της γραμμής που παίζει
+Retry	Επανάληψη προσπάθειας
+Just music, no sung lyrics.	Μόνο μουσική, χωρίς τραγουδισμένους στίχους.
+Lyrics unavailable for this track version.	Δεν υπάρχουν στίχοι για αυτή την έκδοση.
+No matching artist biography found on Italian Wikipedia.	Δεν βρέθηκε αντίστοιχη βιογραφία στην ιταλική Βικιπαίδεια.
+Artist not specified	Δεν ορίστηκε καλλιτέχνης
+Play a track with artist and title tags to see its biography and lyrics.	Παίξτε κομμάτι με ετικέτες καλλιτέχνη και τίτλου για βιογραφία και στίχους.
+The story behind the music	Η ιστορία πίσω από τη μουσική
+Your listening session	Η ακρόασή σας
+Authors and history	Συντάκτες και ιστορικό
+Unavailable	Μη διαθέσιμο
+Library and content	Βιβλιοθήκη και περιεχόμενο
+Manage synchronization, covers and sources.	Διαχείριση συγχρονισμού, εξωφύλλων και πηγών.
+Appearance and readability	Εμφάνιση και αναγνωσιμότητα
+Preferences shared by the full and mini views.	Κοινές προτιμήσεις πλήρους και μίνι προβολής.
+Reduce vinyl animation	Μείωση κίνησης βινυλίου
+Interface size	Μέγεθος διεπαφής
+Use ⌘+ and ⌘− to adjust text size.	Χρησιμοποιήστε ⌘+ και ⌘− για το μέγεθος κειμένου.
+Music server and rooms	Μουσικός διακομιστής και δωμάτια
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	Το MusicCraft παρέχει αρχικά αρχεία. Το LMS συντονίζει piCorePlayer, Squeezelite και συγχρονισμένες ομάδες.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	Η απομακρυσμένη αναπαραγωγή χρησιμοποιεί τις ρυθμίσεις κάθε δωματίου. DSP και αποκλειστικότητα του Mac ισχύουν μόνο τοπικά.
+Source sharing	Κοινή χρήση πηγής
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	Τα νέα κομμάτια κοινοποιούνται αυτόματα. Η ανανέωση αλλάζει την κοινόχρηστη πηγή χωρίς διακοπή της αναπαραγωγής.
+Local address and port	Τοπική διεύθυνση και θύρα
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	Για Raspberry χρησιμοποιήστε την ιδιωτική IP Wi-Fi ή Ethernet του Mac. Το 127.0.0.1 λειτουργεί μόνο σε αυτό το Mac.
+Start music server	Εκκίνηση μουσικού διακομιστή
+Stop music server	Διακοπή μουσικού διακομιστή
+Copy library URL	Αντιγραφή URL βιβλιοθήκης
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	Ο σύνδεσμος περιέχει προσωρινό κλειδί: μοιραστείτε τον μόνο με δικές σας συσκευές. Η έξοδος σταματά τον διακομιστή.
+LMS can run on a Mac, NAS or Raspberry.	Το LMS λειτουργεί σε Mac, NAS ή Raspberry.
+LMS address	Διεύθυνση LMS
+LMS password is kept only for this session.	Ο κωδικός LMS διατηρείται μόνο σε αυτή τη συνεδρία.
+Connect and refresh rooms	Σύνδεση και ανανέωση δωματίων
+LMS connection verified	Η σύνδεση LMS ελέγχθηκε
+Group	Ομαδοποίηση
+Ungroup room	Αποσύνδεση δωματίου
+Play source in room	Αναπαραγωγή πηγής στο δωμάτιο
+Start the music server first	Ξεκινήστε πρώτα τον μουσικό διακομιστή
+piCorePlayer / LMS guide	Οδηγός piCorePlayer / LMS
+Offline	Εκτός σύνδεσης
+Audio and playlists	Ήχος και λίστες
+Files or playlists	Αρχεία ή λίστες
+Sources	Πηγές
+Track count	Πλήθος κομματιών
+Playback order: {mode}	Σειρά αναπαραγωγής: {mode}
+Click to switch to {mode}	Κλικ για αλλαγή σε {mode}
+Searching for {source} on the local network…	Αναζήτηση {source} στο τοπικό δίκτυο…
+{source} found · connection updated to {address}	Βρέθηκε {source} · σύνδεση σε {address}
+Loading · {size} MiB	Φόρτωση · {size} MiB
+Tags unavailable	Μη διαθέσιμες ετικέτες
+Cover · {provider}	Εξώφυλλο · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · Προστέθηκαν: {added} · Διαβάστηκαν: {read} · Αμετάβλητα: {skipped} · Σφάλματα: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · Προστέθηκαν: {added} · Απρόσιτοι φάκελοι: {errors}{limit}
+ · Library limit reached	 · Όριο βιβλιοθήκης
+The saved connection has not been changed.	Η αποθηκευμένη σύνδεση δεν άλλαξε.
+Folder /{name}	Φάκελος /{name}
+Add {name}	Προσθήκη {name}
+Server active · {count} · {address}	Ενεργός διακομιστής · {count} · {address}
+Invalid local address	Μη έγκυρη τοπική διεύθυνση
+Gapless: next track queued in the same stream	Gapless: επόμενο κομμάτι στην ίδια ροή
+Exclusive gapless: next track ready	Αποκλειστικό gapless: επόμενο κομμάτι έτοιμο
+Format change: the output will reopen for the next track	Αλλαγή μορφής: η έξοδος θα ανοίξει για το επόμενο κομμάτι
+Audio preload failed: {reason}	Αποτυχία προφόρτωσης ήχου: {reason}
+Exclusive output unavailable: {reason}	Μη διαθέσιμη αποκλειστική έξοδος: {reason}
+hardware volume, bit-perfect unverified	ένταση συσκευής, μη ελεγμένο bit-perfect
+Connection unavailable or timed out	Η σύνδεση δεν είναι διαθέσιμη ή έληξε ο χρόνος
+Service busy. Try again later.	Η υπηρεσία είναι απασχολημένη. Δοκιμάστε αργότερα.
+Invalid server response	Μη έγκυρη απάντηση διακομιστή
+Invalid server address	Μη έγκυρη διεύθυνση διακομιστή
+Enter a port from 1 to 65535	Εισαγάγετε θύρα από 1 έως 65535
+Invalid credentials	Μη έγκυρα διαπιστευτήρια
+FTP or FTPS is required	Απαιτείται FTP ή FTPS
+Cache unavailable or not writable	Η κρυφή μνήμη δεν είναι διαθέσιμη ή εγγράψιμη
+File unavailable. Check the NAS connection.	Μη διαθέσιμο αρχείο. Ελέγξτε τη σύνδεση NAS.
+Track exceeds the 1 GiB cache limit	Το κομμάτι υπερβαίνει το όριο μνήμης 1 GiB
+Operation cancelled	Η λειτουργία ακυρώθηκε
+Unsupported or damaged audio file	Μη υποστηριζόμενο ή κατεστραμμένο αρχείο ήχου
+Audio device unavailable	Η συσκευή ήχου δεν είναι διαθέσιμη
+The device does not support this audio format	Η συσκευή δεν υποστηρίζει αυτή τη μορφή
+Seek unavailable for this file	Μη διαθέσιμη μετακίνηση σε αυτό το αρχείο
+Keychain save failed. The password stays in memory.	Αποτυχία αποθήκευσης στην Κλειδοθήκη. Ο κωδικός μένει στη μνήμη.
+Network transfer failed	Αποτυχία μεταφοράς δικτύου
+Folder unavailable	Μη διαθέσιμος φάκελος
+Output interrupted by the audio device	Η έξοδος διακόπηκε από τη συσκευή ήχου
+Service unavailable. Try again later.	Η υπηρεσία δεν είναι διαθέσιμη. Δοκιμάστε αργότερα.
+Cannot save the cover	Αδυναμία αποθήκευσης εξωφύλλου
+Invalid network path	Μη έγκυρη διαδρομή δικτύου
+Application theme	Θέμα εφαρμογής
+Peak protection needs peak tags; without them, positive gain can clip.	Η προστασία απαιτεί ετικέτες κορυφών· χωρίς αυτές η θετική ενίσχυση μπορεί να ψαλιδίσει.
+Cannot start server. Check the local address and port.	Αδυναμία εκκίνησης διακομιστή. Ελέγξτε τοπική διεύθυνση και θύρα.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	Το κλείσιμο του MusicCraft σταματά τον διακομιστή. Το Mac πρέπει να μένει ενεργό και συνδεδεμένο.
+Cover	Εξώφυλλο
+External LMS	Εξωτερικό LMS
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	Το Διάστημα παίζει ή παύει· τα βέλη μετακινούν πέντε δευτερόλεπτα. Το εικονίδιο σειράς αλλάζει ακολουθία, τυχαία κομμάτια και άλμπουμ. Η επανάληψη αφορά ένα κομμάτι. Διπλό κλικ ξεκινά φιλτραρισμένο αποτέλεσμα. Κάντε κλικ σε ένα κομμάτι δίπλα στον δίσκο για αναπαραγωγή.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	Προσθέστε φακέλους ή προσαρτημένους τόμους NAS από Αρχείο. Η επιλογή πηγής περιορίζει την ακρόαση στα κομμάτια της· Όλη η μουσική περιλαμβάνει όλες τις πηγές. Διπλό κλικ για αναπαραγωγή.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	Το εξώφυλλο αναζητείται σε ετικέτες, φάκελο άλμπουμ και διαδίκτυο. Η προαιρετική αποθήκευση προσθέτει μόνο εικόνες που λείπουν. Οι υπάρχουσες εικόνες και ετικέτες διατηρούνται.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	Ο αυτόματος συγχρονισμός προσθέτει νέα κομμάτια προσβάσιμων πηγών. Το εικονίδιο ανανέωσης κάνει πλήρη έλεγχο. Δεν ξαναγράφει ή διαγράφει μουσικά αρχεία.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	Στις Ρυθμίσεις επιλέξτε συσκευή και κοινόχρηστη ή αποκλειστική έξοδο. Η αποκλειστική παρακάμπτει ένταση λογισμικού και ReplayGain. Το αυστηρό integer απορρίπτει ασύμβατες μορφές. ReplayGain και προενίσχυση ισχύουν από το επόμενο κοινόχρηστο κομμάτι.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	Εισαγάγετε διεύθυνση FTP τηλεφώνου, θύρα, φάκελο μουσικής και στοιχεία σύνδεσης. Ενεργοποιήστε αυτόματη εύρεση για αλλαγές IP. Ο διακομιστής του τηλεφώνου πρέπει να λειτουργεί στο ίδιο δίκτυο.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	Επιλέξτε πηγή και ξεκινήστε ενσωματωμένο multiroom στις Ρυθμίσεις. Στο piCorePlayer επιλέξτε MusicCraft ή την εμφανιζόμενη IP. Επιλέξτε δωμάτιο, παίξτε την πηγή και ομαδοποιήστε άλλα. Κρατήστε MusicCraft και Mac ενεργά. Τα νέα κομμάτια εμφανίζονται αυτόματα μετά τον συγχρονισμό της πηγής.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	Η βιογραφία ακολουθεί τη γλώσσα διεπαφής με εναλλακτικά αγγλικά. Οι στίχοι μένουν πρωτότυποι. Οι συγχρονισμένοι ακολουθούν την αναπαραγωγή· πατήστε γραμμή για μετάβαση. Η επανάληψη επαναφέρει αποτυχημένη αναζήτηση.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	Το mini διατηρεί μέγεθος μεταξύ καρτελών. Οι Ρυθμίσεις ελέγχουν θέμα, γλώσσα, ζουμ 100–130% και μειωμένη κίνηση. Το F1 ανοίγει τον οδηγό και στις δύο προβολές.
+Help	Βοήθεια
+Integrated server	Ενσωματωμένος διακομιστής
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	Το MusicCraft περιλαμβάνει και ρυθμίζει τον διακομιστή. Ξεκινήστε τον και επιλέξτε MusicCraft ως διακομιστή στο piCorePlayer.
+No matching artist biography found on Wikipedia.	Δεν βρέθηκε αντίστοιχη βιογραφία καλλιτέχνη στη Wikipedia.
+Refresh shared source	Ανανέωση κοινόχρηστης πηγής
+Search the guide…	Αναζήτηση στον οδηγό…
+Server ready · automatic player discovery enabled	Διακομιστής έτοιμος · αυτόματη εύρεση συσκευών ενεργή
+Start integrated multiroom	Έναρξη ενσωματωμένου multiroom
+Start multiroom when MusicCraft opens	Έναρξη multiroom με το άνοιγμα του MusicCraft
+Starting integrated server…	Εκκίνηση ενσωματωμένου διακομιστή…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	Ο ενσωματωμένος διακομιστής συνδέει piCorePlayer και Squeezelite χωρίς ξεχωριστή εγκατάσταση.
+User guide	Εγχειρίδιο χρήσης
+piCorePlayer server address: {address}	Διεύθυνση διακομιστή piCorePlayer: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	Η τυχαία αναπαραγωγή κομματιών παίζει την επιλογή χωρίς επαναλήψεις. Μετρούν μόνο τα κομμάτια που ξεκίνησαν. Το Προηγούμενο, η χειροκίνητη επιλογή και η Επανάληψη επιτρέπουν νέα ακρόαση. Άλλη πηγή ή επιλογή ξεκινά νέο κύκλο· το κλείσιμο της εφαρμογής και η αλλαγή σειράς τον διατηρούν.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	Και οι δύο προβολές θυμούνται τις διαστάσεις τους μετά την επανεκκίνηση. Σε μικρότερη οθόνη προσαρμόζονται στη διαθέσιμη περιοχή με περιθώριο 24 στιγμών, διατηρώντας το προτιμώμενο μέγεθος για μεγαλύτερες οθόνες.
+Tags: {read}/{total} · {remaining} remaining	Ετικέτες: {read}/{total} · απομένουν {remaining}
+Tag indexing complete	Η ευρετηρίαση ετικετών ολοκληρώθηκε
+Tag indexing paused	Η ευρετηρίαση ετικετών σε παύση
+Tag indexing in progress	Ευρετηρίαση ετικετών σε εξέλιξη
+Waiting for tag sources	Αναμονή πηγών ετικετών
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	Σύρετε για ρύθμιση έντασης· κρατήστε πατημένο το Shift για λεπτή ρύθμιση. Κύλιση ή βέλη για μικρές αλλαγές.
+Tag read errors: {n}	Σφάλματα ανάγνωσης ετικετών: {n}
+Tag indexing complete: {read} read · {failed} errors	Η ευρετηρίαση ολοκληρώθηκε: {read} αναγνώστηκαν · {failed} σφάλματα
+LAN scan interval	Διάστημα σάρωσης τοπικού δικτύου

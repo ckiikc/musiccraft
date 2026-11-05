@@ -1,0 +1,321 @@
+File	ఫైల్
+Library	లైబ్రరీ
+Playback	ప్లేబ్యాక్
+Settings	సెట్టింగ్‌లు
+Interface	ఇంటర్‌ఫేస్
+Audio	ఆడియో
+Multiroom	బహుళ గదులు
+Language	భాష
+System language	సిస్టమ్ భాష
+MusicCraft settings	MusicCraft సెట్టింగ్‌లు
+All settings…	అన్ని సెట్టింగ్‌లు…
+Server and multiroom…	సర్వర్ మరియు బహుళ గదులు…
+Add files or playlist…	ఫైళ్లు లేదా ప్లేలిస్ట్ జోడించు…
+Add local / NAS folder…	స్థానిక / NAS ఫోల్డర్ జోడించు…
+Add source…	మూలాన్ని జోడించు…
+Connect smartphone / FTP…	స్మార్ట్‌ఫోన్ / FTP కనెక్ట్ చేయి…
+Connect smartphone / FTP	స్మార్ట్‌ఫోన్ / FTP కనెక్ట్ చేయి
+Quit MusicCraft	MusicCraft నుండి నిష్క్రమించు
+Sources and synchronization…	మూలాలు మరియు సమకాలీకరణ…
+Sources and synchronization	మూలాలు మరియు సమకాలీకరణ
+Cancel synchronization	సమకాలీకరణ రద్దు చేయి
+Faceted browser	వడపోతల బ్రౌజర్
+Clear search and filters	శోధన మరియు వడపోతలు తొలగించు
+Previous track	మునుపటి పాట
+Next track	తదుపరి పాట
+Play	ప్లే చేయి
+Pause	పాజ్ చేయి
+Stop	ఆపు
+Previous	మునుపటిది
+Next	తదుపరిది
+Repeat track	పాటను మళ్లీ ప్లే చేయి
+Track details…	పాట వివరాలు…
+Artist and lyrics…	కళాకారుడు మరియు పాట సాహిత్యం…
+Artist and lyrics	కళాకారుడు మరియు పాట సాహిత్యం
+Audio output…	ఆడియో అవుట్‌పుట్…
+Audio output and quality	ఆడియో అవుట్‌పుట్ మరియు నాణ్యత
+Always on top	ఎల్లప్పుడూ పైన ఉంచు
+Mini player	మినీ ప్లేయర్
+Mini player options	మినీ ప్లేయర్ ఎంపికలు
+Gold	బంగారు
+Graphite	గ్రాఫైట్
+Light	లైట్
+All music	అన్ని సంగీతం
+YOUR MUSIC	మీ సంగీతం
+SMARTPHONE AND NETWORK	స్మార్ట్‌ఫోన్ మరియు నెట్‌వర్క్
+FOLDERS AND NAS	ఫోల్డర్లు మరియు NAS
+SIGNAL LEVELS	సిగ్నల్ స్థాయులు
+Choose your next listen	తదుపరి పాటను ఎంచుకోండి
+Your library awaits	మీ లైబ్రరీ సిద్ధంగా ఉంది
+Loading…	లోడ్ అవుతోంది…
+System output	సిస్టమ్ అవుట్‌పుట్
+Shared	భాగస్వామ్య
+Exclusive	ప్రత్యేక
+SHARED	భాగస్వామ్య
+EXCLUSIVE	ప్రత్యేక
+Mute	మ్యూట్ చేయి
+Volume	వాల్యూమ్
+Hardware volume	పరికర వాల్యూమ్
+Hardware volume · Open audio output	పరికర వాల్యూమ్ · అవుట్‌పుట్ తెరువు
+Configure audio output and exclusive mode	ఆడియో అవుట్‌పుట్ మరియు ప్రత్యేక మోడ్ అమర్చు
+Playback position	ప్లేబ్యాక్ స్థానం
+Output device	అవుట్‌పుట్ పరికరం
+Choose where to listen to your music.	సంగీతం వినే పరికరాన్ని ఎంచుకోండి.
+Refresh devices	పరికరాలు రిఫ్రెష్ చేయి
+Listening mode	వినే విధానం
+Applies when the next track starts.	తదుపరి పాట మొదలైనప్పుడు వర్తిస్తుంది.
+Follow source sample rate	మూలం శాంపిల్ రేట్‌ను అనుసరించు
+Strict integer	కఠిన పూర్ణాంక మోడ్
+Current signal path	ప్రస్తుత సిగ్నల్ మార్గం
+Check device formats	పరికర ఫార్మాట్‌లు తనిఖీ చేయి
+Select a track to open audio output	ఆడియో అవుట్‌పుట్ తెరవడానికి పాట ఎంచుకోండి
+Output updated: applies when the next track starts	అవుట్‌పుట్ నవీకరించబడింది: తదుపరి పాట నుండి
+Shared listening with other apps; MusicCraft controls the volume.	ఇతర యాప్‌లతో కలిసి వినండి; వాల్యూమ్‌ను MusicCraft నియంత్రిస్తుంది.
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	MusicCraft పరికరం మరియు అసలు శాంపిల్ రేట్ కోరుతుంది. వాల్యూమ్‌ను ఆడియో పరికరంలో సర్దండి.
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	కఠిన మోడ్‌కు నష్టం లేని PCM మరియు 0 dB వద్ద అనుకూల పూర్ణాంక అవుట్‌పుట్ అవసరం. లేకపోతే ప్లేబ్యాక్ ఆగుతుంది.
+Level and dynamics	స్థాయి మరియు డైనమిక్స్
+Optional processing, applied to the next track in shared mode.	భాగస్వామ్య మోడ్‌లో తదుపరి పాట నుండి ఐచ్ఛిక ప్రాసెసింగ్.
+Off	ఆఫ్
+ReplayGain track	పాట ReplayGain
+ReplayGain album	ఆల్బమ్ ReplayGain
+Preamp	ముందస్తు గెయిన్
+Prevent clipping using ReplayGain peaks	ReplayGain పీక్‌లతో క్లిప్పింగ్ నివారించు
+Exclusive output bypasses ReplayGain and preamp.	ప్రత్యేక అవుట్‌పుట్ ReplayGain మరియు ముందస్తు గెయిన్‌ను దాటవేస్తుంది.
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	ఆల్బమ్ మోడ్ పాటల మధ్య డైనమిక్స్‌ను కాపాడుతుంది. ఆల్బమ్ ట్యాగ్ లేకపోతే పాట గెయిన్, ట్యాగ్‌లు లేకపోతే 0 dB వాడుతుంది.
+Original PCM → exclusive HAL → output · no DSP	అసలు PCM → ప్రత్యేక HAL → అవుట్‌పుట్ · DSP లేదు
+Float PCM → software gain → shared CoreAudio	ఫ్లోట్ PCM → సాఫ్ట్‌వేర్ గెయిన్ → భాగస్వామ్య CoreAudio
+Sequence	వరుసగా
+Shuffle tracks	యాదృచ్ఛిక పాటలు
+Shuffle albums	యాదృచ్ఛిక ఆల్బమ్‌లు
+Open full library	పూర్తి లైబ్రరీ తెరువు
+Collapse / expand panel	ప్యానెల్ కుదించు / విస్తరించు
+Vinyl	వినైల్
+Album playing	ప్లే అవుతున్న ఆల్బమ్
+Artist	కళాకారుడు
+Lyrics	పాట సాహిత్యం
+Album	ఆల్బమ్
+Title	శీర్షిక
+Duration	నిడివి
+Genre	శైలి
+Year	సంవత్సరం
+Format	ఫార్మాట్
+Folder	ఫోల్డర్
+TITLE	శీర్షిక
+ARTIST	కళాకారుడు
+ALBUM	ఆల్బమ్
+DURATION	నిడివి
+Search	వెతుకు
+Search this source	ఈ మూలంలో వెతుకు
+Search title, artist, album or folder…	శీర్షిక, కళాకారుడు, ఆల్బమ్ లేదా ఫోల్డర్ వెతుకు…
+Filter values…	విలువలను వడపోయి…
+All	అన్నీ
+Album order	ఆల్బమ్ క్రమం
+Original order	అసలు క్రమం
+Choose field…	ఫీల్డ్ ఎంచుకోండి…
+Choose this column’s field	ఈ కాలమ్ ఫీల్డ్ ఎంచుకోండి
+Show or hide linked filters	అనుసంధాన వడపోతలు చూపు లేదా దాచు
+Filtered selection	వడపోసిన ఎంపిక
+Tracks in the selected source	ఎంచుకున్న మూలంలోని పాటలు
+Double-click to play	ప్లే చేయడానికి రెండుసార్లు క్లిక్ చేయండి
+Click to play from this row	ఈ వరుస నుండి ప్లే చేయడానికి క్లిక్ చేయండి
+Play from here	ఇక్కడి నుండి ప్లే చేయి
+No matching tracks	సరిపోయే పాటలు లేవు
+No tracks found	పాటలు కనుగొనబడలేదు
+Try a different search, filter or source.	వేరే శోధన, వడపోత లేదా మూలాన్ని ప్రయత్నించండి.
+Your library, here	మీ లైబ్రరీ ఇక్కడ
+Add a local folder, NAS or smartphone from the File menu.	ఫైల్ మెను నుండి స్థానిక ఫోల్డర్, NAS లేదా ఫోన్ జోడించండి.
+Select a track and start listening	పాట ఎంచుకుని వినడం ప్రారంభించండి
+Ready	సిద్ధం
+Library ready	లైబ్రరీ సిద్ధం
+Playing	ప్లే అవుతోంది
+Playback paused	ప్లేబ్యాక్ పాజ్ అయింది
+Output closed after an error	లోపం తర్వాత అవుట్‌పుట్ మూసివేయబడింది
+Preparing track…	పాట సిద్ధమవుతోంది…
+Configure	అమర్చు
+Synchronize	సమకాలీకరించు
+Synchronize folder	ఫోల్డర్ సమకాలీకరించు
+Synchronize automatically	స్వయంచాలకంగా సమకాలీకరించు
+Synchronizing…	సమకాలీకరిస్తోంది…
+Synchronizing folders…	ఫోల్డర్లు సమకాలీకరిస్తోంది…
+Synchronizing source…	మూలం సమకాలీకరిస్తోంది…
+Synchronization complete	సమకాలీకరణ పూర్తయింది
+Synchronization cancelled	సమకాలీకరణ రద్దయింది
+Find new tracks without changing existing ones.	ఉన్న పాటలను మార్చకుండా కొత్త పాటలను కనుగొంటుంది.
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	ప్రతి 2 నిమిషాలకు తనిఖీ, ఆఫ్‌లైన్ మూలాలకు తక్కువ ప్రయత్నాలు, ప్రతి 30 నిమిషాలకు పూర్తి తనిఖీ.
+Search online for missing covers	లేని కవర్ల కోసం ఆన్‌లైన్‌లో వెతుకు
+Save found covers in the album folder	దొరికిన కవర్లను ఆల్బమ్ ఫోల్డర్‌లో సేవ్ చేయి
+No folders added	ఫోల్డర్లు జోడించలేదు
+No phone connected	ఫోన్ కనెక్ట్ కాలేదు
+Smartphone / FTP	స్మార్ట్‌ఫోన్ / FTP
+Local / NAS folder	స్థానిక / NAS ఫోల్డర్
+Source unavailable	మూలం అందుబాటులో లేదు
+Source not fully reachable	మూలం కొంతవరకే అందుబాటులో ఉంది
+Source name	మూలం పేరు
+Host / IP	హోస్ట్ / IP
+Port	పోర్ట్
+Protocol	ప్రోటోకాల్
+Connection	కనెక్షన్
+Enter the server address and music folder.	సర్వర్ చిరునామా మరియు సంగీత ఫోల్డర్ ఇవ్వండి.
+Read URL	URL చదువు
+Access	యాక్సెస్
+User	వినియోగదారు
+Password	పాస్‌వర్డ్
+Remember in macOS Keychain	macOS కీచైన్‌లో గుర్తుంచుకో
+FTP sends unencrypted data: use a trusted network.	FTP గుప్తీకరించని డేటాను పంపుతుంది: నమ్మకమైన నెట్‌వర్క్ వాడండి.
+Implicit FTPS	ఇంప్లిసిట్ FTPS
+Automatic reconnection	స్వయంచాలక పునఃకనెక్షన్
+Find the phone when its IP changes	IP మారినప్పుడు ఫోన్‌ను కనుగొను
+MusicCraft checks the configured port and verifies the library before changing the connection.	కనెక్షన్ మార్చే ముందు MusicCraft పోర్ట్ మరియు లైబ్రరీని ధృవీకరిస్తుంది.
+Check and save	తనిఖీ చేసి సేవ్ చేయి
+Checking…	తనిఖీ చేస్తోంది…
+Checking new path…	కొత్త మార్గం తనిఖీ చేస్తోంది…
+Connection verified and saved. Update IP, port and folder here.	కనెక్షన్ ధృవీకరించి సేవ్ అయింది. IP, పోర్ట్ మరియు ఫోల్డర్ ఇక్కడ మార్చండి.
+Connection already in progress	కనెక్షన్ ఇప్పటికే జరుగుతోంది
+Server folders	సర్వర్ ఫోల్డర్లు
+Parent folder	పై ఫోల్డర్
+Use as root	రూట్‌గా వాడు
+Browse	బ్రౌజ్ చేయి
+Close	మూసివేయి
+Cancel	రద్దు చేయి
+Check complete	తనిఖీ పూర్తయింది
+Check cancelled	తనిఖీ రద్దయింది
+Search cancelled	శోధన రద్దయింది
+Searching…	వెతుకుతోంది…
+Waiting for a compatible Wi-Fi or Ethernet network	అనుకూల Wi-Fi లేదా Ethernet నెట్‌వర్క్ కోసం వేచి ఉంది
+Phone not found: another automatic attempt is scheduled	ఫోన్ కనబడలేదు: మరో స్వయంచాలక ప్రయత్నం షెడ్యూల్ అయింది
+Connect and index the phone once so it can be recognized	ఫోన్‌ను గుర్తించడానికి ఒకసారి కనెక్ట్ చేసి సూచిక తయారు చేయండి
+Multiple matching libraries found: choose a connection in Network	అనేక లైబ్రరీలు సరిపోతున్నాయి: నెట్‌వర్క్‌లో కనెక్షన్ ఎంచుకోండి
+Password unavailable: open Network to enter it	పాస్‌వర్డ్ అందుబాటులో లేదు: నెట్‌వర్క్‌లో ఇవ్వండి
+Authorize Keychain or enter the password in Network	కీచైన్‌కు అనుమతి ఇవ్వండి లేదా నెట్‌వర్క్‌లో పాస్‌వర్డ్ ఇవ్వండి
+Wait or cancel the current scan	వేచి ఉండండి లేదా ప్రస్తుత స్కాన్ రద్దు చేయండి
+Waiting for the new track…	కొత్త పాట కోసం వేచి ఉంది…
+Instrumental track	వాయిద్య సంగీతం
+Karaoke · line synchronization	కరావోకే · పంక్తుల సమకాలీకరణ
+Unsynchronized lyrics	సమకాలీకరించని సాహిత్యం
+Follow	అనుసరించు
+Follow the playing line	ప్లే అవుతున్న పంక్తిని అనుసరించు
+Retry	మళ్లీ ప్రయత్నించు
+Just music, no sung lyrics.	సంగీతం మాత్రమే, పాడే సాహిత్యం లేదు.
+Lyrics unavailable for this track version.	ఈ పాట వెర్షన్‌కు సాహిత్యం అందుబాటులో లేదు.
+No matching artist biography found on Italian Wikipedia.	ఇటాలియన్ వికీపీడియాలో సరిపోయే జీవితచరిత్ర దొరకలేదు.
+Artist not specified	కళాకారుడిని పేర్కొనలేదు
+Play a track with artist and title tags to see its biography and lyrics.	జీవితచరిత్ర, సాహిత్యం కోసం కళాకారుడు మరియు శీర్షిక ట్యాగ్‌లు ఉన్న పాట ప్లే చేయండి.
+The story behind the music	సంగీతం వెనుక కథ
+Your listening session	మీ వినికిడి సెషన్
+Authors and history	రచయితలు మరియు చరిత్ర
+Unavailable	అందుబాటులో లేదు
+Library and content	లైబ్రరీ మరియు కంటెంట్
+Manage synchronization, covers and sources.	సమకాలీకరణ, కవర్లు మరియు మూలాలను నిర్వహించండి.
+Appearance and readability	రూపం మరియు చదవదగినతనం
+Preferences shared by the full and mini views.	పూర్తి మరియు మినీ వీక్షణలకు ఉమ్మడి ప్రాధాన్యతలు.
+Reduce vinyl animation	వినైల్ యానిమేషన్ తగ్గించు
+Interface size	ఇంటర్‌ఫేస్ పరిమాణం
+Use ⌘+ and ⌘− to adjust text size.	అక్షరాల పరిమాణం కోసం ⌘+ మరియు ⌘− వాడండి.
+Music server and rooms	సంగీత సర్వర్ మరియు గదులు
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	MusicCraft అసలు ఫైళ్లను అందిస్తుంది. LMS ద్వారా piCorePlayer, Squeezelite మరియు సమకాలీకరించిన సమూహాలు నిర్వహించబడతాయి.
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	రిమోట్ ప్లేబ్యాక్ ప్రతి గది సెట్టింగ్‌లను వాడుతుంది. ఈ Mac DSP మరియు ప్రత్యేక మోడ్ స్థానిక వినికిడికే వర్తిస్తాయి.
+Source sharing	మూలాన్ని పంచుకోవడం
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	కొత్త పాటలు స్వయంచాలకంగా షేర్ అవుతాయి. రిఫ్రెష్ చేస్తే ప్లేబ్యాక్ ఆపకుండానే షేర్ చేసిన మూలం మారుతుంది.
+Local address and port	స్థానిక చిరునామా మరియు పోర్ట్
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	Raspberry కోసం Mac ప్రైవేట్ Wi-Fi లేదా Ethernet IP వాడండి. 127.0.0.1 ఈ Mac‌లో మాత్రమే పనిచేస్తుంది.
+Start music server	సంగీత సర్వర్ ప్రారంభించు
+Stop music server	సంగీత సర్వర్ ఆపు
+Copy library URL	లైబ్రరీ URL కాపీ చేయి
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	లింక్‌లో తాత్కాలిక కీ ఉంది: మీ ప్లేయర్లతో మాత్రమే పంచుకోండి. MusicCraft మూసివేస్తే సర్వర్ ఆగుతుంది.
+LMS can run on a Mac, NAS or Raspberry.	LMS ను Mac, NAS లేదా Raspberryలో నడపవచ్చు.
+LMS address	LMS చిరునామా
+LMS password is kept only for this session.	LMS పాస్‌వర్డ్ ఈ సెషన్‌లో మాత్రమే నిల్వ ఉంటుంది.
+Connect and refresh rooms	కనెక్ట్ చేసి గదులు రిఫ్రెష్ చేయి
+LMS connection verified	LMS కనెక్షన్ ధృవీకరించబడింది
+Group	సమూహం చేయి
+Ungroup room	గదిని వేరు చేయి
+Play source in room	గదిలో మూలాన్ని ప్లే చేయి
+Start the music server first	ముందుగా సంగీత సర్వర్ ప్రారంభించండి
+piCorePlayer / LMS guide	piCorePlayer / LMS మార్గదర్శి
+Offline	ఆఫ్‌లైన్
+Audio and playlists	ఆడియో మరియు ప్లేలిస్ట్‌లు
+Files or playlists	ఫైళ్లు లేదా ప్లేలిస్ట్‌లు
+Sources	మూలాలు
+Track count	పాటల సంఖ్య
+Playback order: {mode}	ప్లేబ్యాక్ క్రమం: {mode}
+Click to switch to {mode}	{mode} కు మారడానికి క్లిక్ చేయండి
+Searching for {source} on the local network…	స్థానిక నెట్‌వర్క్‌లో {source} కోసం వెతుకుతోంది…
+{source} found · connection updated to {address}	{source} కనుగొనబడింది · కనెక్షన్ {address} కు నవీకరించబడింది
+Loading · {size} MiB	లోడ్ అవుతోంది · {size} MiB
+Tags unavailable	ట్యాగ్‌లు అందుబాటులో లేవు
+Cover · {provider}	కవర్ · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · జోడించినవి: {added} · చదివినవి: {read} · మారనివి: {skipped} · లోపాలు: {errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · జోడించినవి: {added} · అందుబాటులో లేని ఫోల్డర్లు: {errors}{limit}
+ · Library limit reached	 · లైబ్రరీ పరిమితి చేరింది
+The saved connection has not been changed.	సేవ్ చేసిన కనెక్షన్ మార్చబడలేదు.
+Folder /{name}	ఫోల్డర్ /{name}
+Add {name}	{name} జోడించు
+Server active · {count} · {address}	సర్వర్ నడుస్తోంది · {count} · {address}
+Invalid local address	స్థానిక చిరునామా చెల్లదు
+Gapless: next track queued in the same stream	ఖాళీలు లేకుండా: తదుపరి పాట అదే స్ట్రీమ్‌లో ఉంది
+Exclusive gapless: next track ready	ప్రత్యేక gapless: తదుపరి పాట సిద్ధం
+Format change: the output will reopen for the next track	ఫార్మాట్ మారింది: తదుపరి పాట కోసం అవుట్‌పుట్ మళ్లీ తెరుస్తుంది
+Audio preload failed: {reason}	ఆడియో ముందస్తు లోడ్ విఫలం: {reason}
+Exclusive output unavailable: {reason}	ప్రత్యేక అవుట్‌పుట్ అందుబాటులో లేదు: {reason}
+hardware volume, bit-perfect unverified	పరికర వాల్యూమ్, bit-perfect ధృవీకరించలేదు
+Connection unavailable or timed out	కనెక్షన్ అందుబాటులో లేదు లేదా సమయం ముగిసింది
+Service busy. Try again later.	సేవ బిజీగా ఉంది. తర్వాత ప్రయత్నించండి.
+Invalid server response	సర్వర్ ప్రతిస్పందన చెల్లదు
+Invalid server address	సర్వర్ చిరునామా చెల్లదు
+Enter a port from 1 to 65535	1 నుండి 65535 మధ్య పోర్ట్ ఇవ్వండి
+Invalid credentials	లాగిన్ వివరాలు చెల్లవు
+FTP or FTPS is required	FTP లేదా FTPS అవసరం
+Cache unavailable or not writable	క్యాష్ అందుబాటులో లేదు లేదా రాయలేము
+File unavailable. Check the NAS connection.	ఫైల్ అందుబాటులో లేదు. NAS కనెక్షన్ తనిఖీ చేయండి.
+Track exceeds the 1 GiB cache limit	పాట 1 GiB క్యాష్ పరిమితిని మించుతోంది
+Operation cancelled	చర్య రద్దయింది
+Unsupported or damaged audio file	మద్దతులేని లేదా దెబ్బతిన్న ఆడియో ఫైల్
+Audio device unavailable	ఆడియో పరికరం అందుబాటులో లేదు
+The device does not support this audio format	పరికరం ఈ ఆడియో ఫార్మాట్‌కు మద్దతివ్వదు
+Seek unavailable for this file	ఈ ఫైల్‌లో స్థాన మార్పు అందుబాటులో లేదు
+Keychain save failed. The password stays in memory.	కీచైన్‌లో సేవ్ విఫలం. పాస్‌వర్డ్ మెమరీలోనే ఉంటుంది.
+Network transfer failed	నెట్‌వర్క్ బదిలీ విఫలమైంది
+Folder unavailable	ఫోల్డర్ అందుబాటులో లేదు
+Output interrupted by the audio device	ఆడియో పరికరం అవుట్‌పుట్‌ను నిలిపింది
+Service unavailable. Try again later.	సేవ అందుబాటులో లేదు. తర్వాత ప్రయత్నించండి.
+Cannot save the cover	కవర్ సేవ్ చేయలేము
+Invalid network path	నెట్‌వర్క్ మార్గం చెల్లదు
+Application theme	యాప్ థీమ్
+Peak protection needs peak tags; without them, positive gain can clip.	రక్షణకు పీక్ ట్యాగ్‌లు అవసరం; అవి లేకపోతే పాజిటివ్ గెయిన్ క్లిప్పింగ్ కలిగించవచ్చు.
+Cannot start server. Check the local address and port.	సర్వర్ ప్రారంభించలేము. స్థానిక చిరునామా మరియు పోర్ట్ తనిఖీ చేయండి.
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	MusicCraft మూసితే సర్వర్ ఆగుతుంది. Mac మేల్కొని నెట్‌వర్క్‌కు కనెక్ట్ అయి ఉండాలి.
+Cover	కవర్
+External LMS	బాహ్య LMS
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	స్పేస్ ప్లే లేదా పాజ్ చేస్తుంది; బాణాలు ఐదు సెకన్లు కదుపుతాయి. క్రమం చిహ్నం వరుస, యాదృచ్ఛిక పాటలు, ఆల్బమ్‌లను మారుస్తుంది. రిపీట్ ఒక పాటకే. ఫిల్టర్ ఫలితాన్ని రెండుసార్లు క్లిక్ చేయండి. పాటను ప్లే చేయడానికి వినైల్ పక్కన ఉన్న పాటను క్లిక్ చేయండి.
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	ఫైల్ మెనూ నుంచి ఫోల్డర్లు లేదా మౌంట్ చేసిన NAS వాల్యూమ్‌లు జోడించండి. మూలాన్ని ఎంచుకుంటే దాని పాటలే వస్తాయి; అన్ని సంగీతంలో అన్ని మూలాలు ఉంటాయి. పాటను రెండుసార్లు క్లిక్ చేయండి.
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	కవర్‌ను ట్యాగ్‌లు, ఆల్బమ్ ఫోల్డర్, తర్వాత ఆన్‌లైన్‌లో వెతుకుతుంది. ఐచ్ఛికంగా సేవ్ చేయడం లేని చిత్రాన్ని మాత్రమే జోడిస్తుంది. ఉన్న చిత్రాలు, ట్యాగ్‌లు మారవు.
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	ఆటోమేటిక్ సింక్ అందుబాటులోని మూలాల కొత్త పాటలను జోడిస్తుంది. రిఫ్రెష్ చిహ్నం పూర్తి తనిఖీ చేస్తుంది. సంగీత ఫైళ్లను తిరిగి రాయదు లేదా తొలగించదు.
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	సెట్టింగ్‌లలో పరికరం, షేర్డ్ లేదా ఎక్స్‌క్లూజివ్ అవుట్‌పుట్ ఎంచుకోండి. ఎక్స్‌క్లూజివ్ సాఫ్ట్‌వేర్ వాల్యూమ్, ReplayGain‌ను దాటవేస్తుంది. స్ట్రిక్ట్ ఇంటిజర్ సరిపోని ఫార్మాట్‌లను తిరస్కరిస్తుంది. ReplayGain, ప్రీయాంప్ తదుపరి షేర్డ్ పాట నుంచి వర్తిస్తాయి.
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	ఫోన్ FTP చిరునామా, పోర్ట్, సంగీత ఫోల్డర్, లాగిన్ వివరాలు ఇవ్వండి. IP మారితే ఆటోమేటిక్ గుర్తింపును ప్రారంభించండి. ఫోన్ సర్వర్ అదే నెట్‌వర్క్‌లో నడుస్తూ ఉండాలి.
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	మూలాన్ని ఎంచుకుని సెట్టింగ్‌లలో అంతర్నిర్మిత మల్టీరూమ్ ప్రారంభించండి. piCorePlayerలో MusicCraft లేదా చూపిన Mac IP ఎంచుకోండి. గదిని ఎంచుకుని మూలాన్ని ప్లే చేసి ఇతర గదులను కలపండి. MusicCraft తెరిచి, Mac మేల్కొని ఉండాలి. మూలం సమకాలీకరించిన తర్వాత కొత్త పాటలు స్వయంచాలకంగా కనిపిస్తాయి.
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	జీవితచరిత్ర ఇంటర్‌ఫేస్ భాషను అనుసరిస్తుంది; లేకపోతే ఇంగ్లీష్. పాట సాహిత్యం అసలు భాషలోనే ఉంటుంది. సమకాలీకరించిన పంక్తులు ప్లేబ్యాక్‌ను అనుసరిస్తాయి; క్లిక్ చేసి అక్కడికి వెళ్లండి. మళ్లీ ప్రయత్నించు విఫలమైన శోధనను పునరావృతం చేస్తుంది.
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	మినీ ప్లేయర్ ట్యాబ్‌ల మధ్య పరిమాణాన్ని ఉంచుతుంది. సెట్టింగ్‌లు థీమ్, భాష, 100–130% జూమ్, తక్కువ యానిమేషన్‌ను నియంత్రిస్తాయి. F1 రెండు వీక్షణల్లోనూ మార్గదర్శిని తెరుస్తుంది.
+Help	సహాయం
+Integrated server	అంతర్నిర్మిత సర్వర్
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	MusicCraftలో సర్వర్ ఉంది, సెట్టింగ్‌లు ఆటోమేటిక్. దాన్ని ప్రారంభించి piCorePlayerలో MusicCraftను సర్వర్‌గా ఎంచుకోండి.
+No matching artist biography found on Wikipedia.	వికీపీడియాలో సరిపోయే కళాకారుని జీవితచరిత్ర దొరకలేదు.
+Refresh shared source	షేర్ చేసిన మూలాన్ని నవీకరించు
+Search the guide…	మార్గదర్శినిలో వెతుకు…
+Server ready · automatic player discovery enabled	సర్వర్ సిద్ధం · ఆటోమేటిక్ ప్లేయర్ గుర్తింపు ఆన్
+Start integrated multiroom	అంతర్నిర్మిత మల్టీరూమ్ ప్రారంభించు
+Start multiroom when MusicCraft opens	MusicCraft తెరిచినప్పుడు మల్టీరూమ్ ప్రారంభించు
+Starting integrated server…	అంతర్నిర్మిత సర్వర్ ప్రారంభమవుతోంది…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	అంతర్నిర్మిత సర్వర్ విడిగా ఇన్‌స్టాల్ చేయకుండా piCorePlayer, Squeezeliteను కలుపుతుంది.
+User guide	వినియోగ మార్గదర్శిని
+piCorePlayer server address: {address}	piCorePlayer సర్వర్ చిరునామా: {address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	యాదృచ్ఛిక ట్రాక్‌లు ఎంపికను పునరావృతం లేకుండా ప్లే చేస్తాయి. ప్లే కావడం ప్రారంభమైన పాటలనే లెక్కిస్తుంది. మునుపటి పాట, మాన్యువల్ ఎంపిక, పాట పునరావృతం ద్వారా మళ్లీ వినవచ్చు. వేరే మూలం లేదా ఎంపిక కొత్త చక్రాన్ని ప్రారంభిస్తుంది; యాప్‌ను మూసివేసినా, క్రమం మోడ్ మార్చినా చక్రం కొనసాగుతుంది.
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	రెండు వీక్షణలు పునఃప్రారంభం తర్వాత తమ పరిమాణాలను గుర్తుంచుకుంటాయి. చిన్న తెరపై 24 పాయింట్ల అంచుతో అందుబాటులోని స్థలానికి సరిపోతాయి; పెద్ద తెరల కోసం ఇష్టమైన పరిమాణాన్ని నిలుపుకుంటాయి.
+Tags: {read}/{total} · {remaining} remaining	ట్యాగ్‌లు: {read}/{total} · మిగిలినవి {remaining}
+Tag indexing complete	ట్యాగ్‌ల సూచిక పూర్తయింది
+Tag indexing paused	ట్యాగ్‌ల సూచిక తాత్కాలికంగా నిలిపివేయబడింది
+Tag indexing in progress	ట్యాగ్‌ల సూచిక కొనసాగుతోంది
+Waiting for tag sources	ట్యాగ్‌ల మూలాల కోసం వేచి ఉంది
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	వాల్యూమ్ సర్దుబాటు చేయడానికి లాగండి; సూక్ష్మ నియంత్రణ కోసం Shift నొక్కి ఉంచండి. చిన్న మార్పుల కోసం స్క్రోల్ లేదా బాణం కీలను ఉపయోగించండి.
+Tag read errors: {n}	ట్యాగ్‌ల పఠన లోపాలు: {n}
+Tag indexing complete: {read} read · {failed} errors	సూచికీకరణ పూర్తయింది: {read} చదివినవి · {failed} లోపాలు
+LAN scan interval	స్థానిక నెట్‌వర్క్ స్కాన్ విరామం

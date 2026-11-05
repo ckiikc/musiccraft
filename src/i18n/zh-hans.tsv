@@ -1,0 +1,321 @@
+File	文件
+Library	音乐库
+Playback	播放
+Settings	设置
+Interface	界面
+Audio	音频
+Multiroom	多房间
+Language	语言
+System language	系统语言
+MusicCraft settings	MusicCraft 设置
+All settings…	所有设置…
+Server and multiroom…	服务器与多房间…
+Add files or playlist…	添加文件或播放列表…
+Add local / NAS folder…	添加本地 / NAS 文件夹…
+Add source…	添加音源…
+Connect smartphone / FTP…	连接手机 / FTP…
+Connect smartphone / FTP	连接手机 / FTP
+Quit MusicCraft	退出 MusicCraft
+Sources and synchronization…	音源与同步…
+Sources and synchronization	音源与同步
+Cancel synchronization	取消同步
+Faceted browser	分面浏览器
+Clear search and filters	清除搜索和筛选
+Previous track	上一曲
+Next track	下一曲
+Play	播放
+Pause	暂停
+Stop	停止
+Previous	上一首
+Next	下一首
+Repeat track	单曲循环
+Track details…	曲目详情…
+Artist and lyrics…	艺人与歌词…
+Artist and lyrics	艺人与歌词
+Audio output…	音频输出…
+Audio output and quality	音频输出与音质
+Always on top	始终置顶
+Mini player	迷你播放器
+Mini player options	迷你播放器选项
+Gold	金色
+Graphite	石墨色
+Light	浅色
+All music	全部音乐
+YOUR MUSIC	我的音乐
+SMARTPHONE AND NETWORK	手机与网络
+FOLDERS AND NAS	文件夹与 NAS
+SIGNAL LEVELS	信号电平
+Choose your next listen	选择下一首音乐
+Your library awaits	音乐库等待你的聆听
+Loading…	正在加载…
+System output	系统输出
+Shared	共享
+Exclusive	独占
+SHARED	共享
+EXCLUSIVE	独占
+Mute	静音
+Volume	音量
+Hardware volume	硬件音量
+Hardware volume · Open audio output	硬件音量 · 打开音频输出
+Configure audio output and exclusive mode	配置音频输出和独占模式
+Playback position	播放位置
+Output device	输出设备
+Choose where to listen to your music.	选择音乐播放设备。
+Refresh devices	刷新设备
+Listening mode	聆听模式
+Applies when the next track starts.	从下一首曲目开始生效。
+Follow source sample rate	跟随音源采样率
+Strict integer	严格整数模式
+Current signal path	当前信号路径
+Check device formats	检查设备格式
+Select a track to open audio output	选择曲目以开启音频输出
+Output updated: applies when the next track starts	输出已更新：从下一首生效
+Shared listening with other apps; MusicCraft controls the volume.	与其他应用共享输出；由 MusicCraft 控制音量。
+MusicCraft requests the device and source sample rate. Adjust volume on your audio device.	MusicCraft 请求设备及原始采样率。请在音频设备上调整音量。
+Strict integer requires lossless PCM and a compatible integer output at 0 dB. Playback stops if unavailable.	严格整数模式需要无损 PCM 和支持 0 dB 的整数输出。不支持时将停止播放。
+Level and dynamics	电平与动态
+Optional processing, applied to the next track in shared mode.	可选处理，仅在共享模式下从下一首曲目生效。
+Off	关闭
+ReplayGain track	单曲 ReplayGain
+ReplayGain album	专辑 ReplayGain
+Preamp	前置增益
+Prevent clipping using ReplayGain peaks	根据 ReplayGain 峰值防止削波
+Exclusive output bypasses ReplayGain and preamp.	独占输出绕过 ReplayGain 和前置增益。
+Album mode preserves track dynamics. Missing album tags use track gain; missing tags use 0 dB.	专辑模式保留曲目间动态。无专辑增益时使用单曲增益；无标签时为 0 dB。
+Original PCM → exclusive HAL → output · no DSP	原始 PCM → 独占 HAL → 输出 · 无 DSP
+Float PCM → software gain → shared CoreAudio	浮点 PCM → 软件增益 → 共享 CoreAudio
+Sequence	顺序播放
+Shuffle tracks	随机曲目
+Shuffle albums	随机专辑
+Open full library	打开完整音乐库
+Collapse / expand panel	收起 / 展开面板
+Vinyl	黑胶
+Album playing	正在播放的专辑
+Artist	艺人
+Lyrics	歌词
+Album	专辑
+Title	标题
+Duration	时长
+Genre	流派
+Year	年份
+Format	格式
+Folder	文件夹
+TITLE	标题
+ARTIST	艺人
+ALBUM	专辑
+DURATION	时长
+Search	搜索
+Search this source	搜索此音源
+Search title, artist, album or folder…	搜索标题、艺人、专辑或文件夹…
+Filter values…	筛选值…
+All	全部
+Album order	专辑顺序
+Original order	原始顺序
+Choose field…	选择字段…
+Choose this column’s field	选择本列字段
+Show or hide linked filters	显示或隐藏关联筛选
+Filtered selection	筛选结果
+Tracks in the selected source	所选音源中的曲目
+Double-click to play	双击播放
+Click to play from this row	点击从此行播放
+Play from here	从此处播放
+No matching tracks	没有匹配的曲目
+No tracks found	未找到曲目
+Try a different search, filter or source.	请尝试其他搜索、筛选或音源。
+Your library, here	你的音乐库
+Add a local folder, NAS or smartphone from the File menu.	从“文件”菜单添加本地文件夹、NAS 或手机。
+Select a track and start listening	选择曲目并开始聆听
+Ready	就绪
+Library ready	音乐库已就绪
+Playing	正在播放
+Playback paused	播放已暂停
+Output closed after an error	发生错误，输出已关闭
+Preparing track…	正在准备曲目…
+Configure	配置
+Synchronize	同步
+Synchronize folder	同步文件夹
+Synchronize automatically	自动同步
+Synchronizing…	正在同步…
+Synchronizing folders…	正在同步文件夹…
+Synchronizing source…	正在同步音源…
+Synchronization complete	同步完成
+Synchronization cancelled	同步已取消
+Find new tracks without changing existing ones.	查找新曲目，不修改现有内容。
+Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.	运行时每 2 分钟检查，离线时减少尝试，每 30 分钟完整检查。
+Search online for missing covers	在线搜索缺失的封面
+Save found covers in the album folder	将找到的封面保存到专辑文件夹
+No folders added	尚未添加文件夹
+No phone connected	未连接手机
+Smartphone / FTP	手机 / FTP
+Local / NAS folder	本地 / NAS 文件夹
+Source unavailable	音源不可用
+Source not fully reachable	音源仅部分可访问
+Source name	音源名称
+Host / IP	主机 / IP
+Port	端口
+Protocol	协议
+Connection	连接
+Enter the server address and music folder.	输入服务器地址和音乐文件夹。
+Read URL	读取 URL
+Access	访问
+User	用户名
+Password	密码
+Remember in macOS Keychain	存储到 macOS 钥匙串
+FTP sends unencrypted data: use a trusted network.	FTP 明文传输数据：请使用可信网络。
+Implicit FTPS	隐式 FTPS
+Automatic reconnection	自动重新连接
+Find the phone when its IP changes	IP 变化时自动查找手机
+MusicCraft checks the configured port and verifies the library before changing the connection.	MusicCraft 更改连接前会检查端口并验证音乐库。
+Check and save	验证并保存
+Checking…	正在验证…
+Checking new path…	正在验证新路径…
+Connection verified and saved. Update IP, port and folder here.	连接已验证并保存。可在此更新 IP、端口和文件夹。
+Connection already in progress	连接已在进行中
+Server folders	服务器文件夹
+Parent folder	上级文件夹
+Use as root	设为根目录
+Browse	浏览
+Close	关闭
+Cancel	取消
+Check complete	验证完成
+Check cancelled	验证已取消
+Search cancelled	搜索已取消
+Searching…	正在搜索…
+Waiting for a compatible Wi-Fi or Ethernet network	等待兼容的 Wi-Fi 或以太网
+Phone not found: another automatic attempt is scheduled	未找到手机：已安排自动重试
+Connect and index the phone once so it can be recognized	首次连接并建立手机音乐索引后才能识别
+Multiple matching libraries found: choose a connection in Network	找到多个匹配音乐库：请在网络设置中选择连接
+Password unavailable: open Network to enter it	密码不可用：请在网络设置中输入
+Authorize Keychain or enter the password in Network	授权钥匙串或在网络设置中输入密码
+Wait or cancel the current scan	请等待或取消当前扫描
+Waiting for the new track…	正在等待新曲目…
+Instrumental track	纯音乐曲目
+Karaoke · line synchronization	卡拉 OK · 逐行同步
+Unsynchronized lyrics	未同步歌词
+Follow	跟随
+Follow the playing line	跟随正在播放的歌词
+Retry	重试
+Just music, no sung lyrics.	仅音乐，无演唱歌词。
+Lyrics unavailable for this track version.	此版本曲目暂无歌词。
+No matching artist biography found on Italian Wikipedia.	意大利语维基百科未找到匹配的艺人传记。
+Artist not specified	未指定艺人
+Play a track with artist and title tags to see its biography and lyrics.	播放包含艺人和标题标签的曲目以查看传记和歌词。
+The story behind the music	音乐背后的故事
+Your listening session	本次聆听
+Authors and history	作者与历史
+Unavailable	不可用
+Library and content	音乐库与内容
+Manage synchronization, covers and sources.	管理同步、封面和音源。
+Appearance and readability	外观与可读性
+Preferences shared by the full and mini views.	完整视图和迷你视图共用设置。
+Reduce vinyl animation	减少黑胶动画
+Interface size	界面大小
+Use ⌘+ and ⌘− to adjust text size.	使用 ⌘+ 和 ⌘− 调整文字大小。
+Music server and rooms	音乐服务器与房间
+MusicCraft serves original files. LMS coordinates piCorePlayer and Squeezelite, including synchronized groups.	MusicCraft 提供原始文件。LMS 协调 piCorePlayer、Squeezelite 和同步分组。
+Remote playback uses each room’s settings. This Mac’s DSP and exclusive mode apply only to local listening.	远程播放使用各房间的设置。本机 DSP 和独占模式仅用于本地聆听。
+Source sharing	共享音源
+New tracks are shared automatically. Refresh changes the shared source without stopping playback.	新曲目会自动共享。刷新可切换共享来源，而不中断播放。
+Local address and port	本地地址和端口
+Use the Mac’s private Wi-Fi or Ethernet IP for Raspberry access. 127.0.0.1 works only on this Mac.	树莓派请使用 Mac 的 Wi-Fi 或以太网私有 IP。127.0.0.1 仅适用于本机。
+Start music server	启动音乐服务器
+Stop music server	停止音乐服务器
+Copy library URL	复制音乐库 URL
+The link has a temporary key: share it only with your players. Closing MusicCraft stops the server.	链接含临时密钥：仅与自己的播放器分享。退出 MusicCraft 将停止服务器。
+LMS can run on a Mac, NAS or Raspberry.	LMS 可运行在 Mac、NAS 或树莓派上。
+LMS address	LMS 地址
+LMS password is kept only for this session.	LMS 密码仅保留在当前会话中。
+Connect and refresh rooms	连接并刷新房间
+LMS connection verified	LMS 连接已验证
+Group	分组
+Ungroup room	取消房间分组
+Play source in room	在房间播放此音源
+Start the music server first	请先启动音乐服务器
+piCorePlayer / LMS guide	piCorePlayer / LMS 指南
+Offline	离线
+Audio and playlists	音频与播放列表
+Files or playlists	文件或播放列表
+Sources	音源
+Track count	曲目数量
+Playback order: {mode}	播放顺序：{mode}
+Click to switch to {mode}	点击切换为 {mode}
+Searching for {source} on the local network…	正在局域网中查找 {source}…
+{source} found · connection updated to {address}	已找到 {source} · 连接已更新为 {address}
+Loading · {size} MiB	正在加载 · {size} MiB
+Tags unavailable	标签不可用
+Cover · {provider}	封面 · {provider}
+{status} · Added: {added} · Read: {read} · Unchanged: {skipped} · Errors: {errors}	{status} · 新增：{added} · 已读：{read} · 未变：{skipped} · 错误：{errors}
+{status} · Added: {added} · Unreachable folders: {errors}{limit}	{status} · 新增：{added} · 不可访问文件夹：{errors}{limit}
+ · Library limit reached	 · 已达到音乐库上限
+The saved connection has not been changed.	已保存的连接未更改。
+Folder /{name}	文件夹 /{name}
+Add {name}	添加 {name}
+Server active · {count} · {address}	服务器运行中 · {count} · {address}
+Invalid local address	本地地址无效
+Gapless: next track queued in the same stream	无缝播放：下一曲已加入同一音频流
+Exclusive gapless: next track ready	独占无缝播放：下一曲已就绪
+Format change: the output will reopen for the next track	格式变更：下一曲将重新开启输出
+Audio preload failed: {reason}	音频预加载失败：{reason}
+Exclusive output unavailable: {reason}	独占输出不可用：{reason}
+hardware volume, bit-perfect unverified	硬件音量，未验证位完美
+Connection unavailable or timed out	连接不可用或已超时
+Service busy. Try again later.	服务繁忙，请稍后重试。
+Invalid server response	服务器响应无效
+Invalid server address	服务器地址无效
+Enter a port from 1 to 65535	请输入 1 到 65535 的端口
+Invalid credentials	凭据无效
+FTP or FTPS is required	需要 FTP 或 FTPS
+Cache unavailable or not writable	缓存不可用或无法写入
+File unavailable. Check the NAS connection.	文件不可用，请检查 NAS 连接。
+Track exceeds the 1 GiB cache limit	曲目超过 1 GiB 缓存上限
+Operation cancelled	操作已取消
+Unsupported or damaged audio file	音频格式不支持或文件已损坏
+Audio device unavailable	音频设备不可用
+The device does not support this audio format	设备不支持此音频格式
+Seek unavailable for this file	此文件不支持跳转
+Keychain save failed. The password stays in memory.	钥匙串保存失败，密码仅保留在内存中。
+Network transfer failed	网络传输失败
+Folder unavailable	文件夹不可用
+Output interrupted by the audio device	音频设备中断了输出
+Service unavailable. Try again later.	服务不可用，请稍后重试。
+Cannot save the cover	无法保存封面
+Invalid network path	网络路径无效
+Application theme	应用主题
+Peak protection needs peak tags; without them, positive gain can clip.	保护需要峰值标签；没有时，正增益可能导致削波。
+Cannot start server. Check the local address and port.	无法启动服务器，请检查本地地址和端口。
+Closing MusicCraft stops its server. The Mac must stay awake and connected.	关闭MusicCraft会停止服务器。Mac必须保持唤醒并连接网络。
+Cover	封面
+External LMS	外部LMS
+Guide: Space plays or pauses; Left and Right seek five seconds. The order icon cycles sequence, random tracks and random albums. Repeat repeats one track. Double-click a filtered result to start that selection. Click a track beside the vinyl to play it.	空格播放或暂停，左右键跳转五秒。顺序图标轮换顺序、随机曲目和随机专辑。重复针对单曲。双击筛选结果即可开始播放。 点击唱片旁的曲目即可播放。
+Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.	从文件菜单添加文件夹或已挂载的NAS卷。选择音源仅播放其中的曲目；全部音乐包含所有音源。双击曲目播放。
+Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.	封面按标签、专辑文件夹、在线的顺序查找。可选保存只添加缺失的图片。保留已有图片和音频标签。
+Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.	自动同步添加可访问音源中的新曲目。刷新图标强制完整检查。同步不会改写或删除音乐文件。
+Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.	在设置中选择设备和共享或独占输出。独占模式绕过软件音量和ReplayGain。严格整数拒绝不兼容格式。ReplayGain和前置增益从下一首共享模式曲目开始生效。
+Guide: enter the phone FTP address, port and music folder, then your credentials. Enable automatic discovery when its IP changes. Keep the phone server running on the same network.	输入手机的FTP地址、端口、音乐文件夹和凭据。启用IP变化时的自动查找。保持手机服务器在同一网络运行。
+Guide: select a source and start integrated multiroom in Settings. Choose MusicCraft or the displayed Mac IP in piCorePlayer. Select a room, play the source and group other rooms. Keep MusicCraft open and the Mac awake. New tracks appear automatically after source synchronization.	选择音源，在设置中启动内置多房间服务。在piCorePlayer中选择MusicCraft或显示的Mac IP。选择房间，播放音源并将其他房间编组。保持MusicCraft开启且Mac不休眠。 来源同步后，新曲目会自动显示。
+Guide: the artist biography follows the interface language, with English fallback. Lyrics keep their original language. Timed lyrics follow playback; click a line to seek. Retry repeats a failed lookup.	艺人简介跟随界面语言，缺失时回退到英语。歌词保持原语言。同步歌词跟随播放，点击某行可跳转。重试会重新执行失败的查找。
+Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.	迷你播放器在标签页间保留尺寸。设置控制主题、语言、100–130%缩放及减少动画。F1可在两种视图打开本指南。
+Help	帮助
+Integrated server	内置服务器
+MusicCraft includes the server and manages its settings. Start it, then select MusicCraft as the server in piCorePlayer.	MusicCraft包含并配置服务器。启动后，在piCorePlayer中选择MusicCraft作为服务器。
+No matching artist biography found on Wikipedia.	未在维基百科找到匹配的艺人简介。
+Refresh shared source	刷新共享音源
+Search the guide…	搜索指南…
+Server ready · automatic player discovery enabled	服务器就绪·已启用播放器自动发现
+Start integrated multiroom	启动内置多房间服务
+Start multiroom when MusicCraft opens	打开MusicCraft时启动多房间服务
+Starting integrated server…	正在启动内置服务器…
+The integrated server connects piCorePlayer and Squeezelite without a separate installation.	内置服务器无需单独安装即可连接piCorePlayer和Squeezelite。
+User guide	使用手册
+piCorePlayer server address: {address}	piCorePlayer服务器地址：{address}
+Guide: shuffle tracks plays the listening selection without repeats. Only started tracks count. Previous, manual choices and Repeat track can replay tracks. A new source or selection starts a new cycle; closing the app and changing order mode keep it.	随机曲目模式会不重复地播放当前播放范围内的曲目，只有已开始播放的曲目才计入。上一曲、手动选择和单曲循环可重播曲目。更换来源或播放范围会开始新一轮；关闭应用和切换播放顺序模式会保留当前轮次。
+Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.	两种播放视图都会在重启后保留各自的尺寸。在较小的屏幕上，它们会适应可用区域并保留24点边距，同时保存适合较大屏幕的首选尺寸。
+Tags: {read}/{total} · {remaining} remaining	标签：{read}/{total} · 剩余 {remaining}
+Tag indexing complete	标签索引已完成
+Tag indexing paused	标签索引已暂停
+Tag indexing in progress	正在建立标签索引
+Waiting for tag sources	正在等待标签来源
+Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for small changes.	拖动以调节音量；按住 Shift 可精细调节。滚动或使用方向键进行小幅调整。
+Tag read errors: {n}	标签读取错误：{n}
+Tag indexing complete: {read} read · {failed} errors	索引完成：已读取 {read} · {failed} 个错误
+LAN scan interval	局域网扫描间隔
