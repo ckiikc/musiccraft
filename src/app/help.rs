@@ -43,6 +43,7 @@ const CHAPTERS: [(&str, &[&str]); 9] = [
         "Cover",
         &[
             "Guide: artwork is read first from tags, then the album folder, then online. Optional saving adds an image only when no album artwork file exists. Existing images and audio tags are preserved.",
+            "Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.",
         ],
     ),
     (
@@ -56,6 +57,8 @@ const CHAPTERS: [(&str, &[&str]); 9] = [
         &[
             "Guide: the mini player keeps its size between tabs. Settings controls the global theme, language, 100–130% zoom and reduced animation. F1 opens this guide in both views.",
             "Guide: both player views remember their own sizes after restart. On a smaller display they fit the usable area with a 24-point margin, preserving the preferred size for larger displays.",
+            "Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.",
+            "Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.",
         ],
     ),
 ];

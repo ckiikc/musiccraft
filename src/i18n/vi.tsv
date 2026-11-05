@@ -210,7 +210,7 @@ Library and content	Thư viện và nội dung
 Manage synchronization, covers and sources.	Quản lý đồng bộ hóa, ảnh bìa và nguồn.
 Appearance and readability	Giao diện và khả năng đọc
 Preferences shared by the full and mini views.	Các tùy chọn chung cho chế độ đầy đủ và thu gọn.
-Reduce vinyl animation	Giảm hiệu ứng chuyển động của đĩa than
+Reduce player animation	Giảm hiệu ứng chuyển động của trình phát
 Interface size	Kích thước giao diện
 Use ⌘+ and ⌘− to adjust text size.	Dùng ⌘+ và ⌘− để điều chỉnh kích thước chữ.
 Music server and rooms	Máy chủ nhạc và phòng
@@ -321,3 +321,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Lỗi đọc thẻ: {n}
 Tag indexing complete: {read} read · {failed} errors	Đã lập chỉ mục thẻ · Đã đọc: {read} · Lỗi: {failed}
 LAN scan interval	Khoảng cách giữa các lần dò mạng LAN
+Player appearance	Giao diện trình phát
+Listening	Nghe nhạc
+CD	CD
+Cassette	Băng cassette
+Reel-to-reel	Băng cối
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Trong Cài đặt, chọn đĩa than, CD, băng cassette hoặc Revox / Đồng hồ VU. Thẻ ở giữa hiển thị trình phát đã chọn và ghi nhớ lựa chọn khi mở lại MusicCraft.
+Album artwork	Hình ảnh album
+Previous image	Ảnh trước
+Next image	Ảnh tiếp theo
+Artwork unavailable	Không có hình ảnh
+Double-click to enlarge artwork	Bấm đúp để phóng to ảnh bìa
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Bấm đúp vào ảnh bìa để mở hình ảnh album. Dùng các nút mũi tên hoặc phím trái và phải để xem bìa trước, bìa sau và các trang sách ảnh có trong thư mục album.
+Revox	Revox
+VU meters	Đồng hồ VU
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Cài đặt mở trong cửa sổ riêng. Ảnh album ghi nhớ kích thước và vị trí trên các màn hình và sau khi khởi động lại ứng dụng.
+Side-by-side VU	Đồng hồ VU đặt cạnh nhau

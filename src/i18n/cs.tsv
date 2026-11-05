@@ -208,7 +208,7 @@ Library and content	Knihovna a obsah
 Manage synchronization, covers and sources.	Správa synchronizace, obalů a zdrojů.
 Appearance and readability	Vzhled a čitelnost
 Preferences shared by the full and mini views.	Společné předvolby úplného i mini zobrazení.
-Reduce vinyl animation	Omezit animaci vinylu
+Reduce player animation	Omezit animaci přehrávače
 Interface size	Velikost rozhraní
 Use ⌘+ and ⌘− to adjust text size.	Velikost textu upravíte pomocí ⌘+ a ⌘−.
 Music server and rooms	Hudební server a místnosti
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Chyby čtení tagů: {n}
 Tag indexing complete: {read} read · {failed} errors	Indexování dokončeno: přečteno {read} · chyby {failed}
 LAN scan interval	Interval skenování místní sítě
+Player appearance	Vzhled přehrávače
+Listening	Poslech
+CD	CD
+Cassette	Kazeta
+Reel-to-reel	Cívkový magnetofon
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	V nastavení vyberte vinyl, CD, kazetu nebo Revox / VU metry. Prostřední karta zobrazuje vybraný přehrávač a pamatuje si volbu po opětovném otevření MusicCraft.
+Album artwork	Obrázky alba
+Previous image	Předchozí obrázek
+Next image	Další obrázek
+Artwork unavailable	Obrázek není dostupný
+Double-click to enlarge artwork	Dvojklikem zvětšíte obal
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Dvojklikem na obal otevřete obrázky alba. Šipkami nebo klávesami vlevo a vpravo procházejte přední a zadní obal a obrázky bookletu ve složce alba.
+Revox	Revox
+VU meters	VU metry
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Nastavení se otevírá v samostatném okně. Obrázek alba si pamatuje velikost a polohu na monitorech i po restartu aplikace.
+Side-by-side VU	VU metry vedle sebe

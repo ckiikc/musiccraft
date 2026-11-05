@@ -208,7 +208,7 @@ Library and content	Biblioteka ir turinys
 Manage synchronization, covers and sources.	Tvarkykite sinchronizavimą, viršelius ir šaltinius.
 Appearance and readability	Išvaizda ir skaitomumas
 Preferences shared by the full and mini views.	Bendros viso ir mini rodinio nuostatos.
-Reduce vinyl animation	Mažinti vinilo animaciją
+Reduce player animation	Sumažinti grotuvo animaciją
 Interface size	Sąsajos dydis
 Use ⌘+ and ⌘− to adjust text size.	Teksto dydį keiskite su ⌘+ ir ⌘−.
 Music server and rooms	Muzikos serveris ir kambariai
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Žymų skaitymo klaidos: {n}
 Tag indexing complete: {read} read · {failed} errors	Indeksavimas baigtas: perskaityta {read} · klaidos {failed}
 LAN scan interval	Vietinio tinklo paieškos intervalas
+Player appearance	Grotuvo išvaizda
+Listening	Klausymas
+CD	CD
+Cassette	Kasetė
+Reel-to-reel	Juostinis magnetofonas
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Nuostatose pasirinkite vinilą, CD, kasetę arba Revox / VU matuokliai. Vidurinė kortelė rodo pasirinktą grotuvą ir išsaugo pasirinkimą iš naujo atidarius MusicCraft.
+Album artwork	Albumo iliustracijos
+Previous image	Ankstesnis paveikslėlis
+Next image	Kitas paveikslėlis
+Artwork unavailable	Paveikslėlis nepasiekiamas
+Double-click to enlarge artwork	Dukart spustelėkite, kad padidintumėte viršelį
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Dukart spustelėkite viršelį, kad atvertumėte albumo iliustracijas. Rodyklėmis arba kairės ir dešinės klavišais peržiūrėkite priekinį bei galinį viršelius ir albumo aplanke esančius bukleto paveikslėlius.
+Revox	Revox
+VU meters	VU matuokliai
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Nuostatos atidaromos atskirame lange. Albumo viršelis įsimena dydį ir padėtį skirtinguose ekranuose ir paleidus programą iš naujo.
+Side-by-side VU	VU matuokliai greta

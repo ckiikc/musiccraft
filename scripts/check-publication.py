@@ -12,6 +12,7 @@ PRIVATE_NAMES = {"state.ron", "ftp-sources.json", "tracks-seed.json", "tags.json
 MEDIA_SUFFIXES = {".dmg", ".wav", ".flac", ".mp3", ".m4a", ".audio", ".ron", ".log", ".key", ".p12"}
 PATTERNS = {
     "home-directory": re.compile(r"/Users/[A-Za-z0-9_.-]+/|/home/[A-Za-z0-9_.-]+/"),
+    "private-workspace": re.compile(r"/Volumes/Crucial_[A-Za-z0-9]+/"),
     "personal-network": re.compile(r"\b10[.]19[.]\d+[.]\d+\b"),
     "credential-in-url": re.compile(r"(?:ftps?|https?)://[^\s/\"']+:[^\s/@\"']+@"),
     "github-token": re.compile(r"\bgh[pousr]_[A-Za-z0-9]{30,}|\bgithub_pat_[A-Za-z0-9_]{40,}"),
@@ -23,8 +24,8 @@ def source_files():
     # A git archive is built from tracked files. Before git init, inspect the allowlisted tree.
     result = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--show-toplevel"], capture_output=True, text=True)
     if result.returncode == 0 and Path(result.stdout.strip()).resolve() == ROOT:
-        raw = subprocess.check_output(["git", "-C", str(ROOT), "ls-files", "-z"])
-        files = [ROOT / p.decode() for p in raw.split(b"\0") if p]
+        raw = subprocess.check_output(["git", "-C", str(ROOT), "ls-files", "--cached", "--others", "--exclude-standard", "-z"])
+        files = sorted({ROOT / p.decode() for p in raw.split(b"\0") if p})
         if files:
             return files
     return [p for p in ROOT.rglob("*") if p.is_file() and not any(part in EXCLUDED for part in p.relative_to(ROOT).parts)]

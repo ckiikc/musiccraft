@@ -13,6 +13,8 @@ use std::{
     },
 };
 
+pub mod gallery;
+
 pub enum Job {
     ConnectionChecked {
         token: u64,

@@ -119,6 +119,11 @@ with tempfile.TemporaryDirectory(prefix="aurea-ftp-") as temporary:
             (folder / filename).write_bytes(wav.read_bytes())
         subprocess.run(["cargo", "test", "-j", "2", "--locked", "--offline", "live_ftp_literal_brackets", "--", "--ignored", "--nocapture"], cwd=repo, env=env, check=True)
         subprocess.run(["cargo", "test", "-j", "2", "--locked", "--offline", "live_ftp_progressive_hour", "--", "--ignored", "--nocapture"], cwd=repo, env=env, check=True)
+        gallery = root / "Gallery [Case]"
+        (gallery / "Scans").mkdir(parents=True)
+        for name in ["front.png", "back.png", "Scans/page2.png", "Scans/page10.png"]:
+            (gallery / name).write_bytes((album / "cover.png").read_bytes())
+        subprocess.run(["cargo", "test", "-j", "2", "--locked", "--offline", "live_ftp_gallery", "--", "--ignored", "--nocapture"], cwd=repo, env=env, check=True)
         assert short_audio_range[0], "truncated range fixture did not run"
         assert slow_audio_range[0], "slow range fixture did not run"
     finally:

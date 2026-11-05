@@ -208,7 +208,7 @@ Library and content	Библиотека и съдържание
 Manage synchronization, covers and sources.	Управление на синхронизация, обложки и източници.
 Appearance and readability	Външен вид и четимост
 Preferences shared by the full and mini views.	Общи настройки за пълния и мини изгледа.
-Reduce vinyl animation	Намаляване на виниловата анимация
+Reduce player animation	Намаляване на анимацията на плейъра
 Interface size	Размер на интерфейса
 Use ⌘+ and ⌘− to adjust text size.	Използвайте ⌘+ и ⌘− за размера на текста.
 Music server and rooms	Музикален сървър и стаи
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Грешки при четене на тагове: {n}
 Tag indexing complete: {read} read · {failed} errors	Индексирането приключи: прочетени {read} · грешки {failed}
 LAN scan interval	Интервал на сканиране на локалната мрежа
+Player appearance	Изглед на плейъра
+Listening	Слушане
+CD	CD
+Cassette	Касета
+Reel-to-reel	Ролков магнетофон
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	В настройките изберете винил, CD, касета или Revox / VU индикатори. Централният раздел показва избрания плеър и запазва избора след повторно отваряне на MusicCraft.
+Album artwork	Изображения на албума
+Previous image	Предишно изображение
+Next image	Следващо изображение
+Artwork unavailable	Изображението не е достъпно
+Double-click to enlarge artwork	Двойно щракване за увеличаване на обложката
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Щракнете два пъти върху обложката, за да отворите изображенията на албума. Използвайте стрелките или клавишите наляво и надясно за предната и задната обложка и страниците на книжката в папката на албума.
+Revox	Revox
+VU meters	VU индикатори
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Настройките се отварят в отделен прозорец. Обложката запомня размера и позицията си на различни екрани и след рестартиране на приложението.
+Side-by-side VU	VU метри един до друг

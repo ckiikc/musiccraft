@@ -208,7 +208,7 @@ Library and content	Kitaplık ve içerik
 Manage synchronization, covers and sources.	Eşitleme, kapaklar ve kaynakları yönetin.
 Appearance and readability	Görünüm ve okunabilirlik
 Preferences shared by the full and mini views.	Tam ve mini görünüm için ortak tercihler.
-Reduce vinyl animation	Plak animasyonunu azalt
+Reduce player animation	Oynatıcı animasyonunu azalt
 Interface size	Arayüz boyutu
 Use ⌘+ and ⌘− to adjust text size.	Metni ayarlamak için ⌘+ ve ⌘− kullanın.
 Music server and rooms	Müzik sunucusu ve odalar
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Etiket okuma hataları: {n}
 Tag indexing complete: {read} read · {failed} errors	Dizinleme tamamlandı: {read} okundu · {failed} hata
 LAN scan interval	Yerel ağ tarama aralığı
+Player appearance	Oynatıcı görünümü
+Listening	Dinleme
+CD	CD
+Cassette	Kaset
+Reel-to-reel	Makaralı teyp
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Ayarlarda plak, CD, kaset veya Revox / VU göstergeleri seçin. Ortadaki sekme seçilen oynatıcıyı gösterir ve MusicCraft yeniden açıldığında seçimi korur.
+Album artwork	Albüm görselleri
+Previous image	Önceki görsel
+Next image	Sonraki görsel
+Artwork unavailable	Görsel kullanılamıyor
+Double-click to enlarge artwork	Kapağı büyütmek için çift tıklayın
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Albüm görsellerini açmak için kapağa çift tıklayın. Albüm klasöründeki ön ve arka kapak ile kitapçık görsellerini oklarla veya sol ve sağ tuşlarıyla gezebilirsiniz.
+Revox	Revox
+VU meters	VU göstergeleri
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Ayarlar ayrı bir pencerede açılır. Albüm kapağı, farklı ekranlarda ve uygulama yeniden başlatıldığında boyutunu ve konumunu hatırlar.
+Side-by-side VU	Yan yana VU metreler

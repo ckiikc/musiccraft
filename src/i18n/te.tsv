@@ -208,7 +208,7 @@ Library and content	లైబ్రరీ మరియు కంటెంట్
 Manage synchronization, covers and sources.	సమకాలీకరణ, కవర్లు మరియు మూలాలను నిర్వహించండి.
 Appearance and readability	రూపం మరియు చదవదగినతనం
 Preferences shared by the full and mini views.	పూర్తి మరియు మినీ వీక్షణలకు ఉమ్మడి ప్రాధాన్యతలు.
-Reduce vinyl animation	వినైల్ యానిమేషన్ తగ్గించు
+Reduce player animation	ప్లేయర్ యానిమేషన్ తగ్గించు
 Interface size	ఇంటర్‌ఫేస్ పరిమాణం
 Use ⌘+ and ⌘− to adjust text size.	అక్షరాల పరిమాణం కోసం ⌘+ మరియు ⌘− వాడండి.
 Music server and rooms	సంగీత సర్వర్ మరియు గదులు
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	ట్యాగ్‌ల పఠన లోపాలు: {n}
 Tag indexing complete: {read} read · {failed} errors	సూచికీకరణ పూర్తయింది: {read} చదివినవి · {failed} లోపాలు
 LAN scan interval	స్థానిక నెట్‌వర్క్ స్కాన్ విరామం
+Player appearance	ప్లేయర్ రూపం
+Listening	వినడం
+CD	CD
+Cassette	క్యాసెట్
+Reel-to-reel	రీల్ టు రీల్
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	సెట్టింగ్‌లలో వినైల్, CD, క్యాసెట్ లేదా Revox / VU మీటర్లు ఎంచుకోండి. మధ్య ట్యాబ్ ఎంచుకున్న ప్లేయర్‌ను చూపిస్తుంది, MusicCraft మళ్లీ తెరిచినప్పుడు ఎంపికను గుర్తుంచుకుంటుంది.
+Album artwork	ఆల్బమ్ చిత్రాలు
+Previous image	మునుపటి చిత్రం
+Next image	తదుపరి చిత్రం
+Artwork unavailable	చిత్రం అందుబాటులో లేదు
+Double-click to enlarge artwork	కవర్ పెద్దగా చూడటానికి రెండుసార్లు క్లిక్ చేయండి
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	ఆల్బమ్ చిత్రాలను తెరవడానికి కవర్‌పై రెండుసార్లు క్లిక్ చేయండి. ఆల్బమ్ ఫోల్డర్‌లోని ముందు కవర్, వెనుక కవర్, బుక్‌లెట్ చిత్రాలను చూడటానికి బాణాలు లేదా ఎడమ, కుడి కీలు వాడండి.
+Revox	Revox
+VU meters	VU మీటర్లు
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	సెట్టింగ్‌లు ప్రత్యేక విండోలో తెరుచుకుంటాయి. ఆల్బమ్ కవర్ పరిమాణం, స్థానం వేర్వేరు స్క్రీన్‌లలోనూ యాప్ పునఃప్రారంభం తర్వాత కూడా గుర్తుంటాయి.
+Side-by-side VU	పక్కపక్కన VU మీటర్లు

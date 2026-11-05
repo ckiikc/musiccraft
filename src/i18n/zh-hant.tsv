@@ -208,7 +208,7 @@ Library and content	音樂庫與內容
 Manage synchronization, covers and sources.	管理同步、封面與來源。
 Appearance and readability	外觀與可讀性
 Preferences shared by the full and mini views.	完整與迷你檢視共用設定。
-Reduce vinyl animation	減少黑膠動畫
+Reduce player animation	減少播放器動畫
 Interface size	介面大小
 Use ⌘+ and ⌘− to adjust text size.	使用 ⌘+ 與 ⌘− 調整文字大小。
 Music server and rooms	音樂伺服器與房間
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	標籤讀取錯誤：{n}
 Tag indexing complete: {read} read · {failed} errors	索引完成：已讀取 {read} · {failed} 個錯誤
 LAN scan interval	區域網路掃描間隔
+Player appearance	播放器外觀
+Listening	聆聽
+CD	CD
+Cassette	卡式錄音帶
+Reel-to-reel	盤式錄音帶
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	在設定中選擇黑膠唱片、CD、卡式錄音帶或Revox / VU 錶。中央分頁顯示所選播放器，重新開啟MusicCraft後仍會保留選擇。
+Album artwork	專輯圖片
+Previous image	上一張圖片
+Next image	下一張圖片
+Artwork unavailable	圖片無法使用
+Double-click to enlarge artwork	按兩下放大封面
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	按兩下封面開啟專輯圖片。使用箭頭按鈕或左右鍵瀏覽專輯資料夾中的封面、封底及內頁圖片。
+Revox	Revox
+VU meters	VU 錶
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	設定在獨立視窗中開啟。專輯圖片會記住在各個顯示器上的大小與位置，重新啟動應用程式後仍會保留。
+Side-by-side VU	並排 VU 表

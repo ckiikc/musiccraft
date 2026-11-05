@@ -208,7 +208,7 @@ Library and content	Bibliothèque et contenu
 Manage synchronization, covers and sources.	Gérez la synchronisation, les pochettes et les sources.
 Appearance and readability	Apparence et lisibilité
 Preferences shared by the full and mini views.	Préférences communes aux vues complète et mini.
-Reduce vinyl animation	Réduire l’animation du vinyle
+Reduce player animation	Réduire l’animation du lecteur
 Interface size	Taille de l’interface
 Use ⌘+ and ⌘− to adjust text size.	Utilisez ⌘+ et ⌘− pour ajuster la taille du texte.
 Music server and rooms	Serveur musical et pièces
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Erreurs de lecture des tags : {n}
 Tag indexing complete: {read} read · {failed} errors	Indexation terminée : {read} lus · {failed} erreurs
 LAN scan interval	Intervalle de recherche sur le réseau local
+Player appearance	Apparence du lecteur
+Listening	Écoute
+CD	CD
+Cassette	Cassette
+Reel-to-reel	Magnétophone à bobines
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Dans les réglages, choisissez vinyle, CD, cassette ou Revox / VU-mètres. L’onglet central indique le lecteur sélectionné et conserve le choix après la réouverture de MusicCraft.
+Album artwork	Images de l’album
+Previous image	Image précédente
+Next image	Image suivante
+Artwork unavailable	Image indisponible
+Double-click to enlarge artwork	Double-cliquez pour agrandir la pochette
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Double-cliquez sur la pochette pour ouvrir les images de l’album. Utilisez les flèches ou les touches gauche et droite pour parcourir la pochette, le dos et les images du livret présents dans le dossier de l’album.
+Revox	Revox
+VU meters	VU-mètres
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Les réglages s’ouvrent dans une fenêtre indépendante. La pochette conserve sa taille et sa position sur les différents écrans et après le redémarrage de l’application.
+Side-by-side VU	VU-mètres côte à côte

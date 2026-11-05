@@ -2,6 +2,9 @@
 use super::*;
 impl Aurea {
     pub(crate) fn preview(&mut self, scene: &str) {
+        let artwork_track = (scene.ends_with("-artwork") || scene.ends_with("-jacket"))
+            .then(|| self.saved.tracks.first().cloned())
+            .flatten();
         self.saved.auto_sync = false;
         self.saved.multiroom.auto_start = false;
         self.saved.multiroom.integrated = !scene.contains("multiroom");
@@ -9,6 +12,9 @@ impl Aurea {
         self.saved.sources.clear();
         self.credential_pending.clear();
         self.saved.mini = scene.starts_with("mini");
+        if scene == "mini-vinyl-vu-side-by-side" {
+            self.saved.player_appearance = player_visual::Appearance::VuMetersSideBySide;
+        }
         self.saved.mini_view = if scene == "mini-compact" {
             0
         } else if scene.contains("lyrics") || scene == "mini-plain" {
@@ -208,6 +214,36 @@ impl Aurea {
             let key = self.browser.entries[0][0].key.clone();
             self.browser.select(0, &key, false, false);
             self.refresh_browser();
+        }
+        if let Some(track) = artwork_track {
+            if !library::is_remote(&track.source) {
+                let item = crate::jobs::gallery::Item {
+                    source: std::path::Path::new(&track.source)
+                        .with_file_name("front.png")
+                        .to_string_lossy()
+                        .into_owned(),
+                    name: "front.png".into(),
+                    front: true,
+                };
+                if let Some(image) = crate::jobs::gallery::load(
+                    &item,
+                    &self.cache,
+                    &self.auth,
+                    &std::sync::atomic::AtomicU64::new(1),
+                    1,
+                ) {
+                    self.art = Some(self.ctx.load_texture(
+                        "Fixture album jacket",
+                        egui::ColorImage::from_rgba_unmultiplied(image.size, &image.rgba),
+                        Default::default(),
+                    ));
+                }
+            }
+            self.current = Some(track.source.clone());
+            self.saved.tracks = vec![track];
+            if scene.ends_with("-artwork") {
+                self.open_cover_viewer();
+            }
         }
     }
 }

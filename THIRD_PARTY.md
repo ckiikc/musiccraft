@@ -2,6 +2,11 @@
 
 MusicCraft's own source is MIT. Rust dependencies retain their individual licenses; the lockfile pins the resolved versions. `docs/DEPENDENCIES.tsv` records package names, versions, declared SPDX license expressions and source references for the checked macOS dependency graph. This inventory is not a legal compatibility opinion or a vulnerability audit. Preserve applicable notices when distributing binaries.
 
+The macOS packager collects dependency license texts, pinned upstream notices
+and exact crate source URLs/checksums in `Contents/Resources/ThirdPartyLicenses/`.
+The MPL-2.0 Symphonia components are unmodified; their source versions are in
+that inventory. Pinned supplemental license provenance is in `docs/licenses/manifest.json`.
+
 Lucide icon licenses and attribution are retained under `assets/icons/`. eframe/egui supplies its normal bundled UI font under its dependency license. Supplemental fonts are loaded from the user's system and are not copied into the app.
 
 ## Optional Lyrion Music Server

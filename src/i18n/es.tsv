@@ -208,7 +208,7 @@ Library and content	Biblioteca y contenido
 Manage synchronization, covers and sources.	Gestiona sincronización, carátulas y fuentes.
 Appearance and readability	Aspecto y legibilidad
 Preferences shared by the full and mini views.	Preferencias comunes a la vista completa y mini.
-Reduce vinyl animation	Reducir animación del vinilo
+Reduce player animation	Reducir la animación del reproductor
 Interface size	Tamaño de interfaz
 Use ⌘+ and ⌘− to adjust text size.	Usa ⌘+ y ⌘− para ajustar el texto.
 Music server and rooms	Servidor musical y habitaciones
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Errores de lectura de etiquetas: {n}
 Tag indexing complete: {read} read · {failed} errors	Indexación finalizada: {read} leídos · {failed} errores
 LAN scan interval	Intervalo de búsqueda en la red local
+Player appearance	Aspecto del reproductor
+Listening	Escucha
+CD	CD
+Cassette	Casete
+Reel-to-reel	Magnetófono de bobinas
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	En Ajustes, elige vinilo, CD, casete o Revox / Vúmetros. La pestaña central muestra el reproductor elegido y conserva la selección al volver a abrir MusicCraft.
+Album artwork	Imágenes del álbum
+Previous image	Imagen anterior
+Next image	Imagen siguiente
+Artwork unavailable	Imagen no disponible
+Double-click to enlarge artwork	Haz doble clic para ampliar la portada
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Haz doble clic en la portada para abrir las imágenes del álbum. Usa las flechas o las teclas izquierda y derecha para ver portada, contraportada e imágenes del libreto presentes en la carpeta del álbum.
+Revox	Revox
+VU meters	Vúmetros
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Los ajustes se abren en una ventana independiente. La carátula recuerda su tamaño y posición entre pantallas y después de reiniciar la aplicación.
+Side-by-side VU	Vúmetros lado a lado

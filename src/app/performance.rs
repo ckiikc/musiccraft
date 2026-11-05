@@ -150,9 +150,12 @@ fn repaint_cadence_follows_visible_work() {
     let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
     assert_eq!(app.repaint_delay(true, false), Duration::from_millis(500));
     app.paused = false;
-    assert_eq!(app.repaint_delay(true, false), Duration::from_millis(33));
-    assert_eq!(app.repaint_delay(false, false), Duration::from_millis(33));
-    assert_eq!(app.repaint_delay(false, true), Duration::from_millis(200));
+    for appearance in player_visual::Appearance::ALL {
+        app.saved.player_appearance = appearance;
+        assert_eq!(app.repaint_delay(true, false), Duration::from_millis(33));
+        assert_eq!(app.repaint_delay(false, false), Duration::from_millis(33));
+        assert_eq!(app.repaint_delay(false, true), Duration::from_millis(200));
+    }
     app.saved.mini_view = 2;
     assert_eq!(app.repaint_delay(true, false), Duration::from_millis(67));
     app.saved.mini = false;
@@ -261,6 +264,7 @@ fn settings_round_trip_without_rewriting_tracks_or_passwords_and_output_mode_is_
     app.saved.language = "ja".into();
     app.saved.ui_scale = 1.15;
     app.saved.reduce_motion = true;
+    app.saved.player_appearance = player_visual::Appearance::ReelToReel;
     app.saved.dsp = crate::dsp::Config {
         mode: crate::dsp::ReplayGain::Album,
         preamp_db: -3.0,
@@ -290,6 +294,10 @@ fn settings_round_trip_without_rewriting_tracks_or_passwords_and_output_mode_is_
     assert_eq!(reopened.saved.language, "ja");
     assert_eq!(reopened.saved.ui_scale, 1.15);
     assert!(reopened.saved.reduce_motion);
+    assert_eq!(
+        reopened.saved.player_appearance,
+        player_visual::Appearance::ReelToReel
+    );
     assert_eq!(reopened.saved.dsp, app.saved.dsp);
     assert!(!reopened.native);
     assert_eq!(reopened.volume_db, -23.0);
@@ -297,5 +305,65 @@ fn settings_round_trip_without_rewriting_tracks_or_passwords_and_output_mode_is_
     assert_eq!(
         serde_json::to_value(&reopened.saved.tracks).unwrap(),
         expected
+    );
+}
+
+#[test]
+fn auxiliary_window_positions_survive_save_and_reopen_without_changing_main_geometry() {
+    let dir = tempfile::tempdir().unwrap();
+    let ctx = egui::Context::default();
+    let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+    let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+    let placement: window_placement::Placement =
+        serde_json::from_str(r#"{"position":[4050.0,150.0],"size":[800.0,760.0]}"#).unwrap();
+    app.cover_viewer.load_placement(Some(placement));
+    app.settings_geometry.load(Some(placement));
+    app.saved.mini_size = Some([812.0, 640.0]);
+    let mut storage = Storage::default();
+    eframe::App::save(&mut app, &mut storage);
+    let mut cc = eframe::CreationContext::_new_kittest(ctx);
+    cc.storage = Some(&storage);
+    let app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+    assert_eq!(app.cover_viewer.placement(), Some(placement));
+    assert_eq!(app.settings_geometry.saved(), Some(placement));
+    assert_eq!(app.saved.mini_size, Some([812.0, 640.0]));
+    let old: Saved = serde_json::from_str("{}").unwrap();
+    assert!(old.artwork_window.is_none() && old.settings_window.is_none());
+}
+
+#[test]
+fn escape_closes_only_settings_and_retains_the_selected_mini_view() {
+    let dir = tempfile::tempdir().unwrap();
+    let ctx = egui::Context::default();
+    let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+    let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+    app.saved.mini_view = 3;
+    app.open_settings(0);
+    let mut output = ctx.run_ui(
+        egui::RawInput {
+            screen_rect: Some(egui::Rect::from_min_size(
+                pos2(0.0, 0.0),
+                vec2(520.0, 520.0),
+            )),
+            events: vec![egui::Event::Key {
+                key: egui::Key::Escape,
+                physical_key: None,
+                pressed: true,
+                repeat: false,
+                modifiers: egui::Modifiers::NONE,
+            }],
+            ..Default::default()
+        },
+        |ui| app.settings_window(ui.ctx()),
+    );
+    output.textures_delta.clear();
+    assert!(!app.settings_dialog);
+    assert_eq!(app.saved.mini_view, 3);
+    assert!(
+        output
+            .viewport_output
+            .values()
+            .flat_map(|v| &v.commands)
+            .all(|v| !matches!(v, egui::ViewportCommand::Close))
     );
 }

@@ -170,9 +170,13 @@ impl Aurea {
         ui.separator();
     }
     pub(super) fn open_settings(&mut self, page: u8) {
+        if !self.settings_dialog {
+            self.settings_geometry.open(&self.ctx, vec2(680.0, 620.0));
+            self.settings_focused_on_open =
+                self.ctx.input(|i| i.viewport().focused.unwrap_or(false));
+        }
         self.settings_dialog = true;
         self.settings_page = page;
-        // Keep the selected mini view and dimensions; settings can scroll inside it.
     }
     fn room_task(&mut self, command: Option<(String, Vec<String>)>) {
         if self.room_rx.is_some() {
@@ -284,51 +288,73 @@ impl Aurea {
         if !self.settings_dialog {
             return;
         }
-        let area = ctx.content_rect();
-        let mut open = true;
-        egui::Window::new(tr!("MusicCraft settings"))
-            .id(egui::Id::new("musiccraft-settings"))
-            .open(&mut open)
-            .default_size(vec2(620.0, 540.0))
-            .max_width((area.width() - 32.0).max(300.0))
-            .max_height((area.height() - 40.0).max(160.0))
-            .default_pos(area.center() - vec2(310.0, 270.0))
-            .show(ctx, |ui| {
-                ui.horizontal_wrapped(|ui| {
-                    for (page, label) in [
-                        (0, tr!("Interface")),
-                        (1, tr!("Audio")),
-                        (2, tr!("Library")),
-                        (3, tr!("Multiroom")),
-                    ] {
-                        ui.selectable_value(&mut self.settings_page, page, label);
-                    }
-                });
-                ui.separator();
-                egui::ScrollArea::vertical()
-                    .id_salt("settings-content")
-                    .max_height((area.height() - 140.0).max(100.0))
-                    .show(ui, |ui| match self.settings_page {
-                        1 => self.signal(ui),
-                        2 => {
-                            section(
-                                ui,
-                                tr!("Library and content"),
-                                tr!("Manage synchronization, covers and sources."),
-                            );
-                            self.auto_sync_control(ui);
-                            self.online_cover_control(ui);
-                            self.cover_save_control(ui);
-                            if ui.button(tr!("Sources and synchronization…")).clicked() {
-                                self.sources_dialog = true;
-                            }
+        if !self.settings_geometry.ready() {
+            self.settings_geometry.open(ctx, vec2(680.0, 620.0));
+        }
+        let viewport = egui::ViewportId::from_hash_of("musiccraft-settings");
+        let builder = self
+            .settings_geometry
+            .builder(ctx, tr!("MusicCraft settings"))
+            .with_min_inner_size(vec2(460.0, 340.0))
+            .with_window_level(if self.saved.pinned {
+                egui::WindowLevel::AlwaysOnTop
+            } else {
+                egui::WindowLevel::Normal
+            })
+            .with_active(self.settings_focused_on_open);
+        let mut close = false;
+        ctx.show_viewport_immediate(viewport, builder, |ui, _class| {
+            let ctx = ui.ctx().clone();
+            ui.painter().rect_filled(ui.max_rect(), 0.0, palette::bg());
+            self.settings_geometry.observe(&ctx, viewport);
+            close = ctx.input(|i| i.viewport().close_requested());
+            close |= ctx.input_mut(|i| i.consume_key(egui::Modifiers::NONE, egui::Key::Escape));
+            egui::Frame::new()
+                .fill(palette::bg())
+                .inner_margin(16.0)
+                .show(ui, |ui| {
+                    ui.horizontal_wrapped(|ui| {
+                        for (page, label) in [
+                            (0, tr!("Interface")),
+                            (1, tr!("Audio")),
+                            (2, tr!("Library")),
+                            (3, tr!("Multiroom")),
+                        ] {
+                            ui.selectable_value(&mut self.settings_page, page, label);
                         }
-                        3 => self.multiroom_settings(ui),
-                        _ => self.interface_settings(ui),
                     });
-            });
-        self.settings_dialog = open;
+                    ui.separator();
+                    egui::ScrollArea::vertical()
+                        .id_salt("settings-content")
+                        .max_height(ui.available_height().max(100.0))
+                        .show(ui, |ui| match self.settings_page {
+                            1 => self.signal(ui),
+                            2 => {
+                                section(
+                                    ui,
+                                    tr!("Library and content"),
+                                    tr!("Manage synchronization, covers and sources."),
+                                );
+                                self.auto_sync_control(ui);
+                                self.online_cover_control(ui);
+                                self.cover_save_control(ui);
+                                if ui.button(tr!("Sources and synchronization…")).clicked() {
+                                    self.sources_dialog = true;
+                                }
+                            }
+                            3 => self.multiroom_settings(ui),
+                            _ => self.interface_settings(ui),
+                        });
+                });
+            if close && ctx.viewport_id() == viewport {
+                ctx.send_viewport_cmd(egui::ViewportCommand::Close);
+            }
+        });
+        if close {
+            self.settings_dialog = false;
+        }
     }
+
     fn interface_settings(&mut self, ui: &mut egui::Ui) {
         section(
             ui,
@@ -342,7 +368,24 @@ impl Aurea {
             }
         });
         ui.add_space(12.0);
-        ui.checkbox(&mut self.saved.reduce_motion, tr!("Reduce vinyl animation"));
+        ui.label(tr!("Player appearance"));
+        egui::ComboBox::from_id_salt("player-appearance")
+            .selected_text(self.saved.player_appearance.label())
+            .show_ui(ui, |ui| {
+                for appearance in player_visual::Appearance::ALL {
+                    ui.selectable_value(
+                        &mut self.saved.player_appearance,
+                        appearance,
+                        appearance.label(),
+                    );
+                }
+            })
+            .response
+            .on_hover_text(tr!("Player appearance"));
+        ui.checkbox(
+            &mut self.saved.reduce_motion,
+            tr!("Reduce player animation"),
+        );
         ui.checkbox(&mut self.saved.pinned, tr!("Always on top"));
         ui.add_space(12.0);
         ui.label(tr!("Interface size"));

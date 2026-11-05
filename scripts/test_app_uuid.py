@@ -16,8 +16,8 @@ class AppUuidTests(unittest.TestCase):
 
     def test_app_and_qa_ids_differ_and_only_uuid_changes(self):
         original = self.fixture()
-        prod, prod_uuid = module.app_uuid(original, "org.example.musiccraft")
-        test, test_uuid = module.app_uuid(original, "org.example.musiccraft.gapless-test")
+        prod, prod_uuid = module.app_uuid(original, "io.github.ckiikc.musiccraft")
+        test, test_uuid = module.app_uuid(original, "io.github.ckiikc.musiccraft.gapless-test")
         self.assertNotEqual(prod_uuid, test_uuid)
         self.assertEqual(original[:40], prod[:40])
         self.assertEqual(original[56:], prod[56:])
@@ -26,13 +26,13 @@ class AppUuidTests(unittest.TestCase):
 
     def test_idempotent_and_independent_of_signature_and_old_uuid(self):
         original = self.fixture()
-        first, identity = module.app_uuid(original, "org.example.musiccraft")
-        self.assertEqual(module.app_uuid(first, "org.example.musiccraft"), (first, identity))
+        first, identity = module.app_uuid(original, "io.github.ckiikc.musiccraft")
+        self.assertEqual(module.app_uuid(first, "io.github.ckiikc.musiccraft"), (first, identity))
         resigned = first[:-8] + b"NEWSIGN!"
-        self.assertEqual(module.app_uuid(resigned, "org.example.musiccraft")[1], identity)
+        self.assertEqual(module.app_uuid(resigned, "io.github.ckiikc.musiccraft")[1], identity)
         changed = bytearray(original)
         changed[72] ^= 1
-        self.assertNotEqual(module.app_uuid(bytes(changed), "org.example.musiccraft")[1], identity)
+        self.assertNotEqual(module.app_uuid(bytes(changed), "io.github.ckiikc.musiccraft")[1], identity)
 
     def test_rejects_bad_headers_and_bounds(self):
         for data in [b"", b"not a Mach-O", self.fixture()[:50]]:

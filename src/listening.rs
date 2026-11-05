@@ -587,7 +587,7 @@ fn get_once(url: &url::Url, cancelled: &dyn Fn() -> bool) -> FetchAnswer {
         easy.useragent(concat!(
             "MusicCraft/",
             env!("CARGO_PKG_VERSION"),
-            " (macOS; community source preview)"
+            " (macOS; https://github.com/ckiikc)"
         ))?;
         easy.connect_timeout(Duration::from_secs(4))?;
         easy.timeout(Duration::from_secs(20))?;

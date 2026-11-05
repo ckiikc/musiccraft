@@ -208,7 +208,7 @@ Library and content	Biblioteka i treść
 Manage synchronization, covers and sources.	Zarządzaj synchronizacją, okładkami i źródłami.
 Appearance and readability	Wygląd i czytelność
 Preferences shared by the full and mini views.	Wspólne preferencje pełnego i mini widoku.
-Reduce vinyl animation	Ogranicz animację winylu
+Reduce player animation	Ogranicz animację odtwarzacza
 Interface size	Rozmiar interfejsu
 Use ⌘+ and ⌘− to adjust text size.	Użyj ⌘+ i ⌘−, aby dostosować tekst.
 Music server and rooms	Serwer muzyki i pokoje
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Błędy odczytu tagów: {n}
 Tag indexing complete: {read} read · {failed} errors	Indeksowanie zakończone: odczytano {read} · błędy {failed}
 LAN scan interval	Odstęp między próbami w sieci lokalnej
+Player appearance	Wygląd odtwarzacza
+Listening	Słuchanie
+CD	CD
+Cassette	Kaseta
+Reel-to-reel	Magnetofon szpulowy
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	W ustawieniach wybierz płytę winylową, CD, kasetę lub Revox / Wskaźniki VU. Środkowa karta pokazuje wybrany odtwarzacz i zachowuje wybór po ponownym otwarciu MusicCraft.
+Album artwork	Grafiki albumu
+Previous image	Poprzedni obraz
+Next image	Następny obraz
+Artwork unavailable	Obraz niedostępny
+Double-click to enlarge artwork	Kliknij dwukrotnie, aby powiększyć okładkę
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Kliknij dwukrotnie okładkę, aby otworzyć grafiki albumu. Strzałkami lub klawiszami w lewo i w prawo przeglądaj przód, tył i obrazy książeczki znajdujące się w folderze albumu.
+Revox	Revox
+VU meters	Wskaźniki VU
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Ustawienia otwierają się w osobnym oknie. Okładka albumu pamięta rozmiar i położenie na różnych monitorach oraz po ponownym uruchomieniu aplikacji.
+Side-by-side VU	Wskaźniki VU obok siebie

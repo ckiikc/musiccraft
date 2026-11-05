@@ -1,5 +1,5 @@
 use crate::network::FtpSource;
-const SERVICE: &str = "org.example.musiccraft.ftp";
+const SERVICE: &str = "io.github.ckiikc.musiccraft.ftp";
 fn account(source: &FtpSource) -> String {
     format!("{}:{}", source.id, source.username)
 }

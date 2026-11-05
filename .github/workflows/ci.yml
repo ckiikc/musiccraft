@@ -1,0 +1,37 @@
+name: Source checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 30
+    env:
+      CARGO_BUILD_JOBS: 2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install pinned Rust
+        run: rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
+      - run: cargo +1.97.1 fmt --check
+      - run: cargo +1.97.1 clippy --locked --all-targets -j 2 -- -D warnings
+      - run: cargo +1.97.1 test --locked -j 2
+      - run: python3 scripts/check-publication.py
+      - run: python3 scripts/test_app_uuid.py
+      - name: Synthetic FTP integrations
+        run: |
+          brew install ffmpeg
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r scripts/requirements-test.txt
+          .venv/bin/python scripts/test_ftp.py

@@ -208,7 +208,7 @@ Library and content	ライブラリとコンテンツ
 Manage synchronization, covers and sources.	同期、ジャケット、ソースを管理します。
 Appearance and readability	外観と読みやすさ
 Preferences shared by the full and mini views.	全体表示とミニ表示で共通の設定です。
-Reduce vinyl animation	レコードのアニメーションを減らす
+Reduce player animation	プレーヤーのアニメーションを減らす
 Interface size	インターフェースのサイズ
 Use ⌘+ and ⌘− to adjust text size.	⌘+ と ⌘− で文字のサイズを調整します。
 Music server and rooms	音楽サーバーと部屋
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	タグ読み取りエラー: {n}
 Tag indexing complete: {read} read · {failed} errors	インデックス作成完了: {read} 件読み取り · {failed} 件エラー
 LAN scan interval	LAN の検索間隔
+Player appearance	プレーヤーの外観
+Listening	リスニング
+CD	CD
+Cassette	カセット
+Reel-to-reel	オープンリール
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	設定でレコード、CD、カセット、Revox / VUメーターを選べます。中央のタブには選んだプレーヤー名が表示され、MusicCraftを再起動しても選択は保持されます。
+Album artwork	アルバム画像
+Previous image	前の画像
+Next image	次の画像
+Artwork unavailable	画像を表示できません
+Double-click to enlarge artwork	ダブルクリックでジャケットを拡大
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	ジャケットをダブルクリックするとアルバム画像を開きます。矢印ボタンまたは左右キーで、アルバムフォルダーにある表紙、裏表紙、ブックレット画像を切り替えます。
+Revox	Revox
+VU meters	VUメーター
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	設定は独立したウィンドウで開きます。アルバム画像のサイズと位置は、別の画面やアプリの再起動後も保持されます。
+Side-by-side VU	左右に並べたVUメーター

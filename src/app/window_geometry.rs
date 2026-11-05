@@ -128,6 +128,10 @@ fn native_work_area(ctx: &egui::Context) -> Option<egui::Rect> {
 
 impl Aurea {
     pub(super) fn resize_window(&mut self, ctx: &egui::Context) {
+        self.resize_window_with_position(ctx, true);
+    }
+
+    fn resize_window_with_position(&mut self, ctx: &egui::Context, position_window: bool) {
         let mini = self.saved.mini;
         let area = self.window_geometry.area.unwrap_or_else(|| work_area(ctx));
         let preferred = if mini {
@@ -167,8 +171,9 @@ impl Aurea {
         {
             ctx.send_viewport_cmd(egui::ViewportCommand::InnerSize(size));
         }
-        if let Some(position) = adjusted_position(position, size, usable, chrome)
-            .or_else(|| observed_position.is_none().then_some(position))
+        if position_window
+            && let Some(position) = adjusted_position(position, size, usable, chrome)
+                .or_else(|| observed_position.is_none().then_some(position))
         {
             ctx.send_viewport_cmd(egui::ViewportCommand::OuterPosition(position));
         }
@@ -225,11 +230,16 @@ impl Aurea {
         }
         self.window_geometry.monitor = monitor;
         self.window_geometry.observed = observed;
-        if mode_changed || screen_changed {
+        if mode_changed {
             ctx.send_viewport_cmd(egui::ViewportCommand::Transparent(self.saved.mini));
             ctx.send_viewport_cmd(egui::ViewportCommand::Decorations(!self.saved.mini));
             self.resize_window(ctx);
             self.viewport_mini = Some(self.saved.mini);
+        } else if screen_changed {
+            // A monitor or Dock change can follow a native drag. Fit the size
+            // when needed, but retain the position chosen by the user and do
+            // not reapply macOS window styles while the window is moving.
+            self.resize_window_with_position(ctx, false);
         }
     }
 }
@@ -269,6 +279,30 @@ mod tests {
                 }
             })
             .unwrap()
+    }
+
+    #[test]
+    fn changing_screens_fits_size_without_snapping_the_dragged_position_or_resetting_styles() {
+        let dir = tempfile::tempdir().unwrap();
+        let ctx = egui::Context::default();
+        let cc = eframe::CreationContext::_new_kittest(ctx);
+        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+        let size = vec2(812.0, 640.0);
+        frame(&mut app, size, vec2(2000.0, 1200.0));
+        let output = frame(&mut app, size, vec2(800.0, 600.0));
+        assert_eq!(requested(&output), vec2(752.0, 552.0));
+        assert!(
+            output
+                .viewport_output
+                .values()
+                .flat_map(|v| &v.commands)
+                .all(|command| !matches!(
+                    command,
+                    egui::ViewportCommand::OuterPosition(_)
+                        | egui::ViewportCommand::Transparent(_)
+                        | egui::ViewportCommand::Decorations(_)
+                ))
+        );
     }
 
     #[test]

@@ -22,6 +22,7 @@ use std::{
 
 mod browser;
 mod connection;
+mod cover_viewer;
 mod desktop;
 mod help;
 mod listening_ui;
@@ -29,12 +30,14 @@ mod miniplayer;
 mod palette;
 #[cfg(test)]
 mod performance;
+mod player_visual;
 #[cfg(any(debug_assertions, test))]
 mod preview;
 mod settings;
 mod tag_progress;
 mod widgets;
 mod window_geometry;
+mod window_placement;
 use widgets::{Icons, caption, clipped, section};
 
 #[derive(Serialize, Deserialize)]
@@ -51,6 +54,7 @@ struct Saved {
     strict_integer: bool,
     mini: bool,
     mini_view: u8,
+    mini_last_view: u8,
     mini_size: Option<[f32; 2]>,
     full_size: Option<[f32; 2]>,
     shuffle_session: Option<ShuffleSession>,
@@ -70,6 +74,9 @@ struct Saved {
     language: String,
     ui_scale: f32,
     reduce_motion: bool,
+    player_appearance: player_visual::Appearance,
+    artwork_window: Option<window_placement::Placement>,
+    settings_window: Option<window_placement::Placement>,
     multiroom: crate::multiroom::Config,
 }
 
@@ -87,6 +94,7 @@ impl Default for Saved {
             strict_integer: false,
             mini: true,
             mini_view: 1,
+            mini_last_view: 1,
             mini_size: None,
             full_size: None,
             shuffle_session: None,
@@ -110,6 +118,9 @@ impl Default for Saved {
             language: String::new(),
             ui_scale: 1.0,
             reduce_motion: false,
+            player_appearance: Default::default(),
+            artwork_window: None,
+            settings_window: None,
             multiroom: Default::default(),
         }
     }
@@ -189,6 +200,8 @@ pub struct Aurea {
     info_lyrics: bool,
     settings_dialog: bool,
     settings_page: u8,
+    settings_geometry: window_placement::Tracker,
+    settings_focused_on_open: bool,
     help_dialog: bool,
     help_query: String,
     language_fonts_open: bool,
@@ -217,6 +230,7 @@ pub struct Aurea {
     entries: Vec<network::Entry>,
     browsing: bool,
     art: Option<egui::TextureHandle>,
+    cover_viewer: cover_viewer::Viewer,
     art_origin: Option<(String, String)>,
     online_covers: Arc<AtomicBool>,
     save_covers: Arc<AtomicBool>,
@@ -224,6 +238,8 @@ pub struct Aurea {
     planned: Option<String>,
     meters: [f32; 2],
     angle: f32,
+    reel_motion: player_visual::ReelMotion,
+    needle_motion: player_visual::NeedleMotion,
     last_frame: Instant,
     background_due: Instant,
     screenshot: Option<PathBuf>,
@@ -281,6 +297,11 @@ impl Aurea {
             }
         }
         saved.dsp = saved.dsp.sanitized();
+        saved.mini_last_view = if (1..=4).contains(&saved.mini_view) {
+            saved.mini_view
+        } else {
+            saved.mini_last_view.clamp(1, 4)
+        };
         saved.theme %= 3;
         palette::configure(&cc.egui_ctx, saved.theme);
         let auth = AuthStore::default();
@@ -409,6 +430,8 @@ impl Aurea {
             info_lyrics: true,
             settings_dialog: false,
             settings_page: 0,
+            settings_geometry: Default::default(),
+            settings_focused_on_open: false,
             help_dialog: false,
             help_query: String::new(),
             language_fonts_open: false,
@@ -437,6 +460,7 @@ impl Aurea {
             entries: Vec::new(),
             browsing: false,
             art: None,
+            cover_viewer: Default::default(),
             art_origin: None,
             online_covers,
             save_covers,
@@ -444,6 +468,8 @@ impl Aurea {
             planned: None,
             meters: [0.0; 2],
             angle: 0.0,
+            reel_motion: Default::default(),
+            needle_motion: Default::default(),
             last_frame: Instant::now(),
             background_due: Instant::now(),
             screenshot,
@@ -454,6 +480,8 @@ impl Aurea {
             viewport_pinned: None,
             test_exit: test_seconds.map(|s| Instant::now() + Duration::from_secs(s)),
         };
+        app.cover_viewer.load_placement(app.saved.artwork_window);
+        app.settings_geometry.load(app.saved.settings_window);
         app.browser.sort = app.saved.library_sort;
         app.gain();
         if !paths.is_empty() {
@@ -485,7 +513,7 @@ impl Aurea {
                 .store(self.saved.save_covers, Ordering::Relaxed);
         }
     }
-    fn vinyl_visible(&self) -> bool {
+    fn player_animation_visible(&self) -> bool {
         self.saved.mini && self.saved.mini_view == 1 && !self.saved.reduce_motion
     }
 
@@ -499,7 +527,7 @@ impl Aurea {
             || matches!(self.listening.artist, crate::listening::State::Loading)
             || matches!(self.listening.lyrics, crate::listening::State::Loading);
         let playing = !self.paused && !self.loading;
-        if playing && !minimized && self.vinyl_visible() {
+        if playing && !minimized && self.player_animation_visible() {
             Duration::from_millis(33)
         } else if !visual_active && (playing || busy) {
             Duration::from_millis(200)
@@ -2335,18 +2363,28 @@ impl eframe::App for Aurea {
         let elapsed = now.duration_since(self.last_frame).as_secs_f32().min(0.25);
         self.last_frame = now;
         let playing = !self.paused && !self.loading;
-        if !minimized && playing && self.vinyl_visible() {
+        if !minimized && playing && self.player_animation_visible() {
+            let speed = if self.saved.player_appearance == player_visual::Appearance::Cassette {
+                1.4
+            } else {
+                0.85
+            };
+            self.reel_motion.advance(elapsed, speed);
             self.angle = (self.angle + elapsed * std::f32::consts::TAU * (33.333 / 60.0))
                 .rem_euclid(std::f32::consts::TAU);
         }
         for i in 0..2 {
             let peak = self.audio.meters[i].swap(0, Ordering::Relaxed);
-            self.meters[i] = if visual_active && self.saved.mini {
-                let new = if playing { f32::from_bits(peak) } else { 0.0 };
-                new.max(self.meters[i] * (-elapsed * 8.0).exp())
-            } else {
-                0.0
-            };
+            self.meters[i] =
+                if !minimized && self.saved.mini && (visual_active || self.saved.mini_view == 1) {
+                    let new = if playing { f32::from_bits(peak) } else { 0.0 };
+                    new.max(self.meters[i] * (-elapsed * 8.0).exp())
+                } else {
+                    0.0
+                };
+        }
+        if !minimized {
+            self.needle_motion.advance(elapsed, self.meters);
         }
         ctx.request_repaint_after(self.repaint_delay(visual_active, minimized));
         if let Some(deadline) = self.test_exit
@@ -2360,7 +2398,9 @@ impl eframe::App for Aurea {
         if ctx.input(|i| i.key_pressed(egui::Key::F1)) {
             self.help_dialog = true;
         }
-        if !ctx.egui_wants_keyboard_input() {
+        if !(ctx.embed_viewports() && self.cover_viewer.is_open())
+            && !ctx.egui_wants_keyboard_input()
+        {
             if ctx.input(|i| i.key_pressed(egui::Key::Space)) {
                 self.toggle();
             }
@@ -2382,6 +2422,7 @@ impl eframe::App for Aurea {
         self.auxiliary_windows(&ctx);
         self.settings_window(&ctx);
         self.help_window(&ctx);
+        self.cover_window(&ctx);
 
         let dropped: Vec<_> = ctx.input(|i| {
             i.raw
@@ -2422,16 +2463,17 @@ impl eframe::App for Aurea {
         });
     }
     fn save(&mut self, storage: &mut dyn eframe::Storage) {
-        if let Some(size) = self
-            .ctx
-            .input(|i| i.viewport().inner_rect.map(|r| r.size()))
-        {
+        if let Some(size) = self.ctx.input_for(egui::ViewportId::ROOT, |i| {
+            i.viewport().inner_rect.map(|r| r.size())
+        }) {
             if self.viewport_mini.unwrap_or(self.saved.mini) {
                 self.remember_mini_size(size);
             } else {
                 self.remember_full_size(size);
             }
         }
+        self.saved.artwork_window = self.cover_viewer.placement();
+        self.saved.settings_window = self.settings_geometry.saved();
         self.saved.library_sort = self.browser.sort;
         self.saved.volume_db = valid_volume(self.volume_db);
         self.saved.native_rate = self.native;

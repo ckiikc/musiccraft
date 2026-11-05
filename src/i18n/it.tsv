@@ -208,7 +208,7 @@ Library and content	Libreria e contenuti
 Manage synchronization, covers and sources.	Gestisci sincronizzazione, copertine e sorgenti.
 Appearance and readability	Aspetto e leggibilità
 Preferences shared by the full and mini views.	Preferenze condivise dalle viste completa e mini.
-Reduce vinyl animation	Riduci animazioni del vinile
+Reduce player animation	Riduci animazione del lettore
 Interface size	Dimensione interfaccia
 Use ⌘+ and ⌘− to adjust text size.	Usa ⌘+ e ⌘− per adattare la dimensione dei testi.
 Music server and rooms	Server musicale e stanze
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Errori di lettura tag: {n}
 Tag indexing complete: {read} read · {failed} errors	Indicizzazione conclusa: {read} letti · {failed} errori
 LAN scan interval	Intervallo di ricerca sulla rete locale
+Player appearance	Aspetto del lettore
+Listening	Ascolto
+CD	CD
+Cassette	Musicassetta
+Reel-to-reel	Bobine
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Nelle Impostazioni scegli Vinile, CD, Musicassetta o Revox / VU meter. La scheda centrale mostra il lettore selezionato e conserva la scelta anche dopo aver riaperto MusicCraft.
+Album artwork	Immagini dell’album
+Previous image	Immagine precedente
+Next image	Immagine successiva
+Artwork unavailable	Immagine non disponibile
+Double-click to enlarge artwork	Doppio clic per ingrandire la copertina
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Fai doppio clic sulla copertina per aprire le immagini dell’album. Usa le frecce o i tasti sinistra e destra per sfogliare fronte, retro e immagini del libretto presenti nella cartella dell’album.
+Revox	Revox
+VU meters	VU meter
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Le Impostazioni si aprono in una finestra indipendente. La copertina ricorda dimensioni e posizione, anche su altri schermi e dopo la riapertura dell’app.
+Side-by-side VU	VU affiancati

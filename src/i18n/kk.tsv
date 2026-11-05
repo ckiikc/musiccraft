@@ -208,7 +208,7 @@ Library and content	Кітапхана және мазмұн
 Manage synchronization, covers and sources.	Синхрондау, мұқабалар мен дереккөздерді басқару.
 Appearance and readability	Көрініс және оқылымдылық
 Preferences shared by the full and mini views.	Толық және шағын көріністерге ортақ баптаулар.
-Reduce vinyl animation	Винил анимациясын азайту
+Reduce player animation	Ойнатқыш анимациясын азайту
 Interface size	Интерфейс өлшемі
 Use ⌘+ and ⌘− to adjust text size.	Мәтін өлшемін ⌘+ және ⌘− арқылы өзгертіңіз.
 Music server and rooms	Музыка сервері және бөлмелер
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Тегтерді оқу қателері: {n}
 Tag indexing complete: {read} read · {failed} errors	Индекстеу аяқталды: {read} оқылды · {failed} қате
 LAN scan interval	Жергілікті желіні іздеу аралығы
+Player appearance	Ойнатқыш көрінісі
+Listening	Тыңдау
+CD	CD
+Cassette	Кассета
+Reel-to-reel	Катушкалы магнитофон
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Баптауларда винил, CD, кассета немесе Revox / VU өлшеуіштері таңдаңыз. Ортаңғы қойынды таңдалған ойнатқышты көрсетіп, MusicCraft қайта ашылғанда таңдауды сақтайды.
+Album artwork	Альбом суреттері
+Previous image	Алдыңғы сурет
+Next image	Келесі сурет
+Artwork unavailable	Сурет қолжетімсіз
+Double-click to enlarge artwork	Мұқабаны үлкейту үшін екі рет басыңыз
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Альбом суреттерін ашу үшін мұқабаны екі рет басыңыз. Альбом қалтасындағы алдыңғы және артқы мұқабаны, буклет суреттерін көру үшін көрсеткілерді немесе солға және оңға пернелерін пайдаланыңыз.
+Revox	Revox
+VU meters	VU өлшеуіштері
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Баптаулар бөлек терезеде ашылады. Альбом мұқабасы әртүрлі экрандарда және қолданба қайта іске қосылғанда өлшемі мен орнын сақтайды.
+Side-by-side VU	Қатар орналасқан VU өлшегіштер

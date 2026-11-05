@@ -390,7 +390,7 @@ fn get(url: &str, limit: usize, cancelled: &dyn Fn() -> bool) -> Result<Option<V
         easy.useragent(concat!(
             "MusicCraft/",
             env!("CARGO_PKG_VERSION"),
-            " (community source preview)"
+            " (https://github.com/ckiikc)"
         ))
         .map_err(|_| Error::Unavailable)?;
         easy.connect_timeout(Duration::from_secs(4))

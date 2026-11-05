@@ -208,7 +208,7 @@ Library and content	Könyvtár és tartalom
 Manage synchronization, covers and sources.	Szinkronizálás, borítók és források kezelése.
 Appearance and readability	Megjelenés és olvashatóság
 Preferences shared by the full and mini views.	Közös beállítások a teljes és mini nézethez.
-Reduce vinyl animation	Bakelitanimáció csökkentése
+Reduce player animation	Lejátszó animációjának csökkentése
 Interface size	Felület mérete
 Use ⌘+ and ⌘− to adjust text size.	A szövegméretet a ⌘+ és ⌘− billentyűkkel állíthatja.
 Music server and rooms	Zeneszerver és szobák
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Címkeolvasási hibák: {n}
 Tag indexing complete: {read} read · {failed} errors	Indexelés kész: {read} beolvasva · {failed} hiba
 LAN scan interval	Helyi hálózati keresési időköz
+Player appearance	Lejátszó megjelenése
+Listening	Zenehallgatás
+CD	CD
+Cassette	Kazetta
+Reel-to-reel	Orsós magnó
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	A beállításokban válasszon hanglemezt, CD-t, kazettát, Revoxot vagy VU-mérőket. A középső lap mutatja a kiválasztott lejátszót, és megőrzi a választást a MusicCraft újbóli megnyitásakor.
+Album artwork	Albumképek
+Previous image	Előző kép
+Next image	Következő kép
+Artwork unavailable	A kép nem érhető el
+Double-click to enlarge artwork	Dupla kattintással nagyíthatja a borítót
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Az albumképek megnyitásához kattintson duplán a borítóra. A nyilakkal vagy a bal és jobb billentyűvel lapozhat az album mappájában található előlap, hátlap és füzetképek között.
+Revox	Revox
+VU meters	VU-mérők
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	A beállítások külön ablakban nyílnak meg. Az albumborító megjegyzi a méretét és helyét a különböző kijelzőkön és az alkalmazás újraindítása után is.
+Side-by-side VU	VU-mérők egymás mellett

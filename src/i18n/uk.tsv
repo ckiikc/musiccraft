@@ -208,7 +208,7 @@ Library and content	Медіатека й вміст
 Manage synchronization, covers and sources.	Керування синхронізацією, обкладинками та джерелами.
 Appearance and readability	Вигляд і читабельність
 Preferences shared by the full and mini views.	Спільні налаштування повного й мініперегляду.
-Reduce vinyl animation	Зменшити анімацію вінілу
+Reduce player animation	Зменшити анімацію програвача
 Interface size	Масштаб інтерфейсу
 Use ⌘+ and ⌘− to adjust text size.	Змінюйте розмір тексту за допомогою ⌘+ та ⌘−.
 Music server and rooms	Музичний сервер і кімнати
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Помилки читання тегів: {n}
 Tag indexing complete: {read} read · {failed} errors	Індексацію завершено: прочитано {read} · помилок {failed}
 LAN scan interval	Інтервал пошуку в локальній мережі
+Player appearance	Вигляд програвача
+Listening	Прослуховування
+CD	CD
+Cassette	Касета
+Reel-to-reel	Котушковий магнітофон
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	У налаштуваннях виберіть вініл, CD, касету або Revox / VU-індикатори. Центральна вкладка показує вибраний програвач і зберігає вибір після повторного запуску MusicCraft.
+Album artwork	Зображення альбому
+Previous image	Попереднє зображення
+Next image	Наступне зображення
+Artwork unavailable	Зображення недоступне
+Double-click to enlarge artwork	Двічі клацніть, щоб збільшити обкладинку
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Двічі клацніть обкладинку, щоб відкрити зображення альбому. Стрілками або клавішами ліворуч і праворуч переглядайте передню й задню обкладинки та сторінки буклета з папки альбому.
+Revox	Revox
+VU meters	VU-індикатори
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Налаштування відкриваються в окремому вікні. Обкладинка альбому запам’ятовує розмір і положення на різних екранах і після перезапуску програми.
+Side-by-side VU	VU-метри поруч

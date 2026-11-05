@@ -12,6 +12,18 @@ if [[ -n "$lms_mode" && "$lms_mode" != --with-lms-local ]]; then
   print -u2 'Only --with-lms-local is supported as a second argument.'
   exit 2
 fi
+# Keep builder home directories and checkout paths out of distributed panic
+# locations. Encoded flags preserve spaces in a checkout path correctly.
+export CARGO_ENCODED_RUSTFLAGS="$(python3 - <<'PYTHON'
+import os
+from pathlib import Path
+existing = os.environ.get('CARGO_ENCODED_RUSTFLAGS')
+flags = existing.split('\x1f') if existing else os.environ.get('RUSTFLAGS', '').split()
+flags.extend([f'--remap-path-prefix={Path.home()}=/build/home',
+              f'--remap-path-prefix={Path.cwd()}=/build/musiccraft'])
+print('\x1f'.join(flags), end='')
+PYTHON
+)"
 if [[ "$profile" == release ]]; then
   cargo build --release --locked -j 2
 else
@@ -33,20 +45,21 @@ if [[ "$lms_mode" == --with-lms-local ]]; then
   print -u2 'Local integrated-LMS experiment only: third-party redistribution is not cleared.'
   python3 scripts/prepare-lms-runtime.py >/dev/null
   ditto vendor/LyrionRuntime.app "$bundle/Contents/Resources/LyrionRuntime.app"
-  codesign --force --deep --sign - --identifier org.example.musiccraft.server "$bundle/Contents/Resources/LyrionRuntime.app"
+  codesign --force --deep --sign - --identifier io.github.ckiikc.musiccraft.server "$bundle/Contents/Resources/LyrionRuntime.app"
   cp vendor/lms-runtime.json "$bundle/Contents/Resources/lms-runtime.json"
 fi
 cp LICENSE THIRD_PARTY.md ATTRIBUTION.md "$bundle/Contents/Resources/"
 if [[ -f docs/DEPENDENCIES.tsv ]]; then
   cp docs/DEPENDENCIES.tsv "$bundle/Contents/Resources/"
 fi
+python3 scripts/collect-licenses.py "$bundle/Contents/Resources/ThirdPartyLicenses"
 cp "$target_dir/$profile/musiccraft" "$bundle/Contents/MacOS/MusicCraft"
 python3 - "$bundle" <<'PYTHON'
 import pathlib, plistlib, sys, tomllib
 version = tomllib.loads(pathlib.Path('Cargo.toml').read_text())['package']['version']
 bundle = pathlib.Path(sys.argv[1])
 info = {'CFBundleName': 'MusicCraft', 'CFBundleDisplayName': 'MusicCraft',
-        'CFBundleIdentifier': 'org.example.musiccraft', 'CFBundleExecutable': 'MusicCraft',
+        'CFBundleIdentifier': 'io.github.ckiikc.musiccraft', 'CFBundleExecutable': 'MusicCraft',
         'CFBundleVersion': version, 'CFBundleShortVersionString': version,
         'CFBundlePackageType': 'APPL', 'LSMinimumSystemVersion': '12.0',
         'NSHighResolutionCapable': True, 'NSHumanReadableCopyright': 'Copyright 2026 MusicCraft contributors. MIT.',
@@ -62,7 +75,7 @@ for icon_size in 16 32 128 256 512; do
   sips -z "$double_size" "$double_size" dist/icon-master.png --out "dist/MusicCraft.iconset/icon_${icon_size}x${icon_size}@2x.png" >/dev/null
 done
 iconutil -c icns dist/MusicCraft.iconset -o "$bundle/Contents/Resources/MusicCraft.icns"
-python3 scripts/app-uuid.py "$bundle/Contents/MacOS/MusicCraft" org.example.musiccraft
-codesign --force --sign - --identifier org.example.musiccraft "$bundle"
+python3 scripts/app-uuid.py "$bundle/Contents/MacOS/MusicCraft" io.github.ckiikc.musiccraft
+codesign --force --sign - --identifier io.github.ckiikc.musiccraft "$bundle"
 codesign --verify --deep --strict "$bundle"
 print "$bundle"

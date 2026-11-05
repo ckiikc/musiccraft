@@ -208,7 +208,7 @@ Library and content	Knjižnica in vsebina
 Manage synchronization, covers and sources.	Upravljajte sinhronizacijo, ovitke in vire.
 Appearance and readability	Videz in berljivost
 Preferences shared by the full and mini views.	Skupne nastavitve celotnega in mini pogleda.
-Reduce vinyl animation	Omeji animacijo vinila
+Reduce player animation	Zmanjšaj animacijo predvajalnika
 Interface size	Velikost vmesnika
 Use ⌘+ and ⌘− to adjust text size.	Velikost besedila prilagodite s ⌘+ in ⌘−.
 Music server and rooms	Glasbeni strežnik in prostori
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Napake pri branju oznak: {n}
 Tag indexing complete: {read} read · {failed} errors	Indeksiranje končano: prebrano {read} · napake {failed}
 LAN scan interval	Interval iskanja v krajevnem omrežju
+Player appearance	Videz predvajalnika
+Listening	Poslušanje
+CD	CD
+Cassette	Kaseta
+Reel-to-reel	Kolutni magnetofon
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	V nastavitvah izberite vinil, CD, kaseto ali Revox / VU merilnika. Srednji zavihek prikazuje izbrani predvajalnik in ohrani izbiro po ponovnem odprtju MusicCraft.
+Album artwork	Slike albuma
+Previous image	Prejšnja slika
+Next image	Naslednja slika
+Artwork unavailable	Slika ni na voljo
+Double-click to enlarge artwork	Dvokliknite za povečavo ovitka
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Dvokliknite ovitek za prikaz slik albuma. S puščicami ali tipkama levo in desno pregledujte sprednji in zadnji ovitek ter slike knjižice v mapi albuma.
+Revox	Revox
+VU meters	VU merilnika
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Nastavitve se odprejo v ločenem oknu. Ovitek albuma si zapomni velikost in položaj na različnih zaslonih in po ponovnem zagonu aplikacije.
+Side-by-side VU	VU-merilnika drug ob drugem

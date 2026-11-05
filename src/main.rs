@@ -91,7 +91,7 @@ fn main() -> eframe::Result {
             .with_clamp_size_to_monitor_size(true)
             .with_window_level(eframe::egui::WindowLevel::AlwaysOnTop)
             .with_min_inner_size([520.0, 262.0])
-            .with_app_id("org.example.musiccraft"),
+            .with_app_id("io.github.ckiikc.musiccraft"),
         persistence_path: Some(data.join("state.ron")),
         ..Default::default()
     };

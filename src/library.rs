@@ -553,6 +553,10 @@ pub struct Artwork {
 }
 
 pub fn decode_art(bytes: &[u8]) -> Option<Artwork> {
+    decode_art_sized(bytes, 800)
+}
+
+pub fn decode_art_sized(bytes: &[u8], max_side: u32) -> Option<Artwork> {
     let mut reader = image::ImageReader::new(std::io::Cursor::new(bytes))
         .with_guessed_format()
         .ok()?;
@@ -561,7 +565,13 @@ pub fn decode_art(bytes: &[u8]) -> Option<Artwork> {
     limits.max_image_height = Some(4096);
     limits.max_alloc = Some(64 * 1024 * 1024);
     reader.limits(limits);
-    let image = reader.decode().ok()?.thumbnail(800, 800).to_rgba8();
+    let decoded = reader.decode().ok()?;
+    let image = decoded
+        .thumbnail(
+            max_side.min(decoded.width()),
+            max_side.min(decoded.height()),
+        )
+        .to_rgba8();
     Some(Artwork {
         size: [image.width() as usize, image.height() as usize],
         rgba: image.into_raw().into(),

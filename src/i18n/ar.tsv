@@ -208,7 +208,7 @@ Library and content	المكتبة والمحتوى
 Manage synchronization, covers and sources.	إدارة المزامنة والأغلفة والمصادر.
 Appearance and readability	المظهر وسهولة القراءة
 Preferences shared by the full and mini views.	تفضيلات مشتركة للعرض الكامل والمصغر.
-Reduce vinyl animation	تقليل حركة الأسطوانة
+Reduce player animation	تقليل حركة المشغل
 Interface size	حجم الواجهة
 Use ⌘+ and ⌘− to adjust text size.	استخدم ⌘+ و ⌘− لتعديل حجم النص.
 Music server and rooms	خادم الموسيقى والغرف
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	أخطاء قراءة الوسوم: {n}
 Tag indexing complete: {read} read · {failed} errors	اكتملت الفهرسة: تمت قراءة {read} · أخطاء: {failed}
 LAN scan interval	الفاصل بين محاولات فحص الشبكة المحلية
+Player appearance	مظهر المشغل
+Listening	الاستماع
+CD	CD
+Cassette	شريط كاسيت
+Reel-to-reel	مسجل بكرات
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	اختر الفينيل أو CD أو شريط الكاسيت أو Revox / مقاييس VU من الإعدادات. تعرض علامة التبويب الوسطى المشغل المحدد وتحفظ اختيارك عند إعادة فتح MusicCraft.
+Album artwork	صور الألبوم
+Previous image	الصورة السابقة
+Next image	الصورة التالية
+Artwork unavailable	الصورة غير متاحة
+Double-click to enlarge artwork	انقر مرتين لتكبير الغلاف
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	انقر مرتين على الغلاف لفتح صور الألبوم. استخدم الأسهم أو مفتاحي اليسار واليمين لتصفح الغلاف الأمامي والخلفي وصور الكتيب الموجودة في مجلد الألبوم.
+Revox	Revox
+VU meters	مقاييس VU
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	تفتح الإعدادات في نافذة مستقلة. تتذكر صورة الألبوم حجمها وموضعها عبر الشاشات وبعد إعادة تشغيل التطبيق.
+Side-by-side VU	مقياسا VU جنبًا إلى جنب

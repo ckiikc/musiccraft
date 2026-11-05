@@ -266,7 +266,7 @@ pub fn authenticated_spawn(
     Ok(child)
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Entry {
     pub name: String,
     pub directory: bool,

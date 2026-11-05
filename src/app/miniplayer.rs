@@ -143,14 +143,7 @@ impl Aurea {
             egui::StrokeKind::Inside,
         );
         let rect = |x, y, w, h| egui::Rect::from_min_size(origin + vec2(x, y), vec2(w, h));
-        let header = ui.interact(
-            rect(12.0, 4.0, width - 164.0, 32.0),
-            egui::Id::new("mini-drag"),
-            egui::Sense::drag(),
-        );
-        if header.drag_started() {
-            ctx.send_viewport_cmd(egui::ViewportCommand::StartDrag);
-        }
+        drag_titlebar(ui, rect(12.0, 4.0, width - 164.0, 32.0));
         ui.painter().circle_filled(
             origin + vec2(20.0, 22.0),
             3.0,
@@ -302,6 +295,14 @@ impl Aurea {
         } else {
             ui.put(cover.shrink(21.0), self.icons.image("disc-3", 28.0, muted));
         }
+        let cover_response = ui.interact(cover, ui.id().with("open-artwork"), egui::Sense::click());
+        cover_response.widget_info(|| {
+            egui::WidgetInfo::labeled(egui::WidgetType::Button, true, tr!("Album artwork"))
+        });
+        if cover_viewer::requested(&cover_response) {
+            self.open_cover_viewer();
+        }
+        cover_response.on_hover_text(tr!("Double-click to enlarge artwork"));
         let title = track
             .as_ref()
             .map_or(tr!("Library ready"), |t| t.title.as_str());
@@ -591,10 +592,15 @@ impl Aurea {
             ],
             egui::Stroke::new(1.0, surface),
         );
-        let tab_width = (width - 76.0) / 3.0;
+        let tab_width = (width - 84.0) / 3.0;
+        let active_view = if self.saved.mini_view == 0 {
+            self.saved.mini_last_view
+        } else {
+            self.saved.mini_view
+        };
         for (index, icon, label) in [
             (1, "list-music", tr!("Library")),
-            (2, "disc-3", tr!("Vinyl")),
+            (2, "disc-3", self.saved.player_appearance.label()),
             (3, "book-open", tr!("Artist and lyrics")),
         ] {
             // Stored v0.6 values 1=vinyl / 2=playlist remain compatible.
@@ -604,12 +610,12 @@ impl Aurea {
                 other => other,
             };
             let tab = rect(
-                16.0 + (index - 1) as f32 * tab_width,
+                20.0 + (index - 1) as f32 * (tab_width + 4.0),
                 232.0,
-                tab_width - 4.0,
+                tab_width,
                 28.0,
             );
-            let active = self.saved.mini_view == view || (view == 3 && self.saved.mini_view == 4);
+            let active = active_view == view || (view == 3 && active_view == 4);
             let response = ui.put(
                 tab,
                 egui::Button::image_and_text(
@@ -628,14 +634,23 @@ impl Aurea {
                 .corner_radius(5.0),
             );
             if response.clicked() {
-                self.set_mini_view(if active { 0 } else { view });
-                self.last_lyric_line = None;
+                let selected = if active && self.saved.mini_view != 0 {
+                    0
+                } else if active {
+                    active_view
+                } else {
+                    view
+                };
+                self.set_mini_view(selected);
+                if selected != 0 && selected != active_view {
+                    self.last_lyric_line = None;
+                }
             }
         }
         if button(
             ui,
             &self.icons,
-            rect(width - 44.0, 232.0, 28.0, 28.0),
+            rect(width - 48.0, 232.0, 28.0, 28.0),
             tr!("Collapse / expand panel"),
             false,
             surface,
@@ -646,7 +661,11 @@ impl Aurea {
                 "chevron-up"
             },
         ) {
-            self.set_mini_view(if self.saved.mini_view == 0 { 2 } else { 0 });
+            self.set_mini_view(if self.saved.mini_view == 0 {
+                self.saved.mini_last_view.clamp(1, 4)
+            } else {
+                0
+            });
         }
         if self.saved.mini_view == 0 {
             return;
@@ -887,6 +906,12 @@ impl Aurea {
     }
     fn set_mini_view(&mut self, view: u8) {
         let old = self.saved.mini_view;
+        if old != 0 {
+            self.saved.mini_last_view = old;
+        }
+        if view != 0 {
+            self.saved.mini_last_view = view;
+        }
         self.remember_mini_size(self.ctx.content_rect().size());
         self.saved.mini_view = view;
         // Changing an expanded tab is a content change, not a window resize.
@@ -907,7 +932,41 @@ impl Aurea {
         accent: Color32,
     ) {
         let layout = VinylLayout::new(content);
-        vinyl(ui.painter(), layout.disc, self.angle, self.art.as_ref());
+        let track_progress = current
+            .filter(|track| {
+                self.position.is_finite() && track.duration.is_finite() && track.duration > 0.0
+            })
+            .map_or(0.0, |track| {
+                (self.position / track.duration).clamp(0.0, 1.0) as f32
+            });
+        self.reel_motion.progress = track_progress;
+        self.saved.player_appearance.paint(
+            ui.painter(),
+            layout.disc,
+            player_visual::VisualState {
+                phase: self.angle,
+                progress: track_progress,
+                reels: self.reel_motion.angles,
+                art: self.art.as_ref(),
+                album: current.map_or("", |track| track.album.as_str()),
+                vu: self.needle_motion.levels,
+            },
+        );
+        let visual_response = ui.interact(
+            layout.disc,
+            ui.id().with("player-visual"),
+            egui::Sense::click(),
+        );
+        if cover_viewer::requested(&visual_response) {
+            self.open_cover_viewer();
+        }
+        visual_response.widget_info(|| {
+            egui::WidgetInfo::labeled(
+                egui::WidgetType::Image,
+                true,
+                self.saved.player_appearance.label(),
+            )
+        });
         let Some(current) = current else {
             return;
         };
@@ -1030,6 +1089,41 @@ impl VinylLayout {
         }
     }
 }
+fn drag_titlebar(ui: &mut egui::Ui, rect: egui::Rect) {
+    let header = ui.interact(
+        rect,
+        egui::Id::new("mini-drag"),
+        egui::Sense::click_and_drag(),
+    );
+    let started = header.id.with("native-drag-started");
+    if ui.input(|i| i.pointer.primary_pressed()) {
+        ui.ctx().data_mut(|d| d.remove::<bool>(started));
+    }
+    if !ui.input(|i| i.pointer.primary_down()) {
+        ui.ctx().data_mut(|d| d.remove::<bool>(started));
+        return;
+    }
+    // A drag-only sense starts on mouse-down, including a click that merely
+    // focuses the window. Wait for real movement before entering macOS's
+    // native move loop; holding a stationary click must not start it either.
+    let threshold = ui.ctx().options(|o| o.input_options.max_click_dist);
+    let moved = ui.input(|i| {
+        i.pointer
+            .press_origin()
+            .zip(i.pointer.interact_pos())
+            .is_some_and(|(from, to)| from.distance(to) > threshold)
+    });
+    if header.dragged_by(egui::PointerButton::Primary)
+        && moved
+        && !ui
+            .ctx()
+            .data(|d| d.get_temp::<bool>(started).unwrap_or(false))
+    {
+        ui.ctx().data_mut(|d| d.insert_temp(started, true));
+        ui.ctx().send_viewport_cmd(egui::ViewportCommand::StartDrag);
+    }
+}
+
 #[allow(clippy::too_many_arguments)]
 fn button_if(
     ui: &mut egui::Ui,
@@ -1185,6 +1279,95 @@ mod tests {
             );
         }
     }
+    #[test]
+    fn titlebar_click_does_not_start_a_native_window_drag() {
+        let ctx = egui::Context::default();
+        let frame = |events| {
+            let mut output = ctx.run_ui(
+                egui::RawInput {
+                    screen_rect: Some(egui::Rect::from_min_size(
+                        pos2(0.0, 0.0),
+                        vec2(520.0, 520.0),
+                    )),
+                    events,
+                    ..Default::default()
+                },
+                |ui| {
+                    drag_titlebar(
+                        ui,
+                        egui::Rect::from_min_max(pos2(12.0, 4.0), pos2(356.0, 36.0)),
+                    )
+                },
+            );
+            output.textures_delta.clear();
+            output
+                .viewport_output
+                .values()
+                .flat_map(|v| &v.commands)
+                .filter(|c| matches!(c, egui::ViewportCommand::StartDrag))
+                .count()
+        };
+        let origin = pos2(80.0, 20.0);
+        frame(vec![egui::Event::PointerMoved(origin)]);
+        for button in [egui::PointerButton::Primary, egui::PointerButton::Secondary] {
+            let press = |pressed| egui::Event::PointerButton {
+                pos: origin,
+                button,
+                pressed,
+                modifiers: egui::Modifiers::NONE,
+            };
+            assert_eq!(frame(vec![press(true)]), 0);
+            assert_eq!(
+                frame(vec![egui::Event::PointerMoved(origin + vec2(1.0, 0.0))]),
+                0
+            );
+            assert_eq!(frame(vec![press(false)]), 0);
+        }
+        frame(vec![egui::Event::PointerMoved(origin)]);
+        assert_eq!(
+            frame(vec![egui::Event::PointerButton {
+                pos: origin,
+                button: egui::PointerButton::Primary,
+                pressed: true,
+                modifiers: egui::Modifiers::NONE,
+            }]),
+            0
+        );
+        // Holding the mouse still beyond egui's long-press timeout is not a drag.
+        for _ in 0..60 {
+            assert_eq!(frame(vec![]), 0);
+        }
+        assert_eq!(
+            frame(vec![egui::Event::PointerMoved(origin + vec2(20.0, 0.0))]),
+            1
+        );
+        assert_eq!(
+            frame(vec![egui::Event::PointerMoved(origin + vec2(30.0, 0.0))]),
+            0
+        );
+    }
+    #[test]
+    fn collapse_reopens_the_selected_tab_after_repeated_toggles_and_profile_reload() {
+        for size in [vec2(520.0, 520.0), vec2(812.0, 600.0)] {
+            for view in [1, 2, 3, 4] {
+                let dir = tempfile::tempdir().unwrap();
+                let ctx = egui::Context::default();
+                let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+                let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+                app.saved.mini_view = view;
+                for _ in 0..4 {
+                    click_sized(&mut app, &ctx, size, pos2(size.x - 34.0, 246.0));
+                    assert_eq!(app.saved.mini_view, 0);
+                    assert_eq!(app.saved.mini_last_view, view);
+                    app.saved =
+                        serde_json::from_str(&serde_json::to_string(&app.saved).unwrap()).unwrap();
+                    click_sized(&mut app, &ctx, size, pos2(size.x - 34.0, 246.0));
+                    assert_eq!(app.saved.mini_view, view);
+                }
+            }
+        }
+    }
+
     #[test]
     fn order_icon_cycles_in_both_dark_and_light_mini_without_changing_repeat() {
         for theme in [0, 2] {
@@ -1550,82 +1733,87 @@ mod tests {
     }
     #[test]
     fn vinyl_track_click_preserves_all_order_modes_and_the_existing_selection() {
-        for mode in 0..3 {
-            for filtered in [false, true] {
-                for (size, title) in [
-                    (vec2(520.0, 520.0), "Beyond the Shore"),
-                    (vec2(812.0, 640.0), "Evening Lines"),
-                ] {
-                    let dir = tempfile::tempdir().unwrap();
-                    let ctx = egui::Context::default();
-                    let cc = eframe::CreationContext::_new_kittest(ctx.clone());
-                    let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
-                    app.preview("mini-vinyl");
-                    app.saved.tracks.truncate(8);
-                    for (i, t) in app.saved.tracks.iter_mut().enumerate() {
-                        t.source = format!("/synthetic-not-present/Music/album/{i}.flac");
-                    }
-                    app.saved.tracks.push(Track::placeholder(
-                        "/synthetic-not-present/Music/other-album/track.flac".into(),
-                    ));
-                    app.saved.shuffle = mode == 1;
-                    app.saved.shuffle_albums = mode == 2;
-                    if filtered {
-                        app.playback_selection = Some(
-                            [8, 5, 1]
-                                .into_iter()
-                                .map(|i| app.saved.tracks[i].source.clone())
-                                .collect(),
+        for appearance in player_visual::Appearance::ALL {
+            for mode in 0..3 {
+                for filtered in [false, true] {
+                    for (size, title) in [
+                        (vec2(520.0, 520.0), "Beyond the Shore"),
+                        (vec2(812.0, 640.0), "Evening Lines"),
+                    ] {
+                        let dir = tempfile::tempdir().unwrap();
+                        let ctx = egui::Context::default();
+                        let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+                        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+                        app.preview("mini-vinyl");
+                        app.saved.player_appearance = appearance;
+                        app.saved.tracks.truncate(8);
+                        for (i, t) in app.saved.tracks.iter_mut().enumerate() {
+                            t.source = format!("/synthetic-not-present/Music/album/{i}.flac");
+                        }
+                        app.saved.tracks.push(Track::placeholder(
+                            "/synthetic-not-present/Music/other-album/track.flac".into(),
+                        ));
+                        app.saved.shuffle = mode == 1;
+                        app.saved.shuffle_albums = mode == 2;
+                        if filtered {
+                            app.playback_selection = Some(
+                                [8, 5, 1]
+                                    .into_iter()
+                                    .map(|i| app.saved.tracks[i].source.clone())
+                                    .collect(),
+                            );
+                        }
+                        let selection = app.playback_selection.clone();
+                        app.saved.folders = vec!["/synthetic-not-present/Music".into()];
+                        app.saved.active_source =
+                            Some("folder:/synthetic-not-present/Music".into());
+                        app.current = Some(app.saved.tracks[0].source.clone());
+                        app.query = "filter excludes clicked track".into();
+                        frame_sized(&mut app, &ctx, size, vec![]);
+                        let output = frame_sized(&mut app, &ctx, size, vec![]);
+                        let nodes = output.platform_output.accesskit_update.unwrap().nodes;
+                        let node = nodes
+                            .iter()
+                            .find(|(_, n)| {
+                                n.label() == Some(title)
+                                    && n.role() == egui::accesskit::Role::Button
+                            })
+                            .unwrap();
+                        let r = node.1.bounds().unwrap();
+                        let target = app
+                            .saved
+                            .tracks
+                            .iter()
+                            .find(|t| t.title == title)
+                            .unwrap()
+                            .source
+                            .clone();
+                        click_sized(
+                            &mut app,
+                            &ctx,
+                            size,
+                            pos2(((r.x0 + r.x1) / 2.0) as f32, ((r.y0 + r.y1) / 2.0) as f32),
                         );
+                        assert_eq!(
+                            app.requested.as_deref(),
+                            Some(target.as_str()),
+                            "bounds={r:?} selection={:?} message={}",
+                            app.playback_selection,
+                            app.message
+                        );
+                        assert!(app.loading);
+                        assert_eq!(app.playback_selection, selection);
+                        assert_eq!(
+                            (app.saved.shuffle, app.saved.shuffle_albums),
+                            (mode == 1, mode == 2)
+                        );
+                        assert_eq!(
+                            app.listening_tracks().len(),
+                            if filtered { 3 } else { 9 },
+                            "another album stays in the listening selection"
+                        );
+                        assert_eq!(app.saved.mini_view, 1);
                     }
-                    let selection = app.playback_selection.clone();
-                    app.saved.folders = vec!["/synthetic-not-present/Music".into()];
-                    app.saved.active_source = Some("folder:/synthetic-not-present/Music".into());
-                    app.current = Some(app.saved.tracks[0].source.clone());
-                    app.query = "filter excludes clicked track".into();
-                    frame_sized(&mut app, &ctx, size, vec![]);
-                    let output = frame_sized(&mut app, &ctx, size, vec![]);
-                    let nodes = output.platform_output.accesskit_update.unwrap().nodes;
-                    let node = nodes
-                        .iter()
-                        .find(|(_, n)| {
-                            n.label() == Some(title) && n.role() == egui::accesskit::Role::Button
-                        })
-                        .unwrap();
-                    let r = node.1.bounds().unwrap();
-                    let target = app
-                        .saved
-                        .tracks
-                        .iter()
-                        .find(|t| t.title == title)
-                        .unwrap()
-                        .source
-                        .clone();
-                    click_sized(
-                        &mut app,
-                        &ctx,
-                        size,
-                        pos2(((r.x0 + r.x1) / 2.0) as f32, ((r.y0 + r.y1) / 2.0) as f32),
-                    );
-                    assert_eq!(
-                        app.requested.as_deref(),
-                        Some(target.as_str()),
-                        "bounds={r:?} selection={:?} message={}",
-                        app.playback_selection,
-                        app.message
-                    );
-                    assert!(app.loading);
-                    assert_eq!(app.playback_selection, selection);
-                    assert_eq!(
-                        (app.saved.shuffle, app.saved.shuffle_albums),
-                        (mode == 1, mode == 2)
-                    );
-                    assert_eq!(
-                        app.listening_tracks().len(),
-                        if filtered { 3 } else { 9 },
-                        "another album stays in the listening selection"
-                    );
-                    assert_eq!(app.saved.mini_view, 1);
                 }
             }
         }

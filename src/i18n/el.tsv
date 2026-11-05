@@ -208,7 +208,7 @@ Library and content	Βιβλιοθήκη και περιεχόμενο
 Manage synchronization, covers and sources.	Διαχείριση συγχρονισμού, εξωφύλλων και πηγών.
 Appearance and readability	Εμφάνιση και αναγνωσιμότητα
 Preferences shared by the full and mini views.	Κοινές προτιμήσεις πλήρους και μίνι προβολής.
-Reduce vinyl animation	Μείωση κίνησης βινυλίου
+Reduce player animation	Μείωση κίνησης αναπαραγωγής
 Interface size	Μέγεθος διεπαφής
 Use ⌘+ and ⌘− to adjust text size.	Χρησιμοποιήστε ⌘+ και ⌘− για το μέγεθος κειμένου.
 Music server and rooms	Μουσικός διακομιστής και δωμάτια
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Σφάλματα ανάγνωσης ετικετών: {n}
 Tag indexing complete: {read} read · {failed} errors	Η ευρετηρίαση ολοκληρώθηκε: {read} αναγνώστηκαν · {failed} σφάλματα
 LAN scan interval	Διάστημα σάρωσης τοπικού δικτύου
+Player appearance	Εμφάνιση αναπαραγωγής
+Listening	Ακρόαση
+CD	CD
+Cassette	Κασέτα
+Reel-to-reel	Μαγνητόφωνο μπομπίνας
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Στις ρυθμίσεις επιλέξτε βινύλιο, CD, κασέτα ή Revox / Μετρητές VU. Η κεντρική καρτέλα δείχνει την επιλεγμένη συσκευή και διατηρεί την επιλογή όταν ανοίγετε ξανά το MusicCraft.
+Album artwork	Εικόνες άλμπουμ
+Previous image	Προηγούμενη εικόνα
+Next image	Επόμενη εικόνα
+Artwork unavailable	Η εικόνα δεν είναι διαθέσιμη
+Double-click to enlarge artwork	Διπλό κλικ για μεγέθυνση εξωφύλλου
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Κάντε διπλό κλικ στο εξώφυλλο για να ανοίξετε τις εικόνες του άλμπουμ. Με τα βέλη ή τα πλήκτρα αριστερά και δεξιά δείτε το εξώφυλλο, το οπισθόφυλλο και τις εικόνες του ενθέτου στον φάκελο του άλμπουμ.
+Revox	Revox
+VU meters	Μετρητές VU
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Οι ρυθμίσεις ανοίγουν σε ανεξάρτητο παράθυρο. Το εξώφυλλο θυμάται το μέγεθος και τη θέση του στις διαφορετικές οθόνες και μετά την επανεκκίνηση της εφαρμογής.
+Side-by-side VU	Μετρητές VU δίπλα δίπλα

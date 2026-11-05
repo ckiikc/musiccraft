@@ -208,7 +208,7 @@ Library and content	Biblioteca e conteúdo
 Manage synchronization, covers and sources.	Gerencie sincronização, capas e fontes.
 Appearance and readability	Aparência e legibilidade
 Preferences shared by the full and mini views.	Preferências comuns às visualizações completa e mini.
-Reduce vinyl animation	Reduzir animação do vinil
+Reduce player animation	Reduzir animação do player
 Interface size	Tamanho da interface
 Use ⌘+ and ⌘− to adjust text size.	Use ⌘+ e ⌘− para ajustar o texto.
 Music server and rooms	Servidor de música e ambientes
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Erros de leitura de tags: {n}
 Tag indexing complete: {read} read · {failed} errors	Indexação concluída: {read} lidos · {failed} erros
 LAN scan interval	Intervalo de busca na rede local
+Player appearance	Aparência do player
+Listening	Ouvir
+CD	CD
+Cassette	Fita cassete
+Reel-to-reel	Gravador de rolo
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Nas configurações, escolha vinil, CD, fita cassete ou Revox / Medidores VU. A aba central mostra o player selecionado e mantém a escolha ao reabrir o MusicCraft.
+Album artwork	Imagens do álbum
+Previous image	Imagem anterior
+Next image	Próxima imagem
+Artwork unavailable	Imagem indisponível
+Double-click to enlarge artwork	Clique duas vezes para ampliar a capa
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Clique duas vezes na capa para abrir as imagens do álbum. Use as setas ou as teclas esquerda e direita para ver capa, contracapa e imagens do encarte presentes na pasta do álbum.
+Revox	Revox
+VU meters	Medidores VU
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	As configurações abrem em uma janela separada. A arte do álbum mantém o tamanho e a posição entre monitores e após reiniciar o aplicativo.
+Side-by-side VU	Medidores VU lado a lado

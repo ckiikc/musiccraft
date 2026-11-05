@@ -1,0 +1,257 @@
+[
+  {
+    "path": "docs/licenses/AccessKit--accesskit-a55d3e1a18bb/LICENSE-APACHE",
+    "url": "https://github.com/AccessKit/accesskit/blob/a55d3e1a18bb9ef0e4bccc9083fb13c3e0ad8969/LICENSE-APACHE",
+    "packages": [
+      "accesskit@0.24.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-a55d3e1a18bb/LICENSE-MIT",
+    "url": "https://github.com/AccessKit/accesskit/blob/a55d3e1a18bb9ef0e4bccc9083fb13c3e0ad8969/LICENSE-MIT",
+    "packages": [
+      "accesskit@0.24.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-a55d3e1a18bb/LICENSE.chromium",
+    "url": "https://github.com/AccessKit/accesskit/blob/a55d3e1a18bb9ef0e4bccc9083fb13c3e0ad8969/LICENSE.chromium",
+    "packages": [
+      "accesskit@0.24.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-c88605b96d04/LICENSE-APACHE",
+    "url": "https://github.com/AccessKit/accesskit/blob/c88605b96d04431f9c3c792464a0f2f253480e94/LICENSE-APACHE",
+    "packages": [
+      "accesskit_consumer@0.38.0",
+      "accesskit_macos@0.26.3"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-c88605b96d04/LICENSE-MIT",
+    "url": "https://github.com/AccessKit/accesskit/blob/c88605b96d04431f9c3c792464a0f2f253480e94/LICENSE-MIT",
+    "packages": [
+      "accesskit_consumer@0.38.0",
+      "accesskit_macos@0.26.3"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-c88605b96d04/LICENSE.chromium",
+    "url": "https://github.com/AccessKit/accesskit/blob/c88605b96d04431f9c3c792464a0f2f253480e94/LICENSE.chromium",
+    "packages": [
+      "accesskit_consumer@0.38.0",
+      "accesskit_macos@0.26.3"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-1bbcf100942b/LICENSE-APACHE",
+    "url": "https://github.com/AccessKit/accesskit/blob/1bbcf100942bac96c2c3a4a91cb67b0b20201a24/LICENSE-APACHE",
+    "packages": [
+      "accesskit_winit@0.32.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-1bbcf100942b/LICENSE-MIT",
+    "url": "https://github.com/AccessKit/accesskit/blob/1bbcf100942bac96c2c3a4a91cb67b0b20201a24/LICENSE-MIT",
+    "packages": [
+      "accesskit_winit@0.32.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-1bbcf100942b/LICENSE.chromium",
+    "url": "https://github.com/AccessKit/accesskit/blob/1bbcf100942bac96c2c3a4a91cb67b0b20201a24/LICENSE.chromium",
+    "packages": [
+      "accesskit_winit@0.32.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-4fc083f1c6d6/LICENSE.txt",
+    "url": "https://github.com/madsmtm/objc2/blob/4fc083f1c6d6784577e38b0ee8dbd344481e2fd2/LICENSE.txt",
+    "packages": [
+      "block2@0.5.1",
+      "objc-sys@0.3.5"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-b4167b582b2f/LICENSE.md",
+    "url": "https://github.com/madsmtm/objc2/blob/b4167b582b2f75f9a1be75495c41b765344fd03c/LICENSE.md",
+    "packages": [
+      "block2@0.6.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-8852b424193c/LICENSE.md",
+    "url": "https://github.com/madsmtm/objc2/blob/8852b424193ca41602281b3d7540d7c8ed51e49a/LICENSE.md",
+    "packages": [
+      "dispatch2@0.3.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/emilk--egui-49682f8baa05/LICENSE-APACHE",
+    "url": "https://github.com/emilk/egui/blob/49682f8baa058bf49e011035cfbd6e825f88a5ef/LICENSE-APACHE",
+    "packages": [
+      "ecolor@0.36.2",
+      "eframe@0.36.2",
+      "egui@0.36.2",
+      "egui-winit@0.36.2",
+      "egui_glow@0.36.2",
+      "emath@0.36.2",
+      "epaint@0.36.2",
+      "epaint_default_fonts@0.36.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/emilk--egui-49682f8baa05/LICENSE-MIT",
+    "url": "https://github.com/emilk/egui/blob/49682f8baa058bf49e011035cfbd6e825f88a5ef/LICENSE-MIT",
+    "packages": [
+      "ecolor@0.36.2",
+      "eframe@0.36.2",
+      "egui@0.36.2",
+      "egui-winit@0.36.2",
+      "egui_glow@0.36.2",
+      "emath@0.36.2",
+      "epaint@0.36.2",
+      "epaint_default_fonts@0.36.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/Serial-ATA--lofty-rs-618731cee7aa/LICENSE-APACHE",
+    "url": "https://github.com/Serial-ATA/lofty-rs/blob/618731cee7aac784f5f08643bd5d8d005f3c01d6/LICENSE-APACHE",
+    "packages": [
+      "lofty@0.25.4"
+    ]
+  },
+  {
+    "path": "docs/licenses/Serial-ATA--lofty-rs-618731cee7aa/LICENSE-MIT",
+    "url": "https://github.com/Serial-ATA/lofty-rs/blob/618731cee7aac784f5f08643bd5d8d005f3c01d6/LICENSE-MIT",
+    "packages": [
+      "lofty@0.25.4"
+    ]
+  },
+  {
+    "path": "docs/licenses/Serial-ATA--lofty-rs-5affdd9aea68/LICENSE-APACHE",
+    "url": "https://github.com/Serial-ATA/lofty-rs/blob/5affdd9aea68e7b06d5e1a651bec7814882f44c7/LICENSE-APACHE",
+    "packages": [
+      "lofty_attr@0.13.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/Serial-ATA--lofty-rs-5affdd9aea68/LICENSE-MIT",
+    "url": "https://github.com/Serial-ATA/lofty-rs/blob/5affdd9aea68e7b06d5e1a651bec7814882f44c7/LICENSE-MIT",
+    "packages": [
+      "lofty_attr@0.13.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-5237cbf081d0/LICENSE.txt",
+    "url": "https://github.com/madsmtm/objc2/blob/5237cbf081d04ef75a1f6a207b4018e7c1ae7438/LICENSE.txt",
+    "packages": [
+      "objc2@0.5.3"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-d7d2fa23ceaa/LICENSE.md",
+    "url": "https://github.com/madsmtm/objc2/blob/d7d2fa23ceaa5e6096c923b081040e5d81b3b9df/LICENSE.md",
+    "packages": [
+      "objc2@0.6.5"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-e282618be4c3/LICENSE.txt",
+    "url": "https://github.com/madsmtm/objc2/blob/e282618be4c3a3b9542957e0c8540e9588472ce8/LICENSE.txt",
+    "packages": [
+      "objc2-app-kit@0.2.2",
+      "objc2-core-data@0.2.2",
+      "objc2-core-image@0.2.2",
+      "objc2-foundation@0.2.2",
+      "objc2-metal@0.2.2",
+      "objc2-quartz-core@0.2.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-7b1abfd750a2/LICENSE.md",
+    "url": "https://github.com/madsmtm/objc2/blob/7b1abfd750a2cacaea71d6a56ecfb83cb7de560b/LICENSE.md",
+    "packages": [
+      "objc2-app-kit@0.3.2",
+      "objc2-audio-toolbox@0.3.2",
+      "objc2-core-audio@0.3.2",
+      "objc2-core-audio-types@0.3.2",
+      "objc2-core-foundation@0.3.2",
+      "objc2-core-graphics@0.3.2",
+      "objc2-foundation@0.3.2",
+      "objc2-io-surface@0.3.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/madsmtm--objc2-8d214f547736/LICENSE.md",
+    "url": "https://github.com/madsmtm/objc2/blob/8d214f5477365ffcbcbb7de058c86ed9a518efb7/LICENSE.md",
+    "packages": [
+      "objc2-encode@4.1.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/Serial-ATA--lofty-rs-76ff7093a1f6/LICENSE-APACHE",
+    "url": "https://github.com/Serial-ATA/lofty-rs/blob/76ff7093a1f6a98c60297de4695709d04c8c1f47/LICENSE-APACHE",
+    "packages": [
+      "ogg_pager@0.7.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/Serial-ATA--lofty-rs-76ff7093a1f6/LICENSE-MIT",
+    "url": "https://github.com/Serial-ATA/lofty-rs/blob/76ff7093a1f6a98c60297de4695709d04c8c1f47/LICENSE-MIT",
+    "packages": [
+      "ogg_pager@0.7.2"
+    ]
+  },
+  {
+    "path": "docs/licenses/aclysma--profiling-8271551172eb/LICENSE-APACHE",
+    "url": "https://github.com/aclysma/profiling/blob/8271551172eb6fa4cba47369aedd93790c623df9/LICENSE-APACHE",
+    "packages": [
+      "profiling@1.0.18"
+    ]
+  },
+  {
+    "path": "docs/licenses/aclysma--profiling-8271551172eb/LICENSE-MIT",
+    "url": "https://github.com/aclysma/profiling/blob/8271551172eb6fa4cba47369aedd93790c623df9/LICENSE-MIT",
+    "packages": [
+      "profiling@1.0.18"
+    ]
+  },
+  {
+    "path": "docs/licenses/pdeljanov--Symphonia-6d533f261509/LICENSE",
+    "url": "https://github.com/pdeljanov/Symphonia/blob/6d533f26150953a882a6a111ebd13f0abf7129d5/LICENSE",
+    "packages": [
+      "symphonia@0.5.5",
+      "symphonia-bundle-flac@0.5.5",
+      "symphonia-bundle-mp3@0.5.5",
+      "symphonia-codec-aac@0.5.5",
+      "symphonia-codec-adpcm@0.5.5",
+      "symphonia-codec-alac@0.5.5",
+      "symphonia-codec-pcm@0.5.5",
+      "symphonia-codec-vorbis@0.5.5",
+      "symphonia-core@0.5.5",
+      "symphonia-format-caf@0.5.5",
+      "symphonia-format-isomp4@0.5.5",
+      "symphonia-format-mkv@0.5.5",
+      "symphonia-format-ogg@0.5.5",
+      "symphonia-format-riff@0.5.5",
+      "symphonia-metadata@0.5.5",
+      "symphonia-utils-xiph@0.5.5"
+    ]
+  },
+  {
+    "path": "docs/licenses/RustAudio--dasp-97c3bb9b2363/LICENSE-APACHE",
+    "url": "https://github.com/RustAudio/dasp/blob/97c3bb9b2363c0b46ac1633858bf1054fd02a980/LICENSE-APACHE",
+    "packages": [
+      "dasp_sample@0.11.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/RustAudio--dasp-97c3bb9b2363/LICENSE-MIT",
+    "url": "https://github.com/RustAudio/dasp/blob/97c3bb9b2363c0b46ac1633858bf1054fd02a980/LICENSE-MIT",
+    "packages": [
+      "dasp_sample@0.11.0"
+    ]
+  }
+]

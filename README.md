@@ -4,6 +4,12 @@ A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS
 
 **Independent project · macOS alpha · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
 
+## Experimental release 0.10.41
+
+[Download for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.41). The release is experimental, ad-hoc signed and not notarized. Only Apple silicon macOS has been validated. The public package excludes the optional LMS runtime. Verify the archive against the accompanying `SHA256SUMS.txt`.
+
+![MusicCraft miniplayer with side-by-side VU meters and a synthetic library](docs/screenshots/miniplayer-vu.png)
+
 ## Listening and library
 
 - Full library and compact player, with independent remembered window sizes.
@@ -13,7 +19,9 @@ A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS
 - Optional native sample-rate switching, integer PCM path and ReplayGain controls. Device/driver support is required; unsupported exclusive configurations report an error.
 - FTP/FTPS sources with incremental synchronization, background tag indexing, bounded metadata reads and optional rediscovery when a phone changes its LAN address.
 - Embedded artwork, folder artwork and optional online cover lookup. Optional saving of missing artwork never replaces an existing cover.
-- Artist biographies, plain or synchronized lyrics when a provider has a suitable result, and an animated album view.
+- Artist biographies and plain or synchronized lyrics when a provider has a suitable result.
+- Six persistent player visuals: vinyl, CD, cassette, reel-to-reel, stacked VU meters and side-by-side VU meters. Analog needles visualize existing peak telemetry; they are not a calibrated VU instrument.
+- Independent native settings and artwork windows, remembered geometry, and front/back/booklet image browsing.
 - Interface and built-in help in 23 languages; translations still need editorial review.
 - Original-file HTTP sharing and control of an external Lyrion Music Server for compatible players such as piCorePlayer.
 
@@ -57,10 +65,12 @@ Add a mounted folder as a local source, or enter the FTP/FTPS host, port and roo
 
 Automatic synchronization checks reachable sources approximately every two minutes and periodically audits all folders. Metadata indexing runs separately and pauses for audio transfers and scans. Its first pass is gradual; completed tag reads are journaled and survive a restart. Changed tags at an already-indexed, unchanged URL do not yet trigger a full automatic reread.
 
-The review snapshot uses the placeholder application ID org.example.musiccraft
-and a fresh ~/Library/Application Support/MusicCraft/ profile. A distributor must
-choose a stable publisher-owned identity before the first release. This source
-snapshot starts with an empty library and no configured network sources.
+The public application uses the stable identity `io.github.ckiikc.musiccraft`
+and a separate `~/Library/Application Support/MusicCraft/` profile. FTP passwords
+use the `io.github.ckiikc.musiccraft.ftp` Keychain service. It starts with an empty
+library and no configured network sources. The earlier 0.10.37 source-review
+snapshot used a placeholder identity; it had no published binary release.
+The private development app's older profile is not imported automatically.
 
 ## Privacy and external services
 
@@ -75,6 +85,7 @@ cargo fmt --check
 cargo clippy --locked --all-targets -j 2 -- -D warnings
 cargo test --locked -j 2
 python3 scripts/check-publication.py
+python3 scripts/test_app_uuid.py
 ```
 
 The FTP integration harness creates synthetic audio and authenticated loopback servers. It needs Python, `pyftpdlib` and `ffmpeg`; it does not use your saved sources:
@@ -90,3 +101,5 @@ Tests marked ignored need explicit network, audio-device, private-library or mul
 ## License and artwork
 
 Project source is licensed under [MIT](LICENSE). Original project artwork and synthetic visual fixtures are described in [ATTRIBUTION.md](ATTRIBUTION.md). Lucide interface icons retain their upstream notices. System fonts are loaded locally and are not bundled. Third-party dependencies and the optional LMS component are documented in [THIRD_PARTY.md](THIRD_PARTY.md).
+
+Maintained by [@ckiikc](https://github.com/ckiikc). Community-app consideration is tracked in [ArtCraft Launcher #1247](https://github.com/storytold/craft-launcher/issues/1247).

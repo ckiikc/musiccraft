@@ -213,6 +213,14 @@ impl Aurea {
                     .image("disc-3", cover_size - 20.0, palette::muted()),
             );
         }
+        let cover_response = ui.interact(cover, ui.id().with("open-artwork"), egui::Sense::click());
+        cover_response.widget_info(|| {
+            egui::WidgetInfo::labeled(egui::WidgetType::Button, true, tr!("Album artwork"))
+        });
+        if cover_viewer::requested(&cover_response) {
+            self.open_cover_viewer();
+        }
+        cover_response.on_hover_text(tr!("Double-click to enlarge artwork"));
         let metadata_width = if wide {
             (width * 0.26).min(300.0) - cover_size - 12.0
         } else {

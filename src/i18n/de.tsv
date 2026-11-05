@@ -208,7 +208,7 @@ Library and content	Mediathek und Inhalte
 Manage synchronization, covers and sources.	Synchronisierung, Cover und Quellen verwalten.
 Appearance and readability	Darstellung und Lesbarkeit
 Preferences shared by the full and mini views.	Gemeinsame Einstellungen für Vollansicht und Miniansicht.
-Reduce vinyl animation	Vinylanimation reduzieren
+Reduce player animation	Player-Animation reduzieren
 Interface size	Oberflächengröße
 Use ⌘+ and ⌘− to adjust text size.	Textgröße mit ⌘+ und ⌘− anpassen.
 Music server and rooms	Musikserver und Räume
@@ -319,3 +319,19 @@ Drag to adjust volume; hold Shift for fine control. Scroll or use arrow keys for
 Tag read errors: {n}	Fehler beim Lesen der Tags: {n}
 Tag indexing complete: {read} read · {failed} errors	Indizierung abgeschlossen: {read} gelesen · {failed} Fehler
 LAN scan interval	Intervall für LAN-Suche
+Player appearance	Player-Darstellung
+Listening	Hören
+CD	CD
+Cassette	Kassette
+Reel-to-reel	Tonbandgerät
+Guide: Choose Vinyl, CD, Cassette, Revox or VU meters in Settings. The central tab shows the selected player and remembers your choice after reopening MusicCraft.	Wähle in den Einstellungen Schallplatte, CD, Kassette oder Revox / VU-Meter. Der mittlere Tab zeigt den gewählten Player und behält die Auswahl nach dem erneuten Öffnen von MusicCraft.
+Album artwork	Album-Bilder
+Previous image	Vorheriges Bild
+Next image	Nächstes Bild
+Artwork unavailable	Bild nicht verfügbar
+Double-click to enlarge artwork	Doppelklicken, um das Cover zu vergrößern
+Guide: Double-click the cover to open album artwork. Use the arrows or Left and Right keys to browse cover, back and booklet images found in the album folder.	Öffne die Album-Bilder per Doppelklick auf das Cover. Mit den Pfeilen oder den Tasten Links und Rechts blätterst du durch Vorderseite, Rückseite und Booklet-Bilder im Albumordner.
+Revox	Revox
+VU meters	VU-Meter
+Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Die Einstellungen öffnen sich in einem eigenen Fenster. Das Albumcover behält Größe und Position auf verschiedenen Bildschirmen und nach einem Neustart der App.
+Side-by-side VU	VU-Meter nebeneinander
