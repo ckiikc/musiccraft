@@ -155,6 +155,14 @@ impl Aurea {
         } else {
             0
         };
+        if scene.starts_with("settings-page-") {
+            self.settings_dialog = true;
+            self.settings_page = scene
+                .trim_start_matches("settings-page-")
+                .parse::<u8>()
+                .unwrap_or(0)
+                .min(3);
+        }
         if scene == "integrated-running" {
             self.start_integrated();
         }

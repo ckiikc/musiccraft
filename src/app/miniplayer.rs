@@ -208,6 +208,10 @@ impl Aurea {
                         self.open_settings(0);
                         ui.close();
                     }
+                    ui.checkbox(
+                        &mut self.saved.appearance_by_year,
+                        tr!("Appearance by year"),
+                    );
                     if ui.button(tr!("Server and multiroom…")).clicked() {
                         self.open_settings(3);
                         ui.close();
@@ -283,6 +287,10 @@ impl Aurea {
             .or(self.current.as_ref())
             .and_then(|id| self.saved.tracks.iter().find(|t| &t.source == id))
             .cloned();
+        let area = player_content_area(area);
+        let width = area.width();
+        let origin = area.min;
+        let rect = |x, y, w, h| egui::Rect::from_min_size(origin + vec2(x, y), vec2(w, h));
         let cover = rect(20.0, 49.0, 70.0, 70.0);
         ui.painter().rect_filled(cover, 7.0, surface);
         if let Some(art) = &self.art {
@@ -600,7 +608,12 @@ impl Aurea {
         };
         for (index, icon, label) in [
             (1, "list-music", tr!("Library")),
-            (2, "disc-3", self.saved.player_appearance.label()),
+            (
+                2,
+                "disc-3",
+                self.player_appearance_for(track.as_ref().and_then(|t| t.year))
+                    .label(),
+            ),
             (3, "book-open", tr!("Artist and lyrics")),
         ] {
             // Stored v0.6 values 1=vinyl / 2=playlist remain compatible.
@@ -940,7 +953,8 @@ impl Aurea {
                 (self.position / track.duration).clamp(0.0, 1.0) as f32
             });
         self.reel_motion.progress = track_progress;
-        self.saved.player_appearance.paint(
+        let appearance = self.player_appearance_for(current.and_then(|track| track.year));
+        appearance.paint(
             ui.painter(),
             layout.disc,
             player_visual::VisualState {
@@ -961,11 +975,7 @@ impl Aurea {
             self.open_cover_viewer();
         }
         visual_response.widget_info(|| {
-            egui::WidgetInfo::labeled(
-                egui::WidgetType::Image,
-                true,
-                self.saved.player_appearance.label(),
-            )
+            egui::WidgetInfo::labeled(egui::WidgetType::Image, true, appearance.label())
         });
         let Some(current) = current else {
             return;
@@ -1072,6 +1082,15 @@ impl Aurea {
         }
     }
 }
+fn player_content_area(area: egui::Rect) -> egui::Rect {
+    let maximum = (area.height() * 1.85).clamp(900.0, 1280.0);
+    let width = area.width().min(maximum);
+    egui::Rect::from_min_size(
+        pos2(area.center().x - width * 0.5, area.top()),
+        vec2(width, area.height()),
+    )
+}
+
 struct VinylLayout {
     disc: egui::Rect,
     left: egui::Rect,
@@ -1081,7 +1100,10 @@ impl VinylLayout {
     fn new(content: egui::Rect) -> Self {
         let body = egui::Rect::from_min_max(content.min + vec2(0.0, 30.0), content.max);
         let diameter = body.height().min(body.width() * 0.44).max(1.0);
-        let disc = egui::Rect::from_center_size(body.center(), vec2(diameter, diameter));
+        let disc = egui::Rect::from_min_size(
+            pos2(body.center().x - diameter * 0.5, body.top()),
+            vec2(diameter, diameter),
+        );
         Self {
             disc,
             left: egui::Rect::from_min_max(body.min, pos2(disc.left() - 12.0, body.bottom())),
@@ -1844,6 +1866,7 @@ mod tests {
                 pos2(20.0, 275.0),
                 vec2(size.x - 40.0, size.y - 291.0),
             ));
+            assert_eq!(layout.disc.top(), 305.0, "artwork must stay near its tab");
             assert!(
                 bounds.x1 <= f64::from(layout.disc.left() - 12.0) + 1.0,
                 "row={bounds:?}, size={size:?}, column={:?}",
@@ -1854,6 +1877,40 @@ mod tests {
                     && layout.right.left() > layout.disc.right()
             );
             assert!(layout.disc.bottom() <= size.y - 16.0);
+        }
+    }
+
+    #[test]
+    fn wide_miniplayer_keeps_body_centered_and_window_controls_at_the_edge() {
+        let dir = tempfile::tempdir().unwrap();
+        let ctx = egui::Context::default();
+        let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+        app.preview("mini-vinyl");
+        for size in [
+            vec2(2560.0, 749.0),
+            vec2(520.0, 520.0),
+            vec2(1600.0, 520.0),
+            vec2(812.0, 640.0),
+            vec2(2560.0, 749.0),
+        ] {
+            frame_sized(&mut app, &ctx, size, vec![]);
+            let output = frame_sized(&mut app, &ctx, size, vec![]);
+            let nodes = output.platform_output.accesskit_update.unwrap().nodes;
+            let bounds = |label| {
+                nodes
+                    .iter()
+                    .find(|(_, n)| n.label() == Some(label))
+                    .and_then(|(_, n)| n.bounds())
+                    .unwrap()
+            };
+            let artwork = bounds(tr!("Album artwork"));
+            let quit = bounds(tr!("Quit MusicCraft"));
+            let pause = bounds(tr!("Pause"));
+            assert!(artwork.x0 >= f64::from((size.x - 1280.0) * 0.5));
+            assert!(quit.x1 > f64::from(size.x - 20.0));
+            assert!(((pause.x0 + pause.x1) * 0.5 - f64::from(size.x * 0.5)).abs() < 1.0);
+            assert!(artwork.x0 < pause.x0 && pause.x1 < quit.x0);
         }
     }
 }

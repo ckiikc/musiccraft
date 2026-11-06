@@ -13,6 +13,7 @@ pub(super) enum Appearance {
     Vinyl,
 }
 impl Appearance {
+    pub const MEDIA: [Self; 4] = [Self::Vinyl, Self::ReelToReel, Self::Cassette, Self::Cd];
     pub const ALL: [Self; 6] = [
         Self::Vinyl,
         Self::Cd,
@@ -46,6 +47,77 @@ impl Appearance {
     }
 }
 
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(default)]
+pub(super) struct YearAppearance {
+    pub until: [u32; 3],
+    pub media: [Appearance; 4],
+}
+
+impl Default for YearAppearance {
+    fn default() -> Self {
+        Self {
+            until: [1969, 1979, 1989],
+            media: Appearance::MEDIA,
+        }
+    }
+}
+
+impl YearAppearance {
+    pub fn sanitize(&mut self) {
+        for i in 0..3 {
+            let lower = if i == 0 { 1 } else { self.until[i - 1] + 1 };
+            self.until[i] = self.until[i].clamp(lower, 9996 + i as u32);
+        }
+        for (i, media) in self.media.iter_mut().enumerate() {
+            if !Appearance::MEDIA.contains(media) {
+                *media = Appearance::MEDIA[i];
+            }
+        }
+    }
+
+    pub fn select(&self, year: Option<u32>, fallback: Appearance) -> Appearance {
+        let Some(year) = year.filter(|year| (1..=9999).contains(year)) else {
+            return fallback;
+        };
+        let index = self
+            .until
+            .iter()
+            .position(|&until| year <= until)
+            .unwrap_or(3);
+        self.media[index]
+    }
+}
+
+impl Aurea {
+    pub(super) fn player_appearance_for(&self, year: Option<u32>) -> Appearance {
+        if !self.saved.appearance_by_year {
+            return self.saved.player_appearance;
+        }
+        self.saved
+            .appearance_periods
+            .select(year, self.saved.player_appearance)
+    }
+
+    pub(super) fn effective_player_appearance(&self) -> Appearance {
+        if !self.saved.appearance_by_year {
+            return self.saved.player_appearance;
+        }
+        let year = self
+            .requested
+            .as_ref()
+            .or(self.current.as_ref())
+            .and_then(|id| {
+                self.saved
+                    .tracks
+                    .iter()
+                    .find(|track| &track.source == id)
+                    .and_then(|track| track.year)
+            });
+        self.player_appearance_for(year)
+    }
+}
+
 pub(super) struct VisualState<'a> {
     pub phase: f32,
     pub progress: f32,
@@ -60,7 +132,6 @@ fn turntable(p: &egui::Painter, rect: egui::Rect, state: &VisualState<'_>) {
 }
 
 fn circular_art(p: &egui::Painter, center: egui::Pos2, radius: f32, state: &VisualState<'_>) {
-    p.circle_filled(center, radius, palette::accent());
     if let Some(art) = state.art {
         let mut mesh = egui::Mesh::with_texture(art.id());
         mesh.vertices.push(egui::epaint::Vertex {
@@ -82,6 +153,7 @@ fn circular_art(p: &egui::Painter, center: egui::Pos2, radius: f32, state: &Visu
         }
         p.add(egui::Shape::mesh(mesh));
     } else {
+        p.circle_filled(center, radius, palette::accent());
         p.text(
             center,
             egui::Align2::CENTER_CENTER,
@@ -317,7 +389,13 @@ fn panel(p: &egui::Painter, rect: egui::Rect, radius: f32, fill: Color32) {
 
 fn cassette(p: &egui::Painter, rect: egui::Rect, state: &VisualState<'_>) {
     let width = rect.width() * 0.97;
-    let shell = egui::Rect::from_center_size(rect.center(), vec2(width, width * 0.64));
+    let shell = egui::Rect::from_min_size(
+        pos2(
+            rect.center().x - width * 0.5,
+            rect.top() + rect.width() * 0.015,
+        ),
+        vec2(width, width * 0.64),
+    );
     let point = |x, y| shell.min + vec2(x * shell.width(), y * shell.height());
     let region = |x1, y1, x2, y2| egui::Rect::from_min_max(point(x1, y1), point(x2, y2));
     shadow(p, shell);
@@ -399,10 +477,6 @@ fn cassette(p: &egui::Painter, rect: egui::Rect, state: &VisualState<'_>) {
         }
         p.circle_filled(center, radius * 0.17, Color32::from_rgb(13, 17, 18));
     }
-    p.line_segment(
-        [point(0.4, 0.58), point(0.6, 0.58)],
-        egui::Stroke::new(1.0, Color32::from_rgb(139, 89, 54)),
-    );
     p.add(egui::Shape::convex_polygon(
         vec![
             window.min + vec2(2.0, 1.0),
@@ -782,6 +856,106 @@ fn tape_deck(p: &egui::Painter, rect: egui::Rect, state: &VisualState<'_>) {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn year_periods_have_inclusive_limits_and_preserve_manual_fallback_and_settings() {
+        let policy = YearAppearance::default();
+        for (year, expected) in [
+            (Some(1969), Appearance::Vinyl),
+            (Some(1970), Appearance::ReelToReel),
+            (Some(1979), Appearance::ReelToReel),
+            (Some(1980), Appearance::Cassette),
+            (Some(1989), Appearance::Cassette),
+            (Some(1990), Appearance::Cd),
+            (None, Appearance::VuMeters),
+            (Some(0), Appearance::VuMeters),
+            (Some(10000), Appearance::VuMeters),
+        ] {
+            assert_eq!(policy.select(year, Appearance::VuMeters), expected);
+        }
+        let saved = Saved {
+            appearance_by_year: true,
+            appearance_periods: YearAppearance {
+                until: [1950, 1980, 2000],
+                media: [
+                    Appearance::ReelToReel,
+                    Appearance::Vinyl,
+                    Appearance::Cd,
+                    Appearance::Cassette,
+                ],
+            },
+            ..Default::default()
+        };
+        let restored: Saved =
+            serde_json::from_str(&serde_json::to_string(&saved).unwrap()).unwrap();
+        assert!(restored.appearance_by_year);
+        assert_eq!(restored.appearance_periods, saved.appearance_periods);
+        assert_eq!(
+            restored
+                .appearance_periods
+                .select(Some(1951), Appearance::Vinyl),
+            Appearance::Vinyl
+        );
+        assert_eq!(
+            restored
+                .appearance_periods
+                .select(Some(2001), Appearance::Vinyl),
+            Appearance::Cassette
+        );
+    }
+
+    #[test]
+    fn malformed_year_periods_are_bounded_and_manual_vu_styles_are_excluded() {
+        for until in [[0, 0, 0], [u32::MAX; 3], [2000, 1900, 1800]] {
+            let mut policy = YearAppearance {
+                until,
+                media: [Appearance::VuMeters; 4],
+            };
+            policy.sanitize();
+            assert!((1..=9996).contains(&policy.until[0]));
+            assert!(policy.until[0] < policy.until[1] && policy.until[1] < policy.until[2]);
+            assert!(policy.until[2] < 9999);
+            assert_eq!(policy.media, Appearance::MEDIA);
+        }
+        let old: Saved = serde_json::from_str("{}").unwrap();
+        assert!(!old.appearance_by_year);
+        assert_eq!(old.appearance_periods, YearAppearance::default());
+    }
+
+    #[test]
+    fn year_mode_follows_current_and_requested_tracks_without_overwriting_manual_choice() {
+        let dir = tempfile::tempdir().unwrap();
+        let ctx = egui::Context::default();
+        let cc = eframe::CreationContext::_new_kittest(ctx);
+        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+        app.saved.player_appearance = Appearance::VuMetersSideBySide;
+        app.saved.appearance_by_year = true;
+        app.saved.tracks = [1965, 1975, 1985, 2000]
+            .into_iter()
+            .map(|year| {
+                let mut track = Track::placeholder(format!("/synthetic/{year}.flac"));
+                track.year = Some(year);
+                track
+            })
+            .collect();
+        for i in 0..4 {
+            app.current = Some(app.saved.tracks[i].source.clone());
+            assert_eq!(app.effective_player_appearance(), Appearance::MEDIA[i]);
+        }
+        app.requested = Some(app.saved.tracks[0].source.clone());
+        assert_eq!(app.effective_player_appearance(), Appearance::Vinyl);
+        app.saved.tracks[0].year = None;
+        assert_eq!(
+            app.effective_player_appearance(),
+            Appearance::VuMetersSideBySide
+        );
+        app.saved.appearance_by_year = false;
+        assert_eq!(
+            app.effective_player_appearance(),
+            Appearance::VuMetersSideBySide
+        );
+        assert_eq!(app.saved.player_appearance, Appearance::VuMetersSideBySide);
+    }
 
     #[test]
     fn analog_needles_settle_in_300ms_and_return_to_rest_without_instability() {

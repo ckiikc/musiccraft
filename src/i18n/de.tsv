@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU-Meter
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Die Einstellungen öffnen sich in einem eigenen Fenster. Das Albumcover behält Größe und Position auf verschiedenen Bildschirmen und nach einem Neustart der App.
 Side-by-side VU	VU-Meter nebeneinander
+Appearance by year	Darstellung nach Jahr
+Up to year	Bis zum Jahr
+After year	Nach dem Jahr
+Tracks without a year use the manual appearance.	Titel ohne Jahresangabe verwenden die manuell gewählte Darstellung.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Anleitung: Aktiviere Darstellung nach Jahr in den Einstellungen, um für jeden Zeitraum einen Player und ein Endjahr festzulegen. Titel ohne Jahresangabe behalten die manuelle Auswahl.
+Manual appearance	Manuelle Darstellung
+Window and animation	Fenster und Animation

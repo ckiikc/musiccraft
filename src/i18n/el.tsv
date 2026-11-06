@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	Μετρητές VU
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Οι ρυθμίσεις ανοίγουν σε ανεξάρτητο παράθυρο. Το εξώφυλλο θυμάται το μέγεθος και τη θέση του στις διαφορετικές οθόνες και μετά την επανεκκίνηση της εφαρμογής.
 Side-by-side VU	Μετρητές VU δίπλα δίπλα
+Appearance by year	Εμφάνιση ανά έτος
+Up to year	Έως το έτος
+After year	Μετά το έτος
+Tracks without a year use the manual appearance.	Τα κομμάτια χωρίς έτος χρησιμοποιούν τη χειροκίνητα επιλεγμένη εμφάνιση.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Οδηγός: ενεργοποιήστε την Εμφάνιση ανά έτος στις ρυθμίσεις για να επιλέξετε συσκευή και τελευταίο έτος για κάθε περίοδο. Τα κομμάτια χωρίς έτος διατηρούν τη χειροκίνητη επιλογή.
+Manual appearance	Χειροκίνητη εμφάνιση
+Window and animation	Παράθυρο και κίνηση

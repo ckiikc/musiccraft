@@ -337,3 +337,10 @@ Revox	Revox
 VU meters	Đồng hồ VU
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Cài đặt mở trong cửa sổ riêng. Ảnh album ghi nhớ kích thước và vị trí trên các màn hình và sau khi khởi động lại ứng dụng.
 Side-by-side VU	Đồng hồ VU đặt cạnh nhau
+Appearance by year	Giao diện theo năm
+Up to year	Đến hết năm
+After year	Sau năm
+Tracks without a year use the manual appearance.	Bài hát không có năm dùng giao diện được chọn thủ công.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Hướng dẫn: bật Giao diện theo năm trong Cài đặt để chọn đầu phát và năm cuối của mỗi giai đoạn. Bài hát không có năm giữ lựa chọn thủ công.
+Manual appearance	Giao diện thủ công
+Window and animation	Cửa sổ và hoạt ảnh

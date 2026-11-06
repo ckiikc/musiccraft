@@ -4,11 +4,20 @@ A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS
 
 **Independent project · macOS alpha · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
 
-## Experimental release 0.10.41
+## Experimental release 0.10.43
 
-[Download for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.41). The release is experimental, ad-hoc signed and not notarized. Only Apple silicon macOS has been validated. The public package excludes the optional LMS runtime. Verify the archive against the accompanying `SHA256SUMS.txt`.
+[Download for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.43). The release is experimental, ad-hoc signed and not notarized. Only Apple silicon macOS has been validated. The public package excludes the optional LMS runtime. Verify the archive against the accompanying `SHA256SUMS.txt`.
 
 ![MusicCraft miniplayer with side-by-side VU meters and a synthetic library](docs/screenshots/miniplayer-vu.png)
+
+## New in 0.10.43
+
+- Redesigned settings with a sidebar for Interface, Audio, Library and Multiroom, consistent sections, aligned controls and independent page scrolling.
+- Optional player appearance by track year: edit three inclusive end years and assign vinyl, reel-to-reel, cassette or CD to each period. Missing years keep the manual appearance.
+- Better proportions in wide miniplayer windows, less empty space above the graphic players and a cleaner cassette window.
+- Circular artwork no longer reveals a colored backing at its edge during rotation. The colored placeholder is retained only when artwork is missing.
+
+![Settings with configurable appearance by year](docs/screenshots/settings.png)
 
 ## Listening and library
 

@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU merilnika
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Nastavitve se odprejo v ločenem oknu. Ovitek albuma si zapomni velikost in položaj na različnih zaslonih in po ponovnem zagonu aplikacije.
 Side-by-side VU	VU-merilnika drug ob drugem
+Appearance by year	Videz glede na leto
+Up to year	Do leta
+After year	Po letu
+Tracks without a year use the manual appearance.	Skladbe brez leta uporabljajo ročno izbrani videz.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Vodnik: v nastavitvah vklopite Videz glede na leto ter za vsako obdobje izberite predvajalnik in zadnje leto. Skladbe brez leta ohranijo ročno izbiro.
+Manual appearance	Ročni videz
+Window and animation	Okno in animacija

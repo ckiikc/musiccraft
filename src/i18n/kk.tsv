@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU өлшеуіштері
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Баптаулар бөлек терезеде ашылады. Альбом мұқабасы әртүрлі экрандарда және қолданба қайта іске қосылғанда өлшемі мен орнын сақтайды.
 Side-by-side VU	Қатар орналасқан VU өлшегіштер
+Appearance by year	Жылға қарай көрініс
+Up to year	Осы жылға дейін
+After year	Осы жылдан кейін
+Tracks without a year use the manual appearance.	Жылы жоқ тректер қолмен таңдалған көріністі пайдаланады.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Нұсқаулық: әр кезеңнің ойнатқышы мен соңғы жылын таңдау үшін параметрлерде Жылға қарай көрініс мүмкіндігін қосыңыз. Жылы жоқ тректер қолмен таңдалған көріністі сақтайды.
+Manual appearance	Қолмен таңдалған көрініс
+Window and animation	Терезе және анимация

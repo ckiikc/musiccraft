@@ -6,7 +6,7 @@ tradizionale, ceco, portoghese brasiliano, tedesco,
 spagnolo, francese, russo, kazako, bulgaro, telugu, ungherese, ucraino,
 italiano, arabo, polacco, sloveno, greco, turco, lituano e vietnamita.
 
-Le chiavi inglesi sono anche il fallback. I 22 cataloghi TSV hanno 337 voci
+Le chiavi inglesi sono anche il fallback. I 22 cataloghi TSV hanno 344 voci
 ciascuno, con due colonne per testo sorgente e traduzione.
 `tr!` risolve testo statico e `format` sostituisce placeholder nominali in un
 solo passaggio. I valori inseriti sono opachi: nomi di file, dispositivi,
@@ -33,8 +33,8 @@ Prima di aggiungere una chiave, aggiornare tutti i TSV e i controlli di copertur
 La suite verifica copertura, duplicati, chiavi UI, placeholder, plurali, valori
 opachi e la ricerca nelle nove sezioni del manuale per ogni lingua. La ricerca
 in arabo usa il testo nell’ordine di lettura. I conteggi in vietnamita usano
-sempre la stessa forma. La provenienza dei
-cataloghi è in [ATTRIBUTION.md](../../ATTRIBUTION.md). Non usare questo modulo per normalizzare
+sempre la stessa forma. La provenienza e l’impronta SHA-256 del nuovo
+catalogo sono in [ATTRIBUTION.toml](../../ATTRIBUTION.toml). Non usare questo modulo per normalizzare
 o riscrivere la libreria.
 
 Il cambio lingua aggiorna la biografia seguendo i collegamenti tra le voci

@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU matuokliai
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Nuostatos atidaromos atskirame lange. Albumo viršelis įsimena dydį ir padėtį skirtinguose ekranuose ir paleidus programą iš naujo.
 Side-by-side VU	VU matuokliai greta
+Appearance by year	Vaizdas pagal metus
+Up to year	Iki metų
+After year	Po metų
+Tracks without a year use the manual appearance.	Kūriniai be metų naudoja rankiniu būdu pasirinktą vaizdą.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Vadovas: nustatymuose įjunkite Vaizdas pagal metus ir kiekvienam laikotarpiui pasirinkite grotuvą bei paskutinius metus. Kūriniai be metų išlaiko rankinį pasirinkimą.
+Manual appearance	Rankinis vaizdas
+Window and animation	Langas ir animacija

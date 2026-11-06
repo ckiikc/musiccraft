@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU మీటర్లు
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	సెట్టింగ్‌లు ప్రత్యేక విండోలో తెరుచుకుంటాయి. ఆల్బమ్ కవర్ పరిమాణం, స్థానం వేర్వేరు స్క్రీన్‌లలోనూ యాప్ పునఃప్రారంభం తర్వాత కూడా గుర్తుంటాయి.
 Side-by-side VU	పక్కపక్కన VU మీటర్లు
+Appearance by year	సంవత్సరం ఆధారంగా రూపం
+Up to year	ఈ సంవత్సరం వరకు
+After year	ఈ సంవత్సరం తర్వాత
+Tracks without a year use the manual appearance.	సంవత్సరం లేని పాటలు చేతితో ఎంచుకున్న రూపాన్ని ఉపయోగిస్తాయి.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	మార్గదర్శి: ప్రతి కాలానికి ప్లేయర్ మరియు చివరి సంవత్సరాన్ని ఎంచుకోవడానికి సెట్టింగ్‌లలో సంవత్సరం ఆధారంగా రూపం ఎంపికను ప్రారంభించండి. సంవత్సరం లేని పాటలు చేతితో ఎంచుకున్న రూపాన్ని ఉంచుతాయి.
+Manual appearance	మాన్యువల్ రూపం
+Window and animation	విండో మరియు యానిమేషన్

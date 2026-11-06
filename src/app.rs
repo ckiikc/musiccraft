@@ -75,6 +75,8 @@ struct Saved {
     ui_scale: f32,
     reduce_motion: bool,
     player_appearance: player_visual::Appearance,
+    appearance_by_year: bool,
+    appearance_periods: player_visual::YearAppearance,
     artwork_window: Option<window_placement::Placement>,
     settings_window: Option<window_placement::Placement>,
     multiroom: crate::multiroom::Config,
@@ -119,6 +121,8 @@ impl Default for Saved {
             ui_scale: 1.0,
             reduce_motion: false,
             player_appearance: Default::default(),
+            appearance_by_year: false,
+            appearance_periods: Default::default(),
             artwork_window: None,
             settings_window: None,
             multiroom: Default::default(),
@@ -303,6 +307,7 @@ impl Aurea {
             saved.mini_last_view.clamp(1, 4)
         };
         saved.theme %= 3;
+        saved.appearance_periods.sanitize();
         palette::configure(&cc.egui_ctx, saved.theme);
         let auth = AuthStore::default();
         for source in &saved.sources {
@@ -2364,7 +2369,8 @@ impl eframe::App for Aurea {
         self.last_frame = now;
         let playing = !self.paused && !self.loading;
         if !minimized && playing && self.player_animation_visible() {
-            let speed = if self.saved.player_appearance == player_visual::Appearance::Cassette {
+            let speed = if self.effective_player_appearance() == player_visual::Appearance::Cassette
+            {
                 1.4
             } else {
                 0.85
@@ -2517,7 +2523,6 @@ fn vinyl(p: &egui::Painter, rect: egui::Rect, angle: f32, art: Option<&egui::Tex
         );
     }
     p.add(egui::Shape::mesh(vinyl_reflection(c, radius, angle)));
-    p.circle_filled(c, radius * 0.4, palette::accent());
     if let Some(art) = art {
         let mut mesh = egui::Mesh::with_texture(art.id());
         mesh.vertices.push(egui::epaint::Vertex {
@@ -2538,6 +2543,7 @@ fn vinyl(p: &egui::Painter, rect: egui::Rect, angle: f32, art: Option<&egui::Tex
         }
         p.add(egui::Shape::mesh(mesh));
     } else {
+        p.circle_filled(c, radius * 0.4, palette::accent());
         p.text(
             c,
             egui::Align2::CENTER_CENTER,

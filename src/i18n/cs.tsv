@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU metry
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Nastavení se otevírá v samostatném okně. Obrázek alba si pamatuje velikost a polohu na monitorech i po restartu aplikace.
 Side-by-side VU	VU metry vedle sebe
+Appearance by year	Vzhled podle roku
+Up to year	Do roku
+After year	Po roce
+Tracks without a year use the manual appearance.	Skladby bez roku používají ručně vybraný vzhled.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Průvodce: v nastavení zapněte Vzhled podle roku a pro každé období zvolte přehrávač a poslední rok. Skladby bez roku zachovají ruční volbu.
+Manual appearance	Ruční vzhled
+Window and animation	Okno a animace

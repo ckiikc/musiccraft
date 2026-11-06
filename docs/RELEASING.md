@@ -1,6 +1,6 @@
 # Releases
 
-MusicCraft 0.10.41 is an independent, experimental macOS release. Community-app
+MusicCraft 0.10.43 is an independent, experimental macOS release. Community-app
 approval remains a maintainer decision in ArtCraft Launcher issue #1247.
 
 ## Current public package
@@ -20,9 +20,9 @@ The packager never installs or publishes the generated app.
 After the documented local checks and native smoke test, archive the app:
 
 ```sh
-ditto -c -k --sequesterRsrc --keepParent dist/MusicCraft.app dist/musiccraft-0.10.41-macos-arm64-experimental.zip
+ditto -c -k --sequesterRsrc --keepParent dist/MusicCraft.app dist/musiccraft-0.10.43-macos-arm64-experimental.zip
 cd dist
-shasum -a 256 musiccraft-0.10.41-macos-arm64-experimental.zip > SHA256SUMS.txt
+shasum -a 256 musiccraft-0.10.43-macos-arm64-experimental.zip > SHA256SUMS.txt
 ```
 
 Publish an experimental GitHub prerelease with that ZIP and checksum file,

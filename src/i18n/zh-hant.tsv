@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU 錶
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	設定在獨立視窗中開啟。專輯圖片會記住在各個顯示器上的大小與位置，重新啟動應用程式後仍會保留。
 Side-by-side VU	並排 VU 表
+Appearance by year	依年份選擇外觀
+Up to year	截至年份
+After year	此年份之後
+Tracks without a year use the manual appearance.	沒有年份的曲目使用手動選擇的外觀。
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	指南：在設定中啟用「依年份選擇外觀」，為每個時期選擇播放器及截止年份。沒有年份的曲目保留手動選擇。
+Manual appearance	手動外觀
+Window and animation	視窗與動畫

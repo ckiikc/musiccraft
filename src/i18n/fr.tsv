@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU-mètres
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	Les réglages s’ouvrent dans une fenêtre indépendante. La pochette conserve sa taille et sa position sur les différents écrans et après le redémarrage de l’application.
 Side-by-side VU	VU-mètres côte à côte
+Appearance by year	Apparence selon l’année
+Up to year	Jusqu’à l’année
+After year	Après l’année
+Tracks without a year use the manual appearance.	Les morceaux sans année utilisent l’apparence choisie manuellement.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Guide : activez Apparence selon l’année dans les paramètres pour choisir un lecteur et la dernière année de chaque période. Les morceaux sans année conservent le choix manuel.
+Manual appearance	Apparence manuelle
+Window and animation	Fenêtre et animations

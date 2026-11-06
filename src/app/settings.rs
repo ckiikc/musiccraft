@@ -171,7 +171,7 @@ impl Aurea {
     }
     pub(super) fn open_settings(&mut self, page: u8) {
         if !self.settings_dialog {
-            self.settings_geometry.open(&self.ctx, vec2(680.0, 620.0));
+            self.settings_geometry.open(&self.ctx, vec2(880.0, 720.0));
             self.settings_focused_on_open =
                 self.ctx.input(|i| i.viewport().focused.unwrap_or(false));
         }
@@ -289,13 +289,13 @@ impl Aurea {
             return;
         }
         if !self.settings_geometry.ready() {
-            self.settings_geometry.open(ctx, vec2(680.0, 620.0));
+            self.settings_geometry.open(ctx, vec2(880.0, 720.0));
         }
         let viewport = egui::ViewportId::from_hash_of("musiccraft-settings");
         let builder = self
             .settings_geometry
             .builder(ctx, tr!("MusicCraft settings"))
-            .with_min_inner_size(vec2(460.0, 340.0))
+            .with_min_inner_size(vec2(660.0, 460.0))
             .with_window_level(if self.saved.pinned {
                 egui::WindowLevel::AlwaysOnTop
             } else {
@@ -309,43 +309,7 @@ impl Aurea {
             self.settings_geometry.observe(&ctx, viewport);
             close = ctx.input(|i| i.viewport().close_requested());
             close |= ctx.input_mut(|i| i.consume_key(egui::Modifiers::NONE, egui::Key::Escape));
-            egui::Frame::new()
-                .fill(palette::bg())
-                .inner_margin(16.0)
-                .show(ui, |ui| {
-                    ui.horizontal_wrapped(|ui| {
-                        for (page, label) in [
-                            (0, tr!("Interface")),
-                            (1, tr!("Audio")),
-                            (2, tr!("Library")),
-                            (3, tr!("Multiroom")),
-                        ] {
-                            ui.selectable_value(&mut self.settings_page, page, label);
-                        }
-                    });
-                    ui.separator();
-                    egui::ScrollArea::vertical()
-                        .id_salt("settings-content")
-                        .max_height(ui.available_height().max(100.0))
-                        .show(ui, |ui| match self.settings_page {
-                            1 => self.signal(ui),
-                            2 => {
-                                section(
-                                    ui,
-                                    tr!("Library and content"),
-                                    tr!("Manage synchronization, covers and sources."),
-                                );
-                                self.auto_sync_control(ui);
-                                self.online_cover_control(ui);
-                                self.cover_save_control(ui);
-                                if ui.button(tr!("Sources and synchronization…")).clicked() {
-                                    self.sources_dialog = true;
-                                }
-                            }
-                            3 => self.multiroom_settings(ui),
-                            _ => self.interface_settings(ui),
-                        });
-                });
+            self.settings_contents(ui);
             if close && ctx.viewport_id() == viewport {
                 ctx.send_viewport_cmd(egui::ViewportCommand::Close);
             }
@@ -355,54 +319,299 @@ impl Aurea {
         }
     }
 
-    fn interface_settings(&mut self, ui: &mut egui::Ui) {
-        section(
-            ui,
-            tr!("Appearance and readability"),
-            tr!("Preferences shared by the full and mini views."),
+    fn settings_contents(&mut self, ui: &mut egui::Ui) {
+        let area = ui.max_rect();
+        let navigation_width = (area.width() * 0.26).clamp(148.0, 184.0);
+        let navigation = egui::Rect::from_min_max(
+            area.min,
+            pos2(area.left() + navigation_width, area.bottom()),
         );
-        ui.horizontal_wrapped(|ui| {
-            ui.label(tr!("Application theme"));
-            for (theme, label) in [(0, tr!("Gold")), (1, tr!("Graphite")), (2, tr!("Light"))] {
-                ui.selectable_value(&mut self.saved.theme, theme, label);
+        ui.painter().rect_filled(navigation, 0.0, palette::panel());
+        ui.painter().line_segment(
+            [navigation.right_top(), navigation.right_bottom()],
+            egui::Stroke::new(1.0, palette::muted().gamma_multiply(0.18)),
+        );
+        let mut sidebar = ui.new_child(
+            egui::UiBuilder::new()
+                .id_salt("settings-navigation")
+                .max_rect(navigation.shrink2(vec2(12.0, 20.0)))
+                .layout(egui::Layout::top_down(egui::Align::Min)),
+        );
+        sidebar.label(
+            RichText::new("MUSICCRAFT")
+                .size(11.0)
+                .strong()
+                .color(palette::muted()),
+        );
+        sidebar.add_space(24.0);
+        sidebar.spacing_mut().item_spacing.y = 8.0;
+        for (page, icon, label) in [
+            (0, "palette", tr!("Interface")),
+            (1, "sliders-horizontal", tr!("Audio")),
+            (2, "library", tr!("Library")),
+            (3, "headphones", tr!("Multiroom")),
+        ] {
+            let selected = self.settings_page == page;
+            let color = if selected {
+                palette::accent()
+            } else {
+                palette::muted()
+            };
+            if sidebar
+                .add_sized(
+                    vec2(sidebar.available_width(), 42.0),
+                    egui::Button::new((
+                        self.icons.image(icon, 17.0, color),
+                        RichText::new(label).size(13.5),
+                        egui::Atom::grow(),
+                    ))
+                    .selected(selected)
+                    .frame(true)
+                    .frame_when_inactive(selected),
+                )
+                .clicked()
+            {
+                self.settings_page = page;
+            }
+        }
+        sidebar.add_space((sidebar.available_height() - 24.0).max(0.0));
+        sidebar.label(
+            RichText::new(env!("CARGO_PKG_VERSION"))
+                .monospace()
+                .size(11.0)
+                .color(palette::muted()),
+        );
+        let content = egui::Rect::from_min_max(
+            pos2(navigation.right() + 24.0, area.top() + 22.0),
+            area.max - vec2(24.0, 18.0),
+        );
+        let mut body = ui.new_child(
+            egui::UiBuilder::new()
+                .id_salt("settings-page")
+                .max_rect(content)
+                .layout(egui::Layout::top_down(egui::Align::Min)),
+        );
+        body.spacing_mut().item_spacing = vec2(10.0, 12.0);
+        body.label(
+            RichText::new(match self.settings_page {
+                1 => tr!("Audio"),
+                2 => tr!("Library"),
+                3 => tr!("Multiroom"),
+                _ => tr!("Interface"),
+            })
+            .size(24.0)
+            .strong(),
+        );
+        body.add_space(2.0);
+        body.separator();
+        body.add_space(6.0);
+        egui::ScrollArea::vertical()
+            .id_salt(("settings-content", self.settings_page))
+            .auto_shrink([false, false])
+            .max_height(body.available_height())
+            .show(&mut body, |ui| match self.settings_page {
+                1 => {
+                    settings_card(ui, |ui| self.signal(ui));
+                }
+                2 => {
+                    settings_card(ui, |ui| {
+                        section(
+                            ui,
+                            tr!("Library and content"),
+                            tr!("Manage synchronization, covers and sources."),
+                        );
+                        self.auto_sync_control(ui);
+                        ui.add_space(8.0);
+                        if ui
+                            .add_sized(
+                                vec2(ui.available_width(), 34.0),
+                                egui::Button::image_and_text(
+                                    self.icons.image("library", 16.0, palette::muted()),
+                                    tr!("Sources and synchronization…"),
+                                ),
+                            )
+                            .clicked()
+                        {
+                            self.sources_dialog = true;
+                        }
+                    });
+                    settings_card(ui, |ui| {
+                        section(ui, tr!("Cover"), "");
+                        self.online_cover_control(ui);
+                        self.cover_save_control(ui);
+                    });
+                }
+                3 => {
+                    settings_card(ui, |ui| self.multiroom_settings(ui));
+                }
+                _ => self.interface_settings(ui),
+            });
+    }
+
+    fn interface_settings(&mut self, ui: &mut egui::Ui) {
+        settings_card(ui, |ui| {
+            section(ui, tr!("Application theme"), "");
+            ui.columns(3, |columns| {
+                for (theme, label) in [(0, tr!("Gold")), (1, tr!("Graphite")), (2, tr!("Light"))] {
+                    let column = &mut columns[theme as usize];
+                    if column
+                        .add_sized(
+                            vec2(column.available_width(), 36.0),
+                            egui::Button::new(label).selected(self.saved.theme == theme),
+                        )
+                        .clicked()
+                    {
+                        self.saved.theme = theme;
+                    }
+                }
+            });
+        });
+        settings_card(ui, |ui| {
+            section(ui, tr!("Player appearance"), "");
+            ui.horizontal(|ui| {
+                ui.add_sized(
+                    vec2(112.0, 32.0),
+                    egui::Label::new(
+                        RichText::new(tr!("Manual appearance"))
+                            .size(12.0)
+                            .color(palette::muted()),
+                    )
+                    .wrap(),
+                );
+                egui::ComboBox::from_id_salt("player-appearance")
+                    .width(ui.available_width())
+                    .selected_text(self.saved.player_appearance.label())
+                    .show_ui(ui, |ui| {
+                        for appearance in player_visual::Appearance::ALL {
+                            ui.selectable_value(
+                                &mut self.saved.player_appearance,
+                                appearance,
+                                appearance.label(),
+                            );
+                        }
+                    });
+            });
+            ui.add_space(8.0);
+            ui.separator();
+            ui.add_space(4.0);
+            ui.checkbox(
+                &mut self.saved.appearance_by_year,
+                tr!("Appearance by year"),
+            );
+            ui.label(
+                RichText::new(tr!("Tracks without a year use the manual appearance."))
+                    .size(12.0)
+                    .color(palette::muted()),
+            );
+            if self.saved.appearance_by_year {
+                ui.add_space(4.0);
+                egui::Frame::new()
+                    .fill(palette::bg())
+                    .corner_radius(6.0)
+                    .inner_margin(12.0)
+                    .show(ui, |ui| {
+                        let choice_width = (ui.available_width() - 144.0).max(100.0);
+                        egui::Grid::new("appearance-year-periods")
+                            .spacing(vec2(12.0, 10.0))
+                            .min_col_width(100.0)
+                            .show(ui, |ui| {
+                                ui.add_sized(
+                                    vec2(100.0, 24.0),
+                                    egui::Label::new(
+                                        RichText::new(tr!("Up to year"))
+                                            .size(11.5)
+                                            .color(palette::muted()),
+                                    )
+                                    .wrap(),
+                                );
+                                ui.label(
+                                    RichText::new(tr!("Player appearance"))
+                                        .size(11.5)
+                                        .color(palette::muted()),
+                                );
+                                ui.end_row();
+                                for i in 0..4 {
+                                    if i < 3 {
+                                        let lower = if i == 0 {
+                                            1
+                                        } else {
+                                            self.saved.appearance_periods.until[i - 1] + 1
+                                        };
+                                        let upper = if i == 2 {
+                                            9998
+                                        } else {
+                                            self.saved.appearance_periods.until[i + 1] - 1
+                                        };
+                                        ui.add_sized(
+                                            vec2(100.0, 32.0),
+                                            egui::DragValue::new(
+                                                &mut self.saved.appearance_periods.until[i],
+                                            )
+                                            .range(lower..=upper),
+                                        );
+                                    } else {
+                                        ui.add_sized(
+                                            vec2(100.0, 32.0),
+                                            egui::Label::new(
+                                                RichText::new(format!(
+                                                    "{}\n{}",
+                                                    tr!("After year"),
+                                                    self.saved.appearance_periods.until[2]
+                                                ))
+                                                .size(12.0)
+                                                .color(palette::muted()),
+                                            )
+                                            .halign(egui::Align::Min)
+                                            .wrap(),
+                                        );
+                                    }
+                                    egui::ComboBox::from_id_salt(("appearance-period", i))
+                                        .width(choice_width)
+                                        .selected_text(
+                                            self.saved.appearance_periods.media[i].label(),
+                                        )
+                                        .show_ui(ui, |ui| {
+                                            for appearance in player_visual::Appearance::MEDIA {
+                                                ui.selectable_value(
+                                                    &mut self.saved.appearance_periods.media[i],
+                                                    appearance,
+                                                    appearance.label(),
+                                                );
+                                            }
+                                        });
+                                    ui.end_row();
+                                }
+                            });
+                    });
             }
         });
-        ui.add_space(12.0);
-        ui.label(tr!("Player appearance"));
-        egui::ComboBox::from_id_salt("player-appearance")
-            .selected_text(self.saved.player_appearance.label())
-            .show_ui(ui, |ui| {
-                for appearance in player_visual::Appearance::ALL {
-                    ui.selectable_value(
-                        &mut self.saved.player_appearance,
-                        appearance,
-                        appearance.label(),
-                    );
-                }
-            })
-            .response
-            .on_hover_text(tr!("Player appearance"));
-        ui.checkbox(
-            &mut self.saved.reduce_motion,
-            tr!("Reduce player animation"),
-        );
-        ui.checkbox(&mut self.saved.pinned, tr!("Always on top"));
-        ui.add_space(12.0);
-        ui.label(tr!("Interface size"));
-        if ui
-            .add(
-                egui::Slider::new(&mut self.saved.ui_scale, 1.0..=1.3)
-                    .step_by(0.05)
-                    .custom_formatter(|value, _| format!("{:.0}%", value * 100.0)),
-            )
-            .changed()
-        {
-            self.ctx.set_zoom_factor(self.saved.ui_scale);
-        }
-        ui.label(RichText::new(tr!("Use ⌘+ and ⌘− to adjust text size.")).color(palette::muted()));
-        ui.add_space(14.0);
-        // Language selector is populated by the per-app catalog module.
-        self.language_settings(ui);
+        settings_card(ui, |ui| {
+            section(ui, tr!("Interface size"), "");
+            if ui
+                .add(
+                    egui::Slider::new(&mut self.saved.ui_scale, 1.0..=1.3)
+                        .step_by(0.05)
+                        .custom_formatter(|value, _| format!("{:.0}%", value * 100.0)),
+                )
+                .changed()
+            {
+                self.ctx.set_zoom_factor(self.saved.ui_scale);
+            }
+            ui.label(
+                RichText::new(tr!("Use ⌘+ and ⌘− to adjust text size."))
+                    .size(12.0)
+                    .color(palette::muted()),
+            );
+        });
+        settings_card(ui, |ui| {
+            section(ui, tr!("Window and animation"), "");
+            ui.checkbox(
+                &mut self.saved.reduce_motion,
+                tr!("Reduce player animation"),
+            );
+            ui.checkbox(&mut self.saved.pinned, tr!("Always on top"));
+        });
+        settings_card(ui, |ui| self.language_settings(ui));
     }
     fn multiroom_settings(&mut self, ui: &mut egui::Ui) {
         section(
@@ -728,7 +937,7 @@ impl Aurea {
             .map(|(_, name)| *name)
             .unwrap_or(tr!("System language"));
         let popup = egui::ComboBox::from_id_salt("interface-language")
-            .width(240.0)
+            .width(ui.available_width())
             .selected_text(title)
             .show_ui(ui, |ui| {
                 ui.selectable_value(
@@ -755,6 +964,147 @@ impl Aurea {
             self.library_revision = self.library_revision.wrapping_add(1);
             self.refresh_browser();
             listening_ui::configure_font_stack(&self.ctx, open);
+        }
+    }
+}
+
+fn settings_card<R>(ui: &mut egui::Ui, add: impl FnOnce(&mut egui::Ui) -> R) -> R {
+    let inner = egui::Frame::new()
+        .fill(palette::panel())
+        .corner_radius(8.0)
+        .stroke(egui::Stroke::new(
+            1.0,
+            palette::muted().gamma_multiply(0.16),
+        ))
+        .inner_margin(16.0)
+        .show(ui, |ui| {
+            ui.set_min_width(ui.available_width());
+            ui.spacing_mut().item_spacing = vec2(10.0, 10.0);
+            ui.spacing_mut().button_padding = vec2(8.0, 6.0);
+            ui.spacing_mut().interact_size.y = 32.0;
+            add(ui)
+        })
+        .inner;
+    ui.add_space(14.0);
+    inner
+}
+
+#[cfg(test)]
+mod design_tests {
+    use super::*;
+
+    fn render(
+        app: &mut Aurea,
+        ctx: &egui::Context,
+        size: egui::Vec2,
+        events: Vec<egui::Event>,
+    ) -> egui::FullOutput {
+        let mut output = ctx.run_ui(
+            egui::RawInput {
+                screen_rect: Some(egui::Rect::from_min_size(pos2(0.0, 0.0), size)),
+                events,
+                ..Default::default()
+            },
+            |ui| app.settings_contents(ui),
+        );
+        output.textures_delta.clear();
+        output
+    }
+
+    fn button_events(pos: egui::Pos2, pressed: bool) -> Vec<egui::Event> {
+        vec![
+            egui::Event::PointerMoved(pos),
+            egui::Event::PointerButton {
+                pos,
+                button: egui::PointerButton::Primary,
+                pressed,
+                modifiers: egui::Modifiers::NONE,
+            },
+        ]
+    }
+
+    #[test]
+    fn settings_navigation_stays_inside_small_and_large_windows() {
+        for size in [
+            vec2(660.0, 460.0),
+            vec2(680.0, 620.0),
+            vec2(880.0, 720.0),
+            vec2(1100.0, 780.0),
+        ] {
+            let dir = tempfile::tempdir().unwrap();
+            let ctx = egui::Context::default();
+            let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+            let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+            for (page, label) in [
+                (0, tr!("Interface")),
+                (1, tr!("Audio")),
+                (2, tr!("Library")),
+                (3, tr!("Multiroom")),
+            ] {
+                render(&mut app, &ctx, size, vec![]);
+                let output = render(&mut app, &ctx, size, vec![]);
+                let nodes = output.platform_output.accesskit_update.unwrap().nodes;
+                let bounds = nodes
+                    .iter()
+                    .find(|(_, n)| {
+                        n.label() == Some(label) && n.role() == egui::accesskit::Role::Button
+                    })
+                    .and_then(|(_, n)| n.bounds())
+                    .unwrap();
+                assert!(bounds.x0 >= 0.0 && bounds.x1 <= 184.0 && bounds.y1 < f64::from(size.y));
+                let pos = pos2(
+                    ((bounds.x0 + bounds.x1) * 0.5) as f32,
+                    ((bounds.y0 + bounds.y1) * 0.5) as f32,
+                );
+                render(&mut app, &ctx, size, button_events(pos, true));
+                render(&mut app, &ctx, size, button_events(pos, false));
+                assert_eq!(app.settings_page, page);
+            }
+        }
+    }
+
+    #[test]
+    fn year_checkbox_changes_graphics_without_sending_audio_commands() {
+        let dir = tempfile::tempdir().unwrap();
+        let ctx = egui::Context::default();
+        let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+        let (tx, commands) = mpsc::channel();
+        app.audio.tx = tx;
+        app.saved.player_appearance = player_visual::Appearance::Cd;
+        let mut track = Track::placeholder("/synthetic/1985.flac".into());
+        track.year = Some(1985);
+        app.current = Some(track.source.clone());
+        app.saved.tracks.push(track);
+        let size = vec2(880.0, 720.0);
+        for enabled in [true, false] {
+            render(&mut app, &ctx, size, vec![]);
+            let output = render(&mut app, &ctx, size, vec![]);
+            let nodes = output.platform_output.accesskit_update.unwrap().nodes;
+            let bounds = nodes
+                .iter()
+                .find(|(_, n)| {
+                    n.label() == Some(tr!("Appearance by year"))
+                        && n.role() == egui::accesskit::Role::CheckBox
+                })
+                .and_then(|(_, n)| n.bounds())
+                .unwrap();
+            let pos = pos2(
+                ((bounds.x0 + bounds.x1) * 0.5) as f32,
+                ((bounds.y0 + bounds.y1) * 0.5) as f32,
+            );
+            render(&mut app, &ctx, size, button_events(pos, true));
+            render(&mut app, &ctx, size, button_events(pos, false));
+            assert_eq!(app.saved.appearance_by_year, enabled);
+            assert_eq!(
+                app.effective_player_appearance(),
+                if enabled {
+                    player_visual::Appearance::Cassette
+                } else {
+                    player_visual::Appearance::Cd
+                }
+            );
+            assert!(commands.try_recv().is_err());
         }
     }
 }

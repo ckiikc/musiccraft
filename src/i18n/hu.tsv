@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	VU-mérők
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	A beállítások külön ablakban nyílnak meg. Az albumborító megjegyzi a méretét és helyét a különböző kijelzőkön és az alkalmazás újraindítása után is.
 Side-by-side VU	VU-mérők egymás mellett
+Appearance by year	Megjelenés év szerint
+Up to year	Eddig az évig
+After year	Ez után az év után
+Tracks without a year use the manual appearance.	Az év nélküli számok a kézzel kiválasztott megjelenést használják.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Útmutató: a beállításokban kapcsolja be a Megjelenés év szerint lehetőséget, majd válasszon lejátszót és záróévet minden időszakhoz. Az év nélküli számok megtartják a kézi választást.
+Manual appearance	Kézi megjelenés
+Window and animation	Ablak és animáció

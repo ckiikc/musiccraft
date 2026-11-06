@@ -335,3 +335,10 @@ Revox	Revox
 VU meters	مقاييس VU
 Guide: Settings open in a separate window. Album artwork remembers its size and position across displays and app restarts.	تفتح الإعدادات في نافذة مستقلة. تتذكر صورة الألبوم حجمها وموضعها عبر الشاشات وبعد إعادة تشغيل التطبيق.
 Side-by-side VU	مقياسا VU جنبًا إلى جنب
+Appearance by year	المظهر حسب السنة
+Up to year	حتى سنة
+After year	بعد سنة
+Tracks without a year use the manual appearance.	تستخدم المقاطع التي بلا سنة المظهر المختار يدويًا.
+Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	الدليل: فعّل المظهر حسب السنة في الإعدادات لاختيار مشغّل وآخر سنة لكل فترة. تحتفظ المقاطع التي بلا سنة بالاختيار اليدوي.
+Manual appearance	المظهر اليدوي
+Window and animation	النافذة والحركة
