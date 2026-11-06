@@ -186,6 +186,12 @@ impl Aurea {
         let monitor = ctx.input(|i| i.viewport().monitor_size);
         let mode_changed = self.viewport_mini != Some(self.saved.mini);
         let moved = observed != self.window_geometry.observed;
+        #[cfg(debug_assertions)]
+        if moved || mode_changed {
+            super::window_drag::trace(
+                serde_json::json!({"stage":"geometry", "mini":self.saved.mini,"mode_changed":mode_changed,"inner":observed.map(|r|[r.min.x,r.min.y,r.width(),r.height()]),"outer":ctx.input(|i|i.viewport().outer_rect).map(|r|[r.min.x,r.min.y,r.width(),r.height()])}),
+            );
+        }
         let check = mode_changed
             || monitor != self.window_geometry.monitor
             || moved
@@ -231,6 +237,7 @@ impl Aurea {
         self.window_geometry.monitor = monitor;
         self.window_geometry.observed = observed;
         if mode_changed {
+            super::window_drag::reset(ctx);
             ctx.send_viewport_cmd(egui::ViewportCommand::Transparent(self.saved.mini));
             ctx.send_viewport_cmd(egui::ViewportCommand::Decorations(!self.saved.mini));
             self.resize_window(ctx);

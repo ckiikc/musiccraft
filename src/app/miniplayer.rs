@@ -1118,11 +1118,31 @@ fn drag_titlebar(ui: &mut egui::Ui, rect: egui::Rect) {
         egui::Sense::click_and_drag(),
     );
     let started = header.id.with("native-drag-started");
+    let armed = header.id.with("titlebar-pressed");
     if ui.input(|i| i.pointer.primary_pressed()) {
-        ui.ctx().data_mut(|d| d.remove::<bool>(started));
+        window_drag::reset(ui.ctx());
+        if header.is_pointer_button_down_on() {
+            ui.ctx().data_mut(|data| data.insert_temp(armed, true));
+            window_drag::arm(ui.ctx());
+        }
     }
-    if !ui.input(|i| i.pointer.primary_down()) {
-        ui.ctx().data_mut(|d| d.remove::<bool>(started));
+    if !ui.input(|i| i.pointer.primary_down())
+        || ui.input(|i| {
+            i.events.iter().any(|event| {
+                matches!(
+                    event,
+                    egui::Event::PointerGone | egui::Event::WindowFocused(false)
+                )
+            })
+        })
+    {
+        window_drag::reset(ui.ctx());
+        return;
+    }
+    if !ui
+        .ctx()
+        .data(|data| data.get_temp::<bool>(armed).unwrap_or(false))
+    {
         return;
     }
     // A drag-only sense starts on mouse-down, including a click that merely
@@ -1142,7 +1162,7 @@ fn drag_titlebar(ui: &mut egui::Ui, rect: egui::Rect) {
             .data(|d| d.get_temp::<bool>(started).unwrap_or(false))
     {
         ui.ctx().data_mut(|d| d.insert_temp(started, true));
-        ui.ctx().send_viewport_cmd(egui::ViewportCommand::StartDrag);
+        window_drag::start(ui.ctx());
     }
 }
 
@@ -1301,6 +1321,72 @@ mod tests {
             );
         }
     }
+    #[test]
+    fn interrupted_titlebar_gestures_require_a_fresh_press() {
+        for interruption in [
+            Some(egui::Event::WindowFocused(false)),
+            Some(egui::Event::PointerGone),
+            None,
+        ] {
+            let ctx = egui::Context::default();
+            let frame = |events| {
+                let mut output = ctx.run_ui(
+                    egui::RawInput {
+                        screen_rect: Some(egui::Rect::from_min_size(
+                            pos2(0.0, 0.0),
+                            vec2(520.0, 520.0),
+                        )),
+                        events,
+                        ..Default::default()
+                    },
+                    |ui| {
+                        drag_titlebar(
+                            ui,
+                            egui::Rect::from_min_max(pos2(12.0, 4.0), pos2(356.0, 36.0)),
+                        )
+                    },
+                );
+                output.textures_delta.clear();
+                output
+                    .viewport_output
+                    .values()
+                    .flat_map(|viewport| &viewport.commands)
+                    .filter(|command| matches!(command, egui::ViewportCommand::StartDrag))
+                    .count()
+            };
+            let origin = pos2(80.0, 20.0);
+            let press = |pressed| egui::Event::PointerButton {
+                pos: origin,
+                button: egui::PointerButton::Primary,
+                pressed,
+                modifiers: egui::Modifiers::NONE,
+            };
+            frame(vec![egui::Event::PointerMoved(origin)]);
+            assert_eq!(frame(vec![press(true)]), 0);
+            if let Some(event) = interruption {
+                assert_eq!(frame(vec![event]), 0);
+            } else {
+                // Same cancellation used when switching full/mini geometry.
+                window_drag::reset(&ctx);
+            }
+            assert_eq!(
+                frame(vec![
+                    egui::Event::WindowFocused(true),
+                    egui::Event::PointerMoved(origin + vec2(60.0, 0.0))
+                ]),
+                0,
+                "a stale button-down must not rearm the native drag"
+            );
+            frame(vec![press(false)]);
+            frame(vec![egui::Event::PointerMoved(origin)]);
+            assert_eq!(frame(vec![press(true)]), 0);
+            assert_eq!(
+                frame(vec![egui::Event::PointerMoved(origin + vec2(20.0, 0.0))]),
+                1
+            );
+        }
+    }
+
     #[test]
     fn titlebar_click_does_not_start_a_native_window_drag() {
         let ctx = egui::Context::default();

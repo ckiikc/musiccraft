@@ -36,9 +36,12 @@ mod preview;
 mod settings;
 mod tag_progress;
 mod widgets;
+mod window_drag;
 mod window_geometry;
 mod window_placement;
 use widgets::{Icons, caption, clipped, section};
+#[cfg(debug_assertions)]
+pub(crate) use window_drag::enable_trace as enable_window_drag_trace;
 
 #[derive(Serialize, Deserialize)]
 #[serde(default)]
@@ -486,6 +489,7 @@ impl Aurea {
             test_exit: test_seconds.map(|s| Instant::now() + Duration::from_secs(s)),
         };
         app.cover_viewer.load_placement(app.saved.artwork_window);
+        window_drag::install();
         app.settings_geometry.load(app.saved.settings_window);
         app.browser.sort = app.saved.library_sort;
         app.gain();
@@ -2494,6 +2498,7 @@ impl eframe::App for Aurea {
         self.playback_selection = session.selection;
     }
     fn on_exit(&mut self, _: Option<&eframe::glow::Context>) {
+        window_drag::shutdown();
         self.embedded_server.stop();
         self.media_server = None;
         self.cancel_discovery();

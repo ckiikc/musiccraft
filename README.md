@@ -4,18 +4,19 @@ A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS
 
 **Independent project · macOS alpha · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
 
-## Experimental release 0.10.43
+## Experimental release 0.10.44
 
-[Download for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.43). The release is experimental, ad-hoc signed and not notarized. Only Apple silicon macOS has been validated. The public package excludes the optional LMS runtime. Verify the archive against the accompanying `SHA256SUMS.txt`.
+[Download for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.44). The release is experimental, ad-hoc signed and not notarized. Only Apple silicon macOS has been validated. The public package excludes the optional LMS runtime. Verify the archive against the accompanying `SHA256SUMS.txt`.
 
 ![MusicCraft miniplayer with side-by-side VU meters and a synthetic library](docs/screenshots/miniplayer-vu.png)
 
-## New in 0.10.43
+## New in 0.10.44
 
-- Redesigned settings with a sidebar for Interface, Audio, Library and Multiroom, consistent sections, aligned controls and independent page scrolling.
-- Optional player appearance by track year: edit three inclusive end years and assign vinyl, reel-to-reel, cassette or CD to each period. Missing years keep the manual appearance.
-- Better proportions in wide miniplayer windows, less empty space above the graphic players and a cleaner cassette window.
-- Circular artwork no longer reveals a colored backing at its edge during rotation. The colored placeholder is retained only when artwork is missing.
+- Fixed sudden miniplayer window jumps when dragging the top bar, including after switching from the full faceted library.
+- The macOS drag handler retains the original mouse-down and its window until the movement threshold is crossed. It no longer relies on whichever native event happens to be current when the frame is processed.
+- Release, pointer loss, focus loss and full/mini geometry changes cancel the previous gesture. A fresh press is required to start again.
+- The application-local event monitor passes mouse events through unchanged and is removed on exit. Clicks without movement, long stationary presses and secondary clicks do not start a window drag.
+- Settings, optional appearance by year, responsive player layouts and the circular-artwork edge fix from 0.10.43 are retained.
 
 ![Settings with configurable appearance by year](docs/screenshots/settings.png)
 

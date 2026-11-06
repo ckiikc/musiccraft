@@ -392,8 +392,9 @@ dependencies = [
 
 [[package]]
 name = "musiccraft"
-version = "0.10.43"
+version = "0.10.44"
 dependencies = [
+ "block2 0.6.2",
  "coreaudio-rs",
  "cpal",
  "curl",

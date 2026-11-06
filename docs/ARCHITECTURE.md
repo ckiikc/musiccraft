@@ -2,6 +2,7 @@
 
 The current alpha is one Rust binary with internal modules, not a multi-crate framework.
 
+- `app/window_drag.rs`: preserves the original AppKit left mouse-down for delayed miniplayer dragging, validates its window geometry and cancels interrupted gestures. Its monitor is application-local; optional event/geometry tracing exists only in debug builds with an explicit isolated profile.
 - `app/`: egui views, shared controls, persisted user settings, filtered library and UI event handling.
 - `audio.rs`, `integer.rs`, `exclusive.rs`, `dsp.rs`: playback planning, PCM decoding, macOS device leases/output and optional processing. Low-level CoreAudio calls are isolated in the macOS backend and contain documented unsafe FFI.
 - `library.rs`, `facets.rs`, `shuffle.rs`, `history.rs`: track identity, metadata, browsing and playback selection. FTP identity canonicalization decodes a path segment once and keeps different sources separate.

@@ -52,6 +52,8 @@ fn main() -> eframe::Result {
     let mut paths = Vec::new();
     let mut screenshot = None;
     let mut test_seconds = None;
+    #[cfg(debug_assertions)]
+    let mut drag_trace = None;
     let mut data = std::env::var_os("HOME")
         .map(std::path::PathBuf::from)
         .unwrap_or_else(std::env::temp_dir)
@@ -64,6 +66,8 @@ fn main() -> eframe::Result {
                 }
             }
             "--network" => {}
+            #[cfg(debug_assertions)]
+            "--window-drag-trace" => drag_trace = args.next().map(std::path::PathBuf::from),
             #[cfg(debug_assertions)]
             "--ui-preview" => {
                 let _ = args.next();
@@ -95,6 +99,12 @@ fn main() -> eframe::Result {
         persistence_path: Some(data.join("state.ron")),
         ..Default::default()
     };
+    #[cfg(debug_assertions)]
+    if all_args.iter().any(|arg| arg == "--data-dir")
+        && let Some(path) = drag_trace
+    {
+        app::enable_window_drag_trace(path);
+    }
     eframe::run_native(
         "MusicCraft",
         options,
