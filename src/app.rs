@@ -495,6 +495,7 @@ impl Aurea {
         };
         app.cover_viewer.load_placement(app.saved.artwork_window);
         window_drag::install();
+        crate::about::install();
         crate::open_documents::attach(&app.ctx);
         app.settings_geometry.load(app.saved.settings_window);
         app.browser.sort = app.saved.library_sort;
@@ -2423,6 +2424,8 @@ impl eframe::App for Aurea {
             }));
             self.viewport_pinned = Some(self.saved.pinned);
         }
+        #[cfg(debug_assertions)]
+        crate::about::preview(ctx);
         if palette::current() != self.saved.theme {
             palette::configure(ctx, self.saved.theme);
         }

@@ -6,16 +6,20 @@ A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS
 
 ## Experimental releases
 
-- [Desktop 0.10.49 for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.49): ad-hoc signed, not notarized; optional LMS runtime excluded.
+- [Desktop 0.10.50 for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.50): ad-hoc signed, not notarized; optional LMS runtime excluded.
 - [Android 0.3.0 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.3.0): Android 8/API 26 or newer, local debug build; no Play Store release. Android source and build instructions are in [android/](android/).
 
 Verify each downloaded package against its release's `SHA256SUMS.txt`. MusicCraft remains an independent project; [ArtCraft community consideration](https://github.com/storytold/craft-launcher/issues/1247) is pending.
 
 ![MusicCraft miniplayer with side-by-side VU meters and a synthetic library](docs/screenshots/miniplayer-vu.png)
 
+## About window correction
+
+The standard macOS About panel is raised above the application's pinned windows when opened from the application menu. Reopening recalculates its level without raising the main player or changing the saved always-on-top preference.
+
 ## New desktop and Android companion
 
-Desktop 0.10.49 opens music files delivered by Finder into an ordered listening selection, supports warm/cold Open Documents events, and declares supported audio formats for Open With. Multiple-file opening selects sequential playback and clears repeat-one so the next track can advance.
+Desktop 0.10.50 opens music files delivered by Finder into an ordered listening selection, supports warm/cold Open Documents events, and declares supported audio formats for Open With. Multiple-file opening selects sequential playback and clears repeat-one so the next track can advance.
 
 The new MusicCraft Android source is discovered automatically on the local network. Pair with a four-digit code and approve the request on the phone; subsequent HTTPS reads verify the phone's identity. Each installation generates its own credentials. The Android app provides a read-only music server and pauses sharing while it plays audio locally. See [the sharing guide](docs/SHARING.md).
 

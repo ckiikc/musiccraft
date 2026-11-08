@@ -1,5 +1,6 @@
 #[macro_use]
 mod i18n;
+mod about;
 mod album_art;
 mod app;
 mod audio;

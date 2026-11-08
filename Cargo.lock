@@ -427,7 +427,7 @@ dependencies = [
 
 [[package]]
 name = "musiccraft"
-version = "0.10.49"
+version = "0.10.50"
 dependencies = [
  "aes-gcm",
  "base64",

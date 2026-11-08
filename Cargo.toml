@@ -1,6 +1,6 @@
 [package]
 name = "musiccraft"
-version = "0.10.49"
+version = "0.10.50"
 edition = "2024"
 license = "MIT"
 description = "Native music player for local, NAS, FTP and MusicCraft Android libraries"
@@ -50,7 +50,7 @@ strip = true
 objc2 = "=0.6.5"
 block2 = "=0.6.2"
 objc2-foundation = { version = "=0.3.2", default-features = false, features = ["std", "NSObject", "NSString", "NSNotification", "NSOperation", "block2"] }
-objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["std", "NSScreen", "NSEvent", "NSWindow", "NSResponder", "NSApplication", "block2"] }
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["std", "NSScreen", "NSEvent", "NSWindow", "NSResponder", "NSApplication", "NSMenu", "NSMenuItem", "NSPanel", "block2"] }
 security-framework = "=3.7.0"
 coreaudio-rs = "=0.14.2"
 objc2-core-audio = "=0.3.2"
