@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	没有年份的曲目使用手�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	指南：在设置中启用“按年份选择外观”，为每个时期选择播放器及截止年份。没有年份的曲目保留手动选择。
 Manual appearance	手动外观
 Window and animation	窗口和动画
+Pair with MusicCraft Android	与 MusicCraft Android 配对
+Paste the pairing link copied from your phone.	粘贴从手机复制的配对链接。
+Pairing link	配对链接
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	在 MusicCraft Android 中启用共享，然后在电脑的添加来源 > MusicCraft Android 中粘贴配对链接。使用同一 Wi-Fi。共享为只读模式，手机播放音频时暂停。请勿公开配对链接。
+Sharing paused: phone is playing	共享已暂停：手机正在播放音频
+On the phone, enable sharing and choose Pair computer.	在手机上启用共享并选择配对电脑。
+Searching for phones…	正在搜索手机…
+No phone found. Check that both devices use the same Wi-Fi.	未找到手机。请检查两台设备是否连接同一 Wi-Fi。
+Four-digit code	4 位数字代码
+Confirm the pairing request on your phone.	请在手机上确认配对请求。
+Guide: On the phone, enable sharing and choose Pair computer.	在手机上启用共享并选择配对电脑。
+Guide: Four-digit code	4 位数字代码
+Guide: Confirm the pairing request on your phone.	请在手机上确认配对请求。
+Guide: No phone found. Check that both devices use the same Wi-Fi.	未找到手机。请检查两台设备是否连接同一 Wi-Fi。
+Pair	配对
+Pairing code incorrect or expired. Reopen pairing on the phone.	代码错误或已过期。请在手机上重新打开配对。

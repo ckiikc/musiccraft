@@ -18,6 +18,8 @@ mod listening;
 mod media_server;
 mod multiroom;
 mod network;
+mod open_documents;
+mod phone;
 mod remote_tags;
 mod shuffle;
 mod streaming;
@@ -51,6 +53,8 @@ fn main() -> eframe::Result {
     let mut args = std::env::args().skip(1);
     let mut paths = Vec::new();
     let mut screenshot = None;
+    let mut pairing_file = None;
+    let mut pair_phone_ui = false;
     let mut test_seconds = None;
     #[cfg(debug_assertions)]
     let mut drag_trace = None;
@@ -66,6 +70,8 @@ fn main() -> eframe::Result {
                 }
             }
             "--network" => {}
+            "--pair-phone" => pair_phone_ui = true,
+            "--pair-android" => pairing_file = args.next().map(std::path::PathBuf::from),
             #[cfg(debug_assertions)]
             "--window-drag-trace" => drag_trace = args.next().map(std::path::PathBuf::from),
             #[cfg(debug_assertions)]
@@ -105,6 +111,7 @@ fn main() -> eframe::Result {
     {
         app::enable_window_drag_trace(path);
     }
+    open_documents::install();
     eframe::run_native(
         "MusicCraft",
         options,
@@ -116,6 +123,14 @@ fn main() -> eframe::Result {
                 && let Some(scene) = all_args.get(i + 1)
             {
                 app.preview(scene);
+            }
+            if pair_phone_ui {
+                app.open_phone_pair();
+            }
+            if let Some(file) = pairing_file
+                && let Ok(link) = std::fs::read_to_string(file)
+            {
+                app.pair_phone(&link);
             }
             if all_args.iter().any(|a| a == "--network") {
                 app.open_network();

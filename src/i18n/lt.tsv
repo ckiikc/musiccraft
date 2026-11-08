@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Kūriniai be metų naudoja rank
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Vadovas: nustatymuose įjunkite Vaizdas pagal metus ir kiekvienam laikotarpiui pasirinkite grotuvą bei paskutinius metus. Kūriniai be metų išlaiko rankinį pasirinkimą.
 Manual appearance	Rankinis vaizdas
 Window and animation	Langas ir animacija
+Pair with MusicCraft Android	Susieti su MusicCraft Android
+Paste the pairing link copied from your phone.	Įklijuokite iš telefono nukopijuotą susiejimo nuorodą.
+Pairing link	Susiejimo nuoroda
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Įjunkite bendrinimą MusicCraft Android ir įklijuokite susiejimo nuorodą kompiuteryje per Pridėti šaltinį > MusicCraft Android. Naudokite tą patį Wi-Fi. Prieiga skirta tik skaityti ir pristabdoma, kai telefonas leidžia garsą. Saugokite nuorodą.
+Sharing paused: phone is playing	Bendrinimas pristabdytas: telefonas leidžia garsą
+On the phone, enable sharing and choose Pair computer.	Telefone įjunkite bendrinimą ir pasirinkite Susieti kompiuterį.
+Searching for phones…	Ieškoma telefonų…
+No phone found. Check that both devices use the same Wi-Fi.	Telefonas nerastas. Patikrinkite, ar įrenginiai naudoja tą patį Wi-Fi.
+Four-digit code	4 skaitmenų kodas
+Confirm the pairing request on your phone.	Patvirtinkite susiejimo užklausą telefone.
+Guide: On the phone, enable sharing and choose Pair computer.	Telefone įjunkite bendrinimą ir pasirinkite Susieti kompiuterį.
+Guide: Four-digit code	4 skaitmenų kodas
+Guide: Confirm the pairing request on your phone.	Patvirtinkite susiejimo užklausą telefone.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefonas nerastas. Patikrinkite, ar įrenginiai naudoja tą patį Wi-Fi.
+Pair	Susieti
+Pairing code incorrect or expired. Reopen pairing on the phone.	Kodas neteisingas arba pasibaigė. Telefone iš naujo atidarykite susiejimą.

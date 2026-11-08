@@ -106,7 +106,8 @@ impl Aurea {
         !self.loading && (self.current.is_some() || self.navigation_ready())
     }
     pub(super) fn connection_tick(&mut self, now: Instant) {
-        if self.network_probe_pending
+        if self.phone_pair_dialog
+            || self.network_probe_pending
             || self.connections.request.is_some()
             || self.discovery.is_some()
             || self.scanning
@@ -151,9 +152,13 @@ impl Aurea {
         std::thread::spawn(move || {
             let auth = AuthStore::default();
             let ok = auth.insert(&source).is_ok()
-                && network::ListingSession::with_timeout(Duration::from_secs(2))
-                    .list(&root, &auth, &cancel)
-                    .is_ok();
+                && if source.scheme == "https" {
+                    crate::phone::online(&root, &auth, &cancel, Duration::from_secs(2)).is_ok()
+                } else {
+                    network::ListingSession::with_timeout(Duration::from_secs(2))
+                        .list(&root, &auth, &cancel)
+                        .is_ok()
+                };
             let _ = tx.send(Job::ConnectionChecked { token, ok });
             ctx.request_repaint();
         });

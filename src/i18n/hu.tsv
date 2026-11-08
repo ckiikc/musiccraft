@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Az év nélküli számok a kéz
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Útmutató: a beállításokban kapcsolja be a Megjelenés év szerint lehetőséget, majd válasszon lejátszót és záróévet minden időszakhoz. Az év nélküli számok megtartják a kézi választást.
 Manual appearance	Kézi megjelenés
 Window and animation	Ablak és animáció
+Pair with MusicCraft Android	Párosítás a MusicCraft Androiddal
+Paste the pairing link copied from your phone.	Illessze be a telefonról másolt párosítási hivatkozást.
+Pairing link	Párosítási hivatkozás
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Kapcsolja be a megosztást a MusicCraft Androidban, majd illessze be a párosítási hivatkozást a számítógép Forrás hozzáadása > MusicCraft Android pontjába. Használja ugyanazt a Wi-Fit. A megosztás csak olvasható, és szünetel, amikor a telefon hangot játszik le. Tartsa titokban a hivatkozást.
+Sharing paused: phone is playing	Megosztás szünetel: a telefon hangot játszik le
+On the phone, enable sharing and choose Pair computer.	Kapcsolja be a megosztást a telefonon, és válassza a Számítógép párosítása lehetőséget.
+Searching for phones…	Telefonok keresése…
+No phone found. Check that both devices use the same Wi-Fi.	Nem található telefon. Ellenőrizze, hogy az eszközök ugyanazt a Wi-Fit használják.
+Four-digit code	Négyjegyű kód
+Confirm the pairing request on your phone.	Erősítse meg a párosítási kérelmet a telefonon.
+Guide: On the phone, enable sharing and choose Pair computer.	Kapcsolja be a megosztást a telefonon, és válassza a Számítógép párosítása lehetőséget.
+Guide: Four-digit code	Négyjegyű kód
+Guide: Confirm the pairing request on your phone.	Erősítse meg a párosítási kérelmet a telefonon.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Nem található telefon. Ellenőrizze, hogy az eszközök ugyanazt a Wi-Fit használják.
+Pair	Párosítás
+Pairing code incorrect or expired. Reopen pairing on the phone.	A kód hibás vagy lejárt. Nyissa meg újra a párosítást a telefonon.

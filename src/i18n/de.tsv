@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Titel ohne Jahresangabe verwend
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Anleitung: Aktiviere Darstellung nach Jahr in den Einstellungen, um für jeden Zeitraum einen Player und ein Endjahr festzulegen. Titel ohne Jahresangabe behalten die manuelle Auswahl.
 Manual appearance	Manuelle Darstellung
 Window and animation	Fenster und Animation
+Pair with MusicCraft Android	Mit MusicCraft Android koppeln
+Paste the pairing link copied from your phone.	Füge den vom Telefon kopierten Kopplungslink ein.
+Pairing link	Kopplungslink
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Aktiviere die Freigabe in MusicCraft Android und füge den Kopplungslink am Computer unter Quelle hinzufügen > MusicCraft Android ein. Verwende dasselbe WLAN. Die Freigabe ist schreibgeschützt und pausiert während der Audiowiedergabe am Telefon. Halte den Link geheim.
+Sharing paused: phone is playing	Freigabe pausiert: Telefon spielt Audio ab
+On the phone, enable sharing and choose Pair computer.	Aktiviere die Freigabe am Telefon und wähle Computer koppeln.
+Searching for phones…	Telefone werden gesucht…
+No phone found. Check that both devices use the same Wi-Fi.	Kein Telefon gefunden. Prüfe, ob beide Geräte dasselbe WLAN verwenden.
+Four-digit code	Vierstelliger Code
+Confirm the pairing request on your phone.	Bestätige die Kopplungsanfrage am Telefon.
+Guide: On the phone, enable sharing and choose Pair computer.	Aktiviere die Freigabe am Telefon und wähle Computer koppeln.
+Guide: Four-digit code	Vierstelliger Code
+Guide: Confirm the pairing request on your phone.	Bestätige die Kopplungsanfrage am Telefon.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Kein Telefon gefunden. Prüfe, ob beide Geräte dasselbe WLAN verwenden.
+Pair	Koppeln
+Pairing code incorrect or expired. Reopen pairing on the phone.	Code falsch oder abgelaufen. Öffne die Kopplung am Telefon erneut.

@@ -87,10 +87,7 @@ impl Ranged {
         easy.timeout(Duration::from_secs(5)).map_err(error)?;
         easy.signal(false).map_err(error)?;
         easy.max_recv_speed(256 * 1024).map_err(error)?;
-        if let Some((user, password)) = auth.get(source) {
-            easy.username(&user).map_err(error)?;
-            easy.password(&password).map_err(error)?;
-        }
+        auth.configure(&mut easy, source).map_err(error)?;
         let deadline = Instant::now() + Duration::from_secs(15);
         easy.progress(true).map_err(error)?;
         let cancellation = epoch.clone();

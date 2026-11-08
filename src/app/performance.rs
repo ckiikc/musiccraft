@@ -367,3 +367,87 @@ fn escape_closes_only_settings_and_retains_the_selected_mini_view() {
             .all(|v| !matches!(v, egui::ViewportCommand::Close))
     );
 }
+
+#[test]
+fn finder_selection_uses_received_order_and_both_advance_paths_without_leaking_library() {
+    use crate::audio::{Command, Event};
+    for mode in 0..3 {
+        let dir = tempfile::tempdir().unwrap();
+        let ctx = egui::Context::default();
+        let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+        let (commands_tx, _commands) = mpsc::channel::<Command>();
+        let (events_tx, events) = mpsc::channel();
+        app.audio.tx = commands_tx;
+        app.audio.rx = events;
+        app.saved.shuffle = mode == 1;
+        app.saved.shuffle_albums = mode == 2;
+        app.saved.repeat = true;
+        app.saved.tracks = vec![Track::placeholder("/unrelated-library.wav".into())];
+        let mut files = Vec::new();
+        for name in ["03 Last.wav", "01 First.wav", "02 Middle.wav"] {
+            let path = dir.path().join(name);
+            let spec = hound::WavSpec {
+                channels: 2,
+                sample_rate: 44100,
+                bits_per_sample: 16,
+                sample_format: hound::SampleFormat::Int,
+            };
+            let mut wav = hound::WavWriter::create(&path, spec).unwrap();
+            for _ in 0..8820 {
+                wav.write_sample(0_i16).unwrap();
+            }
+            wav.finalize().unwrap();
+            files.push(path.canonicalize().unwrap());
+        }
+        let ids: Vec<_> = files
+            .iter()
+            .map(|p| p.to_string_lossy().into_owned())
+            .collect();
+        app.open_external_files(files);
+        assert_eq!(
+            app.order_mode(),
+            0,
+            "Finder opens an explicitly ordered selection"
+        );
+        assert!(
+            !app.saved.repeat,
+            "Repeat must not trap the first externally opened track"
+        );
+        assert_eq!(
+            app.listening_tracks()
+                .iter()
+                .map(|t| t.source.clone())
+                .collect::<Vec<_>>(),
+            ids
+        );
+        for index in 0..3 {
+            assert_eq!(app.requested.as_ref(), Some(&ids[index]));
+            let track = app
+                .saved
+                .tracks
+                .iter()
+                .find(|t| t.source == ids[index])
+                .unwrap()
+                .clone();
+            events_tx
+                .send(Event::Started {
+                    ticket: app.ticket,
+                    track,
+                    output: "fixture".into(),
+                    cover: None,
+                    exclusive: false,
+                })
+                .unwrap();
+            app.poll(&ctx);
+            assert_eq!(app.planned.as_ref(), ids.get(index + 1));
+            if index == 1 {
+                app.next();
+            } else {
+                events_tx.send(Event::Ended).unwrap();
+                app.poll(&ctx);
+            }
+        }
+        assert!(app.current.is_none() && app.requested.is_none());
+    }
+}

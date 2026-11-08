@@ -101,6 +101,7 @@ pub struct Stats {
     pub skipped: usize,
     pub errors: usize,
     pub root_unreachable: bool,
+    pub suspended: bool,
 }
 pub struct Report {
     pub target: Target,
@@ -153,6 +154,31 @@ pub fn scan(
         stats: Stats::default(),
         cancelled: false,
     };
+    if root.starts_with("https://") {
+        match crate::phone::catalog(&root, auth, cancel, Duration::from_secs(25)) {
+            Ok(tracks) if !cancel.load(Ordering::Relaxed) => {
+                let present: HashSet<_> = tracks.iter().map(|t| t.source.clone()).collect();
+                report.absent = previous
+                    .iter()
+                    .filter(|p| scope.contains(p) && !present.contains(*p))
+                    .cloned()
+                    .collect();
+                report.tracks = tracks;
+                report.stats.listed = 1;
+                index.last_full = seconds();
+                index.indexed_tracks = present.len();
+            }
+            Ok(_) => report.cancelled = true,
+            Err(_) => {
+                report.stats.errors = 1;
+                report.stats.suspended =
+                    crate::phone::online(&root, auth, cancel, Duration::from_secs(2)) == Ok(false);
+                report.stats.root_unreachable = !report.stats.suspended;
+                report.cancelled = cancel.load(Ordering::Relaxed);
+            }
+        }
+        return report;
+    }
     let mut visited = HashSet::new();
     let mut complete_dirs = HashSet::new();
     let mut listed_children = HashSet::new();

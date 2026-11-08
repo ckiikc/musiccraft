@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Yılı olmayan parçalar elle s
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Kılavuz: her dönem için oynatıcı ve son yıl seçmek üzere ayarlarda Yıla göre görünüm seçeneğini etkinleştirin. Yılı olmayan parçalar elle yapılan seçimi korur.
 Manual appearance	Elle seçilen görünüm
 Window and animation	Pencere ve animasyon
+Pair with MusicCraft Android	MusicCraft Android ile eşleştir
+Paste the pairing link copied from your phone.	Telefonunuzdan kopyaladığınız eşleştirme bağlantısını yapıştırın.
+Pairing link	Eşleştirme bağlantısı
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	MusicCraft Android’de paylaşımı açın ve eşleştirme bağlantısını bilgisayarda Kaynak ekle > MusicCraft Android bölümüne yapıştırın. Aynı Wi-Fi ağını kullanın. Paylaşım salt okunurdur ve telefon ses çalarken duraklar. Bağlantıyı gizli tutun.
+Sharing paused: phone is playing	Paylaşım duraklatıldı: telefon ses çalıyor
+On the phone, enable sharing and choose Pair computer.	Telefonda paylaşımı açın ve Bilgisayarı eşleştir seçeneğini seçin.
+Searching for phones…	Telefonlar aranıyor…
+No phone found. Check that both devices use the same Wi-Fi.	Telefon bulunamadı. Cihazların aynı Wi-Fi ağını kullandığını kontrol edin.
+Four-digit code	4 haneli kod
+Confirm the pairing request on your phone.	Eşleştirme isteğini telefonunuzda onaylayın.
+Guide: On the phone, enable sharing and choose Pair computer.	Telefonda paylaşımı açın ve Bilgisayarı eşleştir seçeneğini seçin.
+Guide: Four-digit code	4 haneli kod
+Guide: Confirm the pairing request on your phone.	Eşleştirme isteğini telefonunuzda onaylayın.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon bulunamadı. Cihazların aynı Wi-Fi ağını kullandığını kontrol edin.
+Pair	Eşleştir
+Pairing code incorrect or expired. Reopen pairing on the phone.	Kod yanlış veya süresi doldu. Telefonda eşleştirmeyi yeniden açın.

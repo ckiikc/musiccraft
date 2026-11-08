@@ -63,7 +63,9 @@ info = {'CFBundleName': 'MusicCraft', 'CFBundleDisplayName': 'MusicCraft',
         'CFBundleVersion': version, 'CFBundleShortVersionString': version,
         'CFBundlePackageType': 'APPL', 'LSMinimumSystemVersion': '12.0',
         'NSHighResolutionCapable': True, 'NSHumanReadableCopyright': 'Copyright 2026 MusicCraft contributors. MIT.',
-        'CFBundleIconFile': 'MusicCraft'}
+        'CFBundleIconFile': 'MusicCraft',
+        'NSLocalNetworkUsageDescription': 'Find paired MusicCraft phones and stream music on your local network.',
+        'NSBonjourServices': ['_musiccraft._tcp.']}
 (bundle / 'Contents/Info.plist').write_bytes(plistlib.dumps(info))
 PYTHON
 mkdir -p dist/MusicCraft.iconset
@@ -75,6 +77,7 @@ for icon_size in 16 32 128 256 512; do
   sips -z "$double_size" "$double_size" dist/icon-master.png --out "dist/MusicCraft.iconset/icon_${icon_size}x${icon_size}@2x.png" >/dev/null
 done
 iconutil -c icns dist/MusicCraft.iconset -o "$bundle/Contents/Resources/MusicCraft.icns"
+python3 scripts/document-types.py "$bundle"
 python3 scripts/app-uuid.py "$bundle/Contents/MacOS/MusicCraft" io.github.ckiikc.musiccraft
 codesign --force --sign - --identifier io.github.ckiikc.musiccraft "$bundle"
 codesign --verify --deep --strict "$bundle"

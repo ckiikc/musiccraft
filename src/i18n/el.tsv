@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Τα κομμάτια χωρί�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Οδηγός: ενεργοποιήστε την Εμφάνιση ανά έτος στις ρυθμίσεις για να επιλέξετε συσκευή και τελευταίο έτος για κάθε περίοδο. Τα κομμάτια χωρίς έτος διατηρούν τη χειροκίνητη επιλογή.
 Manual appearance	Χειροκίνητη εμφάνιση
 Window and animation	Παράθυρο και κίνηση
+Pair with MusicCraft Android	Σύζευξη με το MusicCraft Android
+Paste the pairing link copied from your phone.	Επικολλήστε τον σύνδεσμο σύζευξης που αντιγράψατε από το τηλέφωνο.
+Pairing link	Σύνδεσμος σύζευξης
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Ενεργοποιήστε την κοινή χρήση στο MusicCraft Android και επικολλήστε τον σύνδεσμο σύζευξης στην Προσθήκη πηγής > MusicCraft Android στον υπολογιστή. Χρησιμοποιήστε το ίδιο Wi-Fi. Η πρόσβαση είναι μόνο για ανάγνωση και διακόπτεται όταν το τηλέφωνο παίζει ήχο. Κρατήστε τον σύνδεσμο ιδιωτικό.
+Sharing paused: phone is playing	Κοινή χρήση σε παύση: το τηλέφωνο παίζει ήχο
+On the phone, enable sharing and choose Pair computer.	Ενεργοποιήστε την κοινή χρήση στο τηλέφωνο και επιλέξτε Σύζευξη υπολογιστή.
+Searching for phones…	Αναζήτηση τηλεφώνων…
+No phone found. Check that both devices use the same Wi-Fi.	Δεν βρέθηκε τηλέφωνο. Ελέγξτε ότι οι συσκευές χρησιμοποιούν το ίδιο Wi-Fi.
+Four-digit code	Κωδικός 4 ψηφίων
+Confirm the pairing request on your phone.	Επιβεβαιώστε το αίτημα σύζευξης στο τηλέφωνο.
+Guide: On the phone, enable sharing and choose Pair computer.	Ενεργοποιήστε την κοινή χρήση στο τηλέφωνο και επιλέξτε Σύζευξη υπολογιστή.
+Guide: Four-digit code	Κωδικός 4 ψηφίων
+Guide: Confirm the pairing request on your phone.	Επιβεβαιώστε το αίτημα σύζευξης στο τηλέφωνο.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Δεν βρέθηκε τηλέφωνο. Ελέγξτε ότι οι συσκευές χρησιμοποιούν το ίδιο Wi-Fi.
+Pair	Σύζευξη
+Pairing code incorrect or expired. Reopen pairing on the phone.	Ο κωδικός είναι λανθασμένος ή έληξε. Ανοίξτε ξανά τη σύζευξη στο τηλέφωνο.

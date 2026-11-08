@@ -1,9 +1,9 @@
 [package]
 name = "musiccraft"
-version = "0.10.44"
+version = "0.10.49"
 edition = "2024"
 license = "MIT"
-description = "Native music player for local, NAS and FTP libraries"
+description = "Native music player for local, NAS, FTP and MusicCraft Android libraries"
 publish = false
 
 [dependencies]
@@ -14,6 +14,12 @@ cpal = "=0.17.3"
 rfd = "=0.17.2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+srp = "=0.6.0"
+num-bigint = "=0.4.8"
+subtle = "=2.6.1"
+sha2 = "=0.10.9"
+aes-gcm = "=0.10.3"
+base64 = "=0.22.1"
 lofty = "=0.25.4"
 url = "2"
 walkdir = "2"
@@ -43,6 +49,7 @@ strip = true
 [target.'cfg(target_os = "macos")'.dependencies]
 objc2 = "=0.6.5"
 block2 = "=0.6.2"
+objc2-foundation = { version = "=0.3.2", default-features = false, features = ["std", "NSObject", "NSString", "NSNotification", "NSOperation", "block2"] }
 objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["std", "NSScreen", "NSEvent", "NSWindow", "NSResponder", "NSApplication", "block2"] }
 security-framework = "=3.7.0"
 coreaudio-rs = "=0.14.2"

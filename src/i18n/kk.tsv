@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Жылы жоқ тректер 
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Нұсқаулық: әр кезеңнің ойнатқышы мен соңғы жылын таңдау үшін параметрлерде Жылға қарай көрініс мүмкіндігін қосыңыз. Жылы жоқ тректер қолмен таңдалған көріністі сақтайды.
 Manual appearance	Қолмен таңдалған көрініс
 Window and animation	Терезе және анимация
+Pair with MusicCraft Android	MusicCraft Android қолданбасымен жұптау
+Paste the pairing link copied from your phone.	Телефоннан көшірілген жұптау сілтемесін қойыңыз.
+Pairing link	Жұптау сілтемесі
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	MusicCraft Android қолданбасында бөлісуді қосып, жұптау сілтемесін компьютердегі Дереккөз қосу > MusicCraft Android бөліміне қойыңыз. Бір Wi-Fi желісін пайдаланыңыз. Тек оқуға арналған бөлісу телефон дыбыс ойнатқанда тоқтайды. Сілтемені құпия сақтаңыз.
+Sharing paused: phone is playing	Бөлісу тоқтатылды: телефон дыбыс ойнатуда
+On the phone, enable sharing and choose Pair computer.	Телефонда бөлісуді қосып, Компьютерді жұптау тармағын таңдаңыз.
+Searching for phones…	Телефондар ізделуде…
+No phone found. Check that both devices use the same Wi-Fi.	Телефон табылмады. Құрылғылардың бір Wi-Fi желісін қолданатынын тексеріңіз.
+Four-digit code	4 таңбалы код
+Confirm the pairing request on your phone.	Телефонда жұптау сұрауын растаңыз.
+Guide: On the phone, enable sharing and choose Pair computer.	Телефонда бөлісуді қосып, Компьютерді жұптау тармағын таңдаңыз.
+Guide: Four-digit code	4 таңбалы код
+Guide: Confirm the pairing request on your phone.	Телефонда жұптау сұрауын растаңыз.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон табылмады. Құрылғылардың бір Wi-Fi желісін қолданатынын тексеріңіз.
+Pair	Жұптау
+Pairing code incorrect or expired. Reopen pairing on the phone.	Код қате немесе мерзімі өткен. Телефонда жұптауды қайта ашыңыз.

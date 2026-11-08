@@ -30,6 +30,7 @@ mod miniplayer;
 mod palette;
 #[cfg(test)]
 mod performance;
+mod phone_pair;
 mod player_visual;
 #[cfg(any(debug_assertions, test))]
 mod preview;
@@ -198,6 +199,8 @@ pub struct Aurea {
     remember_password: bool,
     ftp_address: String,
     pending_ftp: Option<(FtpSource, Option<String>, Option<usize>)>,
+    phone_pair_dialog: bool,
+    phone_pair: phone_pair::State,
     ftp_dialog: bool,
     ftp_focus_host: bool,
     audio_dialog: bool,
@@ -429,6 +432,8 @@ impl Aurea {
             remember_password: true,
             ftp_address: String::new(),
             pending_ftp: None,
+            phone_pair_dialog: false,
+            phone_pair: Default::default(),
             ftp_dialog: false,
             ftp_focus_host: false,
             audio_dialog: false,
@@ -490,11 +495,12 @@ impl Aurea {
         };
         app.cover_viewer.load_placement(app.saved.artwork_window);
         window_drag::install();
+        crate::open_documents::attach(&app.ctx);
         app.settings_geometry.load(app.saved.settings_window);
         app.browser.sort = app.saved.library_sort;
         app.gain();
         if !paths.is_empty() {
-            app.import(paths);
+            app.open_external_files(paths);
         }
         app
     }
@@ -638,6 +644,38 @@ impl Aurea {
         };
         self.audio.gain.store(gain.to_bits(), Ordering::Relaxed);
     }
+    fn open_external_files(&mut self, paths: Vec<PathBuf>) {
+        let files = crate::open_documents::audio_files(paths.clone());
+        if files.is_empty() {
+            // Preserve the existing directory/playlist import command path.
+            self.import(paths);
+            return;
+        }
+        let ids: Vec<_> = files
+            .iter()
+            .map(|p| p.to_string_lossy().into_owned())
+            .collect();
+        self.select_source(None);
+        library::merge_tracks(
+            &mut self.saved.tracks,
+            ids.iter().cloned().map(Track::placeholder).collect(),
+        );
+        self.library_revision = self.library_revision.wrapping_add(1);
+        self.playback_selection = Some(ids.clone());
+        // Opening multiple documents is an explicitly ordered listening action.
+        // Do not inherit shuffle or repeat-one from the previous session.
+        if ids.len() > 1 {
+            self.saved.shuffle = false;
+            self.saved.shuffle_albums = false;
+            self.saved.repeat = false;
+        }
+        self.restored_selection = false;
+        self.history = History::default();
+        self.shuffle_cycle.clear();
+        self.query.clear();
+        self.browser.clear();
+        self.play(ids[0].clone());
+    }
     fn import(&mut self, paths: Vec<PathBuf>) {
         if self.scanning {
             self.message = tr!("Wait or cancel the current scan").into();
@@ -763,7 +801,11 @@ impl Aurea {
         });
     }
     fn start_discovery(&mut self, id: &str) {
-        if self.discovery.is_some() || self.network_probe_pending || !self.saved.auto_sync {
+        if self.phone_pair_dialog
+            || self.discovery.is_some()
+            || self.network_probe_pending
+            || !self.saved.auto_sync
+        {
             return;
         }
         let Some(source) = self
@@ -819,6 +861,7 @@ impl Aurea {
             return;
         };
         stored.host = source.host;
+        stored.port = source.port;
         stored.recent_hosts = source.recent_hosts;
         stored.hardware_ids = source.hardware_ids;
         let updated = stored.clone();
@@ -1298,7 +1341,13 @@ impl Aurea {
                             .into();
                             if reason == Reason::Cancelled {
                                 self.network_probe_due = Instant::now();
-                            } else if !self.ftp_dialog
+                            } else if !self.phone_pair_dialog
+                                && self
+                                    .saved
+                                    .active_source
+                                    .as_deref()
+                                    .is_none_or(|id| id == request.source.id)
+                                && !self.ftp_dialog
                                 && !self.browsing
                                 && self.connections.offer_manual_address(&request.source.id)
                             {
@@ -1384,6 +1433,8 @@ impl Aurea {
                                 "status",
                                 if report.cancelled {
                                     tr!("Check cancelled")
+                                } else if report.stats.suspended {
+                                    tr!("Sharing paused: phone is playing")
                                 } else if report.stats.errors > 0 {
                                     tr!("Source not fully reachable")
                                 } else {
@@ -1660,7 +1711,17 @@ impl Aurea {
                 self.browsing = true;
                 let tx = self.tx.clone();
                 std::thread::spawn(move || {
-                    let result = network::list(&url, &candidate_auth);
+                    let result = if url.starts_with("https://") {
+                        crate::phone::online(
+                            &url,
+                            &candidate_auth,
+                            &AtomicBool::new(false),
+                            Duration::from_secs(5),
+                        )
+                        .map(|_| Vec::new())
+                    } else {
+                        network::list(&url, &candidate_auth)
+                    };
                     let _ = tx.send(Job::Directory(url, result));
                 });
             }
@@ -1712,8 +1773,24 @@ impl Aurea {
         self.ftp_old = Some(url.into());
         self.ftp_address = url.into();
         self.message = keychain_error.unwrap_or_else(|| {
-            tr!("Connection verified and saved. Update IP, port and folder here.").into()
+            if self.ftp.scheme == "https" {
+                format!("MusicCraft Android · {}", tr!("Check complete"))
+            } else {
+                tr!("Connection verified and saved. Update IP, port and folder here.").into()
+            }
         });
+        if self.ftp.scheme == "https" {
+            if self.current.is_none() {
+                self.select_source(Some(self.ftp.id.clone()));
+            }
+            self.start_sync(
+                Target::Ftp {
+                    id: self.ftp.id.clone(),
+                    root: url.into(),
+                },
+                true,
+            );
+        }
     }
     pub fn open_network(&mut self) {
         let selected = self
@@ -1724,6 +1801,10 @@ impl Aurea {
         self.open_ftp_editor(selected.or_else(|| (!self.saved.sources.is_empty()).then_some(0)));
     }
     fn open_ftp_editor(&mut self, index: Option<usize>) {
+        if index.is_some_and(|i| self.saved.sources[i].scheme == "https") {
+            self.open_phone_pair();
+            return;
+        }
         if self.saved.mini {
             self.viewport_mini = Some(true);
         }
@@ -1802,13 +1883,7 @@ impl Aurea {
                             .button(ui, "settings", tr!("Configure"), false)
                             .clicked()
                         {
-                            self.ftp = source.clone();
-                            self.ftp_old = self.ftp.url().ok();
-                            self.ftp_edit = Some(index);
-                            self.directory.clear();
-                            self.entries.clear();
-                            self.ftp_address = self.ftp.url().unwrap_or_default();
-                            self.ftp_dialog = true;
+                            self.open_ftp_editor(Some(index));
                         }
                         if ui
                             .add_enabled_ui(!self.scanning, |ui| {
@@ -1825,9 +1900,17 @@ impl Aurea {
                         }
                     });
                     ui.label(
-                        RichText::new(format!("{} · FTP", crate::i18n::tracks(count)))
-                            .small()
-                            .color(palette::muted()),
+                        RichText::new(format!(
+                            "{} · {}",
+                            crate::i18n::tracks(count),
+                            if source.scheme == "https" {
+                                "Android"
+                            } else {
+                                "FTP"
+                            }
+                        ))
+                        .small()
+                        .color(palette::muted()),
                     );
                 });
         }
@@ -1915,6 +1998,11 @@ impl Aurea {
         }
         ui.add_space(12.0);
         ui.menu_button(tr!("Add source…"), |ui| {
+            if ui.button("MusicCraft Android…").clicked() {
+                self.open_phone_pair();
+                ui.close();
+            }
+
             if ui.button(tr!("Smartphone / FTP")).clicked() {
                 self.ftp = FtpSource::smartphone();
                 self.ftp_edit = None;
@@ -2348,6 +2436,9 @@ impl eframe::App for Aurea {
             self.saved.ui_scale = zoom;
             self.viewport_mini = None;
         }
+        for paths in crate::open_documents::take() {
+            self.open_external_files(paths);
+        }
         self.sync_window_geometry(ctx);
         self.poll(ctx);
         let info_open = self.info_dialog || (self.saved.mini && self.saved.mini_view >= 3);
@@ -2445,6 +2536,7 @@ impl eframe::App for Aurea {
             self.import(dropped);
         }
         self.ftp_window(&ctx);
+        self.phone_pair_window(&ctx);
         if self.screenshot.is_some()
             && !self.screenshot_sent
             && self.last_frame.elapsed() < Duration::from_secs(1)
@@ -2915,6 +3007,20 @@ mod source_tests {
             app.poll(&ctx);
         };
 
+        app.saved.active_source = Some("first".into());
+        complete_search(&mut app, Reason::NotFound);
+        assert!(
+            !app.ftp_dialog,
+            "a missing inactive source must not interrupt the selected library"
+        );
+        app.saved.active_source = None;
+        app.phone_pair_dialog = true;
+        complete_search(&mut app, Reason::NotFound);
+        assert!(
+            !app.ftp_dialog,
+            "FTP fallback must not interrupt Android pairing"
+        );
+        app.phone_pair_dialog = false;
         complete_search(&mut app, Reason::Cancelled);
         assert!(!app.ftp_dialog);
         app.open_ftp_editor(Some(0));

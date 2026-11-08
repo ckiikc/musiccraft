@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	年が不明な曲には手動�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	ガイド：設定で「年に応じた表示」を有効にし、各期間のプレーヤーと最後の年を選択します。年が不明な曲には手動の選択が適用されます。
 Manual appearance	手動の表示
 Window and animation	ウィンドウとアニメーション
+Pair with MusicCraft Android	MusicCraft Androidとペアリング
+Paste the pairing link copied from your phone.	スマートフォンからコピーしたペアリングリンクを貼り付けてください。
+Pairing link	ペアリングリンク
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	MusicCraft Androidで共有を有効にし、パソコンのソースを追加 > MusicCraft Androidにペアリングリンクを貼り付けます。同じWi-Fiを使用してください。共有は読み取り専用で、電話で音声を再生中は一時停止します。リンクは他人に公開しないでください。
+Sharing paused: phone is playing	共有を一時停止中：電話で音声を再生しています
+On the phone, enable sharing and choose Pair computer.	電話で共有を有効にし、コンピューターとペアリングを選択します。
+Searching for phones…	電話を検索中…
+No phone found. Check that both devices use the same Wi-Fi.	電話が見つかりません。両方の端末が同じWi-Fiを使用しているか確認してください。
+Four-digit code	4桁のコード
+Confirm the pairing request on your phone.	電話でペアリング要求を確認してください。
+Guide: On the phone, enable sharing and choose Pair computer.	電話で共有を有効にし、コンピューターとペアリングを選択します。
+Guide: Four-digit code	4桁のコード
+Guide: Confirm the pairing request on your phone.	電話でペアリング要求を確認してください。
+Guide: No phone found. Check that both devices use the same Wi-Fi.	電話が見つかりません。両方の端末が同じWi-Fiを使用しているか確認してください。
+Pair	ペアリング
+Pairing code incorrect or expired. Reopen pairing on the phone.	コードが正しくないか期限切れです。電話でペアリングを開き直してください。

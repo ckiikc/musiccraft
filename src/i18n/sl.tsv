@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Skladbe brez leta uporabljajo r
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Vodnik: v nastavitvah vklopite Videz glede na leto ter za vsako obdobje izberite predvajalnik in zadnje leto. Skladbe brez leta ohranijo ročno izbiro.
 Manual appearance	Ročni videz
 Window and animation	Okno in animacija
+Pair with MusicCraft Android	Seznani z MusicCraft Android
+Paste the pairing link copied from your phone.	Prilepite povezavo za seznanjanje, kopirano iz telefona.
+Pairing link	Povezava za seznanjanje
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Omogočite skupno rabo v MusicCraft Android in prilepite povezavo za seznanjanje v Dodaj vir > MusicCraft Android na računalniku. Uporabite isti Wi-Fi. Dostop je samo za branje in se začasno ustavi, ko telefon predvaja zvok. Povezavo ohranite zasebno.
+Sharing paused: phone is playing	Skupna raba ustavljena: telefon predvaja zvok
+On the phone, enable sharing and choose Pair computer.	V telefonu omogočite skupno rabo in izberite Seznani računalnik.
+Searching for phones…	Iskanje telefonov…
+No phone found. Check that both devices use the same Wi-Fi.	Telefon ni najden. Preverite, ali napravi uporabljata isti Wi-Fi.
+Four-digit code	Štirimestna koda
+Confirm the pairing request on your phone.	Potrdite zahtevo za seznanjanje v telefonu.
+Guide: On the phone, enable sharing and choose Pair computer.	V telefonu omogočite skupno rabo in izberite Seznani računalnik.
+Guide: Four-digit code	Štirimestna koda
+Guide: Confirm the pairing request on your phone.	Potrdite zahtevo za seznanjanje v telefonu.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon ni najden. Preverite, ali napravi uporabljata isti Wi-Fi.
+Pair	Seznani
+Pairing code incorrect or expired. Reopen pairing on the phone.	Koda je napačna ali je potekla. Znova odprite seznanjanje v telefonu.

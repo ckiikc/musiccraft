@@ -21,3 +21,7 @@ The [upstream License.txt](https://github.com/LMS-Community/slimserver/blob/publ
 - [LMS sources and notices](https://github.com/LMS-Community/slimserver/tree/public/9.1)
 - [Platform build sources](https://github.com/LMS-Community/slimserver-platforms)
 - [Vendor build sources](https://github.com/LMS-Community/slimserver-vendor)
+
+## Android companion
+
+AndroidX Media3, Kotlin, Guava and Bouncy Castle retain their notices; see [android/THIRD_PARTY.md](android/THIRD_PARTY.md) and the notices included in the APK. The Gradle wrapper is Apache-2.0. Three synthetic FLAC test fixtures are original CC0 tones, hash-pinned by the publication scanner and excluded from the normal app APK. No LMS source, interface assets or music recordings are copied into Android.

@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Для композиций б�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Руководство: включите Вид по году в настройках и выберите проигрыватель и последний год каждого периода. Композиции без года сохраняют ручной выбор.
 Manual appearance	Вид вручную
 Window and animation	Окно и анимация
+Pair with MusicCraft Android	Сопряжение с MusicCraft Android
+Paste the pairing link copied from your phone.	Вставьте ссылку сопряжения, скопированную с телефона.
+Pairing link	Ссылка сопряжения
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Включите общий доступ в MusicCraft Android и вставьте ссылку сопряжения в Добавить источник > MusicCraft Android на компьютере. Используйте одну сеть Wi-Fi. Доступ только для чтения приостанавливается, пока телефон воспроизводит звук. Не разглашайте ссылку.
+Sharing paused: phone is playing	Общий доступ приостановлен: телефон воспроизводит звук
+On the phone, enable sharing and choose Pair computer.	Включите общий доступ на телефоне и выберите Сопряжение с компьютером.
+Searching for phones…	Поиск телефонов…
+No phone found. Check that both devices use the same Wi-Fi.	Телефон не найден. Проверьте, что устройства используют одну сеть Wi-Fi.
+Four-digit code	Код из 4 цифр
+Confirm the pairing request on your phone.	Подтвердите запрос сопряжения на телефоне.
+Guide: On the phone, enable sharing and choose Pair computer.	Включите общий доступ на телефоне и выберите Сопряжение с компьютером.
+Guide: Four-digit code	Код из 4 цифр
+Guide: Confirm the pairing request on your phone.	Подтвердите запрос сопряжения на телефоне.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон не найден. Проверьте, что устройства используют одну сеть Wi-Fi.
+Pair	Сопрячь
+Pairing code incorrect or expired. Reopen pairing on the phone.	Код неверен или истёк. Откройте сопряжение на телефоне заново.

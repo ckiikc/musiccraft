@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Для композицій б�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Посібник: увімкніть Вигляд за роком у налаштуваннях, щоб вибрати програвач і останній рік кожного періоду. Композиції без року зберігають ручний вибір.
 Manual appearance	Ручний вигляд
 Window and animation	Вікно й анімація
+Pair with MusicCraft Android	Сполучення з MusicCraft Android
+Paste the pairing link copied from your phone.	Вставте посилання сполучення, скопійоване з телефона.
+Pairing link	Посилання сполучення
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Увімкніть спільний доступ у MusicCraft Android і вставте посилання сполучення в Додати джерело > MusicCraft Android на комп’ютері. Використовуйте одну мережу Wi-Fi. Доступ лише для читання призупиняється під час відтворення звуку телефоном. Не розголошуйте посилання.
+Sharing paused: phone is playing	Спільний доступ призупинено: телефон відтворює звук
+On the phone, enable sharing and choose Pair computer.	Увімкніть спільний доступ на телефоні й оберіть Сполучити комп’ютер.
+Searching for phones…	Пошук телефонів…
+No phone found. Check that both devices use the same Wi-Fi.	Телефон не знайдено. Перевірте, чи пристрої використовують одну мережу Wi-Fi.
+Four-digit code	Код із 4 цифр
+Confirm the pairing request on your phone.	Підтвердьте запит сполучення на телефоні.
+Guide: On the phone, enable sharing and choose Pair computer.	Увімкніть спільний доступ на телефоні й оберіть Сполучити комп’ютер.
+Guide: Four-digit code	Код із 4 цифр
+Guide: Confirm the pairing request on your phone.	Підтвердьте запит сполучення на телефоні.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон не знайдено. Перевірте, чи пристрої використовують одну мережу Wi-Fi.
+Pair	Сполучити
+Pairing code incorrect or expired. Reopen pairing on the phone.	Код неправильний або прострочений. Відкрийте сполучення на телефоні знову.

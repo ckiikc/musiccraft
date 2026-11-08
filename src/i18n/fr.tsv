@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Les morceaux sans année utilis
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Guide : activez Apparence selon l’année dans les paramètres pour choisir un lecteur et la dernière année de chaque période. Les morceaux sans année conservent le choix manuel.
 Manual appearance	Apparence manuelle
 Window and animation	Fenêtre et animations
+Pair with MusicCraft Android	Associer MusicCraft Android
+Paste the pairing link copied from your phone.	Collez le lien d’association copié depuis votre téléphone.
+Pairing link	Lien d’association
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Activez le partage dans MusicCraft Android, puis collez son lien d’association dans Ajouter une source > MusicCraft Android sur l’ordinateur. Utilisez le même Wi-Fi. Le partage est en lecture seule et se suspend quand le téléphone lit de l’audio. Gardez le lien privé.
+Sharing paused: phone is playing	Partage suspendu : lecture sur le téléphone
+On the phone, enable sharing and choose Pair computer.	Activez le partage sur le téléphone et choisissez Associer un ordinateur.
+Searching for phones…	Recherche des téléphones…
+No phone found. Check that both devices use the same Wi-Fi.	Aucun téléphone trouvé. Vérifiez que les appareils utilisent le même Wi-Fi.
+Four-digit code	Code à 4 chiffres
+Confirm the pairing request on your phone.	Confirmez la demande d’association sur le téléphone.
+Guide: On the phone, enable sharing and choose Pair computer.	Activez le partage sur le téléphone et choisissez Associer un ordinateur.
+Guide: Four-digit code	Code à 4 chiffres
+Guide: Confirm the pairing request on your phone.	Confirmez la demande d’association sur le téléphone.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Aucun téléphone trouvé. Vérifiez que les appareils utilisent le même Wi-Fi.
+Pair	Associer
+Pairing code incorrect or expired. Reopen pairing on the phone.	Code incorrect ou expiré. Rouvrez l’association sur le téléphone.

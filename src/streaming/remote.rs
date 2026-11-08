@@ -88,10 +88,7 @@ impl Remote {
         easy.timeout(Duration::from_secs(12)).map_err(error)?;
         easy.signal(false).map_err(error)?;
         easy.fail_on_error(true).map_err(error)?;
-        if let Some((user, password)) = auth.get(source) {
-            easy.username(&user).map_err(error)?;
-            easy.password(&password).map_err(error)?;
-        }
+        auth.configure(&mut easy, source).map_err(error)?;
         easy.progress(true).map_err(error)?;
         let cancellation = cancel.clone();
         easy.progress_function(move |_, _, _, _| !cancellation.cancelled())
