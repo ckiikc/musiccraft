@@ -1,11 +1,20 @@
 use super::*;
 use unicode_normalization::UnicodeNormalization;
 
-const CHAPTERS: [(&str, &[&str]); 9] = [
+const CHAPTERS: [(&str, &[&str]); 10] = [
     (
         "Library",
         &[
             "Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.",
+        ],
+    ),
+    (
+        "Pair with MusicCraft Android",
+        &[
+            "Guide: On the phone, enable sharing and choose Pair computer.",
+            "Guide: Four-digit code",
+            "Guide: Confirm the pairing request on your phone.",
+            "Guide: No phone found. Check that both devices use the same Wi-Fi.",
         ],
     ),
     (

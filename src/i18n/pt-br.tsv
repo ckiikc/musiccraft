@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Faixas sem ano usam a aparênci
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Guia: ative Aparência por ano nas configurações para escolher um player e o último ano de cada período. Faixas sem ano mantêm a escolha manual.
 Manual appearance	Aparência manual
 Window and animation	Janela e animação
+Pair with MusicCraft Android	Parear com MusicCraft Android
+Paste the pairing link copied from your phone.	Cole o link de pareamento copiado do telefone.
+Pairing link	Link de pareamento
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Ative o compartilhamento no MusicCraft Android e cole o link de pareamento em Adicionar fonte > MusicCraft Android no computador. Use o mesmo Wi-Fi. O acesso é somente leitura e pausa enquanto o telefone reproduz áudio. Mantenha o link privado.
+Sharing paused: phone is playing	Compartilhamento pausado: telefone reproduzindo
+On the phone, enable sharing and choose Pair computer.	Ative o compartilhamento no telefone e escolha Parear computador.
+Searching for phones…	Procurando telefones…
+No phone found. Check that both devices use the same Wi-Fi.	Nenhum telefone encontrado. Verifique se os dispositivos usam o mesmo Wi-Fi.
+Four-digit code	Código de 4 dígitos
+Confirm the pairing request on your phone.	Confirme a solicitação de pareamento no telefone.
+Guide: On the phone, enable sharing and choose Pair computer.	Ative o compartilhamento no telefone e escolha Parear computador.
+Guide: Four-digit code	Código de 4 dígitos
+Guide: Confirm the pairing request on your phone.	Confirme a solicitação de pareamento no telefone.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Nenhum telefone encontrado. Verifique se os dispositivos usam o mesmo Wi-Fi.
+Pair	Parear
+Pairing code incorrect or expired. Reopen pairing on the phone.	Código incorreto ou expirado. Reabra o pareamento no telefone.

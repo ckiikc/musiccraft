@@ -1,4 +1,20 @@
-# MusicCraft 0.10.44 validation — 2026-11-06
+# MusicCraft desktop 0.10.50 and Android 0.3.0 — 2026-11-08
+
+The sanitized public desktop source passed 198 ordinary tests (40 prerequisite-based tests excluded), formatting, Clippy all-targets with warnings denied, all 12 authenticated loopback FTP integrations, three Mach-O identity tests, one document-association test and publication scanning. Tests use synthetic files and a fresh profile. The source/package retain the stable public app ID and do not import the private development profile.
+
+Desktop regression tests cover the order delivered by file browsers, sequential next-track behavior independent of prior shuffle/repeat-one settings, URL decoding and supported document associations. The Android phone source adds pinned HTTPS catalog/streaming and four-digit, approval-gated SRP pairing. The earlier interoperability test against an emulator verified bad PIN rejection, approval-gated identity transfer, catalog/sync and decoded fixture PCM. That interoperability run predates the public snapshot; the loopback-only ignored integration remains available in source and has not been rerun for this publication.
+
+The Android project in `android/` was built from this public tree: debug app and test APKs, eleven unit tests and lint (zero errors, 22 warnings). Its application payload matches the previously installed/tested 0.3.0, apart from stripping ancillary PNG icon metadata; the unit-test search example uses synthetic names. The ordinary APK contains no test music or per-device credentials. Android native tests previously passed in a dedicated emulator: independent search/queue; full Player with live portrait/landscape recreation; queue edits; persistent playlists, rules and ratings; dynamic replenishment and bounded queue; stop-adding preserving the queue; force-stop restoration in pause. See [Android validation](../android/VALIDAZIONE.md) for the exact tested layers, early timing failures and hardware limits.
+
+No new autoradio/DHU test, physical audio capture, external-DAC certification, Intel build or Windows/Linux validation is claimed. Android Auto is a media-service integration; the sideloaded APK is not a Play Store release. Android is currently Italian only; desktop interface/help has 23 languages with native editorial review pending. Neither app imports LMS statistics or duplicates every LMS dynamic-playlist preset.
+
+## About panel (0.10.50)
+
+The default AppKit About action used normal window level zero, below the pinned player (level three). The application now wraps only that menu action, retains the standard Apple panel, recalculates its level from visible normal/pinned application windows and orders it above the player. Transient menus/tooltips and the cached About panel are excluded from the owner level; the saved player preference is not changed. A newly created panel is preferred over a previously closed instance.
+
+The debug-only, explicitly isolated native preview invokes the installed menu action, closes the panel and reopens it. Native window inspection and a captured version panel confirm level four above the pinned player's three; normal mode uses one above zero. The panel shows 0.10.50. The unit regression and ordinary suite pass; these checks concern window ordering, not audio changes.
+
+## Earlier desktop validation (0.10.44)
 
 The separate public checkout passed 192 ordinary tests (39 prerequisite-based
 integrations excluded), all 12 synthetic authenticated loopback FTP integrations,

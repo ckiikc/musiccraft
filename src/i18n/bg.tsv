@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Песните без годи�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Ръководство: включете Изглед според годината в настройките, за да изберете плейър и последна година за всеки период. Песните без година запазват ръчния избор.
 Manual appearance	Ръчен изглед
 Window and animation	Прозорец и анимация
+Pair with MusicCraft Android	Сдвояване с MusicCraft Android
+Paste the pairing link copied from your phone.	Поставете връзката за сдвояване, копирана от телефона.
+Pairing link	Връзка за сдвояване
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Включете споделянето в MusicCraft Android и поставете връзката за сдвояване в Добавяне на източник > MusicCraft Android на компютъра. Използвайте една Wi-Fi мрежа. Достъпът е само за четене и се спира, докато телефонът възпроизвежда звук. Пазете връзката в тайна.
+Sharing paused: phone is playing	Споделянето е спряно: телефонът възпроизвежда звук
+On the phone, enable sharing and choose Pair computer.	Включете споделянето на телефона и изберете Сдвояване на компютър.
+Searching for phones…	Търсене на телефони…
+No phone found. Check that both devices use the same Wi-Fi.	Няма намерен телефон. Проверете дали устройствата използват една Wi-Fi мрежа.
+Four-digit code	Код от 4 цифри
+Confirm the pairing request on your phone.	Потвърдете заявката за сдвояване на телефона.
+Guide: On the phone, enable sharing and choose Pair computer.	Включете споделянето на телефона и изберете Сдвояване на компютър.
+Guide: Four-digit code	Код от 4 цифри
+Guide: Confirm the pairing request on your phone.	Потвърдете заявката за сдвояване на телефона.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Няма намерен телефон. Проверете дали устройствата използват една Wi-Fi мрежа.
+Pair	Сдвои
+Pairing code incorrect or expired. Reopen pairing on the phone.	Кодът е грешен или е изтекъл. Отворете отново сдвояването на телефона.

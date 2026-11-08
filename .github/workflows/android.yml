@@ -1,0 +1,33 @@
+name: Android source checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Build, unit tests and lint (JDK 21)
+        shell: bash
+        run: |
+          export JAVA_HOME="$JAVA_HOME_21_X64"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          # The hosted Ubuntu image includes SDK 36; sdkmanager is not on PATH.
+          test -f "$ANDROID_HOME/platforms/android-36/android.jar"
+          test -d "$ANDROID_HOME/build-tools/36.0.0"
+          ./android/gradlew -p android :app:assembleDebug :app:assembleDebugAndroidTest :app:testDebugUnitTest :app:lintDebug --console=plain
+      - name: Publication scan
+        run: python3 scripts/check-publication.py

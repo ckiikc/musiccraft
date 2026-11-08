@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	تستخدم المقاطع ا�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	الدليل: فعّل المظهر حسب السنة في الإعدادات لاختيار مشغّل وآخر سنة لكل فترة. تحتفظ المقاطع التي بلا سنة بالاختيار اليدوي.
 Manual appearance	المظهر اليدوي
 Window and animation	النافذة والحركة
+Pair with MusicCraft Android	الاقتران مع MusicCraft Android
+Paste the pairing link copied from your phone.	ألصق رابط الاقتران المنسوخ من هاتفك.
+Pairing link	رابط الاقتران
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	فعّل المشاركة في MusicCraft Android، ثم ألصق رابط الاقتران في إضافة مصدر > MusicCraft Android على الكمبيوتر. استخدم شبكة Wi-Fi نفسها. المشاركة للقراءة فقط وتتوقف مؤقتًا عندما يشغّل الهاتف الصوت. احتفظ بالرابط سرًا.
+Sharing paused: phone is playing	المشاركة متوقفة مؤقتًا: الهاتف يشغّل الصوت
+On the phone, enable sharing and choose Pair computer.	فعّل المشاركة على الهاتف واختر إقران الكمبيوتر.
+Searching for phones…	جارٍ البحث عن الهواتف…
+No phone found. Check that both devices use the same Wi-Fi.	لم يُعثر على هاتف. تحقق من استخدام الجهازين لشبكة Wi-Fi نفسها.
+Four-digit code	رمز من 4 أرقام
+Confirm the pairing request on your phone.	أكّد طلب الاقتران على هاتفك.
+Guide: On the phone, enable sharing and choose Pair computer.	فعّل المشاركة على الهاتف واختر إقران الكمبيوتر.
+Guide: Four-digit code	رمز من 4 أرقام
+Guide: Confirm the pairing request on your phone.	أكّد طلب الاقتران على هاتفك.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	لم يُعثر على هاتف. تحقق من استخدام الجهازين لشبكة Wi-Fi نفسها.
+Pair	اقتران
+Pairing code incorrect or expired. Reopen pairing on the phone.	الرمز غير صحيح أو انتهت صلاحيته. أعد فتح الاقتران على الهاتف.

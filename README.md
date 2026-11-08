@@ -2,21 +2,28 @@
 
 A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS sources. A compact player, faceted library browser and album view keep a large personal collection close at hand.
 
-**Independent project · macOS alpha · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
+**Independent project · macOS and Android previews · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
 
-## Experimental release 0.10.44
+## Experimental releases
 
-[Download for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.44). The release is experimental, ad-hoc signed and not notarized. Only Apple silicon macOS has been validated. The public package excludes the optional LMS runtime. Verify the archive against the accompanying `SHA256SUMS.txt`.
+- [Desktop 0.10.50 for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.50): ad-hoc signed, not notarized; optional LMS runtime excluded.
+- [Android 0.3.0 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.3.0): Android 8/API 26 or newer, local debug build; no Play Store release. Android source and build instructions are in [android/](android/).
+
+Verify each downloaded package against its release's `SHA256SUMS.txt`. MusicCraft remains an independent project; [ArtCraft community consideration](https://github.com/storytold/craft-launcher/issues/1247) is pending.
 
 ![MusicCraft miniplayer with side-by-side VU meters and a synthetic library](docs/screenshots/miniplayer-vu.png)
 
-## New in 0.10.44
+## About window correction
 
-- Fixed sudden miniplayer window jumps when dragging the top bar, including after switching from the full faceted library.
-- The macOS drag handler retains the original mouse-down and its window until the movement threshold is crossed. It no longer relies on whichever native event happens to be current when the frame is processed.
-- Release, pointer loss, focus loss and full/mini geometry changes cancel the previous gesture. A fresh press is required to start again.
-- The application-local event monitor passes mouse events through unchanged and is removed on exit. Clicks without movement, long stationary presses and secondary clicks do not start a window drag.
-- Settings, optional appearance by year, responsive player layouts and the circular-artwork edge fix from 0.10.43 are retained.
+The standard macOS About panel is raised above the application's pinned windows when opened from the application menu. Reopening recalculates its level without raising the main player or changing the saved always-on-top preference.
+
+## New desktop and Android companion
+
+Desktop 0.10.50 opens music files delivered by Finder into an ordered listening selection, supports warm/cold Open Documents events, and declares supported audio formats for Open With. Multiple-file opening selects sequential playback and clears repeat-one so the next track can advance.
+
+The new MusicCraft Android source is discovered automatically on the local network. Pair with a four-digit code and approve the request on the phone; subsequent HTTPS reads verify the phone's identity. Each installation generates its own credentials. The Android app provides a read-only music server and pauses sharing while it plays audio locally. See [the sharing guide](docs/SHARING.md).
+
+Android 0.3.0 separates **Cerca**, **Playlist** and a standalone **Player** with portrait and landscape layouts. Saved playlists, editable dynamic mixes, local ratings/listening history, queue editing and paused restoration of queue/position are included. Dynamic mixes choose songs, albums or artists using metadata, ratings and listening criteria; stopping additions preserves the existing queue. These are local MusicCraft statistics, not imported LMS data. Android Auto browsing and background playback use the same Media3 service.
 
 ![Settings with configurable appearance by year](docs/screenshots/settings.png)
 
@@ -71,6 +78,9 @@ The integrated LMS controller is included in the Rust source, but the third-part
 
 ## Configure a phone or NAS
 
+For the MusicCraft Android companion, enable **⋮ → Condividi con il computer** on the phone. On the Mac choose **Add source → MusicCraft Android**, select the discovered phone and enter the code, then authorize on the phone. No separate FTP app is needed.
+
+
 Add a mounted folder as a local source, or enter the FTP/FTPS host, port and root directory in the network settings. Enter credentials in the app; do not embed them in a URL. On macOS, remembered FTP passwords use Keychain. An update of an ad-hoc-signed development app may require a new Keychain consent.
 
 Automatic synchronization checks reachable sources approximately every two minutes and periodically audits all folders. Metadata indexing runs separately and pauses for audio transfers and scans. Its first pass is gradual; completed tag reads are journaled and survive a restart. Changed tags at an already-indexed, unchanged URL do not yet trigger a full automatic reread.
@@ -96,6 +106,7 @@ cargo clippy --locked --all-targets -j 2 -- -D warnings
 cargo test --locked -j 2
 python3 scripts/check-publication.py
 python3 scripts/test_app_uuid.py
+python3 scripts/test_document_types.py
 ```
 
 The FTP integration harness creates synthetic audio and authenticated loopback servers. It needs Python, `pyftpdlib` and `ffmpeg`; it does not use your saved sources:

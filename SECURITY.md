@@ -9,3 +9,6 @@ The optional media server shares only its published selection with tokenized URL
 Online metadata providers receive search terms when the respective features are enabled. Saving a missing cover is a separate optional write to the album directory; it must not overwrite existing artwork.
 
 For diagnostics, use a synthetic reproduction. Redact usernames, network addresses, full paths and tokens from logs. The local publication check is a useful filter, not a complete secret scanner or security certification.
+
+
+The separate Android music server is read-only HTTPS with a per-installation Keystore identity. It advertises on the local Wi-Fi and requires short-lived, attempt-limited SRP pairing plus explicit phone approval. Desktop reads use the pinned phone key and credentials stored in Keychain. Sharing pauses during local phone playback. Neither codes nor installed credentials are in source or release packages. Revoke pairings on the phone if a paired computer is no longer trusted. See docs/SHARING.md for protocol details and limits.

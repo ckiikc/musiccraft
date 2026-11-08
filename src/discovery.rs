@@ -475,6 +475,11 @@ pub fn find(
     if cancel.load(Ordering::Relaxed) {
         return Outcome::Missing(Reason::Cancelled);
     }
+    if source.scheme == "https" {
+        return crate::phone::rediscover(source, cancel)
+            .map(|s| Outcome::Found(Box::new(s)))
+            .unwrap_or(Outcome::Missing(Reason::NotFound));
+    }
     if networks.is_empty() {
         return Outcome::Missing(Reason::NoLan);
     }

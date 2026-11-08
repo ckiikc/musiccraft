@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Las pistas sin año usan la apa
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Guía: activa Apariencia según el año en Ajustes para elegir un reproductor y el último año de cada período. Las pistas sin año mantienen la selección manual.
 Manual appearance	Apariencia manual
 Window and animation	Ventana y animación
+Pair with MusicCraft Android	Vincular con MusicCraft Android
+Paste the pairing link copied from your phone.	Pega el enlace de vinculación copiado del teléfono.
+Pairing link	Enlace de vinculación
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Activa la función de compartir en MusicCraft Android y pega su enlace de vinculación en Añadir fuente > MusicCraft Android en el ordenador. Usa la misma red Wi-Fi. El acceso es de solo lectura y se pausa cuando el teléfono reproduce audio. Mantén el enlace privado.
+Sharing paused: phone is playing	Acceso pausado: el teléfono reproduce audio
+On the phone, enable sharing and choose Pair computer.	Activa el uso compartido en el teléfono y elige Vincular ordenador.
+Searching for phones…	Buscando teléfonos…
+No phone found. Check that both devices use the same Wi-Fi.	No se encontró ningún teléfono. Comprueba que ambos usan la misma Wi-Fi.
+Four-digit code	Código de 4 dígitos
+Confirm the pairing request on your phone.	Confirma la solicitud de vinculación en el teléfono.
+Guide: On the phone, enable sharing and choose Pair computer.	Activa el uso compartido en el teléfono y elige Vincular ordenador.
+Guide: Four-digit code	Código de 4 dígitos
+Guide: Confirm the pairing request on your phone.	Confirma la solicitud de vinculación en el teléfono.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	No se encontró ningún teléfono. Comprueba que ambos usan la misma Wi-Fi.
+Pair	Vincular
+Pairing code incorrect or expired. Reopen pairing on the phone.	Código incorrecto o caducado. Vuelve a abrir la vinculación en el teléfono.

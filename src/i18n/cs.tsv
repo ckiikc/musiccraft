@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Skladby bez roku používají r
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Průvodce: v nastavení zapněte Vzhled podle roku a pro každé období zvolte přehrávač a poslední rok. Skladby bez roku zachovají ruční volbu.
 Manual appearance	Ruční vzhled
 Window and animation	Okno a animace
+Pair with MusicCraft Android	Spárovat s MusicCraft Android
+Paste the pairing link copied from your phone.	Vložte odkaz pro párování zkopírovaný z telefonu.
+Pairing link	Odkaz pro párování
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Zapněte sdílení v MusicCraft Android a vložte odkaz pro párování do Přidat zdroj > MusicCraft Android na počítači. Použijte stejnou Wi-Fi. Sdílení je pouze pro čtení a pozastaví se při přehrávání zvuku v telefonu. Odkaz uchovejte v soukromí.
+Sharing paused: phone is playing	Sdílení pozastaveno: telefon přehrává zvuk
+On the phone, enable sharing and choose Pair computer.	Zapněte sdílení v telefonu a zvolte Spárovat počítač.
+Searching for phones…	Hledání telefonů…
+No phone found. Check that both devices use the same Wi-Fi.	Telefon nebyl nalezen. Ověřte, že zařízení používají stejnou Wi-Fi.
+Four-digit code	Čtyřmístný kód
+Confirm the pairing request on your phone.	Potvrďte žádost o párování v telefonu.
+Guide: On the phone, enable sharing and choose Pair computer.	Zapněte sdílení v telefonu a zvolte Spárovat počítač.
+Guide: Four-digit code	Čtyřmístný kód
+Guide: Confirm the pairing request on your phone.	Potvrďte žádost o párování v telefonu.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon nebyl nalezen. Ověřte, že zařízení používají stejnou Wi-Fi.
+Pair	Spárovat
+Pairing code incorrect or expired. Reopen pairing on the phone.	Kód je nesprávný nebo vypršel. Znovu otevřete párování v telefonu.

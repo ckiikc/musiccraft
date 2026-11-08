@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	సంవత్సరం లే
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	మార్గదర్శి: ప్రతి కాలానికి ప్లేయర్ మరియు చివరి సంవత్సరాన్ని ఎంచుకోవడానికి సెట్టింగ్‌లలో సంవత్సరం ఆధారంగా రూపం ఎంపికను ప్రారంభించండి. సంవత్సరం లేని పాటలు చేతితో ఎంచుకున్న రూపాన్ని ఉంచుతాయి.
 Manual appearance	మాన్యువల్ రూపం
 Window and animation	విండో మరియు యానిమేషన్
+Pair with MusicCraft Android	MusicCraft Androidతో జత చేయండి
+Paste the pairing link copied from your phone.	మీ ఫోన్ నుండి కాపీ చేసిన జత చేసే లింక్‌ను అతికించండి.
+Pairing link	జత చేసే లింక్
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	MusicCraft Androidలో భాగస్వామ్యాన్ని ప్రారంభించి, కంప్యూటర్‌లో మూలాన్ని జోడించు > MusicCraft Androidలో జత చేసే లింక్‌ను అతికించండి. ఒకే Wi-Fi వాడండి. భాగస్వామ్యం చదవడానికి మాత్రమే; ఫోన్ ఆడియో ప్లే చేస్తున్నప్పుడు ఆగుతుంది. లింక్‌ను గోప్యంగా ఉంచండి.
+Sharing paused: phone is playing	భాగస్వామ్యం ఆగింది: ఫోన్ ఆడియో ప్లే చేస్తోంది
+On the phone, enable sharing and choose Pair computer.	ఫోన్‌లో భాగస్వామ్యాన్ని ప్రారంభించి కంప్యూటర్‌ను జత చేయి ఎంచుకోండి.
+Searching for phones…	ఫోన్ల కోసం వెతుకుతోంది…
+No phone found. Check that both devices use the same Wi-Fi.	ఫోన్ కనబడలేదు. రెండు పరికరాలు ఒకే Wi-Fi వాడుతున్నాయో చూడండి.
+Four-digit code	4 అంకెల కోడ్
+Confirm the pairing request on your phone.	మీ ఫోన్‌లో జత చేసే అభ్యర్థనను నిర్ధారించండి.
+Guide: On the phone, enable sharing and choose Pair computer.	ఫోన్‌లో భాగస్వామ్యాన్ని ప్రారంభించి కంప్యూటర్‌ను జత చేయి ఎంచుకోండి.
+Guide: Four-digit code	4 అంకెల కోడ్
+Guide: Confirm the pairing request on your phone.	మీ ఫోన్‌లో జత చేసే అభ్యర్థనను నిర్ధారించండి.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	ఫోన్ కనబడలేదు. రెండు పరికరాలు ఒకే Wi-Fi వాడుతున్నాయో చూడండి.
+Pair	జత చేయి
+Pairing code incorrect or expired. Reopen pairing on the phone.	కోడ్ తప్పు లేదా గడువు ముగిసింది. ఫోన్‌లో జత చేసే స్క్రీన్‌ను మళ్లీ తెరవండి.

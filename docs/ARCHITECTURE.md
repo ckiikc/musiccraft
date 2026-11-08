@@ -14,3 +14,11 @@ The current alpha is one Rust binary with internal modules, not a multi-crate fr
 - `i18n/`: 22 translated TSV catalogs plus English, system-font fallbacks and localized built-in help.
 
 The public release uses io.github.ckiikc.musiccraft and a separate MusicCraft profile. It contains no migration of personal settings. A future cross-platform port needs explicit platform data directories, credential stores, network process adapters, output backends and packaging; shared Rust dependencies alone do not establish portability.
+
+## Android companion and direct phone source
+
+`android/` is a separate Kotlin/Android project, not a Rust workspace member. Catalog reads MediaStore on a worker. PlaybackService owns the sole ExoPlayer/MediaLibrarySession; PlaybackCoordinator owns the queue and dynamic producer. Activities are controllers, so recreation/rotation does not replace the player. ListeningStore persists private snapshots atomically on a worker; SmartRules is pure Kotlin selection logic.
+
+The user-started Android sharing service uses a foreground notification, a per-installation Android Keystore TLS identity and read-only HTTPS. NSD/Bonjour advertises `_musiccraft._tcp.`. Four-digit short-lived SRP-6a pairing requires explicit phone approval before exchanging the encrypted identity/credential. The desktop's `phone/` and `app/phone_pair.rs` use the same sync/streaming paths as other library sources. macOS Keychain stores credentials; library URLs carry no token. Sharing suspension is distinct from an empty catalog and never triggers destructive pruning.
+
+`open_documents.rs` receives macOS file-browser events and delivers their ordered selection to the existing playback path. The packager declares audio associations without changing the user's default handler.

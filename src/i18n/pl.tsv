@@ -342,3 +342,19 @@ Tracks without a year use the manual appearance.	Utwory bez roku używają wygl�
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Poradnik: włącz Wygląd według roku w ustawieniach, aby wybrać odtwarzacz i ostatni rok każdego okresu. Utwory bez roku zachowują ręczny wybór.
 Manual appearance	Wygląd ręczny
 Window and animation	Okno i animacje
+Pair with MusicCraft Android	Połącz z MusicCraft Android
+Paste the pairing link copied from your phone.	Wklej link parowania skopiowany z telefonu.
+Pairing link	Link parowania
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Włącz udostępnianie w MusicCraft Android i wklej link parowania w Dodaj źródło > MusicCraft Android na komputerze. Użyj tej samej sieci Wi-Fi. Dostęp jest tylko do odczytu i zostaje wstrzymany, gdy telefon odtwarza dźwięk. Zachowaj link w tajemnicy.
+Sharing paused: phone is playing	Udostępnianie wstrzymane: telefon odtwarza dźwięk
+On the phone, enable sharing and choose Pair computer.	Włącz udostępnianie na telefonie i wybierz Sparuj komputer.
+Searching for phones…	Wyszukiwanie telefonów…
+No phone found. Check that both devices use the same Wi-Fi.	Nie znaleziono telefonu. Sprawdź, czy urządzenia korzystają z tej samej sieci Wi-Fi.
+Four-digit code	Kod 4-cyfrowy
+Confirm the pairing request on your phone.	Potwierdź żądanie parowania na telefonie.
+Guide: On the phone, enable sharing and choose Pair computer.	Włącz udostępnianie na telefonie i wybierz Sparuj komputer.
+Guide: Four-digit code	Kod 4-cyfrowy
+Guide: Confirm the pairing request on your phone.	Potwierdź żądanie parowania na telefonie.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Nie znaleziono telefonu. Sprawdź, czy urządzenia korzystają z tej samej sieci Wi-Fi.
+Pair	Sparuj
+Pairing code incorrect or expired. Reopen pairing on the phone.	Kod jest nieprawidłowy lub wygasł. Otwórz ponownie parowanie w telefonie.

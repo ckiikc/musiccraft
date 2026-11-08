@@ -1,6 +1,6 @@
 # Releases
 
-MusicCraft 0.10.44 is an independent, experimental macOS release. Community-app
+MusicCraft 0.10.50 is an independent, experimental macOS release. Community-app
 approval remains a maintainer decision in ArtCraft Launcher issue #1247.
 
 ## Current public package
@@ -20,9 +20,9 @@ The packager never installs or publishes the generated app.
 After the documented local checks and native smoke test, archive the app:
 
 ```sh
-ditto -c -k --sequesterRsrc --keepParent dist/MusicCraft.app dist/musiccraft-0.10.44-macos-arm64-experimental.zip
+ditto -c -k --sequesterRsrc --keepParent dist/MusicCraft.app dist/musiccraft-0.10.50-macos-arm64-experimental.zip
 cd dist
-shasum -a 256 musiccraft-0.10.44-macos-arm64-experimental.zip > SHA256SUMS.txt
+shasum -a 256 musiccraft-0.10.50-macos-arm64-experimental.zip > SHA256SUMS.txt
 ```
 
 Publish an experimental GitHub prerelease with that ZIP and checksum file,
@@ -39,3 +39,11 @@ it is not an approved launcher installation source.
 Intel macOS, other operating systems, signing/notarization and combined LMS
 redistribution require separate work and validation. Do not advertise them as
 supported based solely on shared Rust dependencies or a passing local test.
+
+## Android test distribution
+
+Android source lives under `android/`; it has an independent version, currently 0.3.0 (versionCode 4), and stable package ID `it.ckiikc.musiccraft`. Compile with JDK 21 and Android SDK 36 using the checked Gradle wrapper. The wrapper and distribution checksums are pinned. `android/README.md` documents the build and emulator-only tests.
+
+The current public APK is an explicitly labelled debug/test prerelease. It contains no synthetic test audio (that is in the separate instrumentation APK), private library or device credentials. Signing keys, local.properties, caches and APKs are excluded from Git. A locally generated debug key is not a long-term distribution identity: an update requires the same signing certificate, and a future release channel needs a separately managed publisher key. Do not assume a clean CI debug APK can update the downloaded test APK.
+
+This is not a Google Play listing or an approved Android Auto distribution. Android Auto discovery for sideloaded builds may require its own developer options. Runtime permissions must be granted by the user on physical devices.

@@ -23,6 +23,8 @@ pub struct FtpSource {
     pub recent_hosts: Vec<String>,
     #[serde(default)]
     pub hardware_ids: Vec<String>,
+    #[serde(default)]
+    pub tls_pin: Option<String>,
     pub username: String,
     #[serde(skip)]
     pub password: String,
@@ -66,7 +68,12 @@ impl FtpSource {
         } else {
             &self.scheme
         };
-        if !matches!(scheme, "ftp" | "ftps") {
+        if !matches!(scheme, "ftp" | "ftps")
+            && !(scheme == "https"
+                && self.id.starts_with("phone:")
+                && self.root == "/v1/audio/"
+                && self.tls_pin.as_deref().is_some_and(crate::phone::valid_pin))
+        {
             return Err("Protocollo FTP/FTPS richiesto".into());
         }
         let mut u = Url::parse(&format!("{scheme}://{}:{port}/", self.host))
@@ -108,22 +115,56 @@ impl FtpSource {
         Ok(())
     }
 }
+type StoredAuth = (String, String, Option<String>, String);
 #[derive(Clone, Default)]
-pub struct AuthStore(Arc<Mutex<HashMap<String, (String, String)>>>);
+pub struct AuthStore(Arc<Mutex<HashMap<String, StoredAuth>>>);
 impl AuthStore {
     pub fn insert(&self, source: &FtpSource) -> Result<(), String> {
         let url = Url::parse(&source.url()?).map_err(|_| "URL non valido")?;
         if let Ok(mut map) = self.0.lock() {
             map.insert(
                 authority(&url),
-                (source.username.clone(), source.password.clone()),
+                (
+                    source.username.clone(),
+                    source.password.clone(),
+                    source.tls_pin.clone(),
+                    source.id.clone(),
+                ),
             );
         }
         Ok(())
     }
     pub(crate) fn get(&self, source: &str) -> Option<(String, String)> {
         let u = Url::parse(source).ok()?;
-        self.0.lock().ok()?.get(&authority(&u)).cloned()
+        self.0
+            .lock()
+            .ok()?
+            .get(&authority(&u))
+            .map(|v| (v.0.clone(), v.1.clone()))
+    }
+    pub(crate) fn peer(&self, source: &str) -> Option<(String, String)> {
+        let u = Url::parse(source).ok()?;
+        let map = self.0.lock().ok()?;
+        let v = map.get(&authority(&u))?;
+        Some((v.2.clone()?, v.3.clone()))
+    }
+    pub(crate) fn configure(
+        &self,
+        easy: &mut curl::easy::Easy,
+        source: &str,
+    ) -> Result<(), curl::Error> {
+        if let Some((user, pass)) = self.get(source) {
+            easy.username(&user)?;
+            easy.password(&pass)?;
+        }
+        if let Some((pin, _)) = self.peer(source) {
+            // The out-of-band public-key pin replaces CA/hostname trust for this installation.
+            easy.pinned_public_key(&format!("sha256//{pin}"))?;
+            easy.ssl_verify_peer(false)?;
+            easy.ssl_verify_host(false)?;
+            easy.follow_location(false)?;
+        }
+        Ok(())
     }
 }
 fn authority(u: &Url) -> String {
@@ -243,6 +284,14 @@ pub fn authenticated_spawn(
     // These URLs identify one literal file. curl's default URL globbing treats
     // album names such as [2003 Remaster] as ranges and fails before connecting.
     command.arg("--globoff").stdin(Stdio::piped());
+    if let Some((pin, _)) = auth.peer(url) {
+        command.args([
+            "--insecure",
+            "--pinnedpubkey",
+            &format!("sha256//{pin}"),
+            "--no-location",
+        ]);
+    }
     let mut child = command
         .spawn()
         .map_err(|_| "Trasferimento di rete non disponibile".to_string())?;
@@ -421,6 +470,21 @@ impl ListingSession {
         auth: &AuthStore,
         cancel: &std::sync::atomic::AtomicBool,
     ) -> Result<(Vec<Entry>, bool), String> {
+        if url.starts_with("https://") {
+            return crate::phone::catalog(url, auth, cancel, self.timeout).map(|tracks| {
+                (
+                    tracks
+                        .into_iter()
+                        .map(|t| Entry {
+                            name: t.source.rsplit('/').next().unwrap_or_default().into(),
+                            directory: false,
+                            modified: None,
+                        })
+                        .collect(),
+                    true,
+                )
+            });
+        }
         let text = match self.raw(url, auth, cancel) {
             Ok(text) => text,
             Err(_)

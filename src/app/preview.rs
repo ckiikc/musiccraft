@@ -2,6 +2,12 @@
 use super::*;
 impl Aurea {
     pub(crate) fn preview(&mut self, scene: &str) {
+        if scene == "native-about-pinned" || scene == "native-about-normal" {
+            self.saved.pinned = scene.ends_with("pinned");
+            self.ctx
+                .data_mut(|d| d.insert_temp(egui::Id::new("native-about-preview"), true));
+            return;
+        }
         let artwork_track = (scene.ends_with("-artwork") || scene.ends_with("-jacket"))
             .then(|| self.saved.tracks.first().cloned())
             .flatten();

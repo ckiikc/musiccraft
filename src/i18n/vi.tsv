@@ -344,3 +344,19 @@ Tracks without a year use the manual appearance.	Bài hát không có năm dùng
 Guide: Enable Appearance by year in Settings to assign a player and last year to each period. Tracks without a year keep the manual appearance.	Hướng dẫn: bật Giao diện theo năm trong Cài đặt để chọn đầu phát và năm cuối của mỗi giai đoạn. Bài hát không có năm giữ lựa chọn thủ công.
 Manual appearance	Giao diện thủ công
 Window and animation	Cửa sổ và hoạt ảnh
+Pair with MusicCraft Android	Ghép nối với MusicCraft Android
+Paste the pairing link copied from your phone.	Dán liên kết ghép nối đã sao chép từ điện thoại.
+Pairing link	Liên kết ghép nối
+Guide: Enable sharing in MusicCraft Android, then paste its pairing link in Add source > MusicCraft Android on the computer. Use the same Wi-Fi. Sharing is read-only and pauses while the phone plays audio. Keep the pairing link private.	Bật chia sẻ trong MusicCraft Android, rồi dán liên kết ghép nối vào Thêm nguồn > MusicCraft Android trên máy tính. Dùng cùng mạng Wi-Fi. Chia sẻ chỉ cho phép đọc và tạm dừng khi điện thoại phát âm thanh. Giữ kín liên kết ghép nối.
+Sharing paused: phone is playing	Chia sẻ tạm dừng: điện thoại đang phát âm thanh
+On the phone, enable sharing and choose Pair computer.	Bật chia sẻ trên điện thoại và chọn Ghép nối máy tính.
+Searching for phones…	Đang tìm điện thoại…
+No phone found. Check that both devices use the same Wi-Fi.	Không tìm thấy điện thoại. Kiểm tra hai thiết bị dùng cùng Wi-Fi.
+Four-digit code	Mã 4 chữ số
+Confirm the pairing request on your phone.	Xác nhận yêu cầu ghép nối trên điện thoại.
+Guide: On the phone, enable sharing and choose Pair computer.	Bật chia sẻ trên điện thoại và chọn Ghép nối máy tính.
+Guide: Four-digit code	Mã 4 chữ số
+Guide: Confirm the pairing request on your phone.	Xác nhận yêu cầu ghép nối trên điện thoại.
+Guide: No phone found. Check that both devices use the same Wi-Fi.	Không tìm thấy điện thoại. Kiểm tra hai thiết bị dùng cùng Wi-Fi.
+Pair	Ghép nối
+Pairing code incorrect or expired. Reopen pairing on the phone.	Mã sai hoặc đã hết hạn. Mở lại màn hình ghép nối trên điện thoại.
