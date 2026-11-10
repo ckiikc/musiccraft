@@ -24,13 +24,16 @@ mod browser;
 mod connection;
 mod cover_viewer;
 mod desktop;
+mod detached;
 mod help;
 mod listening_ui;
+mod menu;
 mod miniplayer;
 mod palette;
 #[cfg(test)]
 mod performance;
 mod phone_pair;
+mod playback_error;
 mod player_visual;
 #[cfg(any(debug_assertions, test))]
 mod preview;
@@ -83,6 +86,7 @@ struct Saved {
     appearance_periods: player_visual::YearAppearance,
     artwork_window: Option<window_placement::Placement>,
     settings_window: Option<window_placement::Placement>,
+    auxiliary_windows: HashMap<String, window_placement::Placement>,
     multiroom: crate::multiroom::Config,
 }
 
@@ -129,6 +133,7 @@ impl Default for Saved {
             appearance_periods: Default::default(),
             artwork_window: None,
             settings_window: None,
+            auxiliary_windows: HashMap::new(),
             multiroom: Default::default(),
         }
     }
@@ -183,6 +188,7 @@ pub struct Aurea {
     shuffle_cycle: crate::shuffle::Cycle,
     current: Option<String>,
     requested: Option<String>,
+    playback_error: Option<playback_error::Failure>,
     ticket: u64,
     position: f64,
     paused: bool,
@@ -211,6 +217,7 @@ pub struct Aurea {
     settings_dialog: bool,
     settings_page: u8,
     settings_geometry: window_placement::Tracker,
+    auxiliary_geometry: detached::Windows,
     settings_focused_on_open: bool,
     help_dialog: bool,
     help_query: String,
@@ -416,6 +423,7 @@ impl Aurea {
             shuffle_cycle: session.cycle,
             current: None,
             requested: None,
+            playback_error: None,
             ticket: 0,
             position: 0.0,
             paused: true,
@@ -444,6 +452,7 @@ impl Aurea {
             settings_dialog: false,
             settings_page: 0,
             settings_geometry: Default::default(),
+            auxiliary_geometry: Default::default(),
             settings_focused_on_open: false,
             help_dialog: false,
             help_query: String::new(),
@@ -498,6 +507,7 @@ impl Aurea {
         crate::about::install();
         crate::open_documents::attach(&app.ctx);
         app.settings_geometry.load(app.saved.settings_window);
+        app.auxiliary_geometry.load(&app.saved.auxiliary_windows);
         app.browser.sort = app.saved.library_sort;
         app.gain();
         if !paths.is_empty() {
@@ -531,6 +541,19 @@ impl Aurea {
     }
     fn player_animation_visible(&self) -> bool {
         self.saved.mini && self.saved.mini_view == 1 && !self.saved.reduce_motion
+    }
+
+    fn update_meters(&mut self, elapsed: f32, visual_active: bool, minimized: bool, playing: bool) {
+        for i in 0..2 {
+            let peak = self.audio.meters[i].swap(0, Ordering::Relaxed);
+            self.meters[i] =
+                if !minimized && (!self.saved.mini || visual_active || self.saved.mini_view == 1) {
+                    let new = if playing { f32::from_bits(peak) } else { 0.0 };
+                    new.max(self.meters[i] * (-elapsed * 8.0).exp())
+                } else {
+                    0.0
+                };
+        }
     }
 
     fn repaint_delay(&self, visual_active: bool, minimized: bool) -> Duration {
@@ -802,11 +825,7 @@ impl Aurea {
         });
     }
     fn start_discovery(&mut self, id: &str) {
-        if self.phone_pair_dialog
-            || self.discovery.is_some()
-            || self.network_probe_pending
-            || !self.saved.auto_sync
-        {
+        if self.phone_pair_dialog || self.discovery.is_some() || self.network_probe_pending {
             return;
         }
         let Some(source) = self
@@ -815,6 +834,7 @@ impl Aurea {
             .iter()
             .find(|s| {
                 s.id == id
+                    && (self.saved.auto_sync || s.scheme == "https")
                     && s.discovery_enabled()
                     && (s.username.is_empty() || !s.password.is_empty())
             })
@@ -933,10 +953,27 @@ impl Aurea {
         // Leave current PCM playback, volume, history cursor and source selection intact.
     }
     fn auto_sync_control(&mut self, ui: &mut egui::Ui) {
-        if ui.checkbox(&mut self.saved.auto_sync, tr!("Synchronize automatically")).on_hover_text(tr!("Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.")).changed() && !self.saved.auto_sync && self.scan_automatic {
+        let mut enabled = self.saved.auto_sync;
+        if ui.checkbox(&mut enabled, tr!("Synchronize automatically")).on_hover_text(tr!("Checks every 2 minutes while MusicCraft is open, backs off offline sources, and audits every 30 minutes.")).changed() {
+            self.set_auto_sync(enabled);
+        } else {
+            self.cancel_disabled_discovery();
+        }
+    }
+    fn set_auto_sync(&mut self, enabled: bool) {
+        self.saved.auto_sync = enabled;
+        if !enabled && self.scan_automatic {
             self.cancel.store(true, Ordering::Relaxed);
         }
-        if !self.saved.auto_sync {
+        self.cancel_disabled_discovery();
+    }
+    fn cancel_disabled_discovery(&mut self) {
+        if !self.saved.auto_sync
+            && self
+                .discovery
+                .as_ref()
+                .is_some_and(|r| r.source.scheme != "https")
+        {
             self.cancel_discovery();
         }
     }
@@ -969,6 +1006,7 @@ impl Aurea {
         }
         let track = self.scoped_tracks().find(|t| t.source == id).cloned();
         if let Some(track) = track {
+            self.playback_error = None;
             self.ticket = self.audio.load(
                 track,
                 self.saved.device.clone(),
@@ -1179,6 +1217,11 @@ impl Aurea {
                     exclusive,
                 } if ticket == self.ticket => {
                     track.source = self.canonical_source(&track.source);
+                    if self.browser.selected_track.is_none()
+                        || self.browser.selected_track == self.current
+                    {
+                        self.browser.selected_track = Some(track.source.clone());
+                    }
                     self.current = Some(track.source.clone());
                     self.requested = None;
                     self.history.record(track.source.clone());
@@ -1220,11 +1263,11 @@ impl Aurea {
                     self.prepare_next();
                 }
                 Event::Notice(text) => self.message = text,
-                Event::Position(pos, paused) if !self.loading => {
+                Event::Position(pos, paused) if !self.loading && self.playback_error.is_none() => {
                     self.position = pos;
                     self.paused = paused;
                 }
-                Event::Ended if !self.loading => {
+                Event::Ended if !self.loading && self.playback_error.is_none() => {
                     self.paused = true;
                     if let Some(id) = self
                         .history
@@ -1238,17 +1281,15 @@ impl Aurea {
                     }
                 }
                 Event::Error(ticket, e) if ticket == 0 || ticket == self.ticket => {
-                    if let Some(id) = self.requested.as_ref().or(self.current.as_ref())
-                        && let Some(source) = self.source_for_track(id).cloned()
-                    {
-                        self.connections.invalidate(&source);
-                    }
-                    self.stop();
-                    self.ticket = self.audio.generation.load(Ordering::Relaxed);
-                    self.output = tr!("Output closed after an error").into();
-                    self.output_exclusive = false;
-                    self.message = e;
-                    self.history.cancel();
+                    let source = self.requested.as_ref().or(self.current.as_ref()).cloned();
+                    self.playback_failed(source, e);
+                }
+                Event::TrackError {
+                    ticket,
+                    source,
+                    reason,
+                } if ticket == 0 || ticket == self.ticket => {
+                    self.playback_failed(Some(source), reason)
                 }
                 _ => {}
             }
@@ -1300,7 +1341,7 @@ impl Aurea {
                         continue;
                     }
                     let request = self.discovery.take().unwrap();
-                    let valid = self.saved.auto_sync
+                    let valid = (self.saved.auto_sync || request.source.scheme == "https")
                         && !request.cancel.load(Ordering::Relaxed)
                         && request.networks == self.networks
                         && self.saved.sources.iter().any(|s| {
@@ -1342,6 +1383,10 @@ impl Aurea {
                             .into();
                             if reason == Reason::Cancelled {
                                 self.network_probe_due = Instant::now();
+                            } else if request.source.scheme == "https" {
+                                // An offline paired phone is not an invitation to pair again.
+                                // Keep readiness closed and retry after a quiet interval.
+                                self.connections.failed(&request.source);
                             } else if !self.phone_pair_dialog
                                 && self
                                     .saved
@@ -1397,15 +1442,24 @@ impl Aurea {
                     {
                         self.connections.mark_verified(&source);
                     }
-                    let rediscover_id =
-                        if automatic && !report.cancelled && report.stats.root_unreachable {
-                            match &report.target {
-                                Target::Ftp { id, .. } => Some(id.clone()),
-                                _ => None,
+                    let rediscover_id = if !report.cancelled && report.stats.root_unreachable {
+                        match &report.target {
+                            Target::Ftp { id, .. } => {
+                                let phone = self
+                                    .saved
+                                    .sources
+                                    .iter()
+                                    .find(|s| &s.id == id && s.scheme == "https");
+                                if let Some(source) = phone {
+                                    self.connections.failed(source);
+                                }
+                                (automatic || phone.is_some()).then(|| id.clone())
                             }
-                        } else {
-                            None
-                        };
+                            _ => None,
+                        }
+                    } else {
+                        None
+                    };
                     let before = self.saved.tracks.len();
                     if !report.cancelled
                         && !self.cancel.load(Ordering::Relaxed)
@@ -2056,12 +2110,7 @@ impl Aurea {
         }
     }
     fn now_playing(&mut self, ui: &mut egui::Ui, _compact: bool) {
-        let track = self
-            .current
-            .as_ref()
-            .or(self.requested.as_ref())
-            .and_then(|id| self.saved.tracks.iter().find(|t| &t.source == id))
-            .cloned();
+        let track = self.displayed_track().cloned();
         section(
             ui,
             tr!("Your listening session"),
@@ -2153,6 +2202,7 @@ impl Aurea {
         }
     }
     fn stop(&mut self) {
+        self.playback_error = None;
         self.output_exclusive = false;
         self.output = tr!("Select a track to open audio output").into();
         self.audio.stop();
@@ -2326,46 +2376,45 @@ impl Aurea {
     }
     fn ftp_window(&mut self, ctx: &egui::Context) {
         if !self.ftp_dialog {
+            self.auxiliary_geometry.close("connection-v06");
             return;
         }
-        let mut open = true;
-        let available = ctx.content_rect();
-        egui::Window::new(tr!("Connect smartphone / FTP")).id(egui::Id::new("connection-v06")).open(&mut open).default_width(500.0).max_width((available.width()-40.0).max(300.0)).max_height((available.height()-32.0).max(200.0)).default_pos(available.center()-vec2(250.0,230.0)).show(ctx,|ui| {
-            let scroll_height=(available.height()-160.0).clamp(180.0,510.0);
+        let open=self.detached_window(ctx,"connection-v06",tr!("Connect smartphone / FTP"),vec2(580.0,780.0),|app,ui| {
+            let scroll_height=(ui.available_height()-100.0).max(180.0);
             egui::ScrollArea::vertical().id_salt("connection-fields").max_height(scroll_height).show(ui,|ui|{
                 section(ui,tr!("Connection"),tr!("Enter the server address and music folder."));
                 ui.horizontal(|ui|{
-                    ui.add(egui::TextEdit::singleline(&mut self.ftp_address).hint_text("ftp://telefono:porta/Music/").desired_width((ui.available_width()-92.0).max(160.0)).margin(vec2(8.0,7.0)));
-                    if ui.button(tr!("Read URL")).clicked() && let Err(e)=self.ftp.set_url(&self.ftp_address){self.message=e;}
+                    ui.add(egui::TextEdit::singleline(&mut app.ftp_address).hint_text("ftp://telefono:porta/Music/").desired_width((ui.available_width()-92.0).max(160.0)).margin(vec2(8.0,7.0)));
+                    if ui.button(tr!("Read URL")).clicked() && let Err(e)=app.ftp.set_url(&app.ftp_address){app.message=e;}
                 });
                 ui.add_space(8.0);
                 let width=(ui.available_width()-116.0).max(160.0);
                 egui::Grid::new("ftp-fields").num_columns(2).spacing(vec2(16.0,8.0)).show(ui,|ui|{
-                    for (row, (label, value)) in [(tr!("Source name"),&mut self.ftp.name),(tr!("Host / IP"),&mut self.ftp.host),(tr!("Port"),&mut self.ftp.port),(tr!("Folder"),&mut self.ftp.root)].into_iter().enumerate() {
+                    for (row, (label, value)) in [(tr!("Source name"),&mut app.ftp.name),(tr!("Host / IP"),&mut app.ftp.host),(tr!("Port"),&mut app.ftp.port),(tr!("Folder"),&mut app.ftp.root)].into_iter().enumerate() {
                         ui.label(RichText::new(label).color(palette::muted()));
                         let response = ui.add(egui::TextEdit::singleline(value).desired_width(width).margin(vec2(7.0,6.0)));
-                        if row == 1 && std::mem::take(&mut self.ftp_focus_host) {
+                        if row == 1 && std::mem::take(&mut app.ftp_focus_host) {
                             response.request_focus();
                         }
                         ui.end_row();
                     }
                     ui.label(RichText::new(tr!("Protocol")).color(palette::muted()));
-                    egui::ComboBox::from_id_salt("ftp-scheme").selected_text(if self.ftp.scheme=="ftps"{"FTPS"}else{"FTP"}).show_ui(ui,|ui|{ui.selectable_value(&mut self.ftp.scheme,"ftp".into(),"FTP");ui.selectable_value(&mut self.ftp.scheme,"ftps".into(),tr!("Implicit FTPS"));});ui.end_row();
+                    egui::ComboBox::from_id_salt("ftp-scheme").selected_text(if app.ftp.scheme=="ftps"{"FTPS"}else{"FTP"}).show_ui(ui,|ui|{ui.selectable_value(&mut app.ftp.scheme,"ftp".into(),"FTP");ui.selectable_value(&mut app.ftp.scheme,"ftps".into(),tr!("Implicit FTPS"));});ui.end_row();
                 });
                 ui.add_space(12.0);section(ui,tr!("Access"),"");
                 egui::Grid::new("ftp-auth").num_columns(2).spacing(vec2(16.0,8.0)).show(ui,|ui|{
-                    ui.label(RichText::new(tr!("User")).color(palette::muted()));ui.add(egui::TextEdit::singleline(&mut self.ftp.username).desired_width(width).margin(vec2(7.0,6.0)));ui.end_row();
-                    ui.label(RichText::new(tr!("Password")).color(palette::muted()));ui.add(egui::TextEdit::singleline(&mut self.ftp.password).password(true).desired_width(width).margin(vec2(7.0,6.0)));ui.end_row();
+                    ui.label(RichText::new(tr!("User")).color(palette::muted()));ui.add(egui::TextEdit::singleline(&mut app.ftp.username).desired_width(width).margin(vec2(7.0,6.0)));ui.end_row();
+                    ui.label(RichText::new(tr!("Password")).color(palette::muted()));ui.add(egui::TextEdit::singleline(&mut app.ftp.password).password(true).desired_width(width).margin(vec2(7.0,6.0)));ui.end_row();
                 });
-                ui.checkbox(&mut self.remember_password,tr!("Remember in macOS Keychain"));
+                ui.checkbox(&mut app.remember_password,tr!("Remember in macOS Keychain"));
                 ui.label(RichText::new(tr!("FTP sends unencrypted data: use a trusted network.")).small().color(palette::muted()));
                 ui.add_space(12.0);section(ui,tr!("Automatic reconnection"),"");
-                let mut rediscover=self.ftp.discovery_enabled();
-                if ui.checkbox(&mut rediscover,tr!("Find the phone when its IP changes")).changed(){self.ftp.rediscover=Some(rediscover);if let Some(stored)=self.saved.sources.iter_mut().find(|s|s.id==self.ftp.id){stored.rediscover=Some(rediscover);}
-                    if !rediscover{self.cancel_discovery();}}
+                let mut rediscover=app.ftp.discovery_enabled();
+                if ui.checkbox(&mut rediscover,tr!("Find the phone when its IP changes")).changed(){app.ftp.rediscover=Some(rediscover);if let Some(stored)=app.saved.sources.iter_mut().find(|s|s.id==app.ftp.id){stored.rediscover=Some(rediscover);}
+                    if !rediscover{app.cancel_discovery();}}
                 ui.add_enabled_ui(rediscover, |ui| {
                     use discovery::ScanPace;
-                    let pace = &mut self.saved.ftp_scan_pace;
+                    let pace = &mut app.saved.ftp_scan_pace;
                     egui::ComboBox::from_label(tr!("LAN scan interval"))
                         .selected_text(pace.label())
                         .show_ui(ui, |ui| {
@@ -2375,30 +2424,30 @@ impl Aurea {
                         });
                 });
                 ui.label(RichText::new(tr!("MusicCraft checks the configured port and verifies the library before changing the connection.")).small().color(palette::muted()));
-                if !self.directory.is_empty(){
+                if !app.directory.is_empty(){
                     ui.add_space(12.0);section(ui,tr!("Server folders"),"");
-                    ui.add(egui::Label::new(RichText::new(&self.directory).small().color(palette::accent())).truncate()).on_hover_text(&self.directory);
+                    ui.add(egui::Label::new(RichText::new(&app.directory).small().color(palette::accent())).truncate()).on_hover_text(&app.directory);
                     ui.horizontal_wrapped(|ui|{
-                        if ui.button(tr!("Parent folder")).clicked() && let Ok(u)=url::Url::parse(&self.directory) && let Ok(parent)=u.join("../"){self.ftp_browse(parent.into());}
-                        if ui.button(tr!("Use as root")).clicked(){if let Err(e)=self.ftp.set_url(&self.directory){self.message=e;}else{self.connect();}}
-                        if ui.add_enabled(!self.scanning,egui::Button::new(tr!("Synchronize folder"))).clicked(){self.sync_ftp(self.directory.clone());}
+                        if ui.button(tr!("Parent folder")).clicked() && let Ok(u)=url::Url::parse(&app.directory) && let Ok(parent)=u.join("../"){app.ftp_browse(parent.into());}
+                        if ui.button(tr!("Use as root")).clicked(){if let Err(e)=app.ftp.set_url(&app.directory){app.message=e;}else{app.connect();}}
+                        if ui.add_enabled(!app.scanning,egui::Button::new(tr!("Synchronize folder"))).clicked(){app.sync_ftp(app.directory.clone());}
                     });
                     let mut navigate=None;let mut add=None;
-                    for entry in &self.entries {
-                        if entry.directory {if ui.button(crate::i18n::format("Folder /{name}",&[("name",entry.name.clone())])).clicked(){navigate=network::child_url(&self.directory,&entry.name,true);}}
-                        else if library::audio_path(std::path::Path::new(&entry.name))&&ui.button(crate::i18n::format("Add {name}",&[("name",entry.name.clone())])).clicked(){add=network::child_url(&self.directory,&entry.name,false);}
+                    for entry in &app.entries {
+                        if entry.directory {if ui.button(crate::i18n::format("Folder /{name}",&[("name",entry.name.clone())])).clicked(){navigate=network::child_url(&app.directory,&entry.name,true);}}
+                        else if library::audio_path(std::path::Path::new(&entry.name))&&ui.button(crate::i18n::format("Add {name}",&[("name",entry.name.clone())])).clicked(){add=network::child_url(&app.directory,&entry.name,false);}
                     }
-                    if let Some(url)=navigate{self.ftp_browse(url);}
-                    if let Some(url)=add && !self.saved.tracks.iter().any(|t|t.source==url){self.saved.tracks.push(Track::placeholder(url));self.library_revision=self.library_revision.wrapping_add(1);}
+                    if let Some(url)=navigate{app.ftp_browse(url);}
+                    if let Some(url)=add && !app.saved.tracks.iter().any(|t|t.source==url){app.saved.tracks.push(Track::placeholder(url));app.library_revision=app.library_revision.wrapping_add(1);}
                 }
             });
             ui.separator();
-            if !self.message.is_empty(){ui.label(RichText::new(crate::i18n::engine_message(&self.message)).small().color(palette::accent()));}
+            if !app.message.is_empty(){ui.label(RichText::new(app.playback_message()).small().color(palette::accent()));}
             ui.horizontal(|ui|{
-                if self.browsing {ui.add(egui::Spinner::new().size(14.0));ui.label(tr!("Checking…"));}
+                if app.browsing {ui.add(egui::Spinner::new().size(14.0));ui.label(tr!("Checking…"));}
                 ui.with_layout(egui::Layout::right_to_left(egui::Align::Center),|ui|{
-                    if ui.add_enabled(!self.browsing,egui::Button::new(RichText::new(tr!("Check and save")).color(palette::bg())).fill(palette::accent())).clicked(){self.connect();}
-                    if ui.button(tr!("Close")).clicked(){self.ftp_dialog=false;}
+                    if ui.add_enabled(!app.browsing,egui::Button::new(RichText::new(tr!("Check and save")).color(palette::bg())).fill(palette::accent())).clicked(){app.connect();}
+                    if ui.button(tr!("Close")).clicked(){app.ftp_dialog=false;}
                 });
             });
         });
@@ -2444,6 +2493,7 @@ impl eframe::App for Aurea {
         }
         self.sync_window_geometry(ctx);
         self.poll(ctx);
+        self.native_menus(ctx);
         let info_open = self.info_dialog || (self.saved.mini && self.saved.mini_view >= 3);
         let query = self
             .current
@@ -2477,16 +2527,7 @@ impl eframe::App for Aurea {
             self.angle = (self.angle + elapsed * std::f32::consts::TAU * (33.333 / 60.0))
                 .rem_euclid(std::f32::consts::TAU);
         }
-        for i in 0..2 {
-            let peak = self.audio.meters[i].swap(0, Ordering::Relaxed);
-            self.meters[i] =
-                if !minimized && self.saved.mini && (visual_active || self.saved.mini_view == 1) {
-                    let new = if playing { f32::from_bits(peak) } else { 0.0 };
-                    new.max(self.meters[i] * (-elapsed * 8.0).exp())
-                } else {
-                    0.0
-                };
-        }
+        self.update_meters(elapsed, visual_active, minimized, playing);
         if !minimized {
             self.needle_motion.advance(elapsed, self.meters);
         }
@@ -2579,6 +2620,7 @@ impl eframe::App for Aurea {
         }
         self.saved.artwork_window = self.cover_viewer.placement();
         self.saved.settings_window = self.settings_geometry.saved();
+        self.saved.auxiliary_windows = self.auxiliary_geometry.saved();
         self.saved.library_sort = self.browser.sort;
         self.saved.volume_db = valid_volume(self.volume_db);
         self.saved.native_rate = self.native;
@@ -2721,6 +2763,45 @@ mod source_tests {
         assert_eq!(app.saved.tracks[0].title, "Actual title");
         assert_eq!(app.saved.tracks[0].rate, 96000);
         assert_eq!(app.library_revision, revision);
+    }
+
+    #[test]
+    fn started_track_follows_selection_unless_the_user_is_browsing_another_row() {
+        let dir = tempfile::tempdir().unwrap();
+        let ctx = egui::Context::default();
+        let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+        let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+        let (tx, events) = mpsc::channel();
+        let (commands, _) = mpsc::channel();
+        app.audio.rx = events;
+        app.audio.tx = commands;
+        app.saved.auto_sync = false;
+        app.online_covers.store(false, Ordering::Relaxed);
+        app.saved.tracks = ["/synthetic/a.wav", "/synthetic/b.wav", "/synthetic/c.wav"]
+            .into_iter()
+            .map(|id| Track::placeholder(id.into()))
+            .collect();
+        app.current = Some(app.saved.tracks[0].source.clone());
+        app.browser.selected_track = app.current.clone();
+        for (index, expected) in [(1, 1), (0, 2)] {
+            if index == 0 {
+                app.browser.selected_track = Some(app.saved.tracks[2].source.clone());
+            }
+            tx.send(Event::Started {
+                ticket: app.ticket,
+                track: app.saved.tracks[index].clone(),
+                output: "synthetic".into(),
+                cover: None,
+                exclusive: false,
+            })
+            .unwrap();
+            app.poll(&ctx);
+            assert_eq!(app.current.as_ref(), Some(&app.saved.tracks[index].source));
+            assert_eq!(
+                app.browser.selected_track.as_ref(),
+                Some(&app.saved.tracks[expected].source)
+            );
+        }
     }
 
     #[test]

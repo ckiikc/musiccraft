@@ -190,12 +190,7 @@ impl Aurea {
         let r = |x: f32, y: f32, w: f32, h: f32| {
             egui::Rect::from_min_size(area.min + vec2(x, y), vec2(w, h))
         };
-        let track = self
-            .requested
-            .as_ref()
-            .or(self.current.as_ref())
-            .and_then(|id| self.saved.tracks.iter().find(|t| &t.source == id))
-            .cloned();
+        let track = self.displayed_track().cloned();
         let cover_size = if wide { 54.0 } else { 40.0 };
         let cover = r(0.0, if wide { 17.0 } else { 0.0 }, cover_size, cover_size);
         if let Some(art) = &self.art {
@@ -527,7 +522,7 @@ impl Aurea {
                             }
                         )
                     } else {
-                        crate::i18n::engine_message(&self.message)
+                        self.playback_message()
                     };
                     ui.add(
                         egui::Label::new(RichText::new(&text).size(11.0).color(palette::muted()))
@@ -629,96 +624,100 @@ impl Aurea {
             });
     }
     pub(super) fn auxiliary_windows(&mut self, ctx: &egui::Context) {
-        let available = ctx.content_rect();
         if self.info_dialog {
-            let mut open = true;
-            egui::Window::new(tr!("Artist and lyrics"))
-                .id(egui::Id::new("artist-lyrics-window"))
-                .open(&mut open)
-                .default_size(vec2(620.0, 440.0))
-                .default_pos(available.center() - vec2(310.0, 220.0))
-                .max_height((available.height() - 48.0).max(240.0))
-                .max_width((available.width() - 32.0).max(300.0))
-                .show(ctx, |ui| {
+            self.info_dialog = self.detached_window(
+                ctx,
+                "artist-lyrics-window",
+                tr!("Artist and lyrics"),
+                vec2(700.0, 560.0),
+                |app, ui| {
                     ui.horizontal(|ui| {
-                        ui.selectable_value(&mut self.info_lyrics, false, tr!("Artist"));
+                        ui.selectable_value(&mut app.info_lyrics, false, tr!("Artist"));
                         if ui
-                            .selectable_value(&mut self.info_lyrics, true, tr!("Lyrics"))
+                            .selectable_value(&mut app.info_lyrics, true, tr!("Lyrics"))
                             .clicked()
                         {
-                            self.last_lyric_line = None;
+                            app.last_lyric_line = None;
                         }
                     });
                     ui.separator();
-                    self.listening_content(
+                    app.listening_content(
                         ui,
-                        self.info_lyrics,
+                        app.info_lyrics,
                         palette::text(),
                         palette::muted(),
                         palette::accent(),
                     );
-                });
-            self.info_dialog = open;
+                },
+            );
+        } else {
+            self.auxiliary_geometry.close("artist-lyrics-window");
         }
         if self.audio_dialog {
-            let mut open = true;
-            egui::Window::new(tr!("Audio output and quality"))
-                .id(egui::Id::new("audio-settings-v06"))
-                .open(&mut open)
-                .default_width(540.0)
-                .default_height(550.0)
-                .max_width((available.width() - 32.0).max(300.0))
-                .max_height((available.height() - 40.0).max(200.0))
-                .vscroll(true)
-                .default_pos(available.center() - vec2(270.0, 275.0))
-                .show(ctx, |ui| self.signal(ui));
-            self.audio_dialog = open;
+            self.audio_dialog = self.detached_window(
+                ctx,
+                "audio-settings-v06",
+                tr!("Audio output and quality"),
+                vec2(600.0, 700.0),
+                |app, ui| {
+                    egui::ScrollArea::vertical()
+                        .id_salt("audio-content")
+                        .show(ui, |ui| app.signal(ui));
+                },
+            );
+        } else {
+            self.auxiliary_geometry.close("audio-settings-v06");
         }
         if self.sources_dialog {
-            let mut open = true;
-            egui::Window::new(tr!("Sources and synchronization"))
-                .id(egui::Id::new("source-settings-v06"))
-                .open(&mut open)
-                .default_width(430.0)
-                .default_height(580.0)
-                .max_width((available.width() - 32.0).max(280.0))
-                .max_height((available.height() - 40.0).max(200.0))
-                .vscroll(true)
-                .default_pos(available.center() - vec2(215.0, 290.0))
-                .show(ctx, |ui| {
-                    ui.label(
-                        RichText::new(tr!("Find new tracks without changing existing ones."))
-                            .color(palette::muted()),
-                    );
-                    ui.add_space(10.0);
-                    self.sidebar(ui);
-                });
+            let open = self.detached_window(
+                ctx,
+                "source-settings-v06",
+                tr!("Sources and synchronization"),
+                vec2(500.0, 680.0),
+                |app, ui| {
+                    egui::ScrollArea::vertical()
+                        .id_salt("sources-content")
+                        .show(ui, |ui| {
+                            ui.label(
+                                RichText::new(tr!(
+                                    "Find new tracks without changing existing ones."
+                                ))
+                                .color(palette::muted()),
+                            );
+                            ui.add_space(10.0);
+                            app.sidebar(ui);
+                        });
+                },
+            );
             self.sources_dialog = open && !self.ftp_dialog;
+        } else {
+            self.auxiliary_geometry.close("source-settings-v06");
         }
         if self.track_dialog {
-            let mut open = true;
-            egui::Window::new(tr!("Playing"))
-                .id(egui::Id::new("track-details-v06"))
-                .default_pos(available.center() - vec2(275.0, 285.0))
-                .open(&mut open)
-                .default_width(550.0)
-                .default_height(570.0)
-                .max_width((available.width() - 32.0).max(300.0))
-                .max_height((available.height() - 40.0).max(200.0))
-                .vscroll(true)
-                .show(ctx, |ui| {
-                    self.now_playing(ui, true);
-                    if let Some((provider, url)) = &self.art_origin {
-                        ui.hyperlink_to(
-                            crate::i18n::format(
-                                "Cover · {provider}",
-                                &[("provider", provider.clone())],
-                            ),
-                            url,
-                        );
-                    }
-                });
-            self.track_dialog = open;
+            self.track_dialog = self.detached_window(
+                ctx,
+                "track-details-v06",
+                tr!("Playing"),
+                vec2(650.0, 680.0),
+                |app, ui| {
+                    egui::ScrollArea::vertical()
+                        .id_salt("track-content")
+                        .show(ui, |ui| {
+                            app.now_playing(ui, true);
+                            if let Some((provider, url)) = &app.art_origin {
+                                ui.hyperlink_to(
+                                    crate::i18n::format(
+                                        "Cover · {provider}",
+                                        &[("provider", provider.clone())],
+                                    ),
+                                    url,
+                                );
+                            }
+                        });
+                },
+            );
+        } else {
+            self.auxiliary_geometry.close("track-details-v06");
         }
     }
 }

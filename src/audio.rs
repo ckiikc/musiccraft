@@ -53,6 +53,11 @@ pub enum Event {
     Position(f64, bool),
     Ended,
     Error(u64, String),
+    TrackError {
+        ticket: u64,
+        source: String,
+        reason: String,
+    },
 }
 
 pub struct Audio {
@@ -362,7 +367,11 @@ fn worker(
                     }
                     Ok(_) => {}
                     Err(e) => {
-                        let _ = events.send(Event::Error(ticket, e));
+                        let _ = events.send(Event::TrackError {
+                            ticket,
+                            source: track.source.clone(),
+                            reason: e,
+                        });
                     }
                 }
             }
@@ -820,7 +829,7 @@ mod native_test {
                     ended = true;
                     break;
                 }
-                Event::Error(_, e) => panic!("{e}"),
+                Event::Error(_, e) | Event::TrackError { reason: e, .. } => panic!("{e}"),
                 _ => {}
             }
         }
@@ -978,7 +987,7 @@ mod live_gapless_test {
                         ended = true;
                         break;
                     }
-                    Event::Error(_, e) => panic!("{e}"),
+                    Event::Error(_, e) | Event::TrackError { reason: e, .. } => panic!("{e}"),
                     _ => {}
                 }
             }

@@ -195,13 +195,16 @@ pub(super) fn volume_slider(
         )
     });
     let mut drag = ui.data_mut(|data| data.get_temp::<VolumeDrag>(drag_id));
-    if !ui.is_enabled() || !focused || !primary_down || pointer.is_none() || interrupted {
+    if !ui.is_enabled() || !primary_down || pointer.is_none() || interrupted {
         // A release outside the app may never arrive. Never let egui's retained
         // button-down state resume this gesture when focus/the pointer returns.
         drag = None;
     } else if response.is_pointer_button_down_on() && pressed {
+        // macOS can deliver the activation press before the new window focus.
+        // Keep this explicit press for the following focused frame. A stale
+        // button-down alone still cannot start or resume a gesture.
         drag = pointer.map(|pointer| VolumeDrag { pointer });
-    } else if !response.is_pointer_button_down_on() {
+    } else if !focused || !response.is_pointer_button_down_on() {
         drag = None;
     }
     let held = drag.is_some();
@@ -382,6 +385,109 @@ mod volume_tests {
             modifiers: Default::default(),
         }
     }
+    #[test]
+    fn volume_hover_shows_adjustment_cursor_before_any_press() {
+        for focused in [false, true] {
+            let ctx = egui::Context::default();
+            let mut db = -30.0;
+            frame_with_focus(&ctx, &mut db, vec![], false, true, focused);
+            let (_, cursor) = frame_with_focus(
+                &ctx,
+                &mut db,
+                vec![egui::Event::PointerMoved(pos2(50.0, 20.0))],
+                false,
+                true,
+                focused,
+            );
+            assert_eq!(cursor, egui::CursorIcon::ResizeHorizontal);
+            assert_eq!(db, -30.0);
+        }
+    }
+
+    #[test]
+    fn first_volume_press_can_gain_window_focus_without_losing_the_gesture() {
+        for fine in [false, true] {
+            let ctx = egui::Context::default();
+            let mut db = -30.0;
+            // A newly opened app is visible while another app is still active.
+            frame_with_focus(&ctx, &mut db, vec![], fine, true, false);
+            let start = pos2(50.0, 20.0);
+            frame_with_focus(
+                &ctx,
+                &mut db,
+                vec![egui::Event::PointerMoved(start), pointer(start, true)],
+                fine,
+                true,
+                false,
+            );
+            assert_eq!(db, -30.0, "the activation press must not jump the volume");
+            frame_with_focus(
+                &ctx,
+                &mut db,
+                vec![egui::Event::WindowFocused(true)],
+                fine,
+                true,
+                true,
+            );
+            frame_with_focus(
+                &ctx,
+                &mut db,
+                vec![egui::Event::PointerMoved(start + vec2(5.0, 0.0))],
+                fine,
+                true,
+                true,
+            );
+            let expected = -30.0 + 5.0 * 60.0 / 90.0 * if fine { 0.1 } else { 1.0 };
+            assert!(
+                (db - expected).abs() < 0.001,
+                "first gesture stayed blocked: {db}"
+            );
+        }
+    }
+
+    #[test]
+    fn an_activation_press_without_focus_cannot_resume_later() {
+        for cancel in [
+            None,
+            Some(egui::Event::PointerGone),
+            Some(egui::Event::WindowFocused(false)),
+        ] {
+            let ctx = egui::Context::default();
+            let mut db = -30.0;
+            let start = pos2(50.0, 20.0);
+            frame_with_focus(&ctx, &mut db, vec![], false, true, false);
+            frame_with_focus(
+                &ctx,
+                &mut db,
+                vec![egui::Event::PointerMoved(start), pointer(start, true)],
+                false,
+                true,
+                false,
+            );
+            // Only bridge the activation frame; do not keep an unfocused gesture.
+            frame_with_focus(
+                &ctx,
+                &mut db,
+                cancel.into_iter().collect(),
+                false,
+                true,
+                false,
+            );
+            frame_with_focus(
+                &ctx,
+                &mut db,
+                vec![
+                    egui::Event::WindowFocused(true),
+                    egui::Event::PointerMoved(pos2(95.0, 20.0)),
+                ],
+                false,
+                true,
+                true,
+            );
+            assert_eq!(db, -30.0);
+        }
+    }
+
     #[test]
     fn leaving_window_cancels_drag_until_a_fresh_press_even_if_release_is_missing() {
         let ctx = egui::Context::default();

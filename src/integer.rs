@@ -92,7 +92,7 @@ impl PacketDecoder {
                     limit_visual_bytes: symphonia::core::meta::Limit::Maximum(8 * 1024 * 1024),
                 },
             )
-            .map_err(|_| "Formato non riconosciuto dal decoder integer")?;
+            .map_err(|error| format!("Errore di decodifica audio: {error}"))?;
         let metadata = probed.metadata.get().and_then(|m| m.current().cloned());
         let format = probed.format;
         let track = format.default_track().ok_or("Traccia audio non trovata")?;
@@ -148,7 +148,7 @@ impl PacketDecoder {
         }
         let decoder = symphonia::default::get_codecs()
             .make(&params, &DecoderOptions::default())
-            .map_err(|_| "Codec integer non supportato")?;
+            .map_err(|error| format!("Errore di decodifica audio: {error}"))?;
         let effective = decoder.codec_params();
         let rate = effective
             .sample_rate
@@ -249,9 +249,10 @@ impl PacketDecoder {
             if packet.track_id() != self.id {
                 continue;
             }
-            let decoded = self.decoder.decode(&packet).map_err(
-                |_| "Errore di decodifica: il file non può essere dichiarato bit-perfect",
-            )?;
+            let decoded = self
+                .decoder
+                .decode(&packet)
+                .map_err(|error| format!("Errore di decodifica audio: {error}"))?;
             let is_float = matches!(&decoded, AudioBufferRef::F32(_) | AudioBufferRef::F64(_));
             if self.strict && is_float {
                 return Err(
@@ -417,6 +418,20 @@ impl WireFormat {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn damaged_packet_reports_the_decoder_cause_in_shared_playback() {
+        let fixture = std::io::Cursor::new(
+            include_bytes!("../tests/fixtures/invalid-subframe.flac").to_vec(),
+        );
+        let mut decoder = PacketDecoder::open(Box::new(fixture), false).unwrap();
+        let reason = decoder
+            .next(&|| false)
+            .err()
+            .expect("damaged packet must fail");
+        assert!(reason.contains("unexpected end of bitstream"), "{reason}");
+        assert!(!reason.contains("bit-perfect"), "{reason}");
+    }
+
     #[test]
     fn integer_conversion_retains_every_bit_including_low_bits_of_32_bit_pcm() {
         for bits in [16, 24, 32] {

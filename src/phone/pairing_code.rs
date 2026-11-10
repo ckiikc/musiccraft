@@ -78,6 +78,17 @@ pub fn nearby(cancel: &AtomicBool) -> Vec<Nearby> {
         if cancel.load(Ordering::Relaxed) {
             break;
         }
+        #[cfg(target_os = "macos")]
+        if let Some((host, port)) = super::address::service_endpoint(&name, cancel) {
+            for ip in super::address::local_ipv4(&host, cancel) {
+                devices.push(Nearby {
+                    name: name.clone(),
+                    host: ip.to_string(),
+                    port,
+                });
+            }
+        }
+        #[cfg(not(target_os = "macos"))]
         for line in dns_lines(
             vec![
                 "-L".into(),

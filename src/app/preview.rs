@@ -2,6 +2,22 @@
 use super::*;
 impl Aurea {
     pub(crate) fn preview(&mut self, scene: &str) {
+        if let Some(action) = match scene {
+            "native-menu-guide" => Some(crate::native_menu::Action::Guide),
+            "native-menu-settings" => Some(crate::native_menu::Action::Settings),
+            "native-menu-shuffle" => Some(crate::native_menu::Action::ShuffleAlbums),
+            "native-menu-audio" => Some(crate::native_menu::Action::Audio),
+            "native-menu-sources" => Some(crate::native_menu::Action::Sources),
+            "native-menu-details" => Some(crate::native_menu::Action::Details),
+            "native-menu-artist" => Some(crate::native_menu::Action::Artist),
+            "native-menu-network" => Some(crate::native_menu::Action::Network),
+            "native-menu-pair" => Some(crate::native_menu::Action::PairPhone),
+            _ => None,
+        } {
+            self.ctx
+                .data_mut(|d| d.insert_temp(egui::Id::new("native-menu-preview"), action));
+            return;
+        }
         if scene == "native-about-pinned" || scene == "native-about-normal" {
             self.saved.pinned = scene.ends_with("pinned");
             self.ctx
@@ -85,6 +101,19 @@ impl Aurea {
                 self.saved.tracks.push(t);
             }
         }
+        if scene.starts_with("mini-vinyl-flat-catalog") {
+            for (i, track) in self.saved.tracks.iter_mut().enumerate() {
+                track.source = format!("https://phone.invalid:8737/v1/audio/{i}.flac");
+                if i >= 8 {
+                    track.title = format!("Unrelated track {i}");
+                }
+            }
+            self.saved.sources.clear();
+            self.saved.folders.clear();
+            if scene.ends_with("-wide") {
+                self.saved.mini_size = Some([1018.0, 842.0]);
+            }
+        }
         if scene == "empty" {
             self.saved.tracks.clear();
         }
@@ -92,6 +121,8 @@ impl Aurea {
             || matches!(
                 scene,
                 "playing"
+                    | "playing-selection-follow"
+                    | "playing-selection-browse"
                     | "track"
                     | "loading"
                     | "mini"
@@ -114,6 +145,14 @@ impl Aurea {
             if scene == "long" {
                 self.saved.tracks[0].title="Una composizione dal titolo molto lungo per verificare il troncamento dei metadati e la visibilità di tutti i controlli".into();
             }
+        }
+        if scene.starts_with("playing-selection-") {
+            self.current = Some(self.saved.tracks[1].source.clone());
+            self.browser.selected_track = Some(
+                self.saved.tracks[usize::from(scene.ends_with("follow"))]
+                    .source
+                    .clone(),
+            );
         }
         if (scene.starts_with("mini") && scene != "mini-idle")
             || matches!(scene, "info" | "info-artist")

@@ -87,31 +87,30 @@ fn matches_chapter(title: &'static str, paragraphs: &[&'static str], query: &str
 impl Aurea {
     pub(super) fn help_window(&mut self, ctx: &egui::Context) {
         if !self.help_dialog {
+            self.auxiliary_geometry.close("musiccraft-help");
             return;
         }
-        let area = ctx.content_rect();
-        let mut open = true;
-        egui::Window::new(tr!("User guide"))
-            .id(egui::Id::new("musiccraft-help"))
-            .open(&mut open)
-            .default_size(vec2(650.0, 560.0))
-            .max_width((area.width() - 32.0).max(300.0))
-            .max_height((area.height() - 40.0).max(160.0))
-            .show(ctx, |ui| {
+        let open = self.detached_window(
+            ctx,
+            "musiccraft-help",
+            tr!("User guide"),
+            vec2(760.0, 700.0),
+            |app, ui| {
                 ui.label(
                     RichText::new(format!("MusicCraft {}", env!("CARGO_PKG_VERSION")))
                         .color(palette::accent()),
                 );
                 ui.add(
-                    egui::TextEdit::singleline(&mut self.help_query)
+                    egui::TextEdit::singleline(&mut app.help_query)
                         .hint_text(tr!("Search the guide…"))
                         .desired_width(f32::INFINITY),
                 );
                 ui.separator();
-                let query = search_key(self.help_query.trim());
+                let query = search_key(app.help_query.trim());
                 egui::ScrollArea::vertical()
                     .id_salt("help-content")
-                    .max_height((area.height() - 170.0).max(100.0))
+                    .max_height(ui.available_height())
+                    .auto_shrink([false, false])
                     .show(ui, |ui| {
                         for (index, (title, paragraphs)) in CHAPTERS.into_iter().enumerate() {
                             if !matches_chapter(title, paragraphs, &query) {
@@ -137,7 +136,8 @@ impl Aurea {
                             ui.add_space(8.0);
                         }
                     });
-            });
+            },
+        );
         self.help_dialog = open;
     }
 }

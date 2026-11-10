@@ -49,15 +49,53 @@ impl MiniIndex {
 }
 #[derive(Default)]
 pub(super) struct VinylIndex {
-    key: Option<(u64, usize, String)>,
+    key: Option<(u64, usize, VinylAlbum)>,
     rows: Vec<usize>,
 }
+
+/// A server URL directory is not necessarily an album directory. In particular,
+/// Android exposes the entire MediaStore catalog under one /v1/audio/ endpoint.
+/// Keep tags within their physical folder/remote endpoint so editions and copies
+/// from other sources do not get combined.
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+struct VinylAlbum {
+    folder: String,
+    album: String,
+    artist: String,
+    untagged_remote: Option<String>,
+}
+impl VinylAlbum {
+    fn of(track: &Track) -> Self {
+        let album = track.album.trim().to_lowercase();
+        let artist = if album.is_empty() {
+            String::new()
+        } else if track.album_artist.trim().is_empty() {
+            track.artist.trim().to_lowercase()
+        } else {
+            track.album_artist.trim().to_lowercase()
+        };
+        Self {
+            folder: track
+                .source
+                .rsplit_once('/')
+                .map_or("", |(parent, _)| parent)
+                .into(),
+            // Without album tags an HTTP endpoint says nothing about membership.
+            untagged_remote: (album.is_empty()
+                && (track.source.starts_with("https://") || track.source.starts_with("http://")))
+            .then(|| track.source.clone()),
+            album,
+            artist,
+        }
+    }
+}
 impl VinylIndex {
-    fn refresh(&mut self, tracks: &[Track], revision: u64, folder: &str) {
+    fn refresh(&mut self, tracks: &[Track], revision: u64, current: &Track) {
+        let album = VinylAlbum::of(current);
         if self
             .key
             .as_ref()
-            .is_some_and(|(r, n, f)| *r == revision && *n == tracks.len() && f == folder)
+            .is_some_and(|(r, n, a)| *r == revision && *n == tracks.len() && a == &album)
         {
             return;
         }
@@ -66,7 +104,7 @@ impl VinylIndex {
             tracks
                 .iter()
                 .enumerate()
-                .filter(|(_, t)| t.source.rsplit_once('/').map_or("", |(p, _)| p) == folder)
+                .filter(|(_, t)| VinylAlbum::of(t) == album)
                 .map(|(i, _)| i),
         );
         let numbered = self.rows.iter().all(|&i| tracks[i].number > 0);
@@ -79,7 +117,7 @@ impl VinylIndex {
             })
             .then_with(|| a.source.cmp(&b.source))
         });
-        self.key = Some((revision, tracks.len(), folder.into()));
+        self.key = Some((revision, tracks.len(), album));
     }
 }
 
@@ -281,12 +319,7 @@ impl Aurea {
             ctx.send_viewport_cmd(egui::ViewportCommand::Close);
         }
         self.refresh_mini_index();
-        let track = self
-            .requested
-            .as_ref()
-            .or(self.current.as_ref())
-            .and_then(|id| self.saved.tracks.iter().find(|t| &t.source == id))
-            .cloned();
+        let track = self.displayed_track().cloned();
         let area = player_content_area(area);
         let width = area.width();
         let origin = area.min;
@@ -707,7 +740,7 @@ impl Aurea {
             clipped(
                 ui,
                 rect(20.0, area.height() - 13.0, width - 40.0, 12.0),
-                &crate::i18n::engine_message(&self.message),
+                &self.playback_message(),
                 9.0,
                 Color32::from_rgb(243, 148, 128),
             );
@@ -980,12 +1013,8 @@ impl Aurea {
         let Some(current) = current else {
             return;
         };
-        let folder = current
-            .source
-            .rsplit_once('/')
-            .map_or("", |(parent, _)| parent);
         self.vinyl_index
-            .refresh(&self.saved.tracks, self.library_revision, folder);
+            .refresh(&self.saved.tracks, self.library_revision, current);
         let tracks = &self.vinyl_index.rows;
         clipped(
             ui,
@@ -1023,7 +1052,11 @@ impl Aurea {
             column.style_mut().interaction.selectable_labels = false;
             column.spacing_mut().item_spacing.y = 0.0;
             egui::ScrollArea::vertical()
-                .id_salt(("vinyl-tracks", side, folder))
+                .id_salt((
+                    "vinyl-tracks",
+                    side,
+                    self.vinyl_index.key.as_ref().map(|(_, _, album)| album),
+                ))
                 .auto_shrink([false, false])
                 .show_rows(&mut column, 28.0, rows.len(), |ui, range| {
                     for i in range {
@@ -1229,6 +1262,101 @@ fn button(
 mod tests {
     use super::*;
     #[test]
+    fn flat_phone_catalog_visual_lists_only_current_album() {
+        for appearance in player_visual::Appearance::ALL {
+            let dir = tempfile::tempdir().unwrap();
+            let ctx = egui::Context::default();
+            let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+            let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+            app.preview("mini-vinyl-flat-catalog");
+            app.saved.player_appearance = appearance;
+            let current = app.current.clone();
+            let selection = app.playback_selection.clone();
+            frame_sized(&mut app, &ctx, vec2(1018.0, 842.0), vec![]);
+            let output = frame_sized(&mut app, &ctx, vec2(1018.0, 842.0), vec![]);
+            assert_eq!(app.vinyl_index.rows, (0..8).collect::<Vec<_>>());
+            let nodes = output.platform_output.accesskit_update.unwrap().nodes;
+            assert!(
+                nodes
+                    .iter()
+                    .any(|(_, n)| n.label() == Some("Opening Light"))
+            );
+            assert!(
+                !nodes
+                    .iter()
+                    .any(|(_, n)| { n.label().is_some_and(|s| s.starts_with("Unrelated")) })
+            );
+            assert_eq!(app.current, current);
+            assert_eq!(app.playback_selection, selection);
+            assert_eq!(app.saved.tracks.len(), 72);
+        }
+    }
+
+    #[test]
+    fn album_rows_distinguish_artists_editions_sources_and_unknown_tags() {
+        fn track(source: &str, album: &str, artist: &str, disc: u32, number: u32) -> Track {
+            let mut t = Track::placeholder(source.into());
+            t.album = album.into();
+            t.artist = artist.into();
+            t.disc = disc;
+            t.number = number;
+            t
+        }
+        let root = "https://phone.invalid:8737/v1/audio/";
+        let mut tracks = vec![
+            track(&format!("{root}90.flac"), "Collection", "Artist A", 2, 1),
+            track(&format!("{root}20.flac"), "Collection", "Artist A", 1, 2),
+            track(&format!("{root}80.flac"), "Collection", "Artist A", 1, 1),
+            track(&format!("{root}1.flac"), "Collection", "Artist B", 1, 1),
+            track(&format!("{root}2.flac"), "Other album", "Artist A", 1, 1),
+            track(
+                "https://other.invalid/v1/audio/1.flac",
+                "Collection",
+                "Artist A",
+                1,
+                1,
+            ),
+            track("/music/Collection/1.flac", "Collection", "Artist A", 1, 1),
+            track(
+                &format!("{root}3.flac"),
+                "Collection (Deluxe)",
+                "Artist A",
+                1,
+                1,
+            ),
+            track(&format!("{root}4.flac"), "", "Artist A", 1, 1),
+            track(&format!("{root}5.flac"), "", "Artist A", 1, 2),
+        ];
+        let mut index = VinylIndex::default();
+        index.refresh(&tracks, 1, &tracks[0]);
+        assert_eq!(index.rows, [2, 1, 0]);
+        // Album changes in the same endpoint must invalidate the cached group.
+        index.refresh(&tracks, 1, &tracks[3]);
+        assert_eq!(index.rows, [3]);
+        index.refresh(&tracks, 1, &tracks[8]);
+        assert_eq!(index.rows, [8], "an untagged HTTP URL is not an album");
+        // Compilations use album artist even when the performers differ.
+        for t in &mut tracks[..4] {
+            t.album_artist = "Various Artists".into();
+        }
+        index.refresh(&tracks, 2, &tracks[0]);
+        assert_eq!(index.rows.len(), 4);
+        // Refresh when tags change, even without adding/removing tracks.
+        tracks[3].album = "Other album".into();
+        index.refresh(&tracks, 3, &tracks[0]);
+        assert_eq!(index.rows, [2, 1, 0]);
+        // Physical folders still keep separate editions and unknown albums.
+        let local = [
+            track("/music/a/1.flac", "", "A", 1, 1),
+            track("/music/a/2.flac", "", "B", 1, 2),
+            track("/music/a/3.flac", "Known", "A", 1, 3),
+            track("/music/b/1.flac", "", "A", 1, 1),
+        ];
+        index.refresh(&local, 4, &local[0]);
+        assert_eq!(index.rows, [0, 1]);
+    }
+
+    #[test]
     fn mini_indices_refresh_for_query_scope_metadata_and_new_tracks_only() {
         let mut tracks = vec![
             Track::placeholder("/nas/01.flac".into()),
@@ -1257,13 +1385,13 @@ mod tests {
         );
         assert_eq!(index.rows, [1]);
         let mut vinyl = VinylIndex::default();
-        vinyl.refresh(&tracks, 1, "/nas");
+        vinyl.refresh(&tracks, 1, &tracks[0]);
         assert_eq!(vinyl.rows.len(), 2);
         tracks[2].number = 1;
         tracks[0].number = 2;
-        vinyl.refresh(&tracks, 2, "/nas");
+        vinyl.refresh(&tracks, 2, &tracks[0]);
         assert_eq!(vinyl.rows, [2, 0]);
-        vinyl.refresh(&tracks, 2, "ftp://phone/Music");
+        vinyl.refresh(&tracks, 2, &tracks[1]);
         assert_eq!(vinyl.rows, [1]);
     }
     fn frame(app: &mut Aurea, ctx: &egui::Context, events: Vec<egui::Event>) -> egui::FullOutput {

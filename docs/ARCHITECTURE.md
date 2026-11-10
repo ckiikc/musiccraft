@@ -22,3 +22,9 @@ The public release uses io.github.ckiikc.musiccraft and a separate MusicCraft pr
 The user-started Android sharing service uses a foreground notification, a per-installation Android Keystore TLS identity and read-only HTTPS. NSD/Bonjour advertises `_musiccraft._tcp.`. Four-digit short-lived SRP-6a pairing requires explicit phone approval before exchanging the encrypted identity/credential. The desktop's `phone/` and `app/phone_pair.rs` use the same sync/streaming paths as other library sources. macOS Keychain stores credentials; library URLs carry no token. Sharing suspension is distinct from an empty catalog and never triggers destructive pruning.
 
 `open_documents.rs` receives macOS file-browser events and delivers their ordered selection to the existing playback path. The packager declares audio associations without changing the user's default handler.
+
+## Desktop continuity and current-track indicators (0.10.57)
+
+The native macOS menu actions dispatch to the same UI/player paths. Auxiliary windows use independent native viewports. Network audio keeps the initially verified HTTP(S) route for each file; native DNS-SD resolves paired phones to verified local addresses while preserving identity/pin checks. Stream failures remain distinct from clean EOF and decoder failures.
+
+The album-side list identifies the current album within its source rather than using a flat HTTP parent path as the album. Table selection follows accepted Started events unless the user is browsing another row. A two-channel row indicator consumes the existing audio peak telemetry, with no new audio callback, decoder or repaint timer. Its hover-only accessibility marker does not take row clicks.

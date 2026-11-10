@@ -63,6 +63,7 @@ impl Aurea {
     }
     pub(super) fn phone_pair_window(&mut self, ctx: &egui::Context) {
         if !self.phone_pair_dialog {
+            self.auxiliary_geometry.close("phone-pairing");
             return;
         }
         if !self.phone_pair.searched {
@@ -106,63 +107,63 @@ impl Aurea {
         {
             self.search_phones();
         }
-        let mut open = true;
-        egui::Window::new(tr!("Pair with MusicCraft Android"))
-            .id(egui::Id::new("phone-pairing"))
-            .open(&mut open)
-            .default_width(450.0)
-            .show(ctx, |ui| {
+        let open = self.detached_window(
+            ctx,
+            "phone-pairing",
+            tr!("Pair with MusicCraft Android"),
+            vec2(520.0, 420.0),
+            |app, ui| {
                 ui.label(tr!(
                     "On the phone, enable sharing and choose Pair computer."
                 ));
                 ui.add_space(8.0);
-                if self.phone_pair.searching {
+                if app.phone_pair.searching {
                     ui.horizontal(|ui| {
                         ui.spinner();
                         ui.label(tr!("Searching for phones…"));
                     });
-                } else if self.phone_pair.devices.is_empty() {
+                } else if app.phone_pair.devices.is_empty() {
                     ui.label(tr!(
                         "No phone found. Check that both devices use the same Wi-Fi."
                     ));
                 } else {
-                    for (i, device) in self.phone_pair.devices.iter().enumerate() {
-                        ui.selectable_value(&mut self.phone_pair.selected, i, &device.name);
+                    for (i, device) in app.phone_pair.devices.iter().enumerate() {
+                        ui.selectable_value(&mut app.phone_pair.selected, i, &device.name);
                     }
                 }
                 ui.add_space(8.0);
                 ui.horizontal(|ui| {
                     ui.label(tr!("Four-digit code"));
                     ui.add_enabled(
-                        !self.phone_pair.pairing,
-                        egui::TextEdit::singleline(&mut self.phone_pair.code)
+                        !app.phone_pair.pairing,
+                        egui::TextEdit::singleline(&mut app.phone_pair.code)
                             .char_limit(4)
                             .desired_width(72.0)
                             .font(egui::TextStyle::Monospace),
                     );
                 });
-                self.phone_pair.code.retain(|c| c.is_ascii_digit());
-                if self.phone_pair.waiting {
+                app.phone_pair.code.retain(|c| c.is_ascii_digit());
+                if app.phone_pair.waiting {
                     ui.label(tr!("Confirm the pairing request on your phone."));
                 }
                 ui.add_space(8.0);
                 ui.horizontal(|ui| {
-                    let ready = !self.phone_pair.pairing
-                        && !self.phone_pair.searching
-                        && self.phone_pair.code.len() == 4
-                        && self.phone_pair.selected < self.phone_pair.devices.len();
+                    let ready = !app.phone_pair.pairing
+                        && !app.phone_pair.searching
+                        && app.phone_pair.code.len() == 4
+                        && app.phone_pair.selected < app.phone_pair.devices.len();
                     if ui
                         .add_enabled(ready, egui::Button::new(tr!("Pair")))
                         .clicked()
                     {
-                        let peer = self.phone_pair.devices[self.phone_pair.selected].clone();
-                        let code = std::mem::take(&mut self.phone_pair.code);
-                        let cancel = self.phone_pair.cancel.clone();
+                        let peer = app.phone_pair.devices[app.phone_pair.selected].clone();
+                        let code = std::mem::take(&mut app.phone_pair.code);
+                        let cancel = app.phone_pair.cancel.clone();
                         let ctx = ctx.clone();
                         let (tx, rx) = mpsc::channel();
-                        self.phone_pair.rx = Some(rx);
-                        self.phone_pair.pairing = true;
-                        self.phone_pair.error.clear();
+                        app.phone_pair.rx = Some(rx);
+                        app.phone_pair.pairing = true;
+                        app.phone_pair.error.clear();
                         std::thread::spawn(move || {
                             let result = crate::phone::pair(&peer, &code, &cancel, || {
                                 let _ = tx.send(Event::Waiting);
@@ -174,19 +175,20 @@ impl Aurea {
                     }
                     if ui
                         .add_enabled(
-                            !self.phone_pair.pairing && !self.phone_pair.searching,
+                            !app.phone_pair.pairing && !app.phone_pair.searching,
                             egui::Button::new(tr!("Retry")),
                         )
                         .clicked()
                     {
-                        self.search_phones();
+                        app.search_phones();
                     }
-                    if self.phone_pair.pairing {
+                    if app.phone_pair.pairing {
                         ui.spinner();
                     }
                 });
-                ui.label(&self.phone_pair.error);
-            });
+                ui.label(&app.phone_pair.error);
+            },
+        );
         self.phone_pair_dialog &= open;
         if !self.phone_pair_dialog {
             self.phone_pair = State::default()

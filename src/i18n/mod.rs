@@ -191,6 +191,9 @@ pub fn format(key: &'static str, values: &[(&str, String)]) -> String {
 }
 /// Localize engine notices at the UI boundary; protocol and device values stay opaque.
 pub fn engine_message(message: &str) -> String {
+    if let Some(reason) = message.strip_prefix("Errore di decodifica audio: ") {
+        return std::format!("{}: {reason}", text("Unsupported or damaged audio file"));
+    }
     if let Some(value) = CURRENT.with(|c| catalogs()[c.get()].get(message).copied()) {
         return value.to_string();
     }

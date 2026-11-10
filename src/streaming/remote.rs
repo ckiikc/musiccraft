@@ -18,6 +18,17 @@ fn error(message: impl ToString) -> io::Error {
     io::Error::other(message.to_string())
 }
 
+fn transfer_error(cause: io::Error) -> io::Error {
+    // An incomplete HTTP/FTP range is not the end of the audio file. Demuxers
+    // treat UnexpectedEof as a clean end and would silently truncate playback.
+    let kind = if cause.kind() == io::ErrorKind::UnexpectedEof {
+        io::ErrorKind::ConnectionAborted
+    } else {
+        cause.kind()
+    };
+    io::Error::new(kind, format!("Lettura audio dalla rete: {cause}"))
+}
+
 pub(super) fn ftp_source(source: &str) -> bool {
     matches!(
         source.split_once(':').map(|(scheme, _)| scheme),
@@ -70,6 +81,7 @@ struct Remote {
     root: PathBuf,
     blocks: Vec<bool>,
     literal: bool,
+    route: Option<String>,
 }
 impl Remote {
     fn open(
@@ -79,9 +91,18 @@ impl Remote {
         auth: &AuthStore,
         cancel: Cancellation,
     ) -> io::Result<Self> {
+        Self::open_with_handle(source, root, target, auth, cancel, Easy::new())
+    }
+    fn open_with_handle(
+        source: &str,
+        root: &Path,
+        target: PathBuf,
+        auth: &AuthStore,
+        cancel: Cancellation,
+        mut easy: Easy,
+    ) -> io::Result<Self> {
         let _priority = cache::AudioTransfer::begin();
         cancel.check()?;
-        let mut easy = Easy::new();
         easy.url(source).map_err(error)?;
         easy.connect_timeout(Duration::from_secs(3))
             .map_err(error)?;
@@ -141,6 +162,31 @@ impl Remote {
         if length == 0 || length > MAX_STREAM_FILE {
             return Err(error("Dimensione audio oltre il limite di streaming"));
         }
+        // Keep the successful HTTP peer for this file only. A new stream still
+        // performs a fresh lookup; URL, Host, credentials and TLS pin stay intact.
+        let route = if matches!(
+            url::Url::parse(source)
+                .map(|u| u.scheme().to_owned())
+                .as_deref(),
+            Ok("http" | "https")
+        ) {
+            let url = url::Url::parse(source).map_err(error)?;
+            easy.primary_ip().map_err(error)?.and_then(|ip| {
+                ip.parse::<std::net::IpAddr>().ok().map(|ip| {
+                    let ip = match ip {
+                        std::net::IpAddr::V4(ip) => ip.to_string(),
+                        std::net::IpAddr::V6(ip) => format!("[{ip}]"),
+                    };
+                    format!(
+                        "{}:{}:{ip}",
+                        url.host_str().unwrap_or_default(),
+                        url.port_or_known_default().unwrap_or(0)
+                    )
+                })
+            })
+        } else {
+            None
+        };
         fs::create_dir_all(root)?;
         let part = target.with_extension(format!("{:016x}.stream-part", rand::random::<u64>()));
         let file = OpenOptions::new()
@@ -171,6 +217,7 @@ impl Remote {
             root: root.to_owned(),
             blocks: vec![false; length.div_ceil(block_size as u64) as usize],
             literal,
+            route,
         })
     }
     fn fetch(&mut self, start: u64, size: usize) -> io::Result<Vec<u8>> {
@@ -202,6 +249,11 @@ impl Remote {
 
     fn fetch_range(&mut self, start: u64, size: usize) -> io::Result<Vec<u8>> {
         let easy = self.easy.get_mut().map_err(error)?;
+        if let Some(route) = &self.route {
+            let mut addresses = curl::easy::List::new();
+            addresses.append(route).map_err(error)?;
+            easy.resolve(addresses).map_err(error)?;
+        }
         easy.range(&format!("{start}-{}", start + size as u64 - 1))
             .map_err(error)?;
         let mut bytes = Vec::with_capacity(size);
@@ -287,7 +339,7 @@ impl Read for Remote {
                 self.file.read_exact(&mut bytes)?;
                 bytes
             } else {
-                let bytes = self.fetch(start, size)?;
+                let bytes = self.fetch(start, size).map_err(transfer_error)?;
                 if self.length <= cache::MAX_FILE {
                     self.file.seek(SeekFrom::Start(start))?;
                     self.file.write_all(&bytes)?;
@@ -420,4 +472,140 @@ fn literal_request(
         return Err(error("Intervallo FTP non valido"));
     }
     Ok(bytes)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::{
+        net::TcpListener,
+        sync::{Arc, atomic::AtomicU64},
+    };
+
+    include!("remote_regression.rs");
+
+    #[test]
+    fn incomplete_remote_range_is_an_error_not_a_clean_end_or_cached_audio() {
+        let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+        let url = format!("http://{}/synthetic.wav", listener.local_addr().unwrap());
+        let server = std::thread::spawn(move || {
+            for head in [true, false] {
+                let (mut socket, _) = listener.accept().unwrap();
+                socket
+                    .set_read_timeout(Some(Duration::from_secs(3)))
+                    .unwrap();
+                let mut request = Vec::new();
+                while !request.ends_with(b"\r\n\r\n") {
+                    let mut byte = [0];
+                    socket.read_exact(&mut byte).unwrap();
+                    request.push(byte[0]);
+                }
+                if head {
+                    socket.write_all(b"HTTP/1.1 200 OK\r\nContent-Length: 262144\r\nConnection: close\r\n\r\n").unwrap();
+                } else {
+                    socket.write_all(b"HTTP/1.1 206 Partial Content\r\nContent-Length: 262144\r\nContent-Range: bytes 0-262143/262144\r\nConnection: close\r\n\r\npartial").unwrap();
+                }
+            }
+        });
+        let temp = tempfile::tempdir().unwrap();
+        let target = temp.path().join("synthetic.audio");
+        let cancel = Cancellation::new(Arc::new(AtomicU64::new(1)), 1, None);
+        let mut remote = Remote::open(
+            &url,
+            temp.path(),
+            target.clone(),
+            &AuthStore::default(),
+            cancel,
+        )
+        .unwrap();
+        let failure = remote.read(&mut [0; 16]).unwrap_err();
+        assert_eq!(failure.kind(), io::ErrorKind::ConnectionAborted);
+        assert!(failure.to_string().contains("Lettura audio dalla rete: "));
+        drop(remote);
+        assert!(!target.exists());
+        assert_eq!(fs::read_dir(temp.path()).unwrap().count(), 0);
+        server.join().unwrap();
+    }
+
+    #[test]
+    fn interrupted_range_reaches_the_packet_decoder_instead_of_becoming_eof() {
+        let temp = tempfile::tempdir().unwrap();
+        let path = temp.path().join("synthetic.wav");
+        let mut writer = hound::WavWriter::create(
+            &path,
+            hound::WavSpec {
+                channels: 2,
+                sample_rate: 48000,
+                bits_per_sample: 16,
+                sample_format: hound::SampleFormat::Int,
+            },
+        )
+        .unwrap();
+        for _ in 0..192000 {
+            writer.write_sample(17i16).unwrap();
+        }
+        writer.finalize().unwrap();
+        let bytes = fs::read(&path).unwrap();
+        let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+        let url = format!("http://{}/synthetic.wav", listener.local_addr().unwrap());
+        let server = std::thread::spawn(move || {
+            for request_index in 0..3 {
+                let (mut socket, _) = listener.accept().unwrap();
+                socket
+                    .set_read_timeout(Some(Duration::from_secs(3)))
+                    .unwrap();
+                let mut request = Vec::new();
+                while !request.ends_with(b"\r\n\r\n") {
+                    let mut byte = [0];
+                    socket.read_exact(&mut byte).unwrap();
+                    request.push(byte[0]);
+                }
+                if request_index == 0 {
+                    write!(
+                        socket,
+                        "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
+                        bytes.len()
+                    )
+                    .unwrap();
+                } else {
+                    let start = if request_index == 1 { 0 } else { BLOCK };
+                    let end = (start + BLOCK).min(bytes.len());
+                    write!(socket,"HTTP/1.1 206 Partial Content\r\nContent-Length: {}\r\nContent-Range: bytes {start}-{}/{}\r\nConnection: close\r\n\r\n",end-start,end-1,bytes.len()).unwrap();
+                    socket
+                        .write_all(if request_index == 1 {
+                            &bytes[start..end]
+                        } else {
+                            b"partial"
+                        })
+                        .unwrap();
+                }
+            }
+        });
+        let target = temp.path().join("synthetic.audio");
+        let cancel = Cancellation::new(Arc::new(AtomicU64::new(1)), 1, None);
+        let remote = Remote::open(
+            &url,
+            temp.path(),
+            target.clone(),
+            &AuthStore::default(),
+            cancel,
+        )
+        .unwrap();
+        let mut decoder = crate::integer::PacketDecoder::open(Box::new(remote), false).unwrap();
+        let mut frames = 0;
+        loop {
+            match decoder.next(&|| false) {
+                Ok(Some(block)) => frames += block.frames(),
+                Ok(None) => panic!("interrupted range must not become a clean end"),
+                Err(reason) => {
+                    assert!(frames > 0);
+                    assert!(reason.contains("Lettura audio dalla rete: "), "{reason}");
+                    break;
+                }
+            }
+        }
+        drop(decoder);
+        assert!(!target.exists());
+        server.join().unwrap();
+    }
 }

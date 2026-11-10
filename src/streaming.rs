@@ -226,6 +226,7 @@ impl Stream {
         let cancellation = cancel.clone();
         let (ready, waiting) = mpsc::sync_channel(1);
         let duration = decoder.duration;
+        let error_source = track.source.clone();
         std::thread::spawn(move || {
             let mut ready = Some(ready);
             let mut epoch = 0;
@@ -305,7 +306,11 @@ impl Stream {
                         if cancellation.plan.is_none()
                             || cancellation.started.load(Ordering::Acquire)
                         {
-                            crate::audio::Event::Error(cancellation.ticket, error)
+                            crate::audio::Event::TrackError {
+                                ticket: cancellation.ticket,
+                                source: error_source,
+                                reason: error,
+                            }
                         } else {
                             crate::audio::Event::Notice(format!(
                                 "Precaricamento audio interrotto: {error}"

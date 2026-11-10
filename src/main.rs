@@ -18,6 +18,7 @@ mod library;
 mod listening;
 mod media_server;
 mod multiroom;
+mod native_menu;
 mod network;
 mod open_documents;
 mod phone;

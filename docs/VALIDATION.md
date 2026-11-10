@@ -1,3 +1,15 @@
+# Desktop 0.10.57 source update — 2026-11-10
+
+The development source passed 218 ordinary tests, with 42 prerequisite-based tests excluded, Clippy for all targets with warnings denied, and a release build. Regression coverage includes interrupted reads, DNS expiry across audio ranges, authenticated phone reconnection, album membership in a flat catalog, title-text interactions, the first volume gesture across activation, current-track selection and stereo row-indicator geometry. The first fresh-launch volume gesture was also confirmed by the operator in an isolated native QA build.
+
+On the installed development build, native screenshots of real playback showed different L/R bar heights over consecutive frames. This is a UI/telemetry observation, not an acoustic capture or a hardware audio certification. Native visual fixtures use invented metadata; private screenshots and profiles are excluded from Git.
+
+The public export keeps the established public bundle ID, Keychain service and profile location. Personal network literals in synthetic tests are replaced with generic fixture addresses, and credential-rejection fixtures use explicit dummy values. The publication scanner reported no findings before commit preparation. At the user's request, no additional local test suite was run on this sanitized export; CI may run its normal source checks after publication. Android inputs and the established public packager remain unchanged.
+
+The source update is not a new public binary release. Existing downloadable releases retain their own versions and checksums.
+
+---
+
 # MusicCraft desktop 0.10.50 and Android 0.3.0 — 2026-11-08
 
 The sanitized public desktop source passed 198 ordinary tests (40 prerequisite-based tests excluded), formatting, Clippy all-targets with warnings denied, all 12 authenticated loopback FTP integrations, three Mach-O identity tests, one document-association test and publication scanning. Tests use synthetic files and a fresh profile. The source/package retain the stable public app ID and do not import the private development profile.

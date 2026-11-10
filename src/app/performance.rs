@@ -143,6 +143,24 @@ fn volume_round_trips_and_old_profiles_keep_the_previous_default() {
     assert_eq!(valid_volume(-90.0), -60.0);
 }
 #[test]
+fn full_library_consumes_real_stereo_peaks_even_without_focus() {
+    let dir = tempfile::tempdir().unwrap();
+    let ctx = egui::Context::default();
+    let cc = eframe::CreationContext::_new_kittest(ctx);
+    let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+    app.saved.mini = false;
+    for peaks in [[0.8_f32, 0.1], [0.2, 0.6]] {
+        for (meter, value) in app.audio.meters.iter().zip(peaks) {
+            meter.store(value.to_bits(), Ordering::Relaxed);
+        }
+        app.update_meters(1.0, false, false, true);
+        assert_eq!(app.meters, peaks);
+    }
+    app.update_meters(1.0, false, true, true);
+    assert_eq!(app.meters, [0.0; 2]);
+}
+
+#[test]
 fn repaint_cadence_follows_visible_work() {
     let dir = tempfile::tempdir().unwrap();
     let ctx = egui::Context::default();

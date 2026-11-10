@@ -449,6 +449,9 @@ impl Aurea {
             scroll = scroll.vertical_scroll_offset(0.0);
         }
         scroll.show_rows(ui, 48.0, self.browser.indices.len(), |ui, range| {
+            // The table row owns selection, double-click and keyboard focus.
+            // Its child labels must not intercept clicks to select title text.
+            ui.style_mut().interaction.selectable_labels = false;
             for row in range {
                 let t = &self.saved.tracks[self.browser.indices[row]];
                 let current = self.current.as_ref() == Some(&t.source);
@@ -465,9 +468,9 @@ impl Aurea {
                 ui.painter().rect_filled(
                     rect,
                     5.0,
-                    if selected || current {
+                    if current {
                         palette::selected()
-                    } else if response.hovered() {
+                    } else if selected || response.hovered() {
                         palette::surface()
                     } else if row % 2 == 0 {
                         palette::panel()
@@ -475,6 +478,14 @@ impl Aurea {
                         palette::bg()
                     },
                 );
+                if selected && !current {
+                    ui.painter().rect_stroke(
+                        rect.shrink(0.5),
+                        5.0,
+                        egui::Stroke::new(1.0, palette::line()),
+                        egui::StrokeKind::Inside,
+                    );
+                }
                 if current {
                     ui.painter().rect_filled(
                         egui::Rect::from_min_size(rect.min + vec2(0.0, 10.0), vec2(2.0, 28.0)),
@@ -482,20 +493,43 @@ impl Aurea {
                         palette::accent(),
                     );
                 }
-                ui.painter().text(
-                    rect.min + vec2(12.0, 24.0),
-                    egui::Align2::LEFT_CENTER,
-                    format!(
-                        "{:02}",
-                        if t.number > 0 {
-                            t.number as usize
-                        } else {
-                            row + 1
-                        }
-                    ),
-                    egui::FontId::monospace(10.0),
-                    palette::muted(),
-                );
+                if current {
+                    let indicator =
+                        egui::Rect::from_center_size(rect.min + vec2(25.0, 24.0), vec2(18.0, 20.0));
+                    playing_indicator(
+                        ui.painter(),
+                        indicator,
+                        self.meters,
+                        self.paused,
+                        self.saved.reduce_motion,
+                    );
+                    let label = if self.paused {
+                        tr!("Pause")
+                    } else {
+                        tr!("Playing")
+                    };
+                    let marker =
+                        ui.interact(indicator, response.id.with("playing"), egui::Sense::hover());
+                    marker.widget_info(|| {
+                        egui::WidgetInfo::labeled(egui::WidgetType::Image, true, label)
+                    });
+                    marker.on_hover_text(label);
+                } else {
+                    ui.painter().text(
+                        rect.min + vec2(12.0, 24.0),
+                        egui::Align2::LEFT_CENTER,
+                        format!(
+                            "{:02}",
+                            if t.number > 0 {
+                                t.number as usize
+                            } else {
+                                row + 1
+                            }
+                        ),
+                        egui::FontId::monospace(10.0),
+                        palette::muted(),
+                    );
+                }
                 clipped(
                     ui,
                     egui::Rect::from_min_size(
@@ -587,9 +621,223 @@ impl Aurea {
     }
 }
 
+/// The same -60..0 dB peak range as the mini player's stereo meters.
+fn peak_fraction(level: f32) -> f32 {
+    ((20.0 * level.max(0.000001).log10() + 60.0) / 60.0).clamp(0.0, 1.0)
+}
+
+fn playing_indicator(
+    p: &egui::Painter,
+    rect: egui::Rect,
+    levels: [f32; 2],
+    paused: bool,
+    reduce_motion: bool,
+) {
+    if reduce_motion && !paused {
+        let center = rect.center();
+        p.add(egui::Shape::convex_polygon(
+            vec![
+                center + vec2(-4.0, -6.0),
+                center + vec2(5.0, 0.0),
+                center + vec2(-4.0, 6.0),
+            ],
+            palette::accent(),
+            egui::Stroke::NONE,
+        ));
+        return;
+    }
+    for (channel, level) in levels.into_iter().enumerate() {
+        let x = rect.center().x - 5.0 + channel as f32 * 7.0;
+        let rail = egui::Rect::from_min_size(pos2(x, rect.bottom() - 18.0), vec2(3.0, 18.0));
+        if paused {
+            p.rect_filled(rail.shrink2(vec2(0.0, 3.0)), 1.0, palette::muted());
+        } else {
+            p.rect_filled(rail, 1.0, palette::line());
+            let fill = egui::Rect::from_min_max(
+                pos2(
+                    rail.left(),
+                    rail.bottom() - rail.height() * peak_fraction(level),
+                ),
+                rail.max,
+            );
+            p.rect_filled(fill, 1.0, palette::accent());
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn playback_indicator_preserves_stereo_dynamics_and_handles_invalid_peaks() {
+        assert_eq!(peak_fraction(0.0), 0.0);
+        assert_eq!(peak_fraction(f32::NAN), 0.0);
+        assert_eq!(peak_fraction(1.0), 1.0);
+        assert_eq!(peak_fraction(f32::INFINITY), 1.0);
+        assert!(peak_fraction(0.1) < peak_fraction(0.8));
+        assert!(peak_fraction(0.001) < peak_fraction(0.01));
+    }
+
+    #[test]
+    fn stereo_indicator_swaps_channels_and_pause_ignores_the_peaks() {
+        fn paint(levels: [f32; 2], paused: bool) -> Vec<(egui::Rect, Color32)> {
+            let ctx = egui::Context::default();
+            let mut output = ctx.run_ui(Default::default(), |ui| {
+                playing_indicator(
+                    ui.painter(),
+                    egui::Rect::from_min_size(pos2(10.0, 10.0), vec2(18.0, 20.0)),
+                    levels,
+                    paused,
+                    false,
+                );
+            });
+            output.textures_delta.clear();
+            output
+                .shapes
+                .into_iter()
+                .filter_map(|s| match s.shape {
+                    egui::Shape::Rect(r) if r.rect.width() == 3.0 => Some((r.rect, r.fill)),
+                    _ => None,
+                })
+                .collect()
+        }
+        let a = paint([0.1, 0.8], false);
+        let b = paint([0.8, 0.1], false);
+        let heights = |rows: &[(egui::Rect, Color32)]| {
+            rows.iter()
+                .filter(|(_, color)| *color == palette::accent())
+                .map(|(r, _)| r.height())
+                .collect::<Vec<_>>()
+        };
+        let (a, b) = (heights(&a), heights(&b));
+        assert_eq!(a.len(), 2);
+        assert!(a[0] < a[1]);
+        assert_eq!(a, [b[1], b[0]]);
+        assert_eq!(paint([0.0, 1.0], true), paint([1.0, 0.0], true));
+    }
+
+    #[test]
+    fn track_text_click_selects_the_row_and_double_click_or_enter_plays_it() {
+        for size in [vec2(640.0, 300.0), vec2(1120.0, 400.0)] {
+            for column in if size.x >= 700.0 { 0..3 } else { 0..1 } {
+                let dir = tempfile::tempdir().unwrap();
+                let ctx = egui::Context::default();
+                let cc = eframe::CreationContext::_new_kittest(ctx.clone());
+                let mut app = Aurea::new(&cc, dir.path().into(), vec![], None, None);
+                let (tx, commands) = mpsc::channel();
+                app.audio.tx = tx;
+                app.saved.auto_sync = false;
+                app.online_covers.store(false, Ordering::Relaxed);
+                app.saved.tracks = (1..=2)
+                    .map(|n| {
+                        let mut t = Track::placeholder(format!("/synthetic/{n}.flac"));
+                        t.title = format!("Track title {n}");
+                        t.artist = "Test artist".into();
+                        t.album = "Test album".into();
+                        t
+                    })
+                    .collect();
+                let target = app.saved.tracks[0].source.clone();
+                let mut tick = 0;
+                let frame = |app: &mut Aurea, tick: &mut u32, events| {
+                    *tick += 1;
+                    app.refresh_browser();
+                    let mut output = ctx.run_ui(
+                        egui::RawInput {
+                            time: Some(*tick as f64 * 0.03),
+                            screen_rect: Some(egui::Rect::from_min_size(pos2(0.0, 0.0), size)),
+                            events,
+                            ..Default::default()
+                        },
+                        |ui| app.track_table(ui),
+                    );
+                    output.textures_delta.clear();
+                    output
+                };
+                frame(&mut app, &mut tick, vec![]);
+                let output = frame(&mut app, &mut tick, vec![]);
+                let nodes = output.platform_output.accesskit_update.unwrap().nodes;
+                let text = ["Track title 1", "Test artist", "Test album"][column];
+                let row = nodes
+                    .iter()
+                    .find(|(_, n)| n.label() == Some("Track title 1, Test artist"))
+                    .unwrap()
+                    .1
+                    .bounds()
+                    .unwrap();
+                let bounds = nodes
+                    .iter()
+                    .find(|(_, n)| {
+                        n.value() == Some(text)
+                            && n.bounds().is_some_and(|b| b.y0 >= row.y0 && b.y1 <= row.y1)
+                    })
+                    .unwrap()
+                    .1
+                    .bounds()
+                    .unwrap();
+                // A point on the glyphs, not the empty padding of the row.
+                let pos = pos2(
+                    (bounds.x0 + 3.0) as f32,
+                    ((bounds.y0 + bounds.y1) / 2.0) as f32,
+                );
+                frame(&mut app, &mut tick, vec![egui::Event::PointerMoved(pos)]);
+                for pressed in [true, false] {
+                    frame(
+                        &mut app,
+                        &mut tick,
+                        vec![egui::Event::PointerButton {
+                            pos,
+                            button: egui::PointerButton::Primary,
+                            pressed,
+                            modifiers: egui::Modifiers::NONE,
+                        }],
+                    );
+                }
+                assert_eq!(
+                    app.browser.selected_track.as_ref(),
+                    Some(&target),
+                    "column={column}"
+                );
+                assert!(
+                    commands.try_recv().is_err(),
+                    "one click selects without playing"
+                );
+                for pressed in [true, false] {
+                    frame(
+                        &mut app,
+                        &mut tick,
+                        vec![egui::Event::PointerButton {
+                            pos,
+                            button: egui::PointerButton::Primary,
+                            pressed,
+                            modifiers: egui::Modifiers::NONE,
+                        }],
+                    );
+                }
+                assert!(
+                    matches!(commands.try_recv(), Ok(Command::Load{track,..}) if track.source==target)
+                );
+                assert_eq!(app.playback_selection.as_ref().unwrap().len(), 2);
+                // Enter uses the same focused row action, retaining the results.
+                app.loading = false;
+                frame(
+                    &mut app,
+                    &mut tick,
+                    vec![egui::Event::Key {
+                        key: egui::Key::Enter,
+                        physical_key: None,
+                        pressed: true,
+                        repeat: false,
+                        modifiers: egui::Modifiers::NONE,
+                    }],
+                );
+                assert!(
+                    matches!(commands.try_recv(), Ok(Command::Load{track,..}) if track.source==target)
+                );
+            }
+        }
+    }
 
     #[test]
     fn facet_rows_select_when_clicked_on_their_text_or_padding() {

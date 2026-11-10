@@ -4,6 +4,14 @@ A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS
 
 **Independent project · macOS and Android previews · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
 
+## Desktop source update — 0.10.57
+
+The current desktop source includes native macOS menus and independent auxiliary windows, automatic reconnection to paired Android sharing, and more robust network audio reads. The album view groups the flat Android catalog by album and album artist instead of treating the audio endpoint as one folder-sized album.
+
+ReFacets title text now passes clicks to the track row. Selection follows the track that actually starts, while a different row deliberately selected for browsing keeps a neutral highlight. The playing row has two small bars driven by the existing L/R peak telemetry; pause and reduced-motion mode use static symbols. The first volume drag can span window activation without requiring a second attempt. Existing library, pairing and audio settings formats are preserved.
+
+The desktop update does not change the Android source or its published test APK. The existing binary downloads below remain separate from this source update.
+
 ## Experimental releases
 
 - [Desktop 0.10.50 for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.50): ad-hoc signed, not notarized; optional LMS runtime excluded.
