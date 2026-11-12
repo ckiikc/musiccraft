@@ -254,6 +254,11 @@ impl Aurea {
                         self.open_settings(3);
                         ui.close();
                     }
+                    #[cfg(not(target_os = "macos"))]
+                    if ui.button(tr!("About MusicCraft")).clicked() {
+                        crate::about::show(ui.ctx());
+                        ui.close();
+                    }
                     if ui.button(tr!("User guide")).clicked() {
                         self.help_dialog = true;
                         ui.close();

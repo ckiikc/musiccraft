@@ -1,0 +1,48 @@
+name: Experimental desktop packages
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  packages:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    env:
+      CARGO_BUILD_JOBS: 2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Build and package prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev libdbus-1-dev libssl-dev libudev-dev libx11-dev libxi-dev libxrandr-dev libxcursor-dev libxkbcommon-dev libxkbcommon-x11-0 libwayland-dev libegl1-mesa-dev libgl1-mesa-dev libglib2.0-dev mingw-w64 nsis zip
+          rustup toolchain install 1.97.1 --profile minimal
+          rustup default 1.97.1
+          rustup target add x86_64-pc-windows-gnu
+      - name: Reviewed source gates
+        run: |
+          cargo test --locked -j 2
+          python3 scripts/check-publication.py
+      - name: Minimal LGPL codec runtimes
+        run: |
+          scripts/build-codec-runtime.sh linux
+          scripts/build-codec-runtime.sh windows
+      - name: Linux packages
+        run: |
+          scripts/build-desktop.sh x86_64-unknown-linux-gnu
+          python3 scripts/package-desktop.py linux --target x86_64-unknown-linux-gnu
+      - name: Windows packages
+        run: |
+          scripts/build-desktop.sh x86_64-pc-windows-gnu
+          python3 scripts/package-desktop.py windows --target x86_64-pc-windows-gnu
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: musiccraft-experimental-desktop
+          if-no-files-found: error
+          path: |
+            dist/*.deb
+            dist/*.tar.gz
+            dist/*-setup.exe
+            dist/*-portable.zip
+            dist/*.sha256

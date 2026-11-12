@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=MusicCraft
+GenericName=Music player
+Comment=Play local, NAS and paired Android music libraries
+Exec=musiccraft %F
+Icon=io.github.ckiikc.musiccraft
+Terminal=false
+Categories=AudioVideo;Audio;Player;
+StartupNotify=true
+StartupWMClass=io.github.ckiikc.musiccraft
+MimeType=audio/flac;audio/wav;audio/aiff;audio/mp4;video/mp4;audio/x-alac;audio/mpeg;audio/aac;audio/ogg;audio/opus;audio/x-dsd;audio/x-ape;audio/x-ms-wma;audio/x-wavpack;

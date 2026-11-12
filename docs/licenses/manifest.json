@@ -48,21 +48,27 @@
     "path": "docs/licenses/AccessKit--accesskit-1bbcf100942b/LICENSE-APACHE",
     "url": "https://github.com/AccessKit/accesskit/blob/1bbcf100942bac96c2c3a4a91cb67b0b20201a24/LICENSE-APACHE",
     "packages": [
-      "accesskit_winit@0.32.2"
+      "accesskit_winit@0.32.2",
+      "accesskit_consumer@0.35.0",
+      "accesskit_windows@0.32.1"
     ]
   },
   {
     "path": "docs/licenses/AccessKit--accesskit-1bbcf100942b/LICENSE-MIT",
     "url": "https://github.com/AccessKit/accesskit/blob/1bbcf100942bac96c2c3a4a91cb67b0b20201a24/LICENSE-MIT",
     "packages": [
-      "accesskit_winit@0.32.2"
+      "accesskit_winit@0.32.2",
+      "accesskit_consumer@0.35.0",
+      "accesskit_windows@0.32.1"
     ]
   },
   {
     "path": "docs/licenses/AccessKit--accesskit-1bbcf100942b/LICENSE.chromium",
     "url": "https://github.com/AccessKit/accesskit/blob/1bbcf100942bac96c2c3a4a91cb67b0b20201a24/LICENSE.chromium",
     "packages": [
-      "accesskit_winit@0.32.2"
+      "accesskit_winit@0.32.2",
+      "accesskit_consumer@0.35.0",
+      "accesskit_windows@0.32.1"
     ]
   },
   {
@@ -98,7 +104,8 @@
       "egui_glow@0.36.2",
       "emath@0.36.2",
       "epaint@0.36.2",
-      "epaint_default_fonts@0.36.2"
+      "epaint_default_fonts@0.36.2",
+      "egui-wgpu@0.36.2"
     ]
   },
   {
@@ -112,7 +119,8 @@
       "egui_glow@0.36.2",
       "emath@0.36.2",
       "epaint@0.36.2",
-      "epaint_default_fonts@0.36.2"
+      "epaint_default_fonts@0.36.2",
+      "egui-wgpu@0.36.2"
     ]
   },
   {
@@ -252,6 +260,68 @@
     "url": "https://github.com/RustAudio/dasp/blob/97c3bb9b2363c0b46ac1633858bf1054fd02a980/LICENSE-MIT",
     "packages": [
       "dasp_sample@0.11.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-f40dfc01a0c0/LICENSE-APACHE",
+    "url": "https://github.com/AccessKit/accesskit/blob/f40dfc01a0c0e76de535969f82fb35e19513737d/LICENSE-APACHE",
+    "packages": [
+      "accesskit_atspi_common@0.18.1",
+      "accesskit_consumer@0.36.0",
+      "accesskit_unix@0.21.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-f40dfc01a0c0/LICENSE-MIT",
+    "url": "https://github.com/AccessKit/accesskit/blob/f40dfc01a0c0e76de535969f82fb35e19513737d/LICENSE-MIT",
+    "packages": [
+      "accesskit_atspi_common@0.18.1",
+      "accesskit_consumer@0.36.0",
+      "accesskit_unix@0.21.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/AccessKit--accesskit-f40dfc01a0c0/LICENSE.chromium",
+    "url": "https://github.com/AccessKit/accesskit/blob/f40dfc01a0c0e76de535969f82fb35e19513737d/LICENSE.chromium",
+    "packages": [
+      "accesskit_atspi_common@0.18.1",
+      "accesskit_consumer@0.36.0",
+      "accesskit_unix@0.21.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/brendanzab--gl-rs-ea503e8d5fb6/LICENSE",
+    "url": "https://github.com/brendanzab/gl-rs/blob/ea503e8d5fb6d73c6030e6191ce738cd3bf3433e/LICENSE",
+    "packages": [
+      "gl_generator@0.14.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/brendanzab--gl-rs-f150967b1c44/LICENSE",
+    "url": "https://github.com/brendanzab/gl-rs/blob/f150967b1c44ae888e6676f93f639ebc82771bdc/LICENSE",
+    "packages": [
+      "khronos_api@3.1.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/DoumanAsh--clipboard-win-3b27cf2bfd1a/LICENSE",
+    "url": "https://github.com/DoumanAsh/clipboard-win/blob/3b27cf2bfd1adcfa6e0264eb51c1025ddaf0f342/LICENSE",
+    "packages": [
+      "clipboard-win@5.4.1"
+    ]
+  },
+  {
+    "path": "docs/licenses/retep998--winapi-rs-796a8e6c2971/LICENSE-MIT",
+    "url": "https://github.com/retep998/winapi-rs/blob/796a8e6c2971dc2ff1bcff166e6671284f9b5b6b/LICENSE-MIT",
+    "packages": [
+      "winapi-x86_64-pc-windows-gnu@0.4.0"
+    ]
+  },
+  {
+    "path": "docs/licenses/retep998--winapi-rs-796a8e6c2971/LICENSE-APACHE",
+    "url": "https://github.com/retep998/winapi-rs/blob/796a8e6c2971dc2ff1bcff166e6671284f9b5b6b/LICENSE-APACHE",
+    "packages": [
+      "winapi-x86_64-pc-windows-gnu@0.4.0"
     ]
   }
 ]

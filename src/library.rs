@@ -322,7 +322,8 @@ pub fn validate_url(input: &str) -> Result<String, String> {
 pub fn audio_path(path: &Path) -> bool {
     path.extension().and_then(|e| e.to_str()).is_some_and(|e| {
         [
-            "flac", "wav", "aif", "aiff", "m4a", "alac", "mp3", "aac", "ogg", "oga", "mp4",
+            "flac", "wav", "aif", "aiff", "m4a", "alac", "mp3", "aac", "ogg", "oga", "mp4", "dsf",
+            "dff", "dsd", "ape", "wma", "asf", "wv", "opus",
         ]
         .contains(&e.to_ascii_lowercase().as_str())
     })

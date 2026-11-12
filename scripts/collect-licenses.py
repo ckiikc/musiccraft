@@ -11,14 +11,16 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
-    if len(sys.argv) != 2:
-        raise SystemExit("Usage: scripts/collect-licenses.py OUTPUT_DIRECTORY")
+    if len(sys.argv) not in (2,4) or (len(sys.argv)==4 and sys.argv[2]!="--target"):
+        raise SystemExit("Usage: scripts/collect-licenses.py OUTPUT_DIRECTORY [--target TRIPLE]")
     output = Path(sys.argv[1]).resolve()
     generated = (ROOT / "dist").resolve()
     if not output.is_relative_to(generated):
         raise SystemExit("License output must be inside the generated dist directory")
     host = next(line.split(": ", 1)[1] for line in subprocess.check_output(
         ["rustc", "-vV"], text=True).splitlines() if line.startswith("host: "))
+    if len(sys.argv)==4:
+        host=sys.argv[3]
     metadata = json.loads(subprocess.check_output([
         "cargo", "metadata", "--locked", "--offline", "--format-version", "1",
         "--filter-platform", host,

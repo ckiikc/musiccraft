@@ -5,7 +5,6 @@ use std::{
 };
 static REQUESTS: Mutex<Vec<Vec<PathBuf>>> = Mutex::new(Vec::new());
 static CONTEXT: OnceLock<eframe::egui::Context> = OnceLock::new();
-#[cfg(any(target_os = "macos", test))]
 fn enqueue(paths: Vec<PathBuf>) {
     if paths.is_empty() {
         return;
@@ -165,3 +164,8 @@ mod tests {
         assert!(take().is_empty());
     }
 }
+
+#[cfg(not(target_os = "macos"))]
+mod instance;
+#[cfg(not(target_os = "macos"))]
+pub use instance::forward_or_listen;

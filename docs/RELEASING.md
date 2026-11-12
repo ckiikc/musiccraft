@@ -1,5 +1,15 @@
 # Releases
 
+## Local desktop 0.11.0 preview
+
+Windows x86-64 (per-user NSIS installer/portable ZIP) and Linux x86-64
+(Debian package/tarball) are prepared locally. See [porting](PORTING.md) for
+build recipes and [validation](VALIDATION.md) for completed checks and native
+Windows/DAC limitations. These artifacts are unsigned experimental packages,
+not an ArtCraft-approved release. No new GitHub release or installed Mac update
+is implied by their generation. Android retains its independent version.
+
+
 MusicCraft 0.10.50 is an independent, experimental macOS release. Community-app
 approval remains a maintainer decision in ArtCraft Launcher issue #1247.
 

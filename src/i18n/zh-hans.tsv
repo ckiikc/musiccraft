@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	请在手机上确认配对请
 Guide: No phone found. Check that both devices use the same Wi-Fi.	未找到手机。请检查两台设备是否连接同一 Wi-Fi。
 Pair	配对
 Pairing code incorrect or expired. Reopen pairing on the phone.	代码错误或已过期。请在手机上重新打开配对。
+DSD output	DSD 输出
+Convert to PCM	转换为 PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP 需要兼容的 DSD DAC、独占整数输出及 0 dB 硬件音量。不使用 DSP 或重采样。
+Remember in system credential store	保存到系统凭据存储
+Unlock the credential store or enter the password in Network	解锁凭据存储或在网络中输入密码
+About MusicCraft	关于 MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP 需要兼容的 DSD DAC、独占整数输出及 0 dB 硬件音量。不使用 DSP 或重采样。

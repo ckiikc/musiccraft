@@ -80,7 +80,9 @@ pub fn system_language() -> String {
     {
         return language.into();
     }
-    "en".into()
+    sys_locale::get_locale()
+        .map(|locale| normalize(&locale).to_owned())
+        .unwrap_or_else(|| "en".into())
 }
 pub fn set(code: &str) {
     let index = LANGUAGES
@@ -144,7 +146,19 @@ fn catalogs() -> &'static Vec<HashMap<&'static str, &'static str>> {
             .collect()
     })
 }
+fn platform_key(key: &'static str) -> &'static str {
+    #[cfg(not(target_os = "macos"))]
+    match key {
+        "Remember in macOS Keychain" => return "Remember in system credential store",
+        "Authorize Keychain or enter the password in Network" => {
+            return "Unlock the credential store or enter the password in Network";
+        }
+        _ => {}
+    }
+    key
+}
 pub fn text(key: &'static str) -> &'static str {
+    let key = platform_key(key);
     CURRENT.with(|c| {
         catalogs()[c.get()]
             .get(key)
@@ -155,6 +169,7 @@ pub fn text(key: &'static str) -> &'static str {
 }
 /// Search uses the catalog's reading order, before any visual reordering.
 pub fn logical_text(key: &'static str) -> &'static str {
+    let key = platform_key(key);
     if language() == "ar" {
         static ARABIC: OnceLock<HashMap<&'static str, &'static str>> = OnceLock::new();
         ARABIC

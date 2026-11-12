@@ -48,6 +48,29 @@ impl Cancellation {
                     .as_ref()
                     .is_some_and(|(p, n)| p.load(Ordering::Relaxed) != *n))
     }
+    pub(crate) fn materialize(
+        &self,
+        source: &str,
+        root: &Path,
+        auth: &AuthStore,
+    ) -> Result<std::path::PathBuf, String> {
+        crate::cache::materialize_cancellable(
+            source,
+            root,
+            &self.generation,
+            self.ticket,
+            auth,
+            || self.cancelled(),
+            |bytes| {
+                self.transferred.store(bytes, Ordering::Relaxed);
+                if let Ok(events) = self.events.lock()
+                    && let Some(events) = events.as_ref()
+                {
+                    let _ = events.send(crate::audio::Event::Loading(self.ticket, bytes));
+                }
+            },
+        )
+    }
     fn transferred(&self, count: usize) {
         let bytes = self.transferred.fetch_add(count as u64, Ordering::Relaxed) + count as u64;
         if let Ok(events) = self.events.lock()
@@ -108,6 +131,7 @@ impl Stream {
         (
             Self {
                 info: DecodedPcm {
+                    transport: crate::integer::Transport::Pcm,
                     samples: vec![],
                     floating: false,
                     rate: 44100,
@@ -129,34 +153,29 @@ impl Stream {
         root: &Path,
         auth: &AuthStore,
         cancel: Cancellation,
-        strict: bool,
+        mode: impl Into<crate::decoder::Mode>,
         errors: Option<mpsc::Sender<crate::audio::Event>>,
     ) -> Result<Self, String> {
         if let Ok(mut target) = cancel.events.lock() {
             *target = errors;
         }
-        let source = remote::input(&track.source, root, auth, cancel.clone())?;
-        let mut decoder = crate::integer::PacketDecoder::open(source, strict)?;
+        let mut decoder =
+            crate::decoder::Decoder::open(track, root, auth, cancel.clone(), mode.into())?;
         let first = decoder
             .next(&|| cancel.cancelled())?
             .ok_or("Il file audio non contiene campioni")?;
         let info = decoder.info();
         track.rate = info.rate;
         track.channels = info.channels as u8;
-        if let Some(bits) = decoder.source_bits {
+        if let Some(bits) = decoder.source_bits() {
             track.bits = bits as u8;
         }
-        if let Some(duration) = decoder.duration {
+        if let Some(duration) = decoder.duration() {
             track.duration = duration;
         }
-        let mut gain = crate::dsp::Tags::default();
+        let mut gain = decoder.gain();
 
-        let revisions = decoder
-            .metadata
-            .take()
-            .into_iter()
-            .chain(decoder.format.metadata().current().cloned())
-            .collect::<Vec<_>>();
+        let revisions = decoder.metadata();
         let hydrate = !track.metadata_loaded;
         for metadata in &revisions {
             use symphonia::core::meta::StandardTagKey as K;
@@ -225,7 +244,7 @@ impl Stream {
         let worker_state = state.clone();
         let cancellation = cancel.clone();
         let (ready, waiting) = mpsc::sync_channel(1);
-        let duration = decoder.duration;
+        let duration = decoder.duration();
         let error_source = track.source.clone();
         std::thread::spawn(move || {
             let mut ready = Some(ready);
@@ -511,3 +530,12 @@ impl rodio::Source for Shared {
 
 #[cfg(test)]
 mod tests;
+
+pub(crate) fn remote_input(
+    source: &str,
+    root: &Path,
+    auth: &AuthStore,
+    cancel: Cancellation,
+) -> Result<Box<dyn symphonia::core::io::MediaSource>, String> {
+    remote::input(source, root, auth, cancel)
+}

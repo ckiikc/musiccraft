@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Подтвердите зап�
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон не найден. Проверьте, что устройства используют одну сеть Wi-Fi.
 Pair	Сопрячь
 Pairing code incorrect or expired. Reopen pairing on the phone.	Код неверен или истёк. Откройте сопряжение на телефоне заново.
+DSD output	Выход DSD
+Convert to PCM	Преобразовать в PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	Для DoP нужен совместимый DSD ЦАП, монопольный целочисленный выход и аппаратная громкость 0 дБ. Без DSP и передискретизации.
+Remember in system credential store	Сохранить в системном хранилище
+Unlock the credential store or enter the password in Network	Разблокируйте хранилище или введите пароль в разделе «Сеть»
+About MusicCraft	О MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	Для DoP нужен совместимый DSD ЦАП, монопольный целочисленный выход и аппаратная громкость 0 дБ. Без DSP и передискретизации.

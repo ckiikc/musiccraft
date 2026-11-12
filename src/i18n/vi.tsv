@@ -360,3 +360,10 @@ Guide: Confirm the pairing request on your phone.	Xác nhận yêu cầu ghép n
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Không tìm thấy điện thoại. Kiểm tra hai thiết bị dùng cùng Wi-Fi.
 Pair	Ghép nối
 Pairing code incorrect or expired. Reopen pairing on the phone.	Mã sai hoặc đã hết hạn. Mở lại màn hình ghép nối trên điện thoại.
+DSD output	Đầu ra DSD
+Convert to PCM	Chuyển sang PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP cần DAC DSD tương thích, đầu ra số nguyên độc quyền và âm lượng phần cứng ở 0 dB. Không DSP hoặc đổi tần số lấy mẫu.
+Remember in system credential store	Lưu trong kho thông tin xác thực hệ thống
+Unlock the credential store or enter the password in Network	Mở khóa kho thông tin xác thực hoặc nhập mật khẩu trong Mạng
+About MusicCraft	Giới thiệu MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP cần DAC DSD tương thích, đầu ra số nguyên độc quyền và âm lượng phần cứng ở 0 dB. Không DSP hoặc đổi tần số lấy mẫu.

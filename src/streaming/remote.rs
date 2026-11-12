@@ -7,7 +7,7 @@ use std::{
     hash::{Hash, Hasher},
     io::{self, Read, Seek, SeekFrom, Write},
     path::{Path, PathBuf},
-    process::{Command, Stdio},
+    process::Stdio,
     sync::Mutex,
     time::Duration,
 };
@@ -398,7 +398,7 @@ fn literal_request(
     range: Option<(u64, usize)>,
 ) -> io::Result<Vec<u8>> {
     let size = range.map_or(4096, |(_, size)| size);
-    let mut command = Command::new("/usr/bin/curl");
+    let mut command = crate::platform::curl_command();
     command.args([
         "--config",
         "-",

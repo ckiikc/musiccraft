@@ -35,3 +35,37 @@ jobs:
           python3 -m venv .venv
           .venv/bin/python -m pip install -r scripts/requirements-test.txt
           .venv/bin/python scripts/test_ftp.py
+
+  linux:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    env:
+      CARGO_BUILD_JOBS: 2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Native platform dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev libdbus-1-dev libssl-dev libudev-dev libx11-dev libxi-dev libxrandr-dev libxcursor-dev libxkbcommon-dev libxkbcommon-x11-0 libwayland-dev libegl1-mesa-dev libgl1-mesa-dev libglib2.0-dev
+      - run: rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
+      - run: cargo +1.97.1 fmt --check
+      - run: cargo +1.97.1 clippy --locked --all-targets -j 2 -- -D warnings
+      - run: cargo +1.97.1 test --locked -j 2
+      - run: python3 scripts/check-publication.py
+
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      CARGO_BUILD_JOBS: 2
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
+      - run: cargo +1.97.1 fmt --check
+      - run: cargo +1.97.1 clippy --locked --all-targets -j 2 -- -D warnings
+      - run: cargo +1.97.1 test --locked -j 2
+      - run: python scripts/check-publication.py

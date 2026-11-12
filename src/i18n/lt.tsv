@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Patvirtinkite susiejimo užkla
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefonas nerastas. Patikrinkite, ar įrenginiai naudoja tą patį Wi-Fi.
 Pair	Susieti
 Pairing code incorrect or expired. Reopen pairing on the phone.	Kodas neteisingas arba pasibaigė. Telefone iš naujo atidarykite susiejimą.
+DSD output	DSD išvestis
+Convert to PCM	Konvertuoti į PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP reikia suderinamo DSD DAC, išskirtinės sveikųjų skaičių išvesties ir 0 dB aparatinio garsumo. Be DSP ar dažnio keitimo.
+Remember in system credential store	Įsiminti sistemos saugykloje
+Unlock the credential store or enter the password in Network	Atrakinkite saugyklą arba įveskite slaptažodį skiltyje Tinklas
+About MusicCraft	Apie MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP reikia suderinamo DSD DAC, išskirtinės sveikųjų skaičių išvesties ir 0 dB aparatinio garsumo. Be DSP ar dažnio keitimo.

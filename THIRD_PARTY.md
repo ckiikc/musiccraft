@@ -25,3 +25,7 @@ The [upstream License.txt](https://github.com/LMS-Community/slimserver/blob/publ
 ## Android companion
 
 AndroidX Media3, Kotlin, Guava and Bouncy Castle retain their notices; see [android/THIRD_PARTY.md](android/THIRD_PARTY.md) and the notices included in the APK. The Gradle wrapper is Apache-2.0. Three synthetic FLAC test fixtures are original CC0 tones, hash-pinned by the publication scanner and excluded from the normal app APK. No LMS source, interface assets or music recordings are copied into Android.
+
+## Additional desktop codec runtime (0.11.0)
+
+Windows/Linux packages include unmodified FFmpeg 8.0.1 CLIs built with `scripts/build-codec-runtime.sh`. GPL, nonfree, version3 and external autodetected libraries are disabled. Only required audio demuxers/decoders, PCM encoders/muxers and filters are enabled. FFmpeg remains a separate LGPL-2.1-or-later executable; no FFmpeg library is linked into MusicCraft. `codecs/licenses/` includes the complete matching source archive, LGPL text, source SHA-256 and exact build recipe. The APE encoder SDK used to create synthetic QA media is not bundled. Platform MinGW runtime notices accompany Windows packages.

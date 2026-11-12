@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	電話でペアリング要求
 Guide: No phone found. Check that both devices use the same Wi-Fi.	電話が見つかりません。両方の端末が同じWi-Fiを使用しているか確認してください。
 Pair	ペアリング
 Pairing code incorrect or expired. Reopen pairing on the phone.	コードが正しくないか期限切れです。電話でペアリングを開き直してください。
+DSD output	DSD出力
+Convert to PCM	PCMに変換
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoPには対応DSD DAC、排他的な整数出力、ハードウェア音量0 dBが必要です。DSPやリサンプリングは行いません。
+Remember in system credential store	システムの資格情報ストアに保存
+Unlock the credential store or enter the password in Network	資格情報ストアのロックを解除するか、ネットワークでパスワードを入力してください
+About MusicCraft	MusicCraftについて
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoPには対応DSD DAC、排他的な整数出力、ハードウェア音量0 dBが必要です。DSPやリサンプリングは行いません。

@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Eşleştirme isteğini telefon
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon bulunamadı. Cihazların aynı Wi-Fi ağını kullandığını kontrol edin.
 Pair	Eşleştir
 Pairing code incorrect or expired. Reopen pairing on the phone.	Kod yanlış veya süresi doldu. Telefonda eşleştirmeyi yeniden açın.
+DSD output	DSD çıkışı
+Convert to PCM	PCM’ye dönüştür
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP, uyumlu DSD DAC, özel tamsayı çıkışı ve 0 dB donanım sesi gerektirir. DSP veya yeniden örnekleme yoktur.
+Remember in system credential store	Sistem kimlik kasasında hatırla
+Unlock the credential store or enter the password in Network	Kasayı açın veya Ağ bölümünde parola girin
+About MusicCraft	MusicCraft hakkında
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP, uyumlu DSD DAC, özel tamsayı çıkışı ve 0 dB donanım sesi gerektirir. DSP veya yeniden örnekleme yoktur.

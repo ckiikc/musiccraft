@@ -183,12 +183,7 @@ pub fn save_album_cover(
     auth: &AuthStore,
     cancelled: &dyn Fn() -> bool,
 ) -> Result<String, String> {
-    use std::{
-        io::Write,
-        os::unix::fs::OpenOptionsExt,
-        process::{Command, Stdio},
-        time::Duration,
-    };
+    use std::{io::Write, process::Stdio, time::Duration};
     let root = Url::parse(source)
         .ok()
         .and_then(|u| u.join(".").ok())
@@ -208,16 +203,20 @@ pub fn save_album_cover(
     let target =
         child_url(root.as_str(), &temporary, false).ok_or("Cartella album non disponibile")?;
     let local = std::env::temp_dir().join(format!("musiccraft-cover-{id:032x}.png"));
-    let mut file = std::fs::OpenOptions::new()
-        .write(true)
-        .create_new(true)
-        .mode(0o600)
+    let mut options = std::fs::OpenOptions::new();
+    options.write(true).create_new(true);
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::OpenOptionsExt;
+        options.mode(0o600);
+    }
+    let mut file = options
         .open(&local)
         .map_err(|_| "File temporaneo non disponibile")?;
     let result = (|| {
         file.write_all(bytes)
             .map_err(|_| "Copertina non salvabile")?;
-        let mut command = Command::new("/usr/bin/curl");
+        let mut command = crate::platform::curl_command();
         command
             .args([
                 "--config",

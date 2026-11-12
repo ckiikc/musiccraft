@@ -20,12 +20,17 @@ pub fn save(source: &FtpSource) -> Result<(), String> {
     .map_err(|_| "Impossibile salvare nel Portachiavi: la password resta solo in memoria".into())
 }
 #[cfg(not(target_os = "macos"))]
-pub fn load(_: &FtpSource) -> Option<String> {
-    None
+pub fn load(source: &FtpSource) -> Option<String> {
+    keyring::Entry::new(SERVICE, &account(source))
+        .ok()?
+        .get_password()
+        .ok()
 }
 #[cfg(not(target_os = "macos"))]
-pub fn save(_: &FtpSource) -> Result<(), String> {
-    Err("Portachiavi disponibile nella build macOS".into())
+pub fn save(source: &FtpSource) -> Result<(), String> {
+    keyring::Entry::new(SERVICE, &account(source))
+        .and_then(|entry| entry.set_password(&source.password))
+        .map_err(|_| "Secure credential store unavailable or locked; the password remains in memory. Unlock Windows Credential Manager or the Linux Secret Service and retry.".into())
 }
 
 #[cfg(target_os = "macos")]
@@ -33,4 +38,29 @@ pub fn forget(source: &FtpSource) {
     let _ = security_framework::passwords::delete_generic_password(SERVICE, &account(source));
 }
 #[cfg(not(target_os = "macos"))]
-pub fn forget(_: &FtpSource) {}
+pub fn forget(source: &FtpSource) {
+    if let Ok(entry) = keyring::Entry::new(SERVICE, &account(source)) {
+        let _ = entry.delete_credential();
+    }
+}
+
+#[cfg(all(test, not(target_os = "macos")))]
+mod tests {
+    use super::*;
+    #[test]
+    #[ignore = "requires an isolated OS credential-store session, never the user's profile"]
+    fn live_native_credential_store_round_trip() {
+        let source = FtpSource {
+            id: format!("qa-{:032x}", rand::random::<u128>()),
+            username: "fixture".into(),
+            password: format!("fixture-{:032x}", rand::random::<u128>()),
+            ..Default::default()
+        };
+        assert!(load(&source).is_none());
+        save(&source).expect("isolated native credential store");
+        let loaded = load(&source);
+        forget(&source);
+        assert_eq!(loaded.as_deref(), Some(source.password.as_str()));
+        assert!(load(&source).is_none());
+    }
+}

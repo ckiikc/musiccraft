@@ -39,6 +39,7 @@ const CHAPTERS: [(&str, &[&str]); 10] = [
     (
         "Audio",
         &[
+            "Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.",
             "Guide: choose a device and shared or exclusive output in Settings. Exclusive bypasses software volume and ReplayGain. Strict integer stops on incompatible formats. ReplayGain and preamp apply to the next shared-mode track.",
         ],
     ),

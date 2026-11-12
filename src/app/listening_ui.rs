@@ -6,41 +6,18 @@ pub(super) fn configure_language_font(ctx: &egui::Context) {
 }
 pub(super) fn configure_font_stack(ctx: &egui::Context, all_scripts: bool) {
     let language = crate::i18n::language();
-    let paths = if all_scripts {
-        vec![
-            "/System/Library/Fonts/Hiragino Sans GB.ttc",
-            "/System/Library/Fonts/SFArabic.ttf",
-            "/System/Library/Fonts/KohinoorTelugu.ttc",
-        ]
-    } else {
-        match language {
-            "ja" | "zh-hans" | "zh-hant" => vec!["/System/Library/Fonts/Hiragino Sans GB.ttc"],
-            "ar" => vec!["/System/Library/Fonts/SFArabic.ttf"],
-            "te" => vec!["/System/Library/Fonts/KohinoorTelugu.ttc"],
-            _ => vec![],
-        }
-    };
     let mut fonts = egui::FontDefinitions::default();
-    // Rebuild one coherent stack; system fonts are used in place, never bundled.
-    // epaint shapes one face run at a time, without full paragraph bidi.
-    // Its default Latin face does not include Arabic: keeping it first in Arabic
-    // separates spaces/numbers from Arabic words, which are reordered by i18n.
-    // Arial includes Arabic and would merge them, reversing numeric strings too.
-    for path in (language != "ar")
-        .then_some("/System/Library/Fonts/Supplemental/Arial.ttf")
-        .into_iter()
-        .chain(paths)
-    {
-        if let Ok(bytes) = std::fs::read(path) {
-            let name = path.to_string();
+    for (path, primary) in crate::platform::font_paths(language, all_scripts) {
+        if let Ok(bytes) = std::fs::read(&path) {
+            let name = path.to_string_lossy().into_owned();
             fonts
                 .font_data
                 .insert(name.clone(), Arc::new(egui::FontData::from_owned(bytes)));
-            fonts
+            let family = fonts
                 .families
                 .get_mut(&egui::FontFamily::Proportional)
-                .unwrap()
-                .insert(if path.ends_with("Arial.ttf") { 0 } else { 1 }, name);
+                .unwrap();
+            family.insert(if primary { 0 } else { 1.min(family.len()) }, name);
         }
     }
     let family = fonts.families[&egui::FontFamily::Proportional].clone();

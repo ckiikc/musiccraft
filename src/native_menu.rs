@@ -1,4 +1,8 @@
 //! AppKit menus enqueue commands; the existing app/player applies them on its next frame.
+#[cfg_attr(
+    not(target_os = "macos"),
+    expect(dead_code, reason = "Other platforms use the in-window desktop menus")
+)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Action {
     Files,

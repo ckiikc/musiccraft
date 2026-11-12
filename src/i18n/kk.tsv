@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Телефонда жұпта�
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон табылмады. Құрылғылардың бір Wi-Fi желісін қолданатынын тексеріңіз.
 Pair	Жұптау
 Pairing code incorrect or expired. Reopen pairing on the phone.	Код қате немесе мерзімі өткен. Телефонда жұптауды қайта ашыңыз.
+DSD output	DSD шығысы
+Convert to PCM	PCM пішіміне түрлендіру
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP үшін үйлесімді DSD DAC, ерекше бүтін санды шығыс және 0 дБ аппараттық дыбыс қажет. DSP және қайта дискреттеу жоқ.
+Remember in system credential store	Жүйелік қоймада сақтау
+Unlock the credential store or enter the password in Network	Қойманың құлпын ашыңыз немесе Желі бөлімінде құпиясөз енгізіңіз
+About MusicCraft	MusicCraft туралы
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP үшін үйлесімді DSD DAC, ерекше бүтін санды шығыс және 0 дБ аппараттық дыбыс қажет. DSP және қайта дискреттеу жоқ.

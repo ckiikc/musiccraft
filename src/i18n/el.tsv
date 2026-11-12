@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Επιβεβαιώστε το 
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Δεν βρέθηκε τηλέφωνο. Ελέγξτε ότι οι συσκευές χρησιμοποιούν το ίδιο Wi-Fi.
 Pair	Σύζευξη
 Pairing code incorrect or expired. Reopen pairing on the phone.	Ο κωδικός είναι λανθασμένος ή έληξε. Ανοίξτε ξανά τη σύζευξη στο τηλέφωνο.
+DSD output	Έξοδος DSD
+Convert to PCM	Μετατροπή σε PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	Το DoP απαιτεί συμβατό DSD DAC, αποκλειστική ακέραιη έξοδο και ένταση συσκευής 0 dB. Χωρίς DSP ή επαναδειγματοληψία.
+Remember in system credential store	Αποθήκευση στο σύστημα
+Unlock the credential store or enter the password in Network	Ξεκλειδώστε την αποθήκη ή εισαγάγετε κωδικό στο Δίκτυο
+About MusicCraft	Σχετικά με το MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	Το DoP απαιτεί συμβατό DSD DAC, αποκλειστική ακέραιη έξοδο και ένταση συσκευής 0 dB. Χωρίς DSP ή επαναδειγματοληψία.

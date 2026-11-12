@@ -443,6 +443,7 @@ pub struct PrepareOptions {
     pub artwork_only: bool,
     pub next_plan: Option<(Arc<AtomicU64>, u64)>,
     pub exclusive: Option<bool>,
+    pub dsd_dop: bool,
     pub online_art: Option<Arc<AtomicBool>>,
     pub save_art: Option<Arc<AtomicBool>>,
 }
@@ -520,6 +521,11 @@ pub fn prefetch(
             track.update_metadata(&path);
         }
         if !options.artwork_only {
+            let decode_mode = if options.dsd_dop && crate::decoder::is_dsd(&track.source) {
+                crate::decoder::Mode::DoP
+            } else {
+                crate::decoder::Mode::from(options.exclusive == Some(true))
+            };
             match crate::streaming::Stream::prepare(
                 &mut track,
                 &root,
@@ -529,7 +535,7 @@ pub fn prefetch(
                     ticket,
                     options.next_plan.clone(),
                 ),
-                options.exclusive == Some(true),
+                decode_mode,
                 None,
             ) {
                 Ok(mut prepared) => {

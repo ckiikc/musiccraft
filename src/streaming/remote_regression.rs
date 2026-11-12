@@ -22,6 +22,8 @@ fn playing_ranges_keep_the_verified_route_after_dns_cache_expires() {
                 }
                 Err(e) => panic!("{e}"),
             };
+            // Windows can inherit the listener's nonblocking mode.
+            socket.set_nonblocking(false).unwrap();
             socket
                 .set_read_timeout(Some(Duration::from_secs(2)))
                 .unwrap();

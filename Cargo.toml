@@ -1,13 +1,13 @@
 [package]
 name = "musiccraft"
-version = "0.10.57"
+version = "0.11.0"
 edition = "2024"
 license = "MIT"
 description = "Native music player for local, NAS, FTP and MusicCraft Android libraries"
 publish = false
 
 [dependencies]
-eframe = { version = "=0.36.2", default-features = false, features = ["default_fonts", "glow", "persistence", "accesskit"] }
+eframe = { version = "=0.36.2", default-features = false, features = ["default_fonts", "glow", "persistence", "accesskit", "x11", "wayland"] }
 rodio = { version = "=0.22.2", features = ["symphonia-all"] }
 cpal = "=0.17.3"
 
@@ -33,6 +33,25 @@ if-addrs = "=0.15.0"
 httpdate = "=1.0.3"
 unicode-normalization = "=0.1.25"
 unicode-bidi = "=0.3.18"
+sys-locale = "=0.3.2"
+fs2 = "=0.4.3"
+
+[target.'cfg(not(target_os = "macos"))'.dependencies]
+mdns-sd = "=0.21.1"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+keyring = { version = "=3.6.3", features = ["windows-native"] }
+wasapi = "=0.23.0"
+windows = { version = "=0.62.2", features = ["Win32_Media_Audio_Endpoints", "Win32_System_Com", "Win32_Graphics_Gdi"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "=3.6.3", features = ["sync-secret-service", "crypto-rust"] }
+alsa = "=0.11.0"
+x11rb = { version = "=0.13.2", features = ["randr"] }
+
+[build-dependencies]
+winresource = "=0.1.34"
+image = { version = "=0.25.10", default-features = false, features = ["png"] }
 
 [dev-dependencies]
 ron = "=0.12.2"

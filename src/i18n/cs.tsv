@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Potvrďte žádost o párován
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon nebyl nalezen. Ověřte, že zařízení používají stejnou Wi-Fi.
 Pair	Spárovat
 Pairing code incorrect or expired. Reopen pairing on the phone.	Kód je nesprávný nebo vypršel. Znovu otevřete párování v telefonu.
+DSD output	Výstup DSD
+Convert to PCM	Převést na PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP vyžaduje kompatibilní DSD DAC, výhradní celočíselný výstup a hardwarovou hlasitost 0 dB. Bez DSP a převzorkování.
+Remember in system credential store	Uložit do systémového úložiště
+Unlock the credential store or enter the password in Network	Odemkněte úložiště nebo zadejte heslo v Síti
+About MusicCraft	O aplikaci MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP vyžaduje kompatibilní DSD DAC, výhradní celočíselný výstup a hardwarovou hlasitost 0 dB. Bez DSP a převzorkování.

@@ -1,5 +1,7 @@
 //! MusicCraft Android protocol v1. Pairing credentials are never part of media URLs.
 mod address;
+#[cfg(not(target_os = "macos"))]
+mod mdns;
 mod pairing_code;
 use crate::{
     library::{self, Track},
@@ -259,10 +261,6 @@ pub fn rediscover(source: &FtpSource, cancel: &AtomicBool) -> Option<FtpSource> 
     }
     let auth = AuthStore::default();
     auth.insert(source).ok()?;
-    #[cfg(not(target_os = "macos"))]
-    if online(&source.url().ok()?, &auth, cancel, Duration::from_secs(2)).is_ok() {
-        return Some(source.clone());
-    }
     // Migrate legacy Bonjour names to a numeric endpoint only after the same
     // saved TLS pin, device identity and credential authenticate it.
     for ip in address::local_ipv4(&source.host, cancel) {

@@ -1,3 +1,43 @@
+# Desktop 0.11.0 Windows/Linux preview — 2026-11-12
+
+This is a local development preview, not a published release. The public macOS
+identity and existing profile paths are preserved. Android source and the user's
+installed Mac application, library, settings and phone pairing were not changed.
+All new playback checks used synthetic media and isolated profiles. Windows keeps its native window frame after compatibility testing exposed clipped miniplayer controls with a borderless surface; the corrected release screenshot shows the complete header. Independent Windows settings and the Audio page were also inspected.
+
+## Completed checks
+
+- Rust 1.97.1: the final macOS ordinary suite passed (224 tests, 43 prerequisite-based tests excluded), as did Linux (225 tests, 43 excluded). Formatting and Clippy all-targets with warnings denied passed on macOS/Linux; Windows release and final all-target Clippy checks passed.
+- Linux: all 12 authenticated loopback FTP integrations passed. The six-format integration exercised APE, WavPack, WMA, Opus, DSF and DFF, including decode, seek and cancellation. APE/WavPack output matched the reference integer PCM. Lossy/float/hybrid strict-mode rejection was checked separately.
+- DSF/DSDIFF byte tests verify channel/bit order, bounded reads, seeking and odd-tail silence padding. Renderer tests verify continuous DoP markers across queued tracks, starvation silence and rejection of float/16-bit transport. These are synthetic framing checks, not physical-DAC measurements.
+- Linux native X11 screenshots were inspected, including the independent settings window. Two synthetic WAV files opened into the existing instance in order. A PulseAudio null-sink capture observed the automatic 440 Hz to 660 Hz transition with no silent 20 ms windows inside the captured active signal. The capture is virtual, not acoustic or a hardware certification.
+- Linux Secret Service storage/read/removal passed with a dummy credential in an isolated keyring. Synthetic mDNS advertisement/discovery passed without a real phone or saved pairing.
+- Linux and Windows x86-64 release executables built with at most two Cargo jobs. Linux Debian installation/removal preserved an isolated profile sentinel. NSIS installer and portable/archive packages include the matching minimal FFmpeg runtime, full corresponding source, license/build recipe and target-specific dependency notices.
+- Windows: 225 ordinary tests passed under Wine 10 (43 prerequisite-based tests excluded), and the six-format decoder integration passed with the Windows FFmpeg executable. The final release accepted a two-file request into its running instance and a screenshot showed the second fixture playing in sequence. UTF-8 locale is required for Unix filesystem mapping in this Wine environment. Directory timestamp fixtures use native Windows directory handles; loopback fixture sockets are explicitly blocking on both platforms.
+- Windows x86-64 MusicCraft rendered under Wine 10 in the isolated x86-64 Linux container. A real Windows lock contention error exposed a second-instance forwarding bug: ERROR_LOCK_VIOLATION is now recognized through fs2's platform-specific contention code. The native lock regression passed under Wine.
+- The damaged-FLAC regression uses a small synthetic hex fixture rather than a private recording. Publication scanning excludes generated media, profiles, logs, credentials and local build directories.
+
+## Remaining validation boundaries
+
+Wine is a compatibility check, not a real Windows installation or driver test.
+The container's Wine 8 lacked bcryptprimitives.dll; newer Wine also hit Rosetta
+32-bit service limitations. No replacement crypto DLL was added to MusicCraft.
+Real Windows installer execution, Credential Manager, firewall/discovery,
+multiple monitors, WASAPI exclusive devices and uninstall/update behavior still
+need native Windows verification. The manual CI workflow is prepared but has
+not been dispatched or published from this local branch.
+
+Linux Wayland/compositor behavior and physical ALSA exclusive devices remain
+unverified. DoP requires a compatible DSD DAC and a driver accepting the exact
+integer transport rate with unity hardware volume. Physical bit-perfect output,
+DSD DAC recognition and acoustic gaplessness are not established by these tests.
+Raw ASIO/native USB DSD is not implemented; DSF/uncompressed DFF use DoP, while
+DSD PCM conversion remains the default. DRM WMA and WavPack correction files
+are not supported. Extra-codec remote files are downloaded to a bounded cache
+before playback; direct DoP retains progressive reads.
+
+---
+
 # Desktop 0.10.57 source update — 2026-11-10
 
 The development source passed 218 ordinary tests, with 42 prerequisite-based tests excluded, Clippy for all targets with warnings denied, and a release build. Regression coverage includes interrupted reads, DNS expiry across audio ranges, authenticated phone reconnection, album membership in a flat catalog, title-text interactions, the first volume gesture across activation, current-track selection and stereo row-indicator geometry. The first fresh-launch volume gesture was also confirmed by the operator in an isolated native QA build.

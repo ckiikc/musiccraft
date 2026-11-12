@@ -1,6 +1,6 @@
 # Contributing
 
-MusicCraft is an independent macOS alpha. Discuss large changes before implementing them; keep a fix focused and describe its observable behavior and validation.
+MusicCraft is an independent desktop/Android preview. Discuss large changes before implementing them; keep a fix focused and describe its observable behavior and validation.
 
 Use Rust 1.97.1, run the checks in the README, and use at most two Cargo jobs for local work. Test with synthetic audio and isolated `--data-dir` profiles. Never commit a real library, credentials, Keychain exports, downloaded covers/lyrics, personal screenshots or raw diagnostic reports. A private-library audit needs the library owner's explicit consent.
 

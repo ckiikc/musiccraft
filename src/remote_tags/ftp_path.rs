@@ -1,14 +1,14 @@
 //! Use curl's supported no-CWD mode only for FTP basenames that servers trim as whitespace.
 //! Passwords use the existing private stdin configuration, never arguments or files.
 use super::*;
-use std::process::{Command, Stdio};
+use std::process::Stdio;
 impl Ranged {
     pub(super) fn literal_transfer(&mut self, size: usize, head: bool) -> io::Result<Vec<u8>> {
         let (source, auth) = self
             .literal
             .clone()
             .ok_or_else(|| error("Missing literal FTP source"))?;
-        let mut cmd = Command::new("/usr/bin/curl");
+        let mut cmd = crate::platform::curl_command();
         cmd.args([
             "--config",
             "-",

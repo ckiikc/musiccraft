@@ -13,7 +13,7 @@ The current alpha is one Rust binary with internal modules, not a multi-crate fr
 - `media_server.rs`, `multiroom.rs`, `embedded_server.rs`: original-file sharing, external LMS control and optional local-runtime lifecycle. The normal publication package excludes that runtime.
 - `i18n/`: 22 translated TSV catalogs plus English, system-font fallbacks and localized built-in help.
 
-The public release uses io.github.ckiikc.musiccraft and a separate MusicCraft profile. It contains no migration of personal settings. A future cross-platform port needs explicit platform data directories, credential stores, network process adapters, output backends and packaging; shared Rust dependencies alone do not establish portability.
+The public release uses io.github.ckiikc.musiccraft and a separate MusicCraft profile. It contains no migration of personal settings. The cross-platform boundary is described in PORTING.md; shared Rust dependencies alone do not establish runtime or hardware validation.
 
 ## Android companion and direct phone source
 
@@ -28,3 +28,9 @@ The user-started Android sharing service uses a foreground notification, a per-i
 The native macOS menu actions dispatch to the same UI/player paths. Auxiliary windows use independent native viewports. Network audio keeps the initially verified HTTP(S) route for each file; native DNS-SD resolves paired phones to verified local addresses while preserving identity/pin checks. Stream failures remain distinct from clean EOF and decoder failures.
 
 The album-side list identifies the current album within its source rather than using a flat HTTP parent path as the album. Table selection follows accepted Started events unless the user is browsing another row. A two-channel row indicator consumes the existing audio peak telemetry, with no new audio callback, decoder or repaint timer. Its hover-only accessibility marker does not take row clicks.
+
+## 0.11.0 platform adapters
+
+`platform/` supplies profile paths, trusted system process adapters, installed system fonts and monitor work areas. `credentials.rs` preserves the macOS service and adds Windows Credential Manager/Linux Secret Service. `phone/mdns.rs` uses in-process DNS-SD; discovered addresses remain untrusted until existing SRP/TLS identity checks accept them. `open_documents/instance.rs` combines an OS file lock with a per-profile, authenticated, bounded loopback handoff so file-manager requests cannot race profile writes.
+
+`exclusive/portable.rs` owns WASAPI/ALSA clients on one worker and reuses the byte renderer/ring queues. It preserves partial writes and rejects transport changes within a stream. `decoder/` selects native decoding, bounded FFmpeg PCM output, or direct DSF/DSDIFF DoP data. Transport is explicit in decoded blocks; DoP forces integer exclusive validation and renderer-owned markers, bypassing all DSP. Sources and notices for the minimal codec executable ship alongside it. See PORTING.md for driver, cache and format limits.

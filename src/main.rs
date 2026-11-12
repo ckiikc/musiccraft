@@ -1,3 +1,7 @@
+#![cfg_attr(
+    all(target_os = "windows", not(debug_assertions)),
+    windows_subsystem = "windows"
+)]
 #[macro_use]
 mod i18n;
 mod about;
@@ -6,6 +10,7 @@ mod app;
 mod audio;
 mod cache;
 mod credentials;
+mod decoder;
 mod discovery;
 mod dsp;
 mod embedded_server;
@@ -22,6 +27,7 @@ mod native_menu;
 mod network;
 mod open_documents;
 mod phone;
+mod platform;
 mod remote_tags;
 mod shuffle;
 mod streaming;
@@ -60,15 +66,12 @@ fn main() -> eframe::Result {
     let mut test_seconds = None;
     #[cfg(debug_assertions)]
     let mut drag_trace = None;
-    let mut data = std::env::var_os("HOME")
-        .map(std::path::PathBuf::from)
-        .unwrap_or_else(std::env::temp_dir)
-        .join("Library/Application Support/MusicCraft");
+    let mut data = platform::data_directory();
     while let Some(arg) = args.next() {
         match arg.as_str() {
             "--data-dir" => {
                 if let Some(path) = args.next() {
-                    data = path.into();
+                    data = Some(path.into());
                 }
             }
             "--network" => {}
@@ -85,9 +88,22 @@ fn main() -> eframe::Result {
             _ => paths.push(arg.into()),
         }
     }
+    let Some(data) = data else {
+        eprintln!("MusicCraft: user data directory unavailable; specify --data-dir PATH");
+        std::process::exit(1);
+    };
     if let Err(e) = std::fs::create_dir_all(&data) {
         eprintln!("Impossibile creare la cartella dati: {e}");
         return Ok(());
+    }
+    #[cfg(not(target_os = "macos"))]
+    match open_documents::forward_or_listen(&data, &paths) {
+        Ok(true) => return Ok(()),
+        Ok(false) => {}
+        Err(error) => {
+            eprintln!("MusicCraft: {error}");
+            std::process::exit(1);
+        }
     }
     let options = eframe::NativeOptions {
         viewport: eframe::egui::ViewportBuilder::default()
@@ -98,8 +114,8 @@ fn main() -> eframe::Result {
                 .expect("validated MusicCraft icon"),
             )
             .with_inner_size([520.0, 520.0])
-            .with_decorations(false)
-            .with_transparent(true)
+            .with_decorations(cfg!(target_os = "windows"))
+            .with_transparent(cfg!(target_os = "macos"))
             .with_clamp_size_to_monitor_size(true)
             .with_window_level(eframe::egui::WindowLevel::AlwaysOnTop)
             .with_min_inner_size([520.0, 262.0])

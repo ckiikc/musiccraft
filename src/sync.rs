@@ -572,10 +572,7 @@ mod tests {
         let stamp = std::fs::metadata(&a).unwrap().modified().unwrap();
         std::fs::write(a.join("02.flac"), b"new").unwrap();
         // Force a distinct timestamp without sleeping or relying on filesystem precision.
-        std::fs::File::open(&a)
-            .unwrap()
-            .set_modified(stamp + Duration::from_secs(2))
-            .unwrap();
+        set_test_directory_modified(&a, stamp + Duration::from_secs(2));
         let added = scan(
             target.clone(),
             &AuthStore::default(),
@@ -592,10 +589,7 @@ mod tests {
         let deeper = a.join("Disc 2");
         std::fs::create_dir(&deeper).unwrap();
         std::fs::write(deeper.join("01.flac"), b"new").unwrap();
-        std::fs::File::open(&a)
-            .unwrap()
-            .set_modified(stamp + Duration::from_secs(3))
-            .unwrap();
+        set_test_directory_modified(&a, stamp + Duration::from_secs(3));
         let nested = scan(
             target.clone(),
             &AuthStore::default(),
@@ -609,7 +603,7 @@ mod tests {
         known.extend(nested.tracks.into_iter().map(|t| t.source));
         let old = std::fs::metadata(&b).unwrap().modified().unwrap();
         std::fs::write(b.join("02.flac"), b"new").unwrap();
-        std::fs::File::open(&b).unwrap().set_modified(old).unwrap();
+        set_test_directory_modified(&b, old);
         assert!(
             scan(
                 target.clone(),
@@ -704,10 +698,7 @@ mod integration {
         let album = artist.join("Album 05");
         let stamp = std::fs::metadata(&album).unwrap().modified().unwrap();
         std::fs::write(album.join("02 New song.flac"), b"new synthetic").unwrap();
-        std::fs::File::open(&album)
-            .unwrap()
-            .set_modified(stamp + Duration::from_secs(2))
-            .unwrap();
+        set_test_directory_modified(&album, stamp + Duration::from_secs(2));
         let new = scan(target.clone(), &auth, &known, &mut index, false, &cancel);
         assert_eq!(new.tracks.len(), 1);
         assert!(new.tracks[0].source.ends_with("02%20New%20song.flac"));
@@ -717,10 +708,7 @@ mod integration {
         let sub = album.join("New Disc");
         std::fs::create_dir(&sub).unwrap();
         std::fs::write(sub.join("03.flac"), b"new synthetic").unwrap();
-        std::fs::File::open(&album)
-            .unwrap()
-            .set_modified(stamp + Duration::from_secs(3))
-            .unwrap();
+        set_test_directory_modified(&album, stamp + Duration::from_secs(3));
         let nested = scan(target.clone(), &auth, &known, &mut index, false, &cancel);
         assert_eq!(nested.tracks.len(), 1);
         assert!(nested.tracks[0].source.contains("New%20Disc"));
@@ -807,4 +795,21 @@ mod integration {
             "FTP sync: 15 directory listings -> 2 unchanged / 3 with a new song; one login per sweep; zero media downloads; LIST fallback and offline/cancel passed"
         );
     }
+}
+
+#[cfg(test)]
+pub(crate) fn set_test_directory_modified(path: &Path, time: SystemTime) {
+    #[cfg(windows)]
+    let file = {
+        use std::os::windows::fs::OpenOptionsExt;
+        // Directory handles need backup semantics and FILE_WRITE_ATTRIBUTES.
+        std::fs::OpenOptions::new()
+            .access_mode(0x100)
+            .custom_flags(0x0200_0000)
+            .open(path)
+            .unwrap()
+    };
+    #[cfg(not(windows))]
+    let file = std::fs::File::open(path).unwrap();
+    file.set_modified(time).unwrap();
 }

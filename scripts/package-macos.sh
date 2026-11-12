@@ -48,6 +48,9 @@ if [[ "$lms_mode" == --with-lms-local ]]; then
   codesign --force --deep --sign - --identifier io.github.ckiikc.musiccraft.server "$bundle/Contents/Resources/LyrionRuntime.app"
   cp vendor/lms-runtime.json "$bundle/Contents/Resources/lms-runtime.json"
 fi
+if [[ -x vendor/codecs-macos/ffmpeg && -x vendor/codecs-macos/ffprobe ]]; then
+  ditto vendor/codecs-macos "$bundle/Contents/Resources/codecs"
+fi
 cp LICENSE THIRD_PARTY.md ATTRIBUTION.md "$bundle/Contents/Resources/"
 if [[ -f docs/DEPENDENCIES.tsv ]]; then
   cp docs/DEPENDENCIES.tsv "$bundle/Contents/Resources/"

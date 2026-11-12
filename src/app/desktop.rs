@@ -3,10 +3,10 @@ use super::*;
 impl Aurea {
     pub(super) fn pick_music(&mut self, folder: bool) {
         if folder {
-            if let Some(path) = rfd::FileDialog::new()
-                .set_directory("/Volumes")
-                .pick_folder()
-            {
+            let dialog = rfd::FileDialog::new();
+            #[cfg(target_os = "macos")]
+            let dialog = dialog.set_directory("/Volumes");
+            if let Some(path) = dialog.pick_folder() {
                 self.import(vec![path]);
             }
         } else if let Some(paths) = rfd::FileDialog::new()
@@ -14,6 +14,7 @@ impl Aurea {
                 tr!("Audio and playlists"),
                 &[
                     "flac", "wav", "aiff", "aif", "m4a", "mp3", "aac", "ogg", "m3u", "m3u8",
+                    "alac", "oga", "mp4", "dsf", "dff", "dsd", "ape", "wma", "asf", "wv", "opus",
                 ],
             )
             .pick_files()
@@ -176,6 +177,11 @@ impl Aurea {
                 }
             });
             ui.menu_button(tr!("Help"), |ui| {
+                #[cfg(not(target_os = "macos"))]
+                if ui.button(tr!("About MusicCraft")).clicked() {
+                    crate::about::show(ui.ctx());
+                    ui.close();
+                }
                 if ui.button(tr!("User guide")).clicked() {
                     self.help_dialog = true;
                     ui.close();

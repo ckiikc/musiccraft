@@ -1,6 +1,6 @@
 //! macOS exclusive HAL PCM output. Unsafe is confined to typed HAL property calls and the
 //! output-buffer lifetime supplied by CoreAudio. No AudioUnit, mixer or DSP. Strict mode additionally requires integer PCM.
-use crate::integer::{DecodedPcm, WireFormat};
+use crate::integer::{DecodedPcm, Transport, WireFormat};
 use std::sync::{
     Arc,
     atomic::{AtomicBool, AtomicU32, AtomicU64, Ordering},
@@ -41,6 +41,7 @@ pub struct Renderer {
     format: WireFormat,
     empty_cycles: u32,
     exhausted: bool,
+    dop_phase: bool,
 }
 impl Renderer {
     fn next_frame(&mut self) -> Option<[i32; 8]> {
@@ -125,18 +126,31 @@ impl Renderer {
         let mut any = false;
         let mut peaks = [0.0f32; 2];
         for index in 0..frames {
-            let Some(frame) = self.next_frame() else {
-                break;
+            let dop = self.current.pcm.transport == Transport::DoP;
+            let mut frame = match self.next_frame() {
+                Some(frame) => {
+                    any = true;
+                    frame
+                }
+                None if dop => [0x0069_6900; 8],
+                None => break,
             };
-            any = true;
-            for channel in 0..2 {
-                let raw = frame[channel.min(self.format.channels - 1)];
-                let sample = if self.current.pcm.floating {
-                    f64::from(f32::from_bits(raw as u32))
-                } else {
-                    raw as f64 / 2147483648.0
-                };
-                peaks[channel] = peaks[channel].max(sample.abs() as f32);
+            if dop {
+                let marker = if self.dop_phase { 0xfa_u32 } else { 0x05_u32 };
+                for sample in &mut frame {
+                    *sample = ((*sample as u32 & 0x00ff_ff00) | marker << 24) as i32;
+                }
+                self.dop_phase = !self.dop_phase;
+            } else {
+                for channel in 0..2 {
+                    let raw = frame[channel.min(self.format.channels - 1)];
+                    let sample = if self.current.pcm.floating {
+                        f64::from(f32::from_bits(raw as u32))
+                    } else {
+                        raw as f64 / 2147483648.0
+                    };
+                    peaks[channel] = peaks[channel].max(sample.abs() as f32);
+                }
             }
             for (channel, sample) in frame.iter().copied().enumerate().take(self.format.channels) {
                 let (buffer, offset) = if self.format.planar {
@@ -647,6 +661,7 @@ mod mac {
             strict: bool,
         ) -> Result<Self, String> {
             let pcm = pcm.into();
+            let strict = strict || pcm.transport == Transport::DoP;
             let (device, stream) = device(name, strict)?;
             let asbd = candidate(stream, &pcm, strict)?;
             let fmt = wire(&asbd).ok_or("Formato integer non valido")?;
@@ -671,6 +686,7 @@ mod mac {
                 format: fmt,
                 empty_cycles: 0,
                 exhausted: false,
+                dop_phase: false,
             };
             let mut callback = Box::new(Callback { renderer });
             let mut proc = None;
@@ -754,7 +770,9 @@ mod mac {
             plan: u64,
         ) -> Result<u64, String> {
             let pcm = pcm.into();
-            if !self.format.supports(&pcm) {
+            if self.callback.renderer.current.pcm.transport != pcm.transport
+                || !self.format.supports(&pcm)
+            {
                 return Err("Cambio formato: riapertura del DAC necessaria; nessun ricampionamento in esclusiva".into());
             }
             let token = self.next_token;
@@ -830,6 +848,7 @@ mod mac {
             assert_eq!(helpers::get_hogging_pid(id).unwrap(), -1);
             let test_rate = if old_rate == 44100.0 { 48000 } else { 44100 };
             let pcm = Arc::new(DecodedPcm {
+                transport: crate::integer::Transport::Pcm,
                 samples: vec![16 << 16; test_rate as usize * 2],
                 floating: false,
                 rate: test_rate,
@@ -907,6 +926,7 @@ mod tests {
             },
             empty_cycles: 0,
             exhausted: false,
+            dop_phase: false,
         };
         let mut output = vec![9; 44100 * 8];
         renderer.render(&mut [&mut output]);
@@ -920,6 +940,7 @@ mod tests {
     }
     fn pcm(samples: Vec<i32>) -> Arc<DecodedPcm> {
         Arc::new(DecodedPcm {
+            transport: Transport::Pcm,
             samples,
             floating: false,
             rate: 44100,
@@ -976,6 +997,7 @@ mod tests {
                     },
                     empty_cycles: 0,
                     exhausted: false,
+                    dop_phase: false,
                 };
                 let mut actual = Vec::new();
                 while actual.len() < expected.len() {
@@ -1038,6 +1060,7 @@ mod tests {
             },
             empty_cycles: 0,
             exhausted: false,
+            dop_phase: false,
         };
         let mut wrong = [255u8; 7];
         renderer.render(&mut [&mut wrong]);
@@ -1050,5 +1073,164 @@ mod tests {
         for name in crate::audio::devices() {
             println!("{name}: {}", probe(&name).unwrap_or_else(|e| e));
         }
+    }
+}
+
+#[cfg(any(target_os = "windows", target_os = "linux"))]
+mod portable;
+#[cfg(any(target_os = "windows", target_os = "linux"))]
+pub use portable::{HalStream, probe};
+
+#[cfg(test)]
+mod dop_tests {
+    use super::*;
+    fn pcm(frames: usize) -> Arc<DecodedPcm> {
+        Arc::new(DecodedPcm {
+            transport: Transport::DoP,
+            samples: (0..frames * 2)
+                .map(|i| ((i as i32 * 7919) & 0xffff) << 8)
+                .collect(),
+            floating: false,
+            rate: 176400,
+            channels: 2,
+            bits: 24,
+        })
+    }
+    #[test]
+    fn dop_markers_are_continuous_across_gapless_tracks_and_payload_bytes_are_exact() {
+        for (bits, bytes) in [(24, 3), (32, 4)] {
+            for block in [1, 2, 5, 17] {
+                let first = pcm(3);
+                let second = pcm(4);
+                let expected: Vec<_> = first
+                    .samples
+                    .iter()
+                    .chain(&second.samples)
+                    .copied()
+                    .collect();
+                let (mut queue, pending) = rtrb::RingBuffer::new(2);
+                let (retired, _garbage) = rtrb::RingBuffer::new(32);
+                queue
+                    .push(Queued {
+                        token: 2,
+                        plan: 7,
+                        pcm: second.into(),
+                    })
+                    .ok()
+                    .unwrap();
+                let telemetry = Arc::new(Telemetry::new(1));
+                let format = WireFormat {
+                    rate: 176400,
+                    channels: 2,
+                    bits,
+                    bytes,
+                    big_endian: false,
+                    high_aligned: false,
+                    planar: false,
+                    floating: false,
+                };
+                let mut renderer = Renderer {
+                    current: Queued {
+                        token: 1,
+                        plan: 7,
+                        pcm: first.into(),
+                    },
+                    frame: 0,
+                    pending,
+                    retired,
+                    telemetry: telemetry.clone(),
+                    plan: Arc::new(AtomicU64::new(7)),
+                    format,
+                    empty_cycles: 0,
+                    exhausted: false,
+                    dop_phase: false,
+                };
+                let mut output = Vec::new();
+                while output.len() < 7 * 2 * bytes {
+                    let mut buffer = vec![0; block * 2 * bytes];
+                    renderer.render(&mut [&mut buffer]);
+                    output.extend(buffer);
+                }
+                for (i, sample) in expected.into_iter().enumerate() {
+                    let marker = if (i / 2) % 2 == 0 { 5 } else { 250 };
+                    let low = ((sample as u32 >> 8) & 255) as u8;
+                    let high = ((sample as u32 >> 16) & 255) as u8;
+                    let wanted = if bytes == 3 {
+                        vec![low, high, marker]
+                    } else {
+                        vec![0, low, high, marker]
+                    };
+                    assert_eq!(&output[i * bytes..(i + 1) * bytes], wanted);
+                }
+                assert_eq!(telemetry.token.load(Ordering::Acquire), 2);
+                assert_eq!(telemetry.peaks[0].load(Ordering::Relaxed), 0);
+            }
+        }
+    }
+    #[test]
+    fn dop_starvation_keeps_marked_dsd_silence_without_advancing_audio_position() {
+        let (mut stream, _finish) = crate::streaming::Stream::pending_fixture();
+        stream.info.transport = Transport::DoP;
+        stream.info.bits = 24;
+        let (_, pending) = rtrb::RingBuffer::new(2);
+        let (retired, _garbage) = rtrb::RingBuffer::new(32);
+        let telemetry = Arc::new(Telemetry::new(1));
+        let mut renderer = Renderer {
+            current: Queued {
+                token: 1,
+                plan: 0,
+                pcm: stream.into(),
+            },
+            frame: 0,
+            pending,
+            retired,
+            telemetry: telemetry.clone(),
+            plan: Arc::new(AtomicU64::new(0)),
+            format: WireFormat {
+                rate: 176400,
+                channels: 2,
+                bits: 24,
+                bytes: 3,
+                big_endian: false,
+                high_aligned: false,
+                planar: false,
+                floating: false,
+            },
+            empty_cycles: 0,
+            exhausted: false,
+            dop_phase: false,
+        };
+        let mut output = [0; 24];
+        renderer.render(&mut [&mut output]);
+        for (frame, bytes) in output.chunks_exact(6).enumerate() {
+            assert_eq!(
+                bytes,
+                [
+                    0x69,
+                    0x69,
+                    if frame % 2 == 0 { 5 } else { 250 },
+                    0x69,
+                    0x69,
+                    if frame % 2 == 0 { 5 } else { 250 }
+                ]
+            );
+        }
+        assert_eq!(telemetry.frame.load(Ordering::Relaxed), 0);
+        assert!(!telemetry.ended.load(Ordering::Acquire));
+        assert!(
+            !WireFormat {
+                floating: true,
+                ..renderer.format
+            }
+            .supports(&renderer.current.pcm)
+        );
+        assert!(
+            !WireFormat {
+                bits: 16,
+                bytes: 2,
+                ..renderer.format
+            }
+            .supports(&renderer.current.pcm)
+        );
     }
 }

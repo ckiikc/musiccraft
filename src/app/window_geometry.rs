@@ -84,6 +84,24 @@ fn work_area(ctx: &egui::Context) -> egui::Rect {
     if let Some(area) = native_work_area(ctx) {
         return area;
     }
+    #[cfg(all(not(target_os = "macos"), not(test)))]
+    if let Some(areas) = crate::platform::monitor_areas(
+        ctx.native_pixels_per_point().unwrap_or(1.0) * ctx.zoom_factor(),
+    ) {
+        let window = ctx.input(|i| i.viewport().outer_rect.or(i.viewport().inner_rect));
+        if let Some(area) = areas.into_iter().max_by(|a, b| {
+            let overlap =
+                |area: &egui::Rect| window.map_or(0.0, |w| w.intersect(*area).area().max(0.0));
+            overlap(a).total_cmp(&overlap(b)).then_with(|| {
+                let distance = |area: &egui::Rect| {
+                    window.map_or(0.0, |w| w.center().distance_sq(area.center()))
+                };
+                distance(b).total_cmp(&distance(a))
+            })
+        }) {
+            return area;
+        }
+    }
     let size = ctx
         .input(|i| i.viewport().monitor_size)
         .unwrap_or(vec2(1280.0, 900.0));
@@ -238,8 +256,15 @@ impl Aurea {
         self.window_geometry.observed = observed;
         if mode_changed {
             super::window_drag::reset(ctx);
-            ctx.send_viewport_cmd(egui::ViewportCommand::Transparent(self.saved.mini));
-            ctx.send_viewport_cmd(egui::ViewportCommand::Decorations(!self.saved.mini));
+            ctx.send_viewport_cmd(egui::ViewportCommand::Transparent(
+                self.saved.mini && cfg!(target_os = "macos"),
+            ));
+            // Windows keeps its native frame so client-area sizing stays consistent
+            // across drivers and compatibility environments; macOS/X11 keep the
+            // established borderless miniplayer.
+            ctx.send_viewport_cmd(egui::ViewportCommand::Decorations(
+                cfg!(target_os = "windows") || !self.saved.mini,
+            ));
             self.resize_window(ctx);
             self.viewport_mini = Some(self.saved.mini);
         } else if screen_changed {

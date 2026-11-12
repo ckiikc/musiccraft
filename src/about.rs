@@ -152,6 +152,45 @@ pub fn preview(ctx: &eframe::egui::Context) {
     }
 }
 
+#[cfg(not(target_os = "macos"))]
+pub fn show(ctx: &eframe::egui::Context) {
+    ctx.data_mut(|d| d.insert_temp(eframe::egui::Id::new("about-open"), true));
+}
+#[cfg(not(target_os = "macos"))]
+pub fn paint(ctx: &eframe::egui::Context, pinned: bool) {
+    use eframe::egui;
+    let id = egui::Id::new("about-open");
+    if !ctx.data(|d| d.get_temp::<bool>(id).unwrap_or(false)) {
+        return;
+    }
+    let mut open = true;
+    ctx.show_viewport_immediate(
+        egui::ViewportId::from_hash_of("musiccraft-about"),
+        egui::ViewportBuilder::default()
+            .with_title(tr!("About MusicCraft"))
+            .with_inner_size([400.0, 180.0])
+            .with_decorations(true)
+            .with_transparent(false)
+            .with_window_level(if pinned {
+                egui::WindowLevel::AlwaysOnTop
+            } else {
+                egui::WindowLevel::Normal
+            }),
+        |ctx, _| {
+            if ctx.input(|i| i.viewport().close_requested() || i.key_pressed(egui::Key::Escape)) {
+                open = false;
+            }
+            egui::CentralPanel::default().show(ctx, |ui| {
+                ui.heading(format!("MusicCraft {}", env!("CARGO_PKG_VERSION")));
+                ui.label("Copyright 2026 MusicCraft contributors · MIT");
+                ui.label("DSD / DoP · FLAC · ALAC · APE · WavPack · WMA · Opus");
+                ui.hyperlink_to("MusicCraft", "https://github.com/ckiikc/musiccraft");
+            });
+        },
+    );
+    ctx.data_mut(|d| d.insert_temp(id, open));
+}
+
 #[cfg(test)]
 mod tests {
     #[test]

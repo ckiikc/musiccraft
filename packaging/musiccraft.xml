@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="audio/x-dsd"><comment>DSD audio</comment><glob pattern="*.dsf"/><glob pattern="*.dff"/><glob pattern="*.dsd"/></mime-type>
+  <mime-type type="audio/x-ape"><comment>Monkey’s Audio</comment><glob pattern="*.ape"/></mime-type>
+  <mime-type type="audio/x-wavpack"><comment>WavPack audio</comment><glob pattern="*.wv"/></mime-type>
+</mime-info>

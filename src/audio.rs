@@ -5,7 +5,7 @@ use std::{
     path::{Path, PathBuf},
     sync::{
         Arc,
-        atomic::{AtomicU32, AtomicU64, Ordering},
+        atomic::{AtomicBool, AtomicU32, AtomicU64, Ordering},
         mpsc::{self, Receiver, Sender},
     },
     time::Duration,
@@ -68,6 +68,7 @@ pub struct Audio {
     pub gain: Arc<AtomicU32>,
     pub plan: Arc<AtomicU64>,
     pub meters: Arc<[AtomicU32; 2]>,
+    pub dsd_dop: Arc<AtomicBool>,
 }
 
 impl Audio {
@@ -79,9 +80,24 @@ impl Audio {
         let p = plan.clone();
         let gain = Arc::new(AtomicU32::new(0.25f32.to_bits()));
         let meters = Arc::new([AtomicU32::new(0), AtomicU32::new(0)]);
+        let dsd_dop = Arc::new(AtomicBool::new(false));
+        let dop = dsd_dop.clone();
         let (g, v, m) = (generation.clone(), gain.clone(), meters.clone());
-        let thread =
-            std::thread::spawn(move || worker(commands, events, cache, (g, v, m, p), auth));
+        let thread = std::thread::spawn(move || {
+            worker(
+                commands,
+                events,
+                cache,
+                SharedState {
+                    generation: g,
+                    gain: v,
+                    meters: m,
+                    plan_epoch: p,
+                    dsd_dop: dop,
+                },
+                auth,
+            )
+        });
         Self {
             thread: Some(thread),
             tx,
@@ -90,6 +106,7 @@ impl Audio {
             gain,
             plan,
             meters,
+            dsd_dop,
         }
     }
     pub fn load(
@@ -148,12 +165,20 @@ impl Drop for Audio {
     }
 }
 
+fn device_label(device: &cpal::Device) -> Option<String> {
+    let description = device.description().ok()?;
+    #[cfg(target_os = "linux")]
+    if let Some(driver) = description.driver() {
+        return Some(format!("{} · {driver}", description.name()));
+    }
+    Some(description.name().to_owned())
+}
 pub fn devices() -> Vec<String> {
     cpal::default_host()
         .output_devices()
         .into_iter()
         .flatten()
-        .filter_map(|d| d.description().ok().map(|d| d.name().to_string()))
+        .filter_map(|d| device_label(&d))
         .collect()
 }
 
@@ -167,9 +192,9 @@ fn output(
     let device = if device_name.is_empty() {
         host.default_output_device()
     } else {
-        host.output_devices()
-            .ok()
-            .and_then(|mut ds| ds.find(|d| d.description().is_ok_and(|d| d.name() == device_name)))
+        host.output_devices().ok().and_then(|mut ds| {
+            ds.find(|d| device_label(d).is_some_and(|label| label == device_name))
+        })
     }
     .ok_or("Uscita audio non disponibile. Aggiorna l'elenco dei dispositivi")?;
     let mut builder = DeviceSinkBuilder::from_device(device)
@@ -205,19 +230,27 @@ pub fn cover(path: &Path) -> Option<Vec<u8>> {
     Some(picture.data().to_vec())
 }
 
+struct SharedState {
+    generation: Arc<AtomicU64>,
+    gain: Arc<AtomicU32>,
+    meters: Arc<[AtomicU32; 2]>,
+    plan_epoch: Arc<AtomicU64>,
+    dsd_dop: Arc<AtomicBool>,
+}
 fn worker(
     commands: Receiver<Command>,
     events: Sender<Event>,
     root: PathBuf,
-    state: (
-        Arc<AtomicU64>,
-        Arc<AtomicU32>,
-        Arc<[AtomicU32; 2]>,
-        Arc<AtomicU64>,
-    ),
+    state: SharedState,
     auth: crate::network::AuthStore,
 ) {
-    let (generation, gain, meters, plan_epoch) = state;
+    let SharedState {
+        generation,
+        gain,
+        meters,
+        plan_epoch,
+        dsd_dop,
+    } = state;
     let mut dsp = crate::dsp::Config::default();
     let mut queued_plan = None;
     let mut session_native = true;
@@ -261,17 +294,31 @@ fn worker(
                 session_exclusive = exclusive;
                 session_strict = strict;
                 let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                    let decode_mode = if dsd_dop.load(Ordering::Relaxed)
+                        && crate::decoder::is_dsd(&track.source)
+                    {
+                        if !exclusive {
+                            return Err(
+                                "DoP requires an exclusive integer output and a compatible DSD DAC"
+                                    .into(),
+                            );
+                        }
+                        crate::decoder::Mode::DoP
+                    } else {
+                        crate::decoder::Mode::from(exclusive && strict)
+                    };
                     let mut prepared = crate::streaming::Stream::prepare(
                         &mut track,
                         &root,
                         &auth,
                         crate::streaming::Cancellation::new(generation.clone(), ticket, None),
-                        exclusive && strict,
+                        decode_mode,
                         Some(events.clone()),
                     )?;
                     let art = prepared.cover.take();
                     if exclusive {
                         let pcm = crate::streaming::Pcm::from(prepared);
+                        let dop = pcm.transport == crate::integer::Transport::DoP;
                         let mut exclusive_stream = crate::exclusive::HalStream::open(
                             &device,
                             pcm,
@@ -280,7 +327,9 @@ fn worker(
                         )?;
                         let description = format!(
                             "Esclusiva {} · {} Hz · {} bit · {} ch{}",
-                            if exclusive_stream.format.floating {
+                            if dop {
+                                "DSD / DoP"
+                            } else if exclusive_stream.format.floating {
                                 "float"
                             } else {
                                 "integer"

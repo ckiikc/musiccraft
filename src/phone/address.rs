@@ -27,7 +27,7 @@ pub(super) fn local_ipv4(host: &str, cancel: &AtomicBool) -> Vec<Ipv4Addr> {
     }
     #[cfg(not(target_os = "macos"))]
     {
-        vec![]
+        super::mdns::resolve(host, cancel)
     }
 }
 #[cfg(target_os = "macos")]

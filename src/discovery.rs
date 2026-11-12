@@ -64,6 +64,7 @@ pub fn lans() -> Vec<Lan> {
     result.dedup();
     result
 }
+#[cfg(any(target_os = "macos", test))]
 fn mac(value: &str) -> Option<String> {
     let bytes: Vec<_> = value
         .split(':')
@@ -81,6 +82,7 @@ fn mac(value: &str) -> Option<String> {
             .join(":"),
     )
 }
+#[cfg(any(target_os = "macos", test))]
 fn parse_neighbors(text: &str) -> Vec<(Ipv4Addr, String)> {
     text.lines()
         .filter_map(|line| {

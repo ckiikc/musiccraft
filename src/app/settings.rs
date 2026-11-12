@@ -598,9 +598,13 @@ impl Aurea {
                 self.ctx.set_zoom_factor(self.saved.ui_scale);
             }
             ui.label(
-                RichText::new(tr!("Use ⌘+ and ⌘− to adjust text size."))
-                    .size(12.0)
-                    .color(palette::muted()),
+                RichText::new(if cfg!(target_os = "macos") {
+                    tr!("Use ⌘+ and ⌘− to adjust text size.").to_owned()
+                } else {
+                    tr!("Use ⌘+ and ⌘− to adjust text size.").replace('⌘', "Ctrl")
+                })
+                .size(12.0)
+                .color(palette::muted()),
             );
         });
         settings_card(ui, |ui| {

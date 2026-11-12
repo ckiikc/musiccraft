@@ -17,6 +17,7 @@ pub struct Nearby {
     pub host: String,
     pub port: u16,
 }
+#[cfg(target_os = "macos")]
 fn dns_lines(args: Vec<String>, cancel: &AtomicBool, seconds: u64) -> Vec<String> {
     use std::{
         io::{BufRead, BufReader},
@@ -56,6 +57,7 @@ fn dns_lines(args: Vec<String>, cancel: &AtomicBool, seconds: u64) -> Vec<String
     let _ = child.wait();
     lines
 }
+#[cfg(target_os = "macos")]
 pub fn nearby(cancel: &AtomicBool) -> Vec<Nearby> {
     let lines = dns_lines(
         vec!["-B".into(), "_musiccraft._tcp".into(), "local.".into()],
@@ -303,4 +305,9 @@ pub fn pair(
         online(&source.url()?, &auth, cancel, Duration::from_secs(5))?;
         return Ok(source);
     }
+}
+
+#[cfg(not(target_os = "macos"))]
+pub fn nearby(cancel: &AtomicBool) -> Vec<Nearby> {
+    super::mdns::nearby(cancel)
 }

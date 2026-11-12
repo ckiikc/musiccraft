@@ -12,7 +12,15 @@ use symphonia::core::{
 
 #[cfg(test)]
 pub const MAX_PCM_BYTES: usize = 512 * 1024 * 1024;
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum Transport {
+    #[default]
+    Pcm,
+    DoP,
+}
+
 pub struct DecodedPcm {
+    pub transport: Transport,
     /// Normalized signed integer PCM, or f32 bit patterns when floating is true.
     pub samples: Vec<i32>,
     pub floating: bool,
@@ -200,6 +208,7 @@ impl PacketDecoder {
     }
     pub fn info(&self) -> DecodedPcm {
         DecodedPcm {
+            transport: crate::integer::Transport::Pcm,
             samples: vec![],
             floating: self.floating.unwrap_or(false),
             rate: self.rate,
@@ -332,6 +341,7 @@ impl PacketDecoder {
                 continue;
             }
             return Ok(Some(DecodedPcm {
+                transport: Transport::Pcm,
                 samples,
                 floating: is_float,
                 rate: self.rate,
@@ -355,7 +365,8 @@ pub struct WireFormat {
 }
 impl WireFormat {
     pub fn supports(&self, pcm: &DecodedPcm) -> bool {
-        self.rate == pcm.rate
+        (pcm.transport != Transport::DoP || (!self.floating && self.bits >= 24))
+            && self.rate == pcm.rate
             && self.channels == pcm.channels
             && (self.floating || (!pcm.floating && self.bits >= pcm.bits))
     }
@@ -421,7 +432,14 @@ mod tests {
     #[test]
     fn damaged_packet_reports_the_decoder_cause_in_shared_playback() {
         let fixture = std::io::Cursor::new(
-            include_bytes!("../tests/fixtures/invalid-subframe.flac").to_vec(),
+            include_str!("../tests/fixtures/invalid-subframe.hex")
+                .split_whitespace()
+                .flat_map(|line| {
+                    (0..line.len())
+                        .step_by(2)
+                        .map(|i| u8::from_str_radix(&line[i..i + 2], 16).unwrap())
+                })
+                .collect::<Vec<_>>(),
         );
         let mut decoder = PacketDecoder::open(Box::new(fixture), false).unwrap();
         let reason = decoder

@@ -4,7 +4,7 @@ use std::{
     hash::{Hash, Hasher},
     io::{Read, Write},
     path::{Path, PathBuf},
-    process::{Command, Stdio},
+    process::Stdio,
     sync::atomic::{AtomicU64, Ordering},
     time::Duration,
 };
@@ -68,7 +68,6 @@ pub fn materialize_limited(
     )
 }
 
-#[cfg(test)]
 pub fn materialize_cancellable(
     source: &str,
     root: &Path,
@@ -128,7 +127,7 @@ fn materialize_inner(
     let part = target.with_extension(format!("{}.part", rand::random::<u64>()));
     let outcome = if is_remote(source) {
         let _priority = (limit > 8 * 1024 * 1024).then(AudioTransfer::begin);
-        let mut command = Command::new("/usr/bin/curl");
+        let mut command = crate::platform::curl_command();
         command
             .args([
                 "--config",

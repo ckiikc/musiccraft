@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Conferma la richiesta di abbin
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Nessun telefono trovato. Verifica che i dispositivi usino la stessa rete Wi-Fi.
 Pair	Abbina
 Pairing code incorrect or expired. Reopen pairing on the phone.	Codice errato o scaduto. Riapri l’abbinamento sul telefono.
+DSD output	Uscita DSD
+Convert to PCM	Converti in PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP richiede un DAC DSD compatibile, uscita esclusiva integer e volume hardware a 0 dB. Nessun DSP o ricampionamento.
+Remember in system credential store	Ricorda nell’archivio credenziali del sistema
+Unlock the credential store or enter the password in Network	Sblocca l’archivio credenziali o inserisci la password in Rete
+About MusicCraft	Informazioni su MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP richiede un DAC DSD compatibile, uscita esclusiva integer e volume hardware a 0 dB. Nessun DSP o ricampionamento.

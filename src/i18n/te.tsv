@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	మీ ఫోన్‌లో �
 Guide: No phone found. Check that both devices use the same Wi-Fi.	ఫోన్ కనబడలేదు. రెండు పరికరాలు ఒకే Wi-Fi వాడుతున్నాయో చూడండి.
 Pair	జత చేయి
 Pairing code incorrect or expired. Reopen pairing on the phone.	కోడ్ తప్పు లేదా గడువు ముగిసింది. ఫోన్‌లో జత చేసే స్క్రీన్‌ను మళ్లీ తెరవండి.
+DSD output	DSD అవుట్‌పుట్
+Convert to PCM	PCMకి మార్చు
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoPకు అనుకూల DSD DAC, ప్రత్యేక పూర్ణాంక అవుట్‌పుట్ మరియు 0 dB హార్డ్‌వేర్ వాల్యూమ్ అవసరం. DSP లేదా రీసాంప్లింగ్ లేదు.
+Remember in system credential store	సిస్టమ్ ఆధారాల నిల్వలో గుర్తుంచుకో
+Unlock the credential store or enter the password in Network	ఆధారాల నిల్వను అన్‌లాక్ చేయండి లేదా నెట్‌వర్క్‌లో పాస్‌వర్డ్ ఇవ్వండి
+About MusicCraft	MusicCraft గురించి
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoPకు అనుకూల DSD DAC, ప్రత్యేక పూర్ణాంక అవుట్‌పుట్ మరియు 0 dB హార్డ్‌వేర్ వాల్యూమ్ అవసరం. DSP లేదా రీసాంప్లింగ్ లేదు.

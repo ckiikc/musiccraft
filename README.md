@@ -2,7 +2,13 @@
 
 A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS sources. A compact player, faceted library browser and album view keep a large personal collection close at hand.
 
-**Independent project · macOS and Android previews · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
+**Independent project · macOS, Windows, Linux and Android previews · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
+
+## Desktop 0.11.0 cross-platform preview
+
+The development branch adds Windows/Linux platform storage, protected credentials, phone discovery, native exclusive audio and installer recipes while preserving the macOS profile and engine. It also adds APE, WMA, WavPack, Opus, DSD-to-PCM and an explicit DSF/uncompressed DFF DoP transport for compatible DACs. Hardware validation is separate from source/virtual-machine tests. See [porting, formats and build instructions](docs/PORTING.md).
+
+This branch does not publish new GitHub downloads automatically. The existing releases below retain their own versions and checksums.
 
 ## Desktop source update — 0.10.57
 
@@ -54,7 +60,7 @@ There is no universal guarantee of bit-perfect hardware output or of correct res
 
 ## Build on macOS
 
-The current build has been checked on Apple silicon with Rust **1.97.1** and Xcode Command Line Tools. Intel macOS, Windows and Linux need separate validation.
+The current build has been checked on Apple silicon with Rust **1.97.1** and Xcode Command Line Tools. Intel macOS remains unverified. Windows/Linux preview builds and their validation boundaries are documented in [porting](docs/PORTING.md).
 
 From the source directory, build with:
 

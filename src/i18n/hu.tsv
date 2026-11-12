@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Erősítse meg a párosítási
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Nem található telefon. Ellenőrizze, hogy az eszközök ugyanazt a Wi-Fit használják.
 Pair	Párosítás
 Pairing code incorrect or expired. Reopen pairing on the phone.	A kód hibás vagy lejárt. Nyissa meg újra a párosítást a telefonon.
+DSD output	DSD-kimenet
+Convert to PCM	Átalakítás PCM-re
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	A DoP kompatibilis DSD DAC-ot, kizárólagos egész számos kimenetet és 0 dB hardveres hangerőt igényel. DSP és újramintavételezés nélkül.
+Remember in system credential store	Megjegyzés a rendszer tárolójában
+Unlock the credential store or enter the password in Network	Oldja fel a tárolót vagy adja meg a jelszót a Hálózat lapon
+About MusicCraft	A MusicCraft névjegye
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	A DoP kompatibilis DSD DAC-ot, kizárólagos egész számos kimenetet és 0 dB hardveres hangerőt igényel. DSP és újramintavételezés nélkül.

@@ -85,6 +85,12 @@ fn desktop_areas(ctx: &egui::Context) -> Vec<egui::Rect> {
                 .collect();
         }
     }
+    #[cfg(not(target_os = "macos"))]
+    if let Some(areas) =
+        crate::platform::monitor_areas(ctx.native_pixels_per_point().unwrap_or(1.0))
+    {
+        return areas;
+    }
     vec![egui::Rect::from_min_size(
         pos2(0.0, 0.0),
         ctx.input(|i| i.viewport().monitor_size)

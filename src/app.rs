@@ -59,6 +59,7 @@ struct Saved {
     device: String,
     exclusive: bool,
     strict_integer: bool,
+    dsd_dop: bool,
     mini: bool,
     mini_view: u8,
     mini_last_view: u8,
@@ -102,6 +103,7 @@ impl Default for Saved {
             device: String::new(),
             exclusive: false,
             strict_integer: false,
+            dsd_dop: false,
             mini: true,
             mini_view: 1,
             mini_last_view: 1,
@@ -1007,6 +1009,9 @@ impl Aurea {
         let track = self.scoped_tracks().find(|t| t.source == id).cloned();
         if let Some(track) = track {
             self.playback_error = None;
+            self.audio
+                .dsd_dop
+                .store(self.saved.dsd_dop, Ordering::Relaxed);
             self.ticket = self.audio.load(
                 track,
                 self.saved.device.clone(),
@@ -1183,6 +1188,7 @@ impl Aurea {
                         self.audio.plan.load(Ordering::Relaxed),
                     )),
                     exclusive: self.saved.exclusive.then_some(self.saved.strict_integer),
+                    dsd_dop: self.saved.dsd_dop && self.saved.exclusive,
                     online_art: Some(self.online_covers.clone()),
                     save_art: Some(self.save_covers.clone()),
                 },
@@ -1255,6 +1261,7 @@ impl Aurea {
                                 artwork_only: true,
                                 next_plan: None,
                                 exclusive: None,
+                                dsd_dop: false,
                                 online_art: Some(self.online_covers.clone()),
                                 save_art: Some(self.save_covers.clone()),
                             },
@@ -2267,6 +2274,18 @@ impl Aurea {
                 .selectable_value(&mut self.saved.exclusive, true, tr!("Exclusive"))
                 .changed();
         });
+        ui.horizontal(|ui| {
+            ui.label(tr!("DSD output"));
+            changed |= ui
+                .selectable_value(&mut self.saved.dsd_dop, false, tr!("Convert to PCM"))
+                .changed();
+            changed |= ui
+                .selectable_value(&mut self.saved.dsd_dop, true, "DoP")
+                .changed();
+        });
+        if self.saved.dsd_dop {
+            ui.label(RichText::new(tr!("DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.")).small().color(palette::muted()));
+        }
         ui.label(RichText::new(if self.saved.exclusive{tr!("MusicCraft requests the device and source sample rate. Adjust volume on your audio device.")}else{tr!("Shared listening with other apps; MusicCraft controls the volume.")}).small().color(palette::muted()));
         ui.add_space(8.0);
         changed |= ui
@@ -2494,6 +2513,8 @@ impl eframe::App for Aurea {
         self.sync_window_geometry(ctx);
         self.poll(ctx);
         self.native_menus(ctx);
+        #[cfg(not(target_os = "macos"))]
+        crate::about::paint(ctx, self.saved.pinned);
         let info_open = self.info_dialog || (self.saved.mini && self.saved.mini_view >= 3);
         let query = self
             .current
@@ -3293,10 +3314,7 @@ mod source_tests {
         assert!(app.requested.is_none());
         let stamp = std::fs::metadata(&album).unwrap().modified().unwrap();
         std::fs::write(album.join("02.flac"), b"synthetic").unwrap();
-        std::fs::File::open(&album)
-            .unwrap()
-            .set_modified(stamp + Duration::from_secs(2))
-            .unwrap();
+        crate::sync::set_test_directory_modified(&album, stamp + Duration::from_secs(2));
         app.auto_sync_tick(now + Duration::from_secs(121));
         wait(&mut app);
         assert_eq!(app.saved.tracks.len(), 2);

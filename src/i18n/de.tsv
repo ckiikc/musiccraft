@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Bestätige die Kopplungsanfrag
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Kein Telefon gefunden. Prüfe, ob beide Geräte dasselbe WLAN verwenden.
 Pair	Koppeln
 Pairing code incorrect or expired. Reopen pairing on the phone.	Code falsch oder abgelaufen. Öffne die Kopplung am Telefon erneut.
+DSD output	DSD-Ausgabe
+Convert to PCM	In PCM umwandeln
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP benötigt einen kompatiblen DSD-DAC, exklusive Integer-Ausgabe und Hardwarelautstärke bei 0 dB. Kein DSP oder Resampling.
+Remember in system credential store	Im System-Anmeldespeicher merken
+Unlock the credential store or enter the password in Network	Anmeldespeicher entsperren oder Passwort unter Netzwerk eingeben
+About MusicCraft	Über MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP benötigt einen kompatiblen DSD-DAC, exklusive Integer-Ausgabe und Hardwarelautstärke bei 0 dB. Kein DSP oder Resampling.

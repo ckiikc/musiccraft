@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	Potrdite zahtevo za seznanjanj
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon ni najden. Preverite, ali napravi uporabljata isti Wi-Fi.
 Pair	Seznani
 Pairing code incorrect or expired. Reopen pairing on the phone.	Koda je napačna ali je potekla. Znova odprite seznanjanje v telefonu.
+DSD output	Izhod DSD
+Convert to PCM	Pretvori v PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP zahteva združljiv DSD DAC, izključni celoštevilski izhod in strojno glasnost 0 dB. Brez DSP in ponovnega vzorčenja.
+Remember in system credential store	Shrani v sistemsko shrambo
+Unlock the credential store or enter the password in Network	Odklenite shrambo ali vnesite geslo v Omrežje
+About MusicCraft	O programu MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	DoP zahteva združljiv DSD DAC, izključni celoštevilski izhod in strojno glasnost 0 dB. Brez DSP in ponovnega vzorčenja.

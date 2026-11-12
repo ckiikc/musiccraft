@@ -358,3 +358,10 @@ Guide: Confirm the pairing request on your phone.	أكّد طلب الاقترا
 Guide: No phone found. Check that both devices use the same Wi-Fi.	لم يُعثر على هاتف. تحقق من استخدام الجهازين لشبكة Wi-Fi نفسها.
 Pair	اقتران
 Pairing code incorrect or expired. Reopen pairing on the phone.	الرمز غير صحيح أو انتهت صلاحيته. أعد فتح الاقتران على الهاتف.
+DSD output	إخراج DSD
+Convert to PCM	التحويل إلى PCM
+DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	يتطلب DoP محول DSD متوافقاً وإخراجاً حصرياً بالأعداد الصحيحة ومستوى صوت عتادي 0 dB. دون DSP أو إعادة أخذ عينات.
+Remember in system credential store	الحفظ في مخزن بيانات اعتماد النظام
+Unlock the credential store or enter the password in Network	افتح مخزن بيانات الاعتماد أو أدخل كلمة المرور في الشبكة
+About MusicCraft	حول MusicCraft
+Guide: DoP requires a compatible DSD DAC, exclusive integer output and unity hardware volume. No DSP or resampling.	يتطلب DoP محول DSD متوافقاً وإخراجاً حصرياً بالأعداد الصحيحة ومستوى صوت عتادي 0 dB. دون DSP أو إعادة أخذ عينات.
