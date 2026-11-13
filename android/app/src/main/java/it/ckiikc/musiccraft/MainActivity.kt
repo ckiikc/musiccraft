@@ -41,7 +41,7 @@ class MainActivity:Activity() {
         override fun onEvents(player:Player,events:Player.Events){renderPlayer();if(scene==3)showQueue()}
         override fun onPlayerError(error:PlaybackException){status?.text="File non disponibile. Il player prova il brano successivo."}
     }
-    private val ticker=object:Runnable {override fun run(){renderProgress();renderMix();renderSharing();RatingTags.present(this@MainActivity);if(scene==1 && renderedRevision!=store.libraryRevision){renderedRevision=store.libraryRevision;buildContent()};handler.postDelayed(this,1000)}}
+    private val ticker=object:Runnable {override fun run(){renderProgress();renderMix();renderSharing();RatingTags.present(this@MainActivity);SyncPanel.present(this@MainActivity);if(scene==1 && renderedRevision!=store.libraryRevision){renderedRevision=store.libraryRevision;buildContent()};handler.postDelayed(this,1000)}}
     private fun dp(n:Int)=(n*resources.displayMetrics.density).toInt()
     private fun text(value:String,size:Float,color:Int=Color.WHITE)=TextView(this).apply{text=value;textSize=size;setTextColor(color)}
     private fun button(value:String,action:()->Unit)=Button(this).apply{text=value;isAllCaps=false;setTextColor(gold);setBackgroundColor(Color.TRANSPARENT);minHeight=dp(48);setOnClickListener{action()}}
@@ -60,7 +60,7 @@ class MainActivity:Activity() {
     private fun entry(title:String,detail:String,resource:Int=R.drawable.ic_playlist,action:()->Unit):View {val box=row().apply{minimumHeight=dp(70);setPadding(0,dp(5),0,dp(5));isClickable=true;isFocusable=true;contentDescription="$title. $detail";setOnClickListener{action()}};box.addView(icon(resource,title,action),LinearLayout.LayoutParams(dp(48),dp(48)));val labels=column();labels.addView(text(title,16f).apply{maxLines=2});if(detail.isNotBlank())labels.addView(text(detail,13f,muted).apply{maxLines=2});box.addView(labels,LinearLayout.LayoutParams(0,-2,1f));box.addView(icon(R.drawable.ic_chevron,"Apri $title",action),LinearLayout.LayoutParams(dp(48),dp(48)));return box}
     override fun onCreate(savedInstanceState:Bundle?){
         super.onCreate(savedInstanceState);catalog=Catalog.get(this);store=ListeningStore.get(this)
-        scene=savedInstanceState?.getInt("scene") ?: getPreferences(MODE_PRIVATE).getInt("scene",0);scene=scene.coerceIn(0,4)
+        scene=savedInstanceState?.getInt("scene") ?: getPreferences(MODE_PRIVATE).getInt("scene",0);scene=scene.coerceIn(0,5)
         parentId=savedInstanceState?.getString("parent") ?: "songs";query=savedInstanceState?.getString("query") ?: ""
         if(intent.action=="android.media.action.MEDIA_PLAY_FROM_SEARCH")voiceQuery=intent.getStringExtra(android.app.SearchManager.QUERY).orEmpty()
         playlistCatalog=savedInstanceState?.getBoolean("playlistCatalog") ?: false;savedTab=savedInstanceState?.getBoolean("savedTab") ?: false
@@ -71,6 +71,8 @@ class MainActivity:Activity() {
     override fun onActivityResult(requestCode:Int,resultCode:Int,data:android.content.Intent?){
         super.onActivityResult(requestCode,resultCode,data)
         RatingTags.result(this,requestCode,resultCode)
+        SyncPanel.result(this,requestCode,resultCode,data)
+        if(requestCode==SyncPanel.PICK && scene==5)buildContent()
     }
     private fun navigate(to:Int){(getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(root.windowToken,0);scene=to;buildContent()}
     private fun buildContent(){
@@ -85,13 +87,13 @@ class MainActivity:Activity() {
         val header=row();header.addView(text("MUSICCRAFT",15f,gold).apply{setSingleLine();ellipsize=android.text.TextUtils.TruncateAt.END;gravity=Gravity.CENTER_VERTICAL;letterSpacing=.10f;setTypeface(null,Typeface.BOLD)},LinearLayout.LayoutParams(0,dp(56),1f))
         val share=column().apply{gravity=Gravity.CENTER;isClickable=true;isFocusable=true;contentDescription="Condividi con il computer";id=R.id.sharing_open;setOnClickListener{showSharing()};addView(text("Condividi",13f));sharingStatus=text("Spenta",10f,muted).apply{id=R.id.sharing_status};addView(sharingStatus)}
         header.addView(share,LinearLayout.LayoutParams(dp(78),dp(56)));header.addView(icon(R.drawable.ic_more,"Opzioni MusicCraft"){viewMenu(header)},LinearLayout.LayoutParams(dp(48),dp(56)));root.addView(header)
-        when(scene){0->buildSearch();1->buildPlaylists();2->buildPlayer();3->buildQueue();4->buildCarProfiles()}
+        when(scene){0->buildSearch();1->buildPlaylists();2->buildPlayer();3->buildQueue();4->buildCarProfiles();5->root.addView(SyncPanel.view(this),LinearLayout.LayoutParams(-1,0,1f))}
         if(scene==0 || scene==1)buildMiniPlayer()
         val tabs=row().apply{setPadding(0,dp(4),0,0)}
-        for((index,label)in listOf(0 to "Cerca",1 to "Playlist",2 to "Player")){
-            val selected=scene==index || index==2 && scene>=3
-            val tab=column().apply{id=when(index){0->R.id.nav_search;1->R.id.nav_playlists;else->R.id.nav_player};gravity=Gravity.CENTER;isSelected=selected;isClickable=true;isFocusable=true;contentDescription="$label${if(selected)", selezionato" else ""}";setOnClickListener{if(index==1){playlistCatalog=false};navigate(index)}}
-            val image=ImageView(this).apply{setImageResource(when(index){0->R.drawable.ic_search;1->R.drawable.ic_playlist;else->R.drawable.ic_player});imageTintList=android.content.res.ColorStateList.valueOf(if(selected)gold else muted);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO}
+        for((index,label)in listOf(0 to "Cerca",1 to "Playlist",2 to "Player",5 to "Sincronizza")){
+            val selected=scene==index || index==2 && scene in 3..4
+            val tab=column().apply{id=when(index){0->R.id.nav_search;1->R.id.nav_playlists;5->R.id.nav_sync;else->R.id.nav_player};gravity=Gravity.CENTER;isSelected=selected;isClickable=true;isFocusable=true;contentDescription="$label${if(selected)", selezionato" else ""}";setOnClickListener{if(index==1){playlistCatalog=false};navigate(index)}}
+            val image=ImageView(this).apply{setImageResource(when(index){0->R.drawable.ic_search;1->R.drawable.ic_playlist;5->R.drawable.ic_sync;else->R.drawable.ic_player});imageTintList=android.content.res.ColorStateList.valueOf(if(selected)gold else muted);importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO}
             tab.addView(image,LinearLayout.LayoutParams(dp(24),dp(24)));tab.addView(text(label,12f,if(selected)gold else muted).apply{gravity=Gravity.CENTER});val line=View(this).apply{setBackgroundColor(if(selected)gold else Color.TRANSPARENT)};tab.addView(line,LinearLayout.LayoutParams(dp(32),dp(2)).apply{topMargin=dp(4)});tabs.addView(tab,LinearLayout.LayoutParams(0,dp(60),1f))
         }
         root.addView(tabs);setContentView(root);root.requestApplyInsets();renderPlayer();renderSharing()
@@ -343,7 +345,7 @@ class MainActivity:Activity() {
         handler.post(refresh)
     }
     override fun onStart(){super.onStart();val future=MediaBrowser.Builder(this,SessionToken(this,ComponentName(this,PlaybackService::class.java))).buildAsync();connection=future;future.addListener({if(connection===future && !isFinishing)try{browser=future.get();browser?.addListener(listener);if(scene==1)buildContent() else renderPlayer();tryVoicePlayback();if(scene==3)showQueue()}catch(_:Exception){toast("Servizio audio non disponibile. Riapri MusicCraft.")}}, {handler.post(it)});handler.post(ticker)}
-    override fun onStop(){sharingDialog?.dismiss();handler.removeCallbacks(ticker);browser?.removeListener(listener);browser=null;connection?.let{androidx.media3.session.MediaController.releaseFuture(it)};connection=null;getPreferences(MODE_PRIVATE).edit().putInt("scene",scene).apply();super.onStop()}
+    override fun onStop(){SyncPanel.background(this);sharingDialog?.dismiss();handler.removeCallbacks(ticker);browser?.removeListener(listener);browser=null;connection?.let{androidx.media3.session.MediaController.releaseFuture(it)};connection=null;getPreferences(MODE_PRIVATE).edit().putInt("scene",scene).apply();super.onStop()}
     override fun onDestroy(){sharingDialog?.dismiss();artGeneration++;searchGeneration++;handler.removeCallbacks(searchTask);images.shutdownNow();searches.shutdownNow();super.onDestroy()}
     override fun onSaveInstanceState(outState:Bundle){outState.putBoolean("playlistCatalog",playlistCatalog);outState.putBoolean("savedTab",savedTab);outState.putInt("scene",scene);outState.putString("parent",parentId);outState.putString("query",query);super.onSaveInstanceState(outState)}
     override fun onRequestPermissionsResult(requestCode:Int,permissions:Array<out String>,grantResults:IntArray){super.onRequestPermissionsResult(requestCode,permissions,grantResults);if(requestCode==12){val action=bluetoothAction;bluetoothAction=null;if(CarRouteMonitor.permitted(this))action?.invoke() else toast("Permesso Bluetooth negato: puoi scegliere manualmente il profilo auto.")} else if(requestCode==10){buildContent();scan();if(Build.VERSION.SDK_INT>=33 && catalog.permitted() && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED)requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS),11)}}

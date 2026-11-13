@@ -425,3 +425,40 @@ Audio tag ratings have not been read yet.	I voti nei tag audio non sono ancora s
 Audio tag rating is unknown: check the scale or conflicting values.	Voto nel tag audio non determinato: controlla la scala o i valori discordanti.
 
 Refresh audio tag ratings	Rileggi i voti dai tag audio
+Review every change before synchronizing.	Controlla tutte le modifiche prima di sincronizzare.
+Synchronization completed and verified.	Sincronizzazione completata e verificata.
+Synchronize music folders	Sincronizza cartelle musicali
+Preview copies, updates and deletions between a NAS folder and your phone. Playback queues are independent.	Controlla copie, aggiornamenti e cancellazioni fra una cartella NAS e il telefono. La coda di riproduzione resta indipendente.
+Origin · A	Origine · A
+Choose folder…	Scegli cartella…
+Destination · B	Destinazione · B
+Paired smartphone	Smartphone abbinato
+Local / mounted NAS folder	Cartella locale / NAS montato
+On Android, open Synchronization, choose the music folder and enable access from the computer.	Su Android apri Sincronizzazione, scegli la cartella musicale e consenti l’accesso dal computer.
+One-way mode mirrors the origin, including deletions. Bidirectional mode uses the last completed synchronization and asks about conflicting edits.	Una direzione allinea l’origine, cancellazioni comprese. La modalità bidirezionale usa l’ultima sincronizzazione completata e chiede come risolvere i conflitti.
+Generate preview	Genera anteprima
+Apply reviewed changes…	Applica le modifiche verificate…
+Deletions	Cancellazioni
+Replaced and deleted files are retained in .musiccraft-sync/recovery. Hidden files are excluded.	I file sostituiti e cancellati restano in .musiccraft-sync/recovery. I file nascosti sono esclusi.
+Keep A	Mantieni A
+Keep B	Mantieni B
+Apply this synchronization preview?	Applicare questa anteprima di sincronizzazione?
+This updates files and moves deletions to recovery. Changed folders require a new preview. The phone also asks for approval.	I file verranno aggiornati e le cancellazioni spostate nel recupero. Se le cartelle cambiano serve una nuova anteprima. Anche il telefono richiede l’autorizzazione.
+Synchronize now	Sincronizza ora
+Reading complete folder fingerprints…	Lettura delle impronte complete dei file…
+A → B · One way	A → B · Unidirezionale
+B → A · One way	B → A · Unidirezionale
+A ↔ B · Bidirectional	A ↔ B · Bidirezionale
+Synchronization	Sincronizzazione
+Select a library source	Seleziona una sorgente della Libreria
+Use a mounted NAS folder or MusicCraft Android for file synchronization.	Per sincronizzare i file usa un NAS montato o MusicCraft Android.
+Direction	Direzione
+Manage library sources…	Gestisci sorgenti della Libreria…
+Approve the preview on the phone when requested.	Autorizza l’anteprima sul telefono quando richiesto.
+Synchronize library sources	Sincronizza sorgenti della Libreria
+Guide: automatic library refresh updates the catalogue only. File copying and deletions require the separate Synchronization tab and its reviewed preview.	Manuale: l’aggiornamento automatico della Libreria aggiorna solo il catalogo. Copie e cancellazioni dei file richiedono la tab Sincronizzazione e la conferma della relativa anteprima.
+Guide: choose origin and destination from existing Library sources. Select one-way or bidirectional synchronization, generate a preview and resolve every conflict before applying. Library filters and playback queues remain independent.	Manuale: scegli origine e destinazione fra le sorgenti già presenti in Libreria. Seleziona una direzione o la modalità bidirezionale, genera l’anteprima e risolvi ogni conflitto prima di applicare. Filtri della Libreria e coda restano indipendenti.
+Guide: one-way mode mirrors the origin, including deletions. Bidirectional mode uses the last completed baseline. Changed or unreachable sources require a new preview; missing sources are never empty libraries.	Manuale: una direzione allinea l’origine, cancellazioni comprese. La modalità bidirezionale usa l’ultima sincronizzazione completata. Sorgenti cambiate o irraggiungibili richiedono una nuova anteprima; una sorgente non disponibile non è una libreria vuota.
+Guide: on Android grant one music folder and enable computer access in Synchronization. Keep sharing enabled, review each preview on the computer and approve it on the phone. Replaced and deleted files stay in the hidden .musiccraft-sync/recovery directory; recovery is currently manual.	Manuale: su Android autorizza una cartella musicale e abilita l’accesso dal computer in Sincronizzazione. Mantieni la condivisione attiva, controlla ogni anteprima sul computer e confermala sul telefono. I file sostituiti e cancellati restano in .musiccraft-sync/recovery; il ripristino è per ora manuale.
+Apply preview	Applica anteprima
+Validating the reviewed preview…	Verifica dell’anteprima confermata…

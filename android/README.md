@@ -1,8 +1,12 @@
-# MusicCraft for Android — 0.4.1
+# MusicCraft for Android — 0.4.2
+
+## Reviewed synchronization — 0.4.2 (experimental)
+
+A separate **Synchronization** view selects a writable phone/SD-card directory and a direct SMB2/3 NAS endpoint. Preview and resolve conflicts before copying, updating or propagating deletions. Originals are retained for manual recovery. Optional computer access requires the existing pairing and explicit approval of every exact plan on the phone; ordinary sharing stays read-only when this permission is off. No automatic sync starts on app launch. Android 10+ is required for synchronization; the music player still supports Android 8+. See [the complete guide and limitations](../docs/SYNCHRONIZATION.md). The actual home NAS test is pending.
 
 ## Rating tags and paired desktop edits — 0.4.1
 
-The menu **Voti nei tag** chooses the numeric VOTE/RATING scale. Indexing is read-only and caches raw values separately from manual ratings; existing ratings and explicit zero remain authoritative. Paired desktop computers can request a rating change, which names the song and requires approval in MusicCraft plus Android media-write permission. No arbitrary file-write/upload endpoint is exposed. The initial safe writer handles FLAC and MP3 metadata prefixes, journals interrupted edits and preserves audio bytes; unsupported layouts remain unchanged. See [the shared engine documentation](../crates/musiccraft-tags/README.md). This build contains arm64-v8a and x86_64 native libraries.
+The menu **Voti nei tag** chooses the numeric VOTE/RATING scale. Indexing is read-only and caches raw values separately from manual ratings; existing ratings and explicit zero remain authoritative. Paired desktop computers can request a rating change, which names the song and requires approval in MusicCraft plus Android media-write permission. This rating-specific permission does not authorize folder synchronization. The initial safe writer handles FLAC and MP3 metadata prefixes, journals interrupted edits and preserves audio bytes; unsupported layouts remain unchanged. See [the shared engine documentation](../crates/musiccraft-tags/README.md). This build contains arm64-v8a and x86_64 native libraries.
 
 
 The first native Android version of MusicCraft. This is a separate project from the macOS app and does not change its profile or audio engine. It is not an official ArtCraft release.
@@ -16,7 +20,7 @@ The first native Android version of MusicCraft. This is a separate project from 
 - Catalog browsing and search through both Media3 clients and the `MediaBrowserService` protocol used by Android Auto. `MediaSession` checks connections: the app itself, the notification controller and controllers trusted by the system are allowed.
 - Voice search through the media session and `MEDIA_PLAY_FROM_SEARCH`.
 
-The initial UI is in Italian; translated labels below describe the functions, while the app may show their Italian names. Vinyl/VU visualizations, FTP/NAS and folder import through SAF are outside this version. Actual format support also depends on the device's decoders. The library shows shared audio indexed by Android, not other apps' private files.
+The initial UI is in Italian; translated labels below describe the functions, while the app may show their Italian names. Vinyl/VU visualizations and FTP import are outside this version. Direct NAS synchronization uses an explicitly granted native folder, independently of MediaStore library browsing. Actual format support also depends on the device's decoders. The library shows shared audio indexed by Android, not other apps' private files.
 
 ## Continuity — 0.4.0
 
@@ -40,7 +44,7 @@ References: [Android Auto artwork](https://developer.android.com/training/cars/m
 
 ## Search, Playlists and Player
 
-The bottom navigation separates three views. **Search** (`Cerca`) explores and filters the library without changing the queue: each track offers Play now, Play next, Add to queue, Add to playlist and Rate. Replacing an existing queue requires confirmation. **Playlists** contains saved lists and dynamic mixes; **Player** is a standalone view with artwork, seeking and transport controls. In landscape, artwork and controls are arranged side by side; the service maintains audio while the screen is recreated. The mini player in other views opens the full Player.
+The bottom navigation separates Search, Playlists, Player and Synchronization. **Search** (`Cerca`) explores and filters the library without changing the queue: each track offers Play now, Play next, Add to queue, Add to playlist and Rate. Replacing an existing queue requires confirmation. **Playlists** contains saved lists and dynamic mixes; **Player** is a standalone view with artwork, seeking and transport controls. In landscape, artwork and controls are arranged side by side; the service maintains audio while the screen is recreated. The mini player in other views opens the full Player.
 
 Open **Queue** from the Player to move, remove, play or save tracks. Queue and position are saved periodically and restored paused after a process restart; audio never starts automatically. Missing files are excluded from restoration.
 

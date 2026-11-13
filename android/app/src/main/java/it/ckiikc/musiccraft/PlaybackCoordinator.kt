@@ -26,6 +26,8 @@ class PlaybackCoordinator(private val context:android.content.Context,private va
     private var wasPlaying=false
     private var saves=0
     private var observedLibraryRevision=-1L
+    private var observedCatalogRevision=-1L
+    private var observedSyncRevision=SyncIdentity.revision
     private var failures=mutableSetOf<String>()
     private var consecutiveFailures=0
     private var message=""
@@ -48,7 +50,19 @@ class PlaybackCoordinator(private val context:android.content.Context,private va
             handler.post {if(closed || failedGeneration!=generation)return@post;if(player.hasNextMediaItem() && consecutiveFailures<=20){player.seekToNextMediaItem();player.prepare();player.play()}else{player.pause();stopMix();save()}}
         }
     }
-    private val tick=object:Runnable {override fun run(){if(closed)return;account();wasPlaying=player.isPlaying;if(++saves%5==0)save();if(observedLibraryRevision!=store.libraryRevision){observedLibraryRevision=store.libraryRevision;notifyState()};handler.postDelayed(this,1000)}}
+    private val tick=object:Runnable {override fun run(){if(closed)return;account();wasPlaying=player.isPlaying;if(observedCatalogRevision!=catalog.revision || (!FolderSync.working && !player.isPlaying && observedSyncRevision!=SyncIdentity.revision)){observedCatalogRevision=catalog.revision;refreshFileReferences()};if(++saves%5==0)save();if(observedLibraryRevision!=store.libraryRevision){observedLibraryRevision=store.libraryRevision;notifyState()};handler.postDelayed(this,1000)}}
+    private fun refreshFileReferences(){
+        val byId=catalog.songs.associateBy{it.id};val index=player.currentMediaItemIndex;val position=player.currentPosition;var currentChanged=false
+        if(!FolderSync.working && !player.isPlaying && observedSyncRevision!=SyncIdentity.revision){
+            observedSyncRevision=SyncIdentity.revision
+            if(player.mediaItemCount>0 && index>=0){val items=(0 until player.mediaItemCount).map{val old=player.getMediaItemAt(it);byId[old.mediaId]?.item() ?: old};player.setMediaItems(items,index,position);player.prepare()}
+            return
+        }
+        for(i in 0 until player.mediaItemCount){val old=player.getMediaItemAt(i);val song=byId[old.mediaId] ?: continue
+            if(old.localConfiguration?.uri!=song.uri && !(i==index && player.isPlaying)){player.replaceMediaItem(i,song.item());if(i==index)currentChanged=true}
+        }
+        if(currentChanged && index>=0){player.seekTo(index,position);player.prepare()}
+    }
     init {player.addListener(listener);handler.post(tick)}
     private fun account(){
         val now=SystemClock.elapsedRealtime();if(wasPlaying)listened+=(now-lastTick).coerceIn(0,5000);lastTick=now

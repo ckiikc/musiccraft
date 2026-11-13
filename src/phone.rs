@@ -110,6 +110,10 @@ struct Item {
     number: u32,
     disc: u32,
     bytes: u64,
+    #[serde(default)]
+    modified: u64,
+    #[serde(default)]
+    sync_version: u64,
 }
 fn decode(bytes: &[u8], root: &str, id: &str) -> Result<Vec<Track>, String> {
     let c: Catalog = serde_json::from_slice(bytes).map_err(|_| "Invalid Android catalogue")?;
@@ -161,6 +165,10 @@ fn decode(bytes: &[u8], root: &str, id: &str) -> Result<Vec<Track>, String> {
                 .map_err(|_| "Invalid track address")?
                 .into(),
         );
+        track.remote_stamp = Some(format!(
+            "{}:{}:{}",
+            item.bytes, item.modified, item.sync_version
+        ));
         track.title = item.title;
         track.artist = item.artist;
         track.album = item.album;

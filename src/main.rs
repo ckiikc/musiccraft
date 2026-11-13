@@ -11,6 +11,7 @@ mod dsp;
 mod embedded_server;
 mod exclusive;
 mod facets;
+mod file_sync;
 mod history;
 mod integer;
 mod jobs;

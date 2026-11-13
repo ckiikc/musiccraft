@@ -427,7 +427,7 @@ dependencies = [
 
 [[package]]
 name = "musiccraft"
-version = "0.10.62"
+version = "0.10.63"
 dependencies = [
  "aes-gcm",
  "base64",
@@ -441,6 +441,7 @@ dependencies = [
  "if-addrs",
  "image",
  "lofty",
+ "musiccraft-sync",
  "musiccraft-tags",
  "num-bigint",
  "objc2 0.6.5",
@@ -2114,10 +2115,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "743fb55ba31b18fb1ecef6bdc9aa2743314978ac084044301a7eee33fb99a20d"
 
 [[package]]
+name = "musiccraft-sync"
+version = "0.1.0"
+dependencies = [
+ "libc",
+ "rand 0.9.5",
+ "serde",
+ "serde_json",
+ "sha2",
+ "unicode-normalization",
+ "walkdir",
+]
+
+[[package]]
 name = "musiccraft-tags"
 version = "0.1.0"
 dependencies = [
  "jni 0.21.1",
+ "musiccraft-sync",
  "serde",
  "serde_json",
  "sha2",

@@ -212,6 +212,10 @@ pub fn scan(
             match &target {
                 Target::Ftp { id, .. } => session.list_with_coverage(&directory, auth, cancel).map(
                     |(entries, complete)| {
+                        let entries: Vec<_> = entries
+                            .into_iter()
+                            .filter(|entry| entry.name != ".musiccraft-sync")
+                            .collect();
                         let count = entries.len();
                         let children: Vec<_> = entries
                             .into_iter()
@@ -316,6 +320,9 @@ fn local_entries(root: &Path) -> Result<Vec<(String, bool, Option<String>)>, Str
     let mut entries = Vec::new();
     for entry in std::fs::read_dir(root).map_err(|_| "Cartella non raggiungibile")? {
         let entry = entry.map_err(|_| "Cartella non leggibile")?;
+        if entry.file_name() == ".musiccraft-sync" {
+            continue;
+        }
         let kind = entry
             .file_type()
             .map_err(|_| "Tipo di file non disponibile")?;
@@ -517,6 +524,38 @@ mod tests {
         );
         scheduler.due(&[], now);
         assert!(scheduler.entries.is_empty());
+    }
+    #[test]
+    fn recovery_files_are_excluded_from_catalogue_refresh_and_initial_import() {
+        let dir = tempfile::tempdir().unwrap();
+        std::fs::write(dir.path().join("visible.flac"), b"synthetic").unwrap();
+        let recovery = dir.path().join(".musiccraft-sync/recovery/fixture");
+        std::fs::create_dir_all(&recovery).unwrap();
+        std::fs::write(recovery.join("old.flac"), b"synthetic").unwrap();
+        let report = scan(
+            Target::Folder(dir.path().into()),
+            &AuthStore::default(),
+            &HashSet::new(),
+            &mut Index::default(),
+            true,
+            &AtomicBool::new(false),
+        );
+        assert_eq!(report.tracks.len(), 1);
+        assert!(report.tracks[0].source.ends_with("visible.flac"));
+        let (tx, rx) = std::sync::mpsc::channel();
+        crate::jobs::import(
+            vec![dir.path().into()],
+            tx,
+            Arc::new(AtomicBool::new(false)),
+        );
+        let mut tracks = Vec::new();
+        while let Ok(job) = rx.recv_timeout(Duration::from_secs(3)) {
+            if let crate::jobs::Job::Tracks(batch) = job {
+                tracks.extend(batch);
+            }
+        }
+        assert_eq!(tracks.len(), 1);
+        assert!(tracks[0].source.ends_with("visible.flac"));
     }
     #[test]
     fn local_incremental_scan_finds_deep_additions_skips_leaves_and_audits_stale_timestamps() {

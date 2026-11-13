@@ -1,6 +1,6 @@
 # Architecture
 
-The current alpha is one Rust binary with internal modules, not a multi-crate framework.
+The desktop is one Rust binary with internal modules; bounded tag handling and synchronization planning live in two shared helper crates.
 
 - `app/window_drag.rs`: preserves the original AppKit left mouse-down for delayed miniplayer dragging, validates its window geometry and cancels interrupted gestures. Its monitor is application-local; optional event/geometry tracing exists only in debug builds with an explicit isolated profile.
 - `app/`: egui views, shared controls, persisted user settings, filtered library and UI event handling.
@@ -34,3 +34,7 @@ The album-side list identifies the current album within its source rather than u
 `crates/musiccraft-tags` is a shared Rust library and Android JNI engine for bounded read-only rating inspection and fixed-size FLAC/MP3 metadata patches. Descriptive metadata, raw rating tags and private manual overrides are separate. Explicit scales and conflicts are handled before playlist evaluation; no guessed rating is used by a restrictive rule. Desktop writes preserve a verified backup and replace a same-directory copy atomically; Android journals metadata prefixes and requires phone/MediaStore approval. Existing paired TLS identity protects a narrowly scoped rating API, never a generic file-upload path. Queues remain playback snapshots.
 
 `app/follow.rs` tracks current-source/view/list revisions and resolves an off-screen virtualized row only when needed. It does not send audio commands, clear filters or rewrite queues. Android count bounds are persisted with backward-compatible unbounded defaults.
+
+## Reviewed file synchronization
+
+`crates/musiccraft-sync` builds validated plans from root-bound content snapshots and the last verified baseline. Desktop `file_sync` adapters execute local/paired HTTPS operations off the UI thread. The UI uses only existing Library sources. Android uses the same planner through JNI, SAF ExternalStorageProvider and signed SMB2/3. A separate user-started dataSync service owns direct transfers. Music writes serialize with rating changes; exact remote plans require phone approval. Staged verified bytes, exclusive commits and retained originals protect interrupted operations. A separate additive identity/version database preserves Android playlist/stat keys after file replacement and invalidates desktop cached bytes on catalogue refresh. See SYNCHRONIZATION.md for limits; this is not an automatic NAS backup or whole-run Undo.

@@ -126,11 +126,32 @@ pub fn merge_tracks(stored: &mut Vec<Track>, incoming: Vec<Track>) -> usize {
     stored.len() - before
 }
 
+/// Refresh server-versioned entries in place; return URLs whose cached bytes are stale.
+pub fn refresh_remote_versions(stored: &mut [Track], incoming: &[Track]) -> Vec<String> {
+    let versions: std::collections::HashMap<_, _> = incoming
+        .iter()
+        .filter(|t| t.remote_stamp.is_some())
+        .map(|t| (t.source.as_str(), t))
+        .collect();
+    let mut changed = Vec::new();
+    for track in stored {
+        if let Some(fresh) = versions.get(track.source.as_str())
+            && track.remote_stamp != fresh.remote_stamp
+        {
+            changed.push(track.source.clone());
+            *track = (*fresh).clone();
+        }
+    }
+    changed
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Track {
     pub source: String,
     #[serde(default)]
     pub metadata_loaded: bool,
+    #[serde(default)]
+    pub remote_stamp: Option<String>,
     #[serde(default)]
     pub rating_tags: Option<musiccraft_tags::Summary>,
     pub title: String,
@@ -177,6 +198,7 @@ impl Track {
                 .to_uppercase(),
             source,
             metadata_loaded: false,
+            remote_stamp: None,
             rating_tags: None,
             artist: String::new(),
             album: String::new(),
@@ -391,6 +413,32 @@ pub fn playlist(path: &Path) -> Result<Vec<String>, String> {
 #[cfg(test)]
 mod identity_tests {
     use super::*;
+    #[test]
+    fn phone_version_refresh_preserves_identity_order_and_unrelated_metadata() {
+        let mut original = Track::placeholder("https://phone/v1/audio/1.flac".into());
+        original.remote_stamp = Some("10:1:0".into());
+        original.title = "Old audio".into();
+        original.rate = 44100;
+        let mut other = Track::placeholder("/local/other.flac".into());
+        other.title = "Enriched local title".into();
+        let mut stored = vec![other.clone(), original.clone()];
+        let mut fresh = original.clone();
+        fresh.remote_stamp = Some("10:1:1".into());
+        fresh.title = "Replaced audio".into();
+        fresh.rate = 0;
+        assert_eq!(
+            refresh_remote_versions(&mut stored, &[fresh.clone()]),
+            vec![original.source]
+        );
+        assert_eq!(stored[0].title, other.title);
+        assert_eq!(stored[1].source, fresh.source);
+        assert_eq!(stored[1].title, fresh.title);
+        assert_eq!(stored[1].rate, 0);
+        stored[1].rate = 96000;
+        assert!(refresh_remote_versions(&mut stored, &[fresh]).is_empty());
+        assert_eq!(stored[1].rate, 96000);
+    }
+
     #[test]
     fn ftp_identity_decodes_once_without_merging_distinct_files_or_sources() {
         let a = "ftp://phone:8736/Music/Album%20%28FLAC%20%2B%20CUE%29/01%20%5BLive%5D.flac";

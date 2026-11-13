@@ -425,3 +425,40 @@ Audio tag ratings have not been read yet.	Audio tag ratings have not been read y
 Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
 
 Refresh audio tag ratings	Refresh audio tag ratings
+Review every change before synchronizing.	Review every change before synchronizing.
+Synchronization completed and verified.	Synchronization completed and verified.
+Synchronize music folders	Synchronize music folders
+Preview copies, updates and deletions between a NAS folder and your phone. Playback queues are independent.	Preview copies, updates and deletions between a NAS folder and your phone. Playback queues are independent.
+Origin · A	Origin · A
+Choose folder…	Choose folder…
+Destination · B	Destination · B
+Paired smartphone	Paired smartphone
+Local / mounted NAS folder	Local / mounted NAS folder
+On Android, open Synchronization, choose the music folder and enable access from the computer.	On Android, open Synchronization, choose the music folder and enable access from the computer.
+One-way mode mirrors the origin, including deletions. Bidirectional mode uses the last completed synchronization and asks about conflicting edits.	One-way mode mirrors the origin, including deletions. Bidirectional mode uses the last completed synchronization and asks about conflicting edits.
+Generate preview	Generate preview
+Apply reviewed changes…	Apply reviewed changes…
+Deletions	Deletions
+Replaced and deleted files are retained in .musiccraft-sync/recovery. Hidden files are excluded.	Replaced and deleted files are retained in .musiccraft-sync/recovery. Hidden files are excluded.
+Keep A	Keep A
+Keep B	Keep B
+Apply this synchronization preview?	Apply this synchronization preview?
+This updates files and moves deletions to recovery. Changed folders require a new preview. The phone also asks for approval.	This updates files and moves deletions to recovery. Changed folders require a new preview. The phone also asks for approval.
+Synchronize now	Synchronize now
+Reading complete folder fingerprints…	Reading complete folder fingerprints…
+A → B · One way	A → B · One way
+B → A · One way	B → A · One way
+A ↔ B · Bidirectional	A ↔ B · Bidirectional
+Synchronization	Synchronization
+Select a library source	Select a library source
+Use a mounted NAS folder or MusicCraft Android for file synchronization.	Use a mounted NAS folder or MusicCraft Android for file synchronization.
+Direction	Direction
+Manage library sources…	Manage library sources…
+Approve the preview on the phone when requested.	Approve the preview on the phone when requested.
+Synchronize library sources	Synchronize library sources
+Guide: automatic library refresh updates the catalogue only. File copying and deletions require the separate Synchronization tab and its reviewed preview.	Guide: automatic library refresh updates the catalogue only. File copying and deletions require the separate Synchronization tab and its reviewed preview.
+Guide: choose origin and destination from existing Library sources. Select one-way or bidirectional synchronization, generate a preview and resolve every conflict before applying. Library filters and playback queues remain independent.	Guide: choose origin and destination from existing Library sources. Select one-way or bidirectional synchronization, generate a preview and resolve every conflict before applying. Library filters and playback queues remain independent.
+Guide: one-way mode mirrors the origin, including deletions. Bidirectional mode uses the last completed baseline. Changed or unreachable sources require a new preview; missing sources are never empty libraries.	Guide: one-way mode mirrors the origin, including deletions. Bidirectional mode uses the last completed baseline. Changed or unreachable sources require a new preview; missing sources are never empty libraries.
+Guide: on Android grant one music folder and enable computer access in Synchronization. Keep sharing enabled, review each preview on the computer and approve it on the phone. Replaced and deleted files stay in the hidden .musiccraft-sync/recovery directory; recovery is currently manual.	Guide: on Android grant one music folder and enable computer access in Synchronization. Keep sharing enabled, review each preview on the computer and approve it on the phone. Replaced and deleted files stay in the hidden .musiccraft-sync/recovery directory; recovery is currently manual.
+Apply preview	Apply preview
+Validating the reviewed preview…	Validating the reviewed preview…

@@ -1,2 +1,3 @@
 # Preserve upstream license text verbatim, including original whitespace.
 docs/licenses/** -whitespace
+android/app/src/main/assets/SLF4J-LICENSE.txt -whitespace

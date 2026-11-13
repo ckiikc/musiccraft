@@ -56,7 +56,7 @@ object RatingTags {
             try{for(song in songs){
                 if(SharingGate.busy(c)) {indexed=0;break}
                 try{
-                    val fingerprint="${song.size}:${song.modified}";var summary:JSONObject?=null
+                    val fingerprint="${song.size}:${song.modified}:${song.syncVersion}";var summary:JSONObject?=null
                     db.rawQuery("SELECT summary FROM ratings WHERE id=? AND fingerprint=?",arrayOf(song.statKey,fingerprint)).use{if(it.moveToFirst())summary=JSONObject(it.getString(0))}
                     if(summary==null){summary=inspect(c,song.uri);db.execSQL("INSERT OR REPLACE INTO ratings(id,fingerprint,summary) VALUES(?,?,?)",arrayOf(song.statKey,fingerprint,summary.toString()))}
                     val rating=resolve(summary!!,scale);batch[song.statKey]=rating
@@ -107,6 +107,7 @@ object RatingTags {
     private fun commitJournal(c:Context,v:JSONObject){val j=journal(c);val stream=j.startWrite();try{stream.write(v.toString().toByteArray());j.finishWrite(stream)}catch(e:Exception){j.failWrite(stream);throw e}}
     private fun array(v:org.json.JSONArray)=ByteArray(v.length()){v.getInt(it).also{n->require(n in 0..255)}.toByte()}
     internal fun apply(c:Context,key:String){worker.execute{
+        MusicWriteGate.lock.lock()
         try {
             check(recoverNow(c)){"Una modifica precedente richiede recupero; nessun altro file verrà modificato"}
             val request=status(c,key) ?: return@execute
@@ -126,9 +127,14 @@ object RatingTags {
             c.contentResolver.notifyChange(song.uri,null);journal(c).delete()
             android.os.Handler(android.os.Looper.getMainLooper()).post{android.widget.Toast.makeText(c,"Voto salvato nei tag audio",android.widget.Toast.LENGTH_SHORT).show()}
         }catch(e:Exception){recoverNow(c);fail(c,key,e.message ?: "Salvataggio non riuscito; copia di recupero conservata")}
+        finally{MusicWriteGate.lock.unlock()}
     }}
     /** A partially written prefix can only contain old/new metadata bytes; never overwrite unrelated edits. */
-    @Synchronized fun recoverNow(c:Context):Boolean {
+    fun recoverNow(c:Context):Boolean {
+        if(!MusicWriteGate.lock.tryLock())return false
+        return try{synchronized(this){recoverLocked(c)}}finally{MusicWriteGate.lock.unlock()}
+    }
+    private fun recoverLocked(c:Context):Boolean {
         val j=journal(c);if(!j.baseFile.exists())return true
         return try {
             require(j.baseFile.length()<=24*1024*1024)

@@ -16,3 +16,4 @@ for target, abi, compiler in [('aarch64-linux-android', 'arm64-v8a', 'aarch64-li
     dest = root / 'app/src/main/jniLibs' / abi
     dest.mkdir(parents=True, exist_ok=True)
     shutil.copy2(root.parent / 'crates/musiccraft-tags/target' / target / 'release/libmusiccraft_tags.so', dest)
+subprocess.run(['python3', str(root / 'scripts/generate-native-notices.py')], check=True)

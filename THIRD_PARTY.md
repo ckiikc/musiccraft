@@ -25,3 +25,7 @@ The [upstream License.txt](https://github.com/LMS-Community/slimserver/blob/publ
 ## Android companion
 
 AndroidX Media3, Kotlin, Guava and Bouncy Castle retain their notices; see [android/THIRD_PARTY.md](android/THIRD_PARTY.md) and the notices included in the APK. The Gradle wrapper is Apache-2.0. Three synthetic FLAC test fixtures are original CC0 tones, hash-pinned by the publication scanner and excluded from the normal app APK. No LMS source, interface assets or music recordings are copied into Android.
+
+## File synchronization
+
+The shared planner is MIT source under `crates/musiccraft-sync`. Android direct NAS access uses SMBJ and its dependency notices; see [Android notices](android/THIRD_PARTY.md). The standard macOS package continues to exclude LMS.

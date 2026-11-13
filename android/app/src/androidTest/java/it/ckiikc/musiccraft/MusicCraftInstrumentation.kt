@@ -16,6 +16,8 @@ import java.util.concurrent.atomic.AtomicReference
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class MusicCraftInstrumentation : Instrumentation() {
+    private var syncServer=false
+    private var syncOnly=false
     private var ratingsServer=false
     private var ratingsOnly=false
     private var keepFixtures = false
@@ -26,7 +28,7 @@ class MusicCraftInstrumentation : Instrumentation() {
     private var cleanupOnly=false
     private var artworkOnly=false
     private var onlineArtworkOnly=false
-    override fun onCreate(arguments: Bundle?) { super.onCreate(arguments);ratingsOnly=arguments?.getString("ratingsOnly")=="true";ratingsServer=arguments?.getString("ratingsServer")=="true";onlineArtworkOnly=arguments?.getString("onlineArtworkOnly")=="true";artworkOnly=arguments?.getString("artworkOnly")=="true";keepFixtures=arguments?.getString("keepFixtures")=="true";shareServer=arguments?.getString("sharingServer")=="true";restoreOnly=arguments?.getString("restoreOnly")=="true";migrationOnly=arguments?.getString("migrationOnly")=="true";lifecycleOnly=arguments?.getString("lifecycleOnly")=="true";cleanupOnly=arguments?.getString("cleanupOnly")=="true";start() }
+    override fun onCreate(arguments: Bundle?) { super.onCreate(arguments);syncServer=arguments?.getString("syncServer")=="true";syncOnly=arguments?.getString("syncOnly")=="true";ratingsOnly=arguments?.getString("ratingsOnly")=="true";ratingsServer=arguments?.getString("ratingsServer")=="true";onlineArtworkOnly=arguments?.getString("onlineArtworkOnly")=="true";artworkOnly=arguments?.getString("artworkOnly")=="true";keepFixtures=arguments?.getString("keepFixtures")=="true";shareServer=arguments?.getString("sharingServer")=="true";restoreOnly=arguments?.getString("restoreOnly")=="true";migrationOnly=arguments?.getString("migrationOnly")=="true";lifecycleOnly=arguments?.getString("lifecycleOnly")=="true";cleanupOnly=arguments?.getString("cleanupOnly")=="true";start() }
     private fun <T> main(block:()->T):T {
         val value=AtomicReference<T>();val error=AtomicReference<Throwable>()
         runOnMainSync {try {value.set(block())}catch(e:Throwable){error.set(e)}}
@@ -60,6 +62,10 @@ class MusicCraftInstrumentation : Instrumentation() {
         finish(code,report)
     }
     override fun onStart() {
+        if(syncServer){val report=Bundle();var code=Activity.RESULT_CANCELED;try{SyncChecks(targetContext,context).serve(this);code=Activity.RESULT_OK;report.putString("stream","PASS: authenticated synchronization server fixture closed\n")}catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")};finish(code,report);return}
+
+        if(syncOnly){val report=Bundle();var code=Activity.RESULT_CANCELED;try{SyncChecks(targetContext,context).run();code=Activity.RESULT_OK;report.putString("stream","PASS: actual SMB2/3 and SAF copy, conflict resolution, baseline, deletion recovery, exact bytes and stale-preview rejection\n")}catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")};finish(code,report);return}
+
         if(ratingsServer){val report=Bundle();var code=Activity.RESULT_CANCELED;try{RatingChecks(targetContext,context).serve(this);code=Activity.RESULT_OK;report.putString("stream","PASS: authenticated rating server fixture closed\n")}catch(e:Throwable){report.putString("stream",e.stackTraceToString())};finish(code,report);return}
 
         if(ratingsOnly){val report=Bundle();var code=Activity.RESULT_CANCELED;try{RatingChecks(targetContext,context).run();code=Activity.RESULT_OK;report.putString("stream","PASS: shared native FLAC/MP3 rating import, approved metadata-only writes, identical audio payload, original metadata recovery, conflicts and explicit vote precedence\n")}catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")};finish(code,report);return}

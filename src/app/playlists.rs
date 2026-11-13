@@ -14,6 +14,7 @@ pub(super) enum Page {
     Library,
     Playlists,
     Queue,
+    Synchronization,
 }
 #[derive(Default)]
 pub(super) struct State {

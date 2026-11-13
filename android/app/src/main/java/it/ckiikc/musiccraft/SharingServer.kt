@@ -91,6 +91,41 @@ class SharingServer(private val context:Context, private val identity:SharingIde
         }
         val expected="Basic "+Base64.encodeToString("musiccraft:${identity.token}".toByteArray(),Base64.NO_WRAP)
         if(!MessageDigest.isEqual(expected.toByteArray(),headers["authorization"].orEmpty().toByteArray())) {response(401);return}
+        if(path.startsWith("/v1/sync/")) {
+            if(!FolderSync.computer(context) || SharingGate.busy(context)){response(503);return}
+            try {
+                val parsed=android.net.Uri.parse(path)
+                val route=parsed.path.orEmpty()
+                fun body(limit:Int):JSONObject {
+                    check(!headers.containsKey("transfer-encoding"));val length=headers["content-length"]?.toIntOrNull() ?: error("Missing size");check(length in 1..limit)
+                    val bytes=ByteArray(length);var at=0;while(at<length){val n=input.read(bytes,at,length-at);if(n<0)throw EOFException();at+=n};return JSONObject(String(bytes,Charsets.UTF_8))
+                }
+                when {
+                    method=="GET" && route=="/v1/sync/snapshot" -> {
+                        val snapshot=FolderSync.tree(context).use{SyncFiles.snapshot(it,SyncFiles.root(it),java.util.concurrent.atomic.AtomicBoolean(false)){!closed && !SharingGate.busy(context) && FolderSync.computer(context)}}
+                        if(SharingGate.busy(context) || closed){response(503);return};response(200,snapshot.toString().toByteArray())
+                    }
+                    method=="POST" && route=="/v1/sync/plan" -> {val b=body(48*1024*1024);response(200,FolderSync.submit(context,b.getString("id"),b.getJSONObject("plan")).toString().toByteArray())}
+                    method=="POST" && Regex("/v1/sync/finish/[a-f0-9]{32}").matches(route) -> response(200,FolderSync.finish(context,route.substringAfterLast('/')).toString().toByteArray())
+                    method=="GET" && Regex("/v1/sync/plan/[a-f0-9]{32}").matches(route) -> response(200,FolderSync.status(route.substringAfterLast('/')).toString().toByteArray())
+                    method=="POST" && Regex("/v1/sync/apply/[a-f0-9]{32}/[0-9]{1,6}").matches(route) -> {
+                        check(!headers.containsKey("transfer-encoding"));val parts=route.split('/');val length=headers["content-length"]?.toLongOrNull() ?: error("Missing size");check(length in 0..(8L*1024*1024*1024))
+                        response(200,FolderSync.remoteApply(context,parts[4],parts[5].toInt(),length,input).toString().toByteArray())
+                    }
+                    method=="GET" && route=="/v1/sync/file" -> {
+                        val relative=parsed.getQueryParameter("path") ?: error("Missing path");SyncFiles.checkPath(relative);check(!relative.split('/').any{it.startsWith('.')})
+                        val temporary=File.createTempFile("sync-transfer-",".tmp",context.cacheDir)
+                        try {
+                            FolderSync.tree(context).use{s->s.read(relative).use{source->temporary.outputStream().use{dest->val bytes=ByteArray(65536);var total=0L;while(true){check(!closed && !SharingGate.busy(context));val n=source.read(bytes);if(n<0)break;total+=n;check(total<=8L*1024*1024*1024);dest.write(bytes,0,n)}}}}
+                            output.write("HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${temporary.length()}\r\nCache-Control: no-store\r\nConnection: close\r\n\r\n".toByteArray(Charsets.US_ASCII))
+                            temporary.inputStream().use{source->val b=ByteArray(65536);while(true){check(!closed && !SharingGate.busy(context));val n=source.read(b);if(n<0)break;output.write(b,0,n)}};output.flush()
+                        }finally{temporary.delete()}
+                    }
+                    else -> response(405)
+                }
+            }catch(_:Exception){response(503)}
+            return
+        }
         val ratingRoute=Regex("/v1/ratings/(\\d+)(?:/([a-f0-9]{32}))?").matchEntire(path)
         if(ratingRoute!=null){
             if(SharingGate.busy(context)){response(503);return}
@@ -117,7 +152,7 @@ class SharingServer(private val context:Context, private val identity:SharingIde
             val tracks=JSONArray()
             for(song in songs) {
                 val ext=extension(song);if(ext==null || song.size<=0) continue
-                tracks.put(JSONObject().put("id",song.id.substringAfter(':')).put("filename",song.id.substringAfter(':')+"."+ext).put("title",song.title.take(1024)).put("artist",song.artist.take(1024)).put("album",song.album.take(1024)).put("duration",song.duration/1000.0).put("number",song.trackNumber%1000).put("disc",song.trackNumber/1000).put("bytes",song.size).put("modified",song.modified))
+                tracks.put(JSONObject().put("id",song.id.substringAfter(':')).put("filename",song.id.substringAfter(':')+"."+ext).put("title",song.title.take(1024)).put("artist",song.artist.take(1024)).put("album",song.album.take(1024)).put("duration",song.duration/1000.0).put("number",song.trackNumber%1000).put("disc",song.trackNumber/1000).put("bytes",song.size).put("modified",song.modified).put("sync_version",song.syncVersion))
             }
             val bytes=JSONObject().put("protocol",1).put("device_id",identity.id).put("tracks",tracks).toString().toByteArray()
             if(SharingGate.busy(context)) {response(503);return}

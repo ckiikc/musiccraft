@@ -1,142 +1,199 @@
 # MusicCraft
 
-A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS sources. A compact player, faceted library browser and album view keep a large personal collection close at hand.
+A music player for local collections, mounted NAS libraries and music shared by a paired Android phone. A faceted desktop library, independent playlists and playback queues, and a mobile player with Android Auto keep browsing separate from listening.
 
-**Independent project · macOS and Android previews · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
+**Independent project · experimental releases · MIT source license.** MusicCraft is not an official ArtCraft application. [Community-app consideration](https://github.com/storytold/craft-launcher/issues/1247) does not imply affiliation or acceptance.
 
-## Desktop 0.10.62 and Android 0.4.1
+## Downloads and release lines
 
-The macOS release adds saved/dynamic playlists, visible ratings, read-only VOTE/RATING import with an explicit scale, and conservative FLAC/MP3 tag synchronization. Explicit MusicCraft ratings, including zero, retain priority. The queue and ReFacets reveal the current track without changing filters or queue order.
+| Platform | Release | Status |
+| --- | --- | --- |
+| Apple silicon macOS | [0.10.63](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.63) | Current Mac/Android feature line; ad-hoc signed, not notarized; optional LMS runtime excluded |
+| Android | [0.4.2 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.4.2) | Android 8+ for music, Android 10+ for file synchronization; arm64-v8a and x86_64; not a Play Store release |
+| Windows x86-64 / Linux x86-64 | [0.11.0 preview](https://github.com/ckiikc/musiccraft/releases/tag/v0.11.0) | Separate experimental source/package line; not yet merged with the newest Mac/Android synchronization features |
 
-Android adds exact minimum/maximum play-count criteria combined with rating bounds, persistent rating-tag indexing and phone-approved desktop rating edits. The same Rust metadata engine is used on both platforms. See [rating semantics, supported layouts and recovery](crates/musiccraft-tags/README.md). Unsupported formats, ambiguous tags and denied writes remain unchanged/pending.
+Each release includes checksums. Read its limitations and verify downloads against `SHA256SUMS.txt`. Intel macOS, physical DAC behavior and every phone/head-unit/NAS combination are not certified by a successful source build.
 
-This is the macOS/Android release line. The separate Windows/Linux 0.11.0 preview keeps its own source tag and packages; these changes do not replace or claim to validate that port. Public macOS packages retain their separate clean MusicCraft profile and exclude LMS.
+**New in 0.10.63 / 0.4.2:** reviewed file synchronization, Library-only source selectors on desktop, direct SMB NAS access on Android, recoverable deletions/replacements, and stable track references after phone-file replacement. The actual home NAS test is still pending. See [synchronization](docs/SYNCHRONIZATION.md).
 
-## Desktop source update — 0.10.57
+![MusicCraft compact player with stereo VU meters and synthetic metadata](docs/screenshots/miniplayer-vu.png)
 
-The current desktop source includes native macOS menus and independent auxiliary windows, automatic reconnection to paired Android sharing, and more robust network audio reads. The album view groups the flat Android catalog by album and album artist instead of treating the audio endpoint as one folder-sized album.
+## Desktop: library and ReFacets
 
-ReFacets title text now passes clicks to the track row. Selection follows the track that actually starts, while a different row deliberately selected for browsing keeps a neutral highlight. The playing row has two small bars driven by the existing L/R peak telemetry; pause and reduced-motion mode use static symbols. The first volume drag can span window activation without requiring a second attempt. Existing library, pairing and audio settings formats are preserved.
+- Local folders, mounted NAS shares, FTP/FTPS sources and authenticated MusicCraft Android libraries.
+- Source-aware browsing, text search and ReFacets artist, album and folder filters. Metadata includes album artist, genre, year, disc and track numbers.
+- Incremental catalogue refresh, automatic source checks, background tag indexing and persistent metadata journals. Unreachable or suspended sources are distinguished from genuinely deleted files.
+- Phone-network rediscovery derives bounded connected private subnets from the computer's network. Configurable probe intervals: **5 ms, 50 ms, 350 ms or 1 second**. Legacy FTP discovery offers manual server entry when discovery fails; network speed and router behavior still determine results.
+- Paired MusicCraft phones use service discovery and verified identity instead of requiring a copied link or a permanent IP address. They reconnect when sharing becomes available, without reopening pairing or restarting the player.
+- Album membership uses source, album and album artist, including the phone's flat catalogue. An audio endpoint is not treated as one enormous album.
+- Double-clicking track-title text starts the track instead of selecting the text. Queue and ReFacets reveal the current track without clearing active filters or changing the queue order.
+- The playing row has two small indicators driven by the existing stereo peak telemetry. Selection follows accepted playback transitions; a separate row deliberately selected for browsing keeps a neutral highlight.
+- Finder/Open With support for warm and cold app launches. Multiple delivered files form an ordered listening selection with automatic advance. File associations allow choosing MusicCraft as a default handler; installation does not change that choice automatically.
 
-The desktop update does not change the Android source or its published test APK. The existing binary downloads below remain separate from this source update.
+## Desktop: playlists, queue and ratings
 
-## Experimental releases
+**Library, Playlists and Playback queue are separate views.** Browsing or editing a playlist does not silently replace an active listening queue.
 
-- [Desktop 0.10.62 for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.62): ad-hoc signed, not notarized; optional LMS runtime excluded.
-- [Android 0.4.1 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.4.1): Android 8/API 26 or newer, local debug build; no Play Store release. Android source and build instructions are in [android/](android/).
+- Create, rename, duplicate and delete saved playlists; add selected tracks or the current filtered ReFacets result.
+- Search playlist contents, reorder/remove tracks, and start an explicit listening selection.
+- Import M3U/M3U8 and export M3U8 playlists. Relative paths and Unicode names are handled; credential-bearing URLs are rejected.
+- Create dynamic playlists with **all/any** rules on **genre, artist, album, title, year, rating and play count**. Text rules support matching/exclusion; numeric rules support equality and minimum/maximum bounds.
+- Preview, edit and duplicate dynamic rules. Results refresh when the library, relevant metadata, votes or qualified listening counts change. A queue already playing remains its own snapshot.
+- Visible, editable stars next to tracks; changing a rating does not start the song. A context menu remains available. Ratings currently use **whole stars from 0 to 5**.
+- Read existing `VOTE`/`RATING` tags with an explicit numeric scale, including 0–5 and 0–100. Ambiguous/conflicting values are not guessed. Explicit MusicCraft ratings, including zero, take precedence over imported values.
+- Write rating changes back to supported **FLAC/MP3** tag layouts while preserving audio bytes and unrelated metadata. Unsupported or ambiguous layouts remain unchanged/pending rather than being rewritten broadly.
+- Paired phone rating edits require approval in MusicCraft Android and any Android media-write prompt. Metadata journals and verified backups support interrupted-write recovery. This approval is independent from the optional folder-sync permission.
+- Qualified play counts are local to each installation; Mac and phone listening history are not automatically combined. See [rating semantics and recovery](crates/musiccraft-tags/README.md).
 
-Verify each downloaded package against its release's `SHA256SUMS.txt`. MusicCraft remains an independent project; [ArtCraft community consideration](https://github.com/storytold/craft-launcher/issues/1247) is pending.
+## Desktop: playback and audio
 
-![MusicCraft miniplayer with side-by-side VU meters and a synthetic library](docs/screenshots/miniplayer-vu.png)
+- Play/pause, previous/next, seeking, volume, repeat, sequential playback, shuffled tracks and shuffled albums.
+- Persistent shuffle cycles and prepared next tracks for gapless playback where the format/output path permits it.
+- Selectable audio devices and shared or exclusive CoreAudio output on macOS.
+- Optional source sample-rate following, integer PCM handling and ReplayGain controls. Unsupported exclusive configurations report an error.
+- Authenticated network streaming, buffering, bounded read/retry behavior and cached files. A verified route is retained across audio ranges so expired DNS does not interrupt an already identified phone source.
+- Background playback remains independent from window focus. Rendering uses visibility-aware work to reduce CPU; keeping a visible player on another display does not require it to own keyboard focus.
+- Source failures, interrupted network reads and decoder failures are distinct from a clean end of track. Playback has no listening-time limit.
 
-## About window correction
+### Audio formats and the separate extended-codec preview
 
-The standard macOS About panel is raised above the application's pinned windows when opened from the application menu. Reopening recalculates its level without raising the main player or changing the saved always-on-top preference.
+| Release line | Formats / transport |
+| --- | --- |
+| Mac 0.10.63 | FLAC, WAV, AIFF/AIF, ALAC/M4A, MP3, AAC, Ogg/Vorbis and supported MP4 audio containers, subject to the actual codec/container |
+| Android 0.4.2 | Formats supported by Media3 and the device's Android decoders; this is not a promise that every desktop format plays on every phone |
+| Windows/Linux 0.11.0 preview | Adds APE, WMA, WavPack, Opus and DSF/DFF DSD-to-PCM through a bundled limited FFmpeg runtime; adds an explicit DSF/uncompressed DFF DoP path for compatible exclusive-output DACs |
 
-## New desktop and Android companion
+The 0.11.0 preview includes WASAPI exclusive output on Windows and direct ALSA output on Linux. Its portable ZIP/NSIS and tarball/Debian packages have their own prerequisites and unresolved hardware checks. See the [tagged porting and codec guide](https://github.com/ckiikc/musiccraft/blob/v0.11.0/docs/PORTING.md).
 
-Desktop 0.10.50 opens music files delivered by Finder into an ordered listening selection, supports warm/cold Open Documents events, and declares supported audio formats for Open With. Multiple-file opening selects sequential playback and clears repeat-one so the next track can advance.
+**DoP is experimental and is not raw ASIO/native USB DSD.** That latter transport is not implemented. DoP requires a compatible DAC, integer exclusive transport and supported rates; it bypasses software gain, ReplayGain and resampling and fails explicitly when the requirements cannot be met. DRM WMA, WavPack correction sidecars and compressed DST direct-DoP have additional limitations documented in the tagged guide. The newer 0.10.63 Mac package does not automatically include the separate 0.11.0 extended-codec/DoP branch.
 
-The new MusicCraft Android source is discovered automatically on the local network. Pair with a four-digit code and approve the request on the phone; subsequent HTTPS reads verify the phone's identity. Each installation generates its own credentials. The Android app provides a read-only music server and pauses sharing while it plays audio locally. See [the sharing guide](docs/SHARING.md).
+Source tests establish PCM/format and framing behavior, not physical bit-perfect output, acoustic gaplessness or DAC certification.
 
-Android 0.3.0 separates **Cerca**, **Playlist** and a standalone **Player** with portrait and landscape layouts. Saved playlists, editable dynamic mixes, local ratings/listening history, queue editing and paused restoration of queue/position are included. Dynamic mixes choose songs, albums or artists using metadata, ratings and listening criteria; stopping additions preserves the existing queue. These are local MusicCraft statistics, not imported LMS data. Android Auto browsing and background playback use the same Media3 service.
+## Desktop: player views, artwork and windows
 
-![Settings with configurable appearance by year](docs/screenshots/settings.png)
+- Full library and compact player, with independent remembered window sizes and an always-on-top option.
+- **Six player visuals:** vinyl, CD, cassette, reel-to-reel, stacked stereo VU meters and side-by-side stereo VU meters. The central tab reflects the selected visual.
+- Artwork remains recognizable on vinyl, CD, cassette and reel-to-reel views. Reel motion uses continuous state; analogue needles use existing L/R telemetry and are not calibrated VU instruments.
+- Optional automatic visual selection based on track year; the chosen appearance persists.
+- Collapsing the side sections retains the selected central tab. First-use volume dragging and window-drag handling account for focus changes.
+- Embedded artwork, local folder artwork and optional online cover lookup. Saving a missing album cover is optional and does not overwrite an existing cover.
+- Double-click artwork to open a large independent cover window, with front/back/booklet navigation when images exist and controls that disappear over the image.
+- Artwork-window position is remembered across sessions and multiple screens; restored geometry is constrained to available displays.
+- Independent settings, user-guide and other auxiliary windows can extend beyond the main player's bounds. The cover window has an opaque native title bar. About is raised above a pinned player.
+- Native macOS application menus, artist biographies, plain lyrics and synchronized lyrics when a provider has a suitable result.
+- Desktop interface and built-in guide in **23 languages, including Vietnamese**, with the language preference retained across launches. New synchronization sections currently have Italian/English text and English fallback elsewhere; editorial review is still needed.
 
-## Listening and library
+![MusicCraft appearance settings](docs/screenshots/settings.png)
 
-- Full library and compact player, with independent remembered window sizes.
-- Faceted artist, album and folder filters; source isolation and search.
-- Sequential playback, shuffled tracks and shuffled albums. The track shuffle cycle persists across restarts.
-- Gapless preparation, selectable output devices and shared/exclusive output modes on macOS.
-- Optional native sample-rate switching, integer PCM path and ReplayGain controls. Device/driver support is required; unsupported exclusive configurations report an error.
-- FTP/FTPS sources with incremental synchronization, background tag indexing, bounded metadata reads and optional rediscovery when a phone changes its LAN address.
-- Embedded artwork, folder artwork and optional online cover lookup. Optional saving of missing artwork never replaces an existing cover.
-- Artist biographies and plain or synchronized lyrics when a provider has a suitable result.
-- Six persistent player visuals: vinyl, CD, cassette, reel-to-reel, stacked VU meters and side-by-side VU meters. Analog needles visualize existing peak telemetry; they are not a calibrated VU instrument.
-- Independent native settings and artwork windows, remembered geometry, and front/back/booklet image browsing.
-- Interface and built-in help in 23 languages; translations still need editorial review.
-- Original-file HTTP sharing and control of an external Lyrion Music Server for compatible players such as piCorePlayer.
+## Android: library, player and playlists
 
-There is no universal guarantee of bit-perfect hardware output or of correct results from every metadata provider. The source includes tests of PCM handling and output-format selection; an end-to-end DAC measurement is a separate hardware test.
+The Italian mobile interface separates **Search, Playlists, Player and Synchronization**. Search does not change the listening queue. The standalone Player supports portrait and landscape layouts.
 
-## Build on macOS
+- MediaStore library with tracks, albums, artists and search, including indexed shared/removable storage.
+- Play now, play next, add to queue, add to a saved playlist and rate a track. Replacing an existing queue asks for confirmation.
+- Persistent saved playlists, manual ratings and listening statistics. Queue tools play, move, remove or save tracks.
+- A playlist home with Resume listening, suggested mixes and separate Dynamic/Saved lists; a mini player opens the full Player.
+- Full artwork, metadata, seeking, transport and upcoming tracks. Secondary landscape content scrolls while transport stays accessible.
+- One Media3 player/service for the app, notification, system controls and Android Auto. Audio continues in the background and with the screen off, subject to Android/device power management.
+- Audio-focus and headphone-disconnection handling. Screen rotation or Activity closure does not create a second player. Process restart restores queue/position **paused**, without starting music automatically.
 
-The current build has been checked on Apple silicon with Rust **1.97.1** and Xcode Command Line Tools. Intel macOS, Windows and Linux need separate validation.
+### Android dynamic mixes
 
-From the source directory, build with:
+- Eight initial templates and an editable criteria/preview screen.
+- Choose songs, albums or artists; filter by genre, text, year/range/decade, rating and played/unplayed/partly played state.
+- Inclusive minimum/maximum qualified play counts combined with ratings. Maximum zero selects never-played tracks.
+- Ordering by random selection, total/average counts, total/average rating, number of rated tracks or recent listening.
+- A bounded producer adds tracks ahead, avoids adjacent/upcoming duplicates and retains a limited history. **Stop adding automatically** preserves the existing queue.
+- Rules and statistics are MusicCraft data, inspired by dynamic-playlist workflows; this is not an LMS connection or an import of LMS ratings/history.
 
-~~~sh
+### Android artwork library
+
+- Priority: embedded per-file artwork, identifiable local album artwork, retained artwork, then optional online lookup.
+- A persistent private **SQLite index plus deduplicated JPEG store** keeps covers outside Android's disposable cache. Album aliases share identical images; heterogeneous folders retain per-track artwork.
+- Changed files/metadata receive new associations. Positive results are reused; negative results, transient errors, rate limits and Retry-After are remembered with bounded retries.
+- Optional MusicBrainz/Cover Art Archive lookup is disabled by default, conservative, paced and on demand. It does not scan the entire collection online or guarantee a match.
+- Covers are not written into the music directories. Storage is bounded at 256 MiB without automatically discarding retained artwork; clearing app data/uninstalling removes this private library.
+
+## Android Auto and per-car queues
+
+- Browse **Now playing, Mixes, Playlists and Library**, with intermediate routes on hosts allowing fewer tabs. The head unit controls templates, list limits and artwork rendering.
+- Show the active playlist/profile and current queue through the media session. Start an existing saved playlist or dynamic mix directly from the car display, without picking up the phone.
+- Media-browser search and media-session voice-search support; notification/system transport controls use the same player.
+- Separate **Phone, Unrecognized car and named-car queues**, each retaining order, track/position, playlist name, shuffle/repeat and dynamic-producer state.
+- Optional Bluetooth recognition associates a known paired head unit with a named car. Android Auto connection plus one unambiguous match selects the profile; manual selection remains available.
+- Nearby-device permission is optional on Android 12+. No Bluetooth scanning or location permission is requested. An ordinary headphone connection alone does not select a car.
+- Switching/restoring profiles does not autoplay. Shared playlists/ratings remain available without duplicating music files.
+- Configure cars/Bluetooth and create/edit mix criteria on the phone; driving controls only start/select existing content. Protocol/emulator checks do not replace testing with a real head unit.
+
+See [Android setup and build](android/README.md) and [car queues](android/CAR_QUEUES.md). A sideloaded test APK may need **Unknown sources** in Android Auto's developer settings; a Play Store release is separate work.
+
+## Pair a phone and stream to the computer
+
+1. On Android press **Condividi → Attiva**. The visible status distinguishes Off, Active, Suspended and waiting for Wi-Fi.
+2. Choose **Abbina computer**. On the Mac add a MusicCraft Android source, select the discovered phone and enter its four-digit code.
+3. Approve on the phone. Later connections reuse the pairing, even if the local IP changes. A complicated URL or manually maintained IP is not required.
+
+Each installation generates its own Keystore HTTPS identity and pairing credentials. Reads use a pinned certificate; macOS retains credentials in Keychain. Sharing pauses during phone playback and offers revocation. Starting sharing is an explicit user action, including after an update stops the previous service. No separate FTP app is required. Ordinary sharing remains read-only; rating edits and folder synchronization each have their own approval flow. See [the sharing guide](docs/SHARING.md).
+
+The desktop can also expose a selected collection through its original-file HTTP server and control an **external Lyrion Music Server**, including compatible players such as piCorePlayer. The standard public package excludes the optional LMS runtime; see [multiroom](docs/MULTIROOM.md).
+
+## Reviewed NAS ↔ phone file synchronization (experimental)
+
+- A desktop **Synchronization** tab uses only sources already in Library, shown by name. Choose origin A, destination B and **A → B, B → A or bidirectional**.
+- Mounted folders/NAS and paired MusicCraft Android are supported. Legacy FTP sources are shown as unavailable for writable folder synchronization.
+- Preview copies, updates and deletions; resolve every conflict before applying. One-way mode mirrors its origin, including destination-only deletions. Bidirectional mode compares against the last fully verified baseline.
+- Content fingerprints, root identity and stale-preview checks avoid selecting winners merely by timestamps. Changed-both-sides and deletion-versus-edit conflicts require a choice.
+- Verified staging and exclusive commits retain replaced/deleted originals under `.musiccraft-sync/recovery`. Interrupted runs need a new preview; recovery is currently manual, not whole-run Undo.
+- Android has its own direct signed **SMB2/3** NAS connection, with host/share/subdirectory/domain/user configuration and a password held only for the current screen.
+- A native writable folder grant and a separate opt-in computer permission are required. Every computer plan also requires approval of its exact preview on the phone. Sync runs through a user-started data-sync foreground service; startup never silently resumes writes.
+- Complete selected roots are synchronized, including artwork and other non-hidden files; this is independent from search filters. Empty directories are not mirrored. Both roots need space/access for control and recovery data.
+- Phone replacements retain playlist/stat identifiers; per-file versions invalidate old desktop audio/tag caches on catalogue refresh. Queues, playlists, ratings, car profiles and pairing stores remain separate.
+
+Limits include 100,000 files, 64 directory levels and 8 GiB per phone transfer. Android synchronization requires Android 10+ and the native ExternalStorageProvider; arbitrary cloud document providers are unsupported. Fingerprint metadata can be reused for up to 24 hours, while destinations of planned changes are rechecked before mutation. **Real NAS compatibility, long disconnections and volume-specific behavior remain to be tested.** Read [synchronization and recovery](docs/SYNCHRONIZATION.md) before using personal files.
+
+## Build and test
+
+Desktop builds have been checked on Apple silicon with Rust **1.97.1** and Xcode Command Line Tools. Use at most two Cargo jobs:
+
+```sh
 cargo run --release --locked -j 2
-~~~
-
-To run without touching your normal library or settings:
-
-```sh
+# Separate test library/settings:
 cargo run --locked -j 2 -- --data-dir /private/tmp/musiccraft-demo
-```
-
-The development-only visual fixtures use synthetic metadata and require an explicit isolated directory:
-
-```sh
-cargo run --locked -j 2 -- --data-dir /private/tmp/musiccraft-preview --ui-preview mini-vinyl --test-seconds 120
-```
-
-## Package an experimental app
-
-```sh
+# Experimental public bundle, without LMS:
 scripts/package-macos.sh release
 ```
 
-This produces `dist/MusicCraft.app`, without a bundled LMS runtime. The app has an ad-hoc signature for local development and is **not notarized**. No installer or application is installed automatically. [Packaging and release status](docs/RELEASING.md) explains the remaining distribution work.
+The public app retains `io.github.ckiikc.musiccraft`, `~/Library/Application Support/MusicCraft/` and its existing public Keychain service. It starts empty on a new installation and does not import the private development profile. An update must keep the application identity; do not replace a private-profile installation with a differently identified public bundle and expect an automatic migration.
 
-The integrated LMS controller is included in the Rust source, but the third-party runtime is excluded from the default package. Use an external LMS with the standard package. A separate, explicitly requested local-use recipe is documented in [multiroom](docs/MULTIROOM.md); its output is not a cleared public redistribution bundle.
+Android uses JDK 21, SDK 36, the checked Gradle wrapper, Rust Android targets and the NDK. Set `ANDROID_HOME` or an ignored `local.properties`:
 
-## Configure a phone or NAS
+```sh
+./android/gradlew -p android :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
+```
 
-For the MusicCraft Android companion, enable **⋮ → Condividi con il computer** on the phone. On the Mac choose **Add source → MusicCraft Android**, select the discovered phone and enter the code, then authorize on the phone. No separate FTP app is needed.
+Install an Android update with the **same certificate/applicationId**; never uninstall or clear data when retaining library settings, playlists, votes, car queues and pairing. Signing keys and SDK paths are not distributed.
 
-
-Add a mounted folder as a local source, or enter the FTP/FTPS host, port and root directory in the network settings. Enter credentials in the app; do not embed them in a URL. On macOS, remembered FTP passwords use Keychain. An update of an ad-hoc-signed development app may require a new Keychain consent.
-
-Automatic synchronization checks reachable sources approximately every two minutes and periodically audits all folders. Metadata indexing runs separately and pauses for audio transfers and scans. Its first pass is gradual; completed tag reads are journaled and survive a restart. Changed tags at an already-indexed, unchanged URL do not yet trigger a full automatic reread.
-
-The public application uses the stable identity `io.github.ckiikc.musiccraft`
-and a separate `~/Library/Application Support/MusicCraft/` profile. FTP passwords
-use the `io.github.ckiikc.musiccraft.ftp` Keychain service. It starts with an empty
-library and no configured network sources. The earlier 0.10.37 source-review
-snapshot used a placeholder identity; it had no published binary release.
-The private development app's older profile is not imported automatically.
-
-## Privacy and external services
-
-Music files stay on your configured devices. Online cover, biography and lyrics lookups send the relevant artist/album/title queries to their providers. They can be unavailable, rate-limited or incorrect. Retrieved media, biographies and lyrics are not project assets and retain their providers' attribution and applicable terms.
-
-FTP without TLS exposes credentials and traffic on the network; choose FTPS or a network you trust. Optional phone rediscovery probes only bounded connected private networks and the configured port. LAN music sharing is off by default, uses a session token, and is intended for a private network; do not expose its port to the Internet. See [security](SECURITY.md).
-
-## Development
+Developer gates:
 
 ```sh
 cargo fmt --check
 cargo clippy --locked --all-targets -j 2 -- -D warnings
 cargo test --locked -j 2
+cargo test --locked --manifest-path crates/musiccraft-sync/Cargo.toml -j 2
+cargo test --locked --manifest-path crates/musiccraft-tags/Cargo.toml -j 2
 python3 scripts/check-publication.py
 python3 scripts/test_app_uuid.py
 python3 scripts/test_document_types.py
 ```
 
-The FTP integration harness creates synthetic audio and authenticated loopback servers. It needs Python, `pyftpdlib` and `ffmpeg`; it does not use your saved sources:
+Synthetic FTP, paired HTTPS, SMB/SAF, rating recovery, UI and Android instrumentation checks have explicit prerequisites. Instrumentation runs only in an isolated emulator, never on a personal phone. Ignored private-library/hardware tests are not run by default. See [validation](docs/VALIDATION.md), [architecture](docs/ARCHITECTURE.md), [releasing](docs/RELEASING.md) and [contributing](CONTRIBUTING.md).
 
-```sh
-python3 -m venv .venv
-.venv/bin/python -m pip install -r scripts/requirements-test.txt
-.venv/bin/python scripts/test_ftp.py
-```
+## Privacy, dependencies and license
 
-Tests marked ignored need explicit network, audio-device, private-library or multiroom prerequisites. Do not run all ignored tests indiscriminately. See [validation](docs/VALIDATION.md), [architecture](docs/ARCHITECTURE.md) and [contributing](CONTRIBUTING.md).
+Music files stay on configured devices. Optional online cover, biography and lyrics lookup sends relevant artist/album/title queries to the selected providers. Retrieved media/text is not project artwork and retains its applicable rights/attribution. Provider matches and availability are not guaranteed.
 
-## License and artwork
+FTP is unencrypted; use FTPS or a network you trust. Keep music servers on a private network and do not forward their ports to the Internet. Do not publish URLs with credentials, pairing material, personal libraries, downloaded metadata or raw diagnostic screenshots. See [security](SECURITY.md).
 
-Project source is licensed under [MIT](LICENSE). Original project artwork and synthetic visual fixtures are described in [ATTRIBUTION.md](ATTRIBUTION.md). Lucide interface icons retain their upstream notices. System fonts are loaded locally and are not bundled. Third-party dependencies and the optional LMS component are documented in [THIRD_PARTY.md](THIRD_PARTY.md).
+Project source is [MIT](LICENSE). Original artwork and synthetic fixtures are described in [attribution](ATTRIBUTION.md); Lucide icons and all dependencies retain their licenses. Fonts are loaded locally; no personal fonts are bundled. Binary packages include dependency notices. See [desktop components](THIRD_PARTY.md), [Android components](android/THIRD_PARTY.md) and the [pinned inventory](docs/DEPENDENCIES.tsv). Optional LMS redistribution is not included in the standard package.
 
-Maintained by [@ckiikc](https://github.com/ckiikc). Community-app consideration is tracked in [ArtCraft Launcher #1247](https://github.com/storytold/craft-launcher/issues/1247).
+Maintained by [@ckiikc](https://github.com/ckiikc).

@@ -574,6 +574,7 @@ impl Aurea {
                         (playlists::Page::Library, tr!("Library")),
                         (playlists::Page::Playlists, tr!("Playlists")),
                         (playlists::Page::Queue, tr!("Playback queue")),
+                        (playlists::Page::Synchronization, tr!("Synchronization")),
                     ] {
                         ui.selectable_value(&mut self.playlist_ui.page, page, label);
                     }
@@ -603,6 +604,10 @@ impl Aurea {
                 });
                 ui.separator();
                 match self.playlist_ui.page {
+                    playlists::Page::Synchronization => {
+                        self.file_sync_page(ui);
+                        return;
+                    }
                     playlists::Page::Playlists => {
                         self.playlists_page(ui);
                         return;

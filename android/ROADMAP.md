@@ -44,3 +44,7 @@ Per-file local artwork, permanent deduplicated SQLite/JPEG storage with album al
 ## 0.4.1 — rating-tag interoperability
 
 Shared Rust metadata engine; persistent read-only rating index; manual-vote precedence; explicit 0–5/0–100 scale selection. Authenticated, bounded, persisted desktop edit requests with phone and MediaStore approval, metadata-prefix verification and interrupted-write recovery. Only supported FLAC/MP3 layouts are written; queues, car profiles and pairing identity are retained. Emulator validation is separate from physical-device validation.
+
+## 0.4.2 — reviewed NAS synchronization (experimental)
+
+Separate Synchronization view, explicit native folder grants, optional computer synchronization with computer-side reviewed previews, direct signed SMB2/3 access and a user-started data-sync foreground service. Shared Rust planning, persistent baselines, cached fingerprints and recovery storage remain independent of queues, playlists and pairing. Synthetic SMB/SAF and paired desktop HTTPS tests are distinct from personal NAS validation.

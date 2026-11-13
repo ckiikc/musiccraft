@@ -242,6 +242,26 @@ impl Aurea {
         if matches!(scene, "dynamic-stats" | "dynamic-stats-rules") {
             self.preview_stats_playlist(scene == "dynamic-stats-rules");
         }
+        if scene == "file-sync" {
+            self.saved.sources.clear();
+            self.saved.folders = ["a", "b"]
+                .iter()
+                .map(|s| {
+                    self.cache
+                        .parent()
+                        .unwrap()
+                        .parent()
+                        .unwrap()
+                        .join(format!("desktop-{s}"))
+                })
+                .collect();
+            self.file_sync.config.a = Target::Folder(self.saved.folders[0].clone()).key();
+            self.file_sync.config.b = Target::Folder(self.saved.folders[1].clone()).key();
+            self.saved.language = "it".into();
+            crate::i18n::set("it");
+            self.playlist_ui.page = playlists::Page::Synchronization;
+            self.saved.pinned = false;
+        }
         if scene == "playlists-empty" {
             self.playlist_ui.page = playlists::Page::Playlists;
         }

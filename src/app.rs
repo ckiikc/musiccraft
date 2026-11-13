@@ -25,6 +25,7 @@ mod connection;
 mod cover_viewer;
 mod desktop;
 mod detached;
+mod file_sync;
 mod follow;
 mod help;
 mod listening_ui;
@@ -171,6 +172,8 @@ pub struct Aurea {
     library_follow: follow::State,
     playlist_book: crate::playlists::Book,
     playlist_ui: playlists::State,
+    file_sync: file_sync::State,
+    file_sync_refresh: std::collections::VecDeque<Target>,
     playlist_path: PathBuf,
     playlist_error: Option<String>,
     playlist_dirty: bool,
@@ -437,6 +440,8 @@ impl Aurea {
             library_follow: Default::default(),
             playlist_book,
             playlist_ui: Default::default(),
+            file_sync: file_sync::State::new(data.join("file-sync")),
+            file_sync_refresh: Default::default(),
             playlist_path,
             playlist_error,
             playlist_dirty,
@@ -811,7 +816,7 @@ impl Aurea {
         targets
     }
     fn start_sync(&mut self, target: Target, automatic: bool) {
-        if self.scanning {
+        if self.scanning || self.file_sync.busy() {
             return;
         }
         if !automatic {
@@ -836,6 +841,7 @@ impl Aurea {
     }
     fn auto_sync_tick(&mut self, now: Instant) {
         if !self.saved.auto_sync
+            || self.file_sync.busy()
             || self.scanning
             || self.loading
             || self.browsing
@@ -1277,6 +1283,15 @@ impl Aurea {
         }
     }
     fn poll(&mut self, ctx: &egui::Context) {
+        if self.file_sync.poll() {
+            self.after_file_sync();
+        }
+        if !self.scanning
+            && !self.file_sync.busy()
+            && let Some(target) = self.file_sync_refresh.pop_front()
+        {
+            self.start_sync(target, false);
+        }
         while let Ok(event) = self.audio.rx.try_recv() {
             match event {
                 Event::Loading(ticket, bytes) if ticket == self.ticket => self.loaded_bytes = bytes,
@@ -1310,6 +1325,7 @@ impl Aurea {
                         .iter_mut()
                         .find(|t| t.source == track.source)
                     {
+                        track.remote_stamp = stored.remote_stamp.clone();
                         *stored = track.clone();
                         self.library_revision = self.library_revision.wrapping_add(1);
                     }
@@ -1559,8 +1575,20 @@ impl Aurea {
                         self.history
                             .remove_missing(&report.absent, self.current.as_deref());
                     }
+                    let changed =
+                        library::refresh_remote_versions(&mut self.saved.tracks, &report.tracks);
+                    for source in changed.iter().chain(report.absent.iter()) {
+                        crate::cache::invalidate_remote(source, &self.cache);
+                        self.covers.remove(source);
+                    }
+                    if !changed.is_empty() {
+                        self.remote_tags.library_changed();
+                        if self.planned.as_ref().is_some_and(|id| changed.contains(id)) {
+                            self.prepare_track(self.planned.clone());
+                        }
+                    }
                     let added = library::merge_tracks(&mut self.saved.tracks, report.tracks);
-                    if added > 0 || removed > 0 {
+                    if added > 0 || removed > 0 || !changed.is_empty() {
                         self.library_revision = self.library_revision.wrapping_add(1);
                     }
                     self.sync_status = crate::i18n::format(

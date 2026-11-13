@@ -71,6 +71,7 @@ pub fn import(paths: Vec<PathBuf>, tx: Sender<Job>, cancel: Arc<AtomicBool>) {
                     .sort_by_file_name()
                     .max_depth(32)
                     .into_iter()
+                    .filter_entry(|entry| entry.file_name() != ".musiccraft-sync")
                     .take_while(|_| !cancel.load(Ordering::Relaxed))
                     .filter_map(|e| match e {
                         Ok(e) => Some(e),

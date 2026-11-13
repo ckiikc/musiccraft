@@ -1,7 +1,7 @@
 use super::*;
 use unicode_normalization::UnicodeNormalization;
 
-const CHAPTERS: [(&str, &[&str]); 11] = [
+const CHAPTERS: [(&str, &[&str]); 12] = [
     (
         "Library",
         &[
@@ -35,7 +35,15 @@ const CHAPTERS: [(&str, &[&str]); 11] = [
     (
         "Sources and synchronization",
         &[
-            "Guide: automatic synchronization adds new tracks when sources are reachable. The refresh icon forces a complete check. Existing music files are never rewritten or deleted by synchronization.",
+            "Guide: automatic library refresh updates the catalogue only. File copying and deletions require the separate Synchronization tab and its reviewed preview.",
+        ],
+    ),
+    (
+        "Synchronization",
+        &[
+            "Guide: choose origin and destination from existing Library sources. Select one-way or bidirectional synchronization, generate a preview and resolve every conflict before applying. Library filters and playback queues remain independent.",
+            "Guide: one-way mode mirrors the origin, including deletions. Bidirectional mode uses the last completed baseline. Changed or unreachable sources require a new preview; missing sources are never empty libraries.",
+            "Guide: on Android grant one music folder and enable computer access in Synchronization. Keep sharing enabled, review each preview on the computer and approve it on the phone. Replaced and deleted files stay in the hidden .musiccraft-sync/recovery directory; recovery is currently manual.",
         ],
     ),
     (

@@ -5,3 +5,11 @@ Used as native vector drawables. License in Material-icons-LICENSE.txt.
 Optional cover retrieval: MusicBrainz and Cover Art Archive.
 https://musicbrainz.org/doc/Cover_Art_Archive
 Artwork is supplied by the respective rights holders; downloaded images are kept on the user's device and are not packaged with MusicCraft.
+
+Network synchronization dependencies:
+SMBJ 0.15.0 and ASN.One 0.6.0: Apache License 2.0 (SMB-Apache-LICENSE.txt).
+https://github.com/hierynomus/smbj
+https://github.com/hierynomus/asn-one
+SLF4J 2.0.18: MIT (SLF4J-LICENSE.txt).
+MBassador 1.3.2: MIT (MBassador-LICENSE.txt).
+Bouncy Castle 1.85.2: Bouncy Castle license (BouncyCastle-LICENSE.txt).

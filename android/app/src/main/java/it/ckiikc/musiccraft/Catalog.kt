@@ -24,8 +24,8 @@ object LibraryRules {
         query.isBlank() || listOf(title, artist, album).any { it.contains(query.trim(), ignoreCase = true) }
 }
 
-data class Song(val id: String, val title: String, val artist: String, val album: String, val albumKey: String, val duration: Long, val uri: android.net.Uri, val artwork: android.net.Uri?, val trackNumber: Int, val displayName:String = "", val size:Long = 0, val modified:Long = 0,val year:Int=0,val genre:String="",val added:Long=0) {
-    val coverKey:String by lazy { ArtworkKeys.file(id,added,size,modified,artist,album,title) }
+data class Song(val id: String, val title: String, val artist: String, val album: String, val albumKey: String, val duration: Long, val uri: android.net.Uri, val artwork: android.net.Uri?, val trackNumber: Int, val displayName:String = "", val size:Long = 0, val modified:Long = 0,val year:Int=0,val genre:String="",val added:Long=0,val syncVersion:Long=0) {
+    val coverKey:String by lazy { ArtworkKeys.file(id,added,size,modified,artist,album,title)+":"+syncVersion }
     val statKey:String get()="$id@$added"
     fun facts()=TrackFacts(id,title,artist,albumKey,genre,year,trackNumber,statKey,album)
     fun item(): MediaItem = MediaItem.Builder().setMediaId(id).setUri(uri).setMediaMetadata(
@@ -37,6 +37,7 @@ data class Song(val id: String, val title: String, val artist: String, val album
 class Catalog private constructor(private val context: Context) {
     @Volatile var songs: List<Song> = emptyList(); private set
     @Volatile var lastError: String? = null; private set
+    @Volatile var revision:Long=0;private set
     private val worker = Executors.newSingleThreadExecutor()
     private var loading: ListenableFuture<List<Song>>? = null
     private var loadedAt = 0L
@@ -51,6 +52,7 @@ class Catalog private constructor(private val context: Context) {
         worker.execute {
             try {
                 songs = if (permitted()) readSongs() else emptyList()
+                revision++
                 lastError = null
                 hadPermission = allowed
                 loadedAt = android.os.SystemClock.elapsedRealtime()
@@ -77,7 +79,8 @@ class Catalog private constructor(private val context: Context) {
                 out += Song("song:$id", text(1, "Senza titolo"), text(2, "Artista sconosciuto"), text(3, "Album sconosciuto"), "album:$albumId", cursor.getLong(5), ContentUris.withAppendedId(collection, id), if (albumId > 0) ContentUris.withAppendedId(android.net.Uri.parse("content://media/external/audio/albumart"), albumId) else null, cursor.getInt(6), cursor.getString(7).orEmpty(), cursor.getLong(8), cursor.getLong(9),cursor.getInt(10),if(Build.VERSION.SDK_INT>=30) cursor.getString(11).orEmpty() else "",cursor.getLong(12))
             }
         }
-        return out
+        val aliases=SyncIdentity.aliases(context);val reserved=aliases.values.map{it.id}.toSet()
+        return out.map{song->val actual=song.id.substringAfter(':').toLong();val stable=aliases[actual];if(stable!=null)song.copy(id="song:${stable.id}",added=stable.added,syncVersion=stable.version)else if(actual in reserved)song.copy(id="song:${Long.MAX_VALUE-actual}")else song}
     }
     fun folder(id: String, title: String, type: Int): MediaItem {
         val icon=when(id){"now-playing"->"ic_player";"dynamic"->"ic_shuffle";"playlists","playlist-menu"->"ic_playlist";"cars"->"ic_car";"artists"->"ic_artist";"songs"->"ic_player";else->"ic_album"}

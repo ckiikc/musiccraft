@@ -45,3 +45,5 @@ jobs:
       - run: rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
       - run: cargo +1.97.1 test --manifest-path crates/musiccraft-tags/Cargo.toml --locked -j 2
       - run: cargo +1.97.1 clippy --manifest-path crates/musiccraft-tags/Cargo.toml --locked --all-targets -j 2 -- -D warnings
+      - run: cargo +1.97.1 test --manifest-path crates/musiccraft-sync/Cargo.toml --locked -j 2
+      - run: cargo +1.97.1 clippy --manifest-path crates/musiccraft-sync/Cargo.toml --locked --all-targets -j 2 -- -D warnings

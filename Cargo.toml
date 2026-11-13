@@ -1,6 +1,6 @@
 [package]
 name = "musiccraft"
-version = "0.10.62"
+version = "0.10.63"
 edition = "2024"
 license = "MIT"
 description = "Native music player for local, NAS, FTP and MusicCraft Android libraries"
@@ -9,6 +9,7 @@ repository = "https://github.com/ckiikc/musiccraft"
 
 [dependencies]
 musiccraft-tags = { path = "crates/musiccraft-tags" }
+musiccraft-sync = { path = "crates/musiccraft-sync" }
 eframe = { version = "=0.36.2", default-features = false, features = ["default_fonts", "glow", "persistence", "accesskit"] }
 rodio = { version = "=0.22.2", features = ["symphonia-all"] }
 cpal = "=0.17.3"

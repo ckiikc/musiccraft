@@ -53,3 +53,19 @@ fn clone_fd(fd: i32) -> std::io::Result<std::fs::File> {
     let borrowed = unsafe { BorrowedFd::borrow_raw(fd) };
     Ok(std::fs::File::from(borrowed.try_clone_to_owned()?))
 }
+
+/// The sync planner accepts JSON and returns a preview; JNI cannot open or modify a path.
+#[unsafe(no_mangle)]
+pub extern "system" fn Java_it_ckiikc_musiccraft_FolderSync_planNative(
+    mut env: JNIEnv,
+    _: JClass,
+    input: jni::objects::JString,
+) -> jstring {
+    let output = env
+        .get_string(&input)
+        .map(|s| musiccraft_sync::json(&String::from(s)))
+        .unwrap_or_else(|_| "{\"error\":\"Invalid sync request\"}".into());
+    env.new_string(output)
+        .map(|s| s.into_raw())
+        .unwrap_or(std::ptr::null_mut())
+}
