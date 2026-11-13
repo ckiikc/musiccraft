@@ -25,7 +25,9 @@ object LibraryRules {
 }
 
 data class Song(val id: String, val title: String, val artist: String, val album: String, val albumKey: String, val duration: Long, val uri: android.net.Uri, val artwork: android.net.Uri?, val trackNumber: Int, val displayName:String = "", val size:Long = 0, val modified:Long = 0,val year:Int=0,val genre:String="",val added:Long=0,val syncVersion:Long=0) {
-    val coverKey:String by lazy { ArtworkKeys.file(id,added,size,modified,artist,album,title)+":"+syncVersion }
+    private val originalCoverKey:String by lazy { ArtworkKeys.file(id,added,size,modified,artist,album,title) }
+    val coverKey:String by lazy { ArtworkKeys.versioned(originalCoverKey,syncVersion) }
+    internal val previousCoverKey:String get()="$originalCoverKey:$syncVersion"
     val statKey:String get()="$id@$added"
     fun facts()=TrackFacts(id,title,artist,albumKey,genre,year,trackNumber,statKey,album)
     fun item(): MediaItem = MediaItem.Builder().setMediaId(id).setUri(uri).setMediaMetadata(
@@ -92,7 +94,7 @@ class Catalog private constructor(private val context: Context) {
         "dynamic" -> ListeningStore.get(context).rules.map{MediaItem.Builder().setMediaId("mix:"+it.id).setMediaMetadata(MediaMetadata.Builder().setTitle(it.name).setIsBrowsable(false).setIsPlayable(true).setMediaType(MediaMetadata.MEDIA_TYPE_PLAYLIST).build()).build()}
         "playlists" -> ListeningStore.get(context).playlists.map{MediaItem.Builder().setMediaId("playlist:"+it.id).setMediaMetadata(MediaMetadata.Builder().setTitle(it.name).setIsBrowsable(false).setIsPlayable(true).setMediaType(MediaMetadata.MEDIA_TYPE_PLAYLIST).build()).build()}
         "songs" -> songs.map { it.item() }
-        "albums" -> songs.distinctBy { it.albumKey }.sortedBy { it.album.lowercase() }.map { folder(it.albumKey, it.album, MediaMetadata.MEDIA_TYPE_ALBUM) }
+        "albums" -> songs.distinctBy { it.albumKey }.sortedBy { it.album.lowercase() }.map { folder(it.albumKey, it.album, MediaMetadata.MEDIA_TYPE_ALBUM).let{album->album.buildUpon().setMediaMetadata(album.mediaMetadata.buildUpon().setArtworkUri(ArtworkLibrary.uri(it)).build()).build()} }
         "artists" -> songs.map { it.artist }.distinct().sortedBy { it.lowercase() }.map { folder(artistId(it), it, MediaMetadata.MEDIA_TYPE_ARTIST) }
         else -> songs.filter { it.albumKey == parent || artistId(it.artist) == parent }.sortedWith(compareBy<Song> { it.album }.thenBy { it.trackNumber }.thenBy { it.title }).map { it.item() }
     }

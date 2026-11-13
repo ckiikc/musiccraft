@@ -48,3 +48,7 @@ Shared Rust metadata engine; persistent read-only rating index; manual-vote prec
 ## 0.4.2 — reviewed NAS synchronization (experimental)
 
 Separate Synchronization view, explicit native folder grants, optional computer synchronization with computer-side reviewed previews, direct signed SMB2/3 access and a user-started data-sync foreground service. Shared Rust planning, persistent baselines, cached fingerprints and recovery storage remain independent of queues, playlists and pairing. Synthetic SMB/SAF and paired desktop HTTPS tests are distinct from personal NAS validation.
+
+## 0.4.3 — Android Auto cover URI regression
+
+Keep versioned artwork IDs within the provider's opaque SHA-256 contract; retain earlier zero-version associations and migrate 0.4.2 artwork aliases/backoff without downloads or duplicate JPEGs. Album browser items expose cover URIs. No library, queue, rating or pairing format changes. Native emulator tests cover browsed/playing-item metadata, decoded provider images, external read grants, denied writes and revocation. Real head-unit rendering remains unverified.

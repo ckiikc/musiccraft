@@ -1,4 +1,10 @@
-# MusicCraft for Android — 0.4.2
+# MusicCraft for Android — 0.4.3
+
+## Android Auto artwork correction — 0.4.3
+
+Cover identities remain valid opaque content-provider IDs after a synchronized file is replaced. This repairs a 0.4.2 regression where the appended sync version caused the read-only artwork provider to reject every generated cover URI. Version-zero keys remain compatible with 0.4.1, and associations stored by 0.4.2 are reused without copying JPEGs or downloading covers again; negative-result backoff is preserved. Android Auto album entries now reference actual cover artwork instead of the generic album icon.
+
+Library, votes, playlists, per-car queues and pairing formats/identities are unchanged. Verification covers the Android Auto-compatible media browser and playing-item metadata plus a different-UID reader with read-only grants in an isolated emulator. A real head-unit display remains a separate test.
 
 ## Reviewed synchronization — 0.4.2 (experimental)
 

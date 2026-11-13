@@ -10,6 +10,12 @@ class ArtworkArchive(private val directory:File,private val budget:Long=256L*102
     init{directory.mkdirs();db=SQLiteDatabase.openOrCreateDatabase(File(directory,"index.db"),null);db.execSQL("CREATE TABLE IF NOT EXISTS art (key TEXT PRIMARY KEY, blob TEXT, retry INTEGER NOT NULL, source TEXT NOT NULL)")}
     data class Entry(val file:File?,val retry:Long,val source:String)
     @Synchronized fun entry(key:String):Entry?=db.rawQuery("SELECT blob,retry,source FROM art WHERE key=?",arrayOf(key)).use{c->if(!c.moveToFirst())null else Entry(c.getString(0)?.let{File(directory,"$it.jpg")}.takeIf{it?.isFile==true},c.getLong(1),c.getString(2))}
+    /** Reuse the 0.4.2 association, including its negative-result backoff, without copying a JPEG. */
+    @Synchronized fun migrate(previous:String,key:String):Entry? {
+        if(entry(key)!=null)return entry(key)
+        db.execSQL("INSERT OR IGNORE INTO art (key,blob,retry,source) SELECT ?,blob,retry,source FROM art WHERE key=?",arrayOf(key,previous))
+        return entry(key)
+    }
     @Synchronized fun put(key:String,bytes:ByteArray?,retry:Long=0,source:String="local"):File? {
         val hash=bytes?.let{ArtworkKeys.hash(it)};val file=hash?.let{File(directory,"$it.jpg")}
         if(file!=null && !file.exists()){

@@ -29,7 +29,7 @@ class ArtworkLibrary internal constructor(private val context:Context,private va
         return try{job.get(35,TimeUnit.SECONDS)}catch(_:Exception){null}finally{if(job.isDone)jobs.remove(key,job)}
     }
     private fun load(song:Song):File? {
-        val now=System.currentTimeMillis();val existing=archive.entry(song.coverKey)
+        val now=System.currentTimeMillis();val existing=archive.entry(song.coverKey) ?: archive.migrate(song.previousCoverKey,song.coverKey)
         existing?.file?.let{return it}
         if(existing==null || existing.source=="local-missing" && existing.retry<=now){
             val embedded=try{MediaMetadataRetriever().let{r->try{r.setDataSource(context,song.uri);r.embeddedPicture?.takeIf{it.size<=MAX_BYTES}}finally{r.release()}}}catch(_:Exception){null}

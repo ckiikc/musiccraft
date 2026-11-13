@@ -11,6 +11,10 @@ object ArtworkKeys {
     fun normalized(value:String)=Normalizer.normalize(value,Normalizer.Form.NFKD).replace(Regex("\\p{M}"),"").lowercase(Locale.ROOT).replace(Regex("[^\\p{L}\\p{N}]+")," ").trim()
     fun known(value:String)=normalized(value).let{it.isNotBlank() && it !in setOf("unknown","unknown album","unknown artist","album sconosciuto","artista sconosciuto","sconosciuto","various artists","artisti vari")}
     fun file(id:String,added:Long,size:Long,modified:Long,artist:String,album:String,title:String)=hash(listOf(id,added,size,modified,artist,album,title).joinToString("\u0000"))
+    fun versioned(base:String,version:Long):String {
+        require(version>=0 && Regex("[0-9a-f]{64}").matches(base))
+        return if(version==0L)base else hash("$base\u0000sync\u0000$version")
+    }
     fun query(artist:String,album:String,title:String):String? {
         if(!known(artist))return null
         return if(known(album))"album\u0000${normalized(artist)}\u0000${normalized(album)}" else if(known(title))"track\u0000${normalized(artist)}\u0000${normalized(title)}" else null
