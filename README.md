@@ -9,10 +9,12 @@ A music player for local collections, mounted NAS libraries and music shared by 
 | Platform | Release | Status |
 | --- | --- | --- |
 | Apple silicon macOS | [0.10.63](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.63) | Current Mac/Android feature line; ad-hoc signed, not notarized; optional LMS runtime excluded |
-| Android | [0.4.2 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.4.2) | Android 8+ for music, Android 10+ for file synchronization; arm64-v8a and x86_64; not a Play Store release |
+| Android | [0.4.3 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.4.3) | Android 8+ for music, Android 10+ for file synchronization; arm64-v8a and x86_64; not a Play Store release |
 | Windows x86-64 / Linux x86-64 | [0.11.0 preview](https://github.com/ckiikc/musiccraft/releases/tag/v0.11.0) | Separate experimental source/package line; not yet merged with the newest Mac/Android synchronization features |
 
 Each release includes checksums. Read its limitations and verify downloads against `SHA256SUMS.txt`. Intel macOS, physical DAC behavior and every phone/head-unit/NAS combination are not certified by a successful source build.
+
+**Android 0.4.3:** fixes the cover-URI regression introduced in 0.4.2, preserves previously archived images without downloading them again, and uses album artwork in the Android Auto album browser. Native emulator tests cover browsed/playing metadata and read-only access from an external UID; real head-unit rendering remains to be checked.
 
 **New in 0.10.63 / 0.4.2:** reviewed file synchronization, Library-only source selectors on desktop, direct SMB NAS access on Android, recoverable deletions/replacements, and stable track references after phone-file replacement. The actual home NAS test is still pending. See [synchronization](docs/SYNCHRONIZATION.md).
 
@@ -60,7 +62,7 @@ Each release includes checksums. Read its limitations and verify downloads again
 | Release line | Formats / transport |
 | --- | --- |
 | Mac 0.10.63 | FLAC, WAV, AIFF/AIF, ALAC/M4A, MP3, AAC, Ogg/Vorbis and supported MP4 audio containers, subject to the actual codec/container |
-| Android 0.4.2 | Formats supported by Media3 and the device's Android decoders; this is not a promise that every desktop format plays on every phone |
+| Android 0.4.3 | Formats supported by Media3 and the device's Android decoders; this is not a promise that every desktop format plays on every phone |
 | Windows/Linux 0.11.0 preview | Adds APE, WMA, WavPack, Opus and DSF/DFF DSD-to-PCM through a bundled limited FFmpeg runtime; adds an explicit DSF/uncompressed DFF DoP path for compatible exclusive-output DACs |
 
 The 0.11.0 preview includes WASAPI exclusive output on Windows and direct ALSA output on Linux. Its portable ZIP/NSIS and tarball/Debian packages have their own prerequisites and unresolved hardware checks. See the [tagged porting and codec guide](https://github.com/ckiikc/musiccraft/blob/v0.11.0/docs/PORTING.md).
