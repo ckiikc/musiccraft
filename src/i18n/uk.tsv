@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Підтвердьте зап�
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон не знайдено. Перевірте, чи пристрої використовують одну мережу Wi-Fi.
 Pair	Сполучити
 Pairing code incorrect or expired. Reopen pairing on the phone.	Код неправильний або прострочений. Відкрийте сполучення на телефоні знову.
+Playlists	Списки відтворення
+Playback queue	Черга відтворення
+New playlist	Новий список
+Playlist name	Назва списку
+Rename	Перейменувати
+Duplicate	Дублювати
+Delete	Видалити
+Delete playlist?	Видалити список?
+Add	Додати
+Add to playlist…	Додати до списку…
+Add tracks…	Додати композиції…
+Choose tracks from your library.	Виберіть композиції з медіатеки.
+Clear queue	Очистити чергу
+Could not save playlist.	Не вдалося зберегти список.
+Export playlist…	Експортувати список…
+Import playlist…	Імпортувати список…
+Move down	Перемістити вниз
+Move up	Перемістити вгору
+No playlists yet	Списків поки немає
+Playlist changes do not change the playback queue.	Зміни списку не змінюють чергу відтворення.
+Playlists unavailable.	Списки недоступні.
+Remove from playlist	Вилучити зі списку
+Remove from queue	Вилучити з черги
+Save queue as playlist	Зберегти чергу як список
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	У списках відтворення створюйте, перейменовуйте та впорядковуйте збережені списки. Відтворення копіює список до черги. Зміни списку не впливають на активну чергу. Підтримуються імпорт та експорт M3U/M3U8.
+New dynamic playlist	Новий динамічний список
+Dynamic playlist	Динамічний список
+Edit rules…	Змінити правила…
+Updates automatically with the library.	Оновлюється автоматично зі змінами бібліотеки.
+All rules	Усі правила
+Any rule	Хоча б одне правило
+Add rule	Додати правило
+Save rules	Зберегти правила
+Remove rule	Видалити правило
+Tag value	Значення тегу
+Contains	Містить
+Equals	Дорівнює
+Does not contain	Не містить
+Does not equal	Не дорівнює
+At least	Не менше
+At most	Не більше
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Динамічні списки зберігають правила тегів. Виберіть усі правила або хоча б одне. Межі років включені. Результати оновлюються разом із бібліотекою; відтворення зберігає копію в черзі.
+Rating	Оцінка
+Play count	Кількість прослуховувань
+Unrated	Без оцінки
+Rating (0–5)	Оцінка (0–5)
+Listening statistics unavailable.	Статистика прослуховувань недоступна.
+Could not save listening statistics.	Не вдалося зберегти статистику прослуховувань.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Оцініть трек правою кнопкою миші. Динамічні правила враховують оцінки й кількість прослуховувань. Прослуховування зараховується після 30 секунд або половини короткого треку, мінімум секунди; паузи й перемотка не враховуються. Попередня історія не відновлюється.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Натисніть зірки біля треку, щоб змінити оцінку. Повторне натискання поточної оцінки видаляє її. Зірки не запускають відтворення та не змінюють чергу.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

@@ -2,6 +2,8 @@
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Action {
     Files,
+    Playlists,
+    Queue,
     Folder,
     Network,
     PairPhone,
@@ -46,6 +48,9 @@ const GROUPS: &[(&str, &[Option<Action>])] = &[
     (
         "Library",
         &[
+            Some(Playlists),
+            Some(Queue),
+            None,
             Some(AutoSync),
             None,
             Some(Sources),
@@ -108,6 +113,8 @@ impl Action {
     fn label(self, state: &State) -> &'static str {
         crate::i18n::logical_text(match self {
             Files => "Add files or playlist…",
+            Playlists => "Playlists",
+            Queue => "Playback queue",
             Folder => "Add local / NAS folder…",
             Network => "Connect smartphone / FTP…",
             PairPhone => "Pair with MusicCraft Android",

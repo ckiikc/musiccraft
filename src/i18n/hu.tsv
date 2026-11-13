@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Erősítse meg a párosítási
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Nem található telefon. Ellenőrizze, hogy az eszközök ugyanazt a Wi-Fit használják.
 Pair	Párosítás
 Pairing code incorrect or expired. Reopen pairing on the phone.	A kód hibás vagy lejárt. Nyissa meg újra a párosítást a telefonon.
+Playlists	Lejátszási listák
+Playback queue	Lejátszási sor
+New playlist	Új lejátszási lista
+Playlist name	A lista neve
+Rename	Átnevezés
+Duplicate	Másolat
+Delete	Törlés
+Delete playlist?	Törli a lejátszási listát?
+Add	Hozzáadás
+Add to playlist…	Hozzáadás a listához…
+Add tracks…	Számok hozzáadása…
+Choose tracks from your library.	Válasszon számokat a könyvtárból.
+Clear queue	Sor ürítése
+Could not save playlist.	A lista mentése nem sikerült.
+Export playlist…	Lista exportálása…
+Import playlist…	Lista importálása…
+Move down	Mozgatás le
+Move up	Mozgatás fel
+No playlists yet	Még nincsenek listák
+Playlist changes do not change the playback queue.	A lista módosítása nem változtatja meg a lejátszási sort.
+Playlists unavailable.	A listák nem érhetők el.
+Remove from playlist	Eltávolítás a listából
+Remove from queue	Eltávolítás a sorból
+Save queue as playlist	Sor mentése lejátszási listaként
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	A Lejátszási listák alatt létrehozhatja, átnevezheti és rendezheti mentett listáit. A lejátszás a sortól független másolatot helyez a lejátszási sorba. A listák szerkesztése nem módosítja az aktív sort. Az importálás és exportálás M3U/M3U8 formátumot támogat.
+New dynamic playlist	Új dinamikus lejátszási lista
+Dynamic playlist	Dinamikus lejátszási lista
+Edit rules…	Szabályok szerkesztése…
+Updates automatically with the library.	Automatikusan frissül a könyvtár változásakor.
+All rules	Minden szabály
+Any rule	Legalább egy szabály
+Add rule	Szabály hozzáadása
+Save rules	Szabályok mentése
+Remove rule	Szabály törlése
+Tag value	Címkeérték
+Contains	Tartalmazza
+Equals	Egyenlő
+Does not contain	Nem tartalmazza
+Does not equal	Nem egyenlő
+At least	Legalább
+At most	Legfeljebb
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	A dinamikus listák címkeszabályokat mentenek. Válassza az összes vagy legalább egy szabály teljesülését. Az évhatárok is beleszámítanak. A találatok követik a könyvtárat; a lejátszás a sor másolatát őrzi meg.
+Rating	Értékelés
+Play count	Lejátszások száma
+Unrated	Nincs értékelés
+Rating (0–5)	Értékelés (0–5)
+Listening statistics unavailable.	A hallgatási statisztika nem érhető el.
+Could not save listening statistics.	A hallgatási statisztika nem menthető.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Jobb kattintással értékelhet egy számot. A dinamikus szabályok értékelést és lejátszásszámot is kezelnek. Egy hallgatás 30 másodperc vagy egy rövid szám fele után számít, legalább egy másodperccel; szünet és tekerés nem számít. A korábbi előzményeket nem állítjuk vissza.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	A szám melletti csillagokra kattintva módosíthatja az értékelést. Az aktuális értékre ismét kattintva törölheti. A csillagok nem indítanak lejátszást és nem módosítják a sort.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

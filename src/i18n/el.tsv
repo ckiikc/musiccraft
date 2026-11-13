@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Επιβεβαιώστε το 
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Δεν βρέθηκε τηλέφωνο. Ελέγξτε ότι οι συσκευές χρησιμοποιούν το ίδιο Wi-Fi.
 Pair	Σύζευξη
 Pairing code incorrect or expired. Reopen pairing on the phone.	Ο κωδικός είναι λανθασμένος ή έληξε. Ανοίξτε ξανά τη σύζευξη στο τηλέφωνο.
+Playlists	Λίστες αναπαραγωγής
+Playback queue	Ουρά αναπαραγωγής
+New playlist	Νέα λίστα
+Playlist name	Όνομα λίστας
+Rename	Μετονομασία
+Duplicate	Διπλότυπο
+Delete	Διαγραφή
+Delete playlist?	Διαγραφή λίστας;
+Add	Προσθήκη
+Add to playlist…	Προσθήκη στη λίστα…
+Add tracks…	Προσθήκη κομματιών…
+Choose tracks from your library.	Επιλέξτε κομμάτια από τη βιβλιοθήκη σας.
+Clear queue	Εκκαθάριση ουράς
+Could not save playlist.	Δεν ήταν δυνατή η αποθήκευση της λίστας.
+Export playlist…	Εξαγωγή λίστας…
+Import playlist…	Εισαγωγή λίστας…
+Move down	Μετακίνηση κάτω
+Move up	Μετακίνηση πάνω
+No playlists yet	Δεν υπάρχουν λίστες ακόμα
+Playlist changes do not change the playback queue.	Οι αλλαγές στη λίστα δεν αλλάζουν την ουρά αναπαραγωγής.
+Playlists unavailable.	Οι λίστες δεν είναι διαθέσιμες.
+Remove from playlist	Αφαίρεση από τη λίστα
+Remove from queue	Αφαίρεση από την ουρά
+Save queue as playlist	Αποθήκευση ουράς ως λίστα
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	Στις Λίστες αναπαραγωγής δημιουργείτε, μετονομάζετε και αναδιατάσσετε αποθηκευμένες λίστες. Η αναπαραγωγή αντιγράφει τη λίστα στην ουρά. Οι αλλαγές δεν επηρεάζουν την ενεργή ουρά. Η εισαγωγή και εξαγωγή υποστηρίζουν M3U/M3U8.
+New dynamic playlist	Νέα δυναμική λίστα
+Dynamic playlist	Δυναμική λίστα
+Edit rules…	Επεξεργασία κανόνων…
+Updates automatically with the library.	Ενημερώνεται αυτόματα με τη βιβλιοθήκη.
+All rules	Όλοι οι κανόνες
+Any rule	Τουλάχιστον ένας κανόνας
+Add rule	Προσθήκη κανόνα
+Save rules	Αποθήκευση κανόνων
+Remove rule	Αφαίρεση κανόνα
+Tag value	Τιμή ετικέτας
+Contains	Περιέχει
+Equals	Ισούται με
+Does not contain	Δεν περιέχει
+Does not equal	Δεν ισούται με
+At least	Τουλάχιστον
+At most	Το πολύ
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Οι δυναμικές λίστες αποθηκεύουν κανόνες ετικετών. Επιλέξτε όλους τους κανόνες ή τουλάχιστον έναν. Τα όρια ετών περιλαμβάνονται. Τα αποτελέσματα ακολουθούν τη βιβλιοθήκη· η αναπαραγωγή κρατά αντίγραφο στην ουρά.
+Rating	Βαθμολογία
+Play count	Αριθμός ακροάσεων
+Unrated	Χωρίς βαθμολογία
+Rating (0–5)	Βαθμολογία (0–5)
+Listening statistics unavailable.	Τα στατιστικά ακρόασης δεν είναι διαθέσιμα.
+Could not save listening statistics.	Δεν ήταν δυνατή η αποθήκευση των στατιστικών ακρόασης.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Βαθμολογήστε ένα κομμάτι με δεξί κλικ. Οι δυναμικοί κανόνες υποστηρίζουν βαθμούς και πλήθος ακροάσεων. Μια ακρόαση μετρά μετά από 30 δευτερόλεπτα ή μισό σύντομο κομμάτι, τουλάχιστον ένα δευτερόλεπτο· παύσεις και μετακινήσεις δεν μετρούν. Το παλιό ιστορικό δεν ανακατασκευάζεται.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Πατήστε τα αστέρια δίπλα σε ένα κομμάτι για να αλλάξετε τη βαθμολογία. Πατήστε ξανά την τρέχουσα βαθμολογία για να την αφαιρέσετε. Τα αστέρια δεν ξεκινούν αναπαραγωγή και δεν αλλάζουν την ουρά.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

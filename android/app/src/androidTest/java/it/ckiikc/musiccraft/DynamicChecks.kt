@@ -24,11 +24,11 @@ class DynamicChecks(private val test:Instrumentation) {
         val queue=listOf("QA Gamma","QA Alpha","QA Beta").map{name->songs.single{it.title==name}.id}
         check(send(b,"play_ids"){putStringArrayList("ids",ArrayList(queue));putString("mode","replace")}.resultCode==SessionResult.RESULT_SUCCESS)
         await("Manual queue did not play"){main{b.isPlaying}}
-        main{activity.findViewById<Button>(R.id.nav_search).performClick();activity.findViewById<EditText>(R.id.library_search).setText("QA Beta")}
+        main{activity.findViewById<android.view.View>(R.id.nav_search).performClick();activity.findViewById<EditText>(R.id.library_search).setText("QA Beta")}
         await("Search did not filter"){main{activity.findViewById<ListView>(R.id.library_list).adapter.count==1}}
         check(ids(b)==queue){"Searching replaced the listening queue"}
-        main{activity.findViewById<Button>(R.id.nav_playlists).performClick()};check(ids(b)==queue)
-        main{activity.findViewById<Button>(R.id.nav_player).performClick()}
+        main{activity.findViewById<android.view.View>(R.id.nav_playlists).performClick()};check(ids(b)==queue)
+        main{activity.findViewById<android.view.View>(R.id.nav_player).performClick()}
         check(main{activity.findViewById<LinearLayout>(R.id.player_stage).orientation==LinearLayout.VERTICAL})
         fun rotate(orientation:Int):Activity {
             val monitor=test.addMonitor(MainActivity::class.java.name,null,false)

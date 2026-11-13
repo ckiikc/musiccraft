@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Телефонда жұпта�
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон табылмады. Құрылғылардың бір Wi-Fi желісін қолданатынын тексеріңіз.
 Pair	Жұптау
 Pairing code incorrect or expired. Reopen pairing on the phone.	Код қате немесе мерзімі өткен. Телефонда жұптауды қайта ашыңыз.
+Playlists	Ойнату тізімдері
+Playback queue	Ойнату кезегі
+New playlist	Жаңа ойнату тізімі
+Playlist name	Ойнату тізімінің атауы
+Rename	Атауын өзгерту
+Duplicate	Көшірмесін жасау
+Delete	Жою
+Delete playlist?	Ойнату тізімін жою керек пе?
+Add	Қосу
+Add to playlist…	Ойнату тізіміне қосу…
+Add tracks…	Әндерді қосу…
+Choose tracks from your library.	Кітапханаңыздан әндерді таңдаңыз.
+Clear queue	Кезекті тазарту
+Could not save playlist.	Ойнату тізімін сақтау мүмкін болмады.
+Export playlist…	Ойнату тізімін экспорттау…
+Import playlist…	Ойнату тізімін импорттау…
+Move down	Төмен жылжыту
+Move up	Жоғары жылжыту
+No playlists yet	Әзірге ойнату тізімдері жоқ
+Playlist changes do not change the playback queue.	Ойнату тізімін өзгерту ойнату кезегін өзгертпейді.
+Playlists unavailable.	Ойнату тізімдері қолжетімсіз.
+Remove from playlist	Ойнату тізімінен алып тастау
+Remove from queue	Кезектен алып тастау
+Save queue as playlist	Кезекті ойнату тізімі ретінде сақтау
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	Ойнату тізімдері бөлімінде сақталған тізімдерді жасаңыз, атауын өзгертіңіз және ретін реттеңіз. Ойнату тізімді кезекке көшіреді. Тізім өзгерістері белсенді кезекті өзгертпейді. M3U/M3U8 импорттау және экспорттау қолданылады.
+New dynamic playlist	Жаңа динамикалық тізім
+Dynamic playlist	Динамикалық тізім
+Edit rules…	Ережелерді өзгерту…
+Updates automatically with the library.	Кітапхана өзгергенде автоматты жаңартылады.
+All rules	Барлық ережелер
+Any rule	Кемінде бір ереже
+Add rule	Ереже қосу
+Save rules	Ережелерді сақтау
+Remove rule	Ережені жою
+Tag value	Тег мәні
+Contains	Қамтиды
+Equals	Тең
+Does not contain	Қамтымайды
+Does not equal	Тең емес
+At least	Кемінде
+At most	Ең көбі
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Динамикалық тізімдер тег ережелерін сақтайды. Барлық ережелерді не кемінде бір ережені таңдаңыз. Жыл аралығының шекаралары кіреді. Нәтижелер кітапханамен жаңарады; ойнату кезекте көшірмені сақтайды.
+Rating	Баға
+Play count	Тыңдау саны
+Unrated	Бағаланбаған
+Rating (0–5)	Баға (0–5)
+Listening statistics unavailable.	Тыңдау статистикасы қолжетімсіз.
+Could not save listening statistics.	Тыңдау статистикасын сақтау мүмкін болмады.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Трекке оң жақ батырмамен баға беріңіз. Динамикалық ережелер баға мен тыңдау санын қолдайды. 30 секунд не қысқа тректің жартысы, кемінде бір секунд тыңдалса саналады; үзіліс пен айналдыру саналмайды. Бұрынғы тарих қалпына келтірілмейді.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Бағаны өзгерту үшін трек жанындағы жұлдыздарды басыңыз. Ағымдағы бағаны қайта бассаңыз, ол өшіріледі. Жұлдыздар ойнатуды бастамайды және кезекті өзгертпейді.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

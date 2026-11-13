@@ -33,6 +33,8 @@ impl Aurea {
         };
         match action {
             Action::Files => self.pick_music(false),
+            Action::Playlists => self.open_playlists(playlists::Page::Playlists),
+            Action::Queue => self.open_playlists(playlists::Page::Queue),
             Action::Folder => self.pick_music(true),
             Action::Network => self.open_network(),
             Action::PairPhone => self.open_phone_pair(),

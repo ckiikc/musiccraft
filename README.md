@@ -4,6 +4,14 @@ A native Rust music player for local folders, mounted NAS libraries and FTP/FTPS
 
 **Independent project · macOS and Android previews · MIT source license.** MusicCraft is not an official ArtCraft application. Public repository preparation does not imply acceptance into any software suite.
 
+## Desktop 0.10.62 and Android 0.4.1
+
+The macOS release adds saved/dynamic playlists, visible ratings, read-only VOTE/RATING import with an explicit scale, and conservative FLAC/MP3 tag synchronization. Explicit MusicCraft ratings, including zero, retain priority. The queue and ReFacets reveal the current track without changing filters or queue order.
+
+Android adds exact minimum/maximum play-count criteria combined with rating bounds, persistent rating-tag indexing and phone-approved desktop rating edits. The same Rust metadata engine is used on both platforms. See [rating semantics, supported layouts and recovery](crates/musiccraft-tags/README.md). Unsupported formats, ambiguous tags and denied writes remain unchanged/pending.
+
+This is the macOS/Android release line. The separate Windows/Linux 0.11.0 preview keeps its own source tag and packages; these changes do not replace or claim to validate that port. Public macOS packages retain their separate clean MusicCraft profile and exclude LMS.
+
 ## Desktop source update — 0.10.57
 
 The current desktop source includes native macOS menus and independent auxiliary windows, automatic reconnection to paired Android sharing, and more robust network audio reads. The album view groups the flat Android catalog by album and album artist instead of treating the audio endpoint as one folder-sized album.
@@ -14,8 +22,8 @@ The desktop update does not change the Android source or its published test APK.
 
 ## Experimental releases
 
-- [Desktop 0.10.50 for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.50): ad-hoc signed, not notarized; optional LMS runtime excluded.
-- [Android 0.3.0 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.3.0): Android 8/API 26 or newer, local debug build; no Play Store release. Android source and build instructions are in [android/](android/).
+- [Desktop 0.10.62 for Apple silicon macOS](https://github.com/ckiikc/musiccraft/releases/tag/v0.10.62): ad-hoc signed, not notarized; optional LMS runtime excluded.
+- [Android 0.4.1 test APK](https://github.com/ckiikc/musiccraft/releases/tag/android-v0.4.1): Android 8/API 26 or newer, local debug build; no Play Store release. Android source and build instructions are in [android/](android/).
 
 Verify each downloaded package against its release's `SHA256SUMS.txt`. MusicCraft remains an independent project; [ArtCraft community consideration](https://github.com/storytold/craft-launcher/issues/1247) is pending.
 

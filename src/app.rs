@@ -25,6 +25,7 @@ mod connection;
 mod cover_viewer;
 mod desktop;
 mod detached;
+mod follow;
 mod help;
 mod listening_ui;
 mod menu;
@@ -35,10 +36,12 @@ mod performance;
 mod phone_pair;
 mod playback_error;
 mod player_visual;
+mod playlists;
 #[cfg(any(debug_assertions, test))]
 mod preview;
 mod settings;
 mod tag_progress;
+mod track_stats;
 mod widgets;
 mod window_drag;
 mod window_geometry;
@@ -51,6 +54,7 @@ pub(crate) use window_drag::enable_trace as enable_window_drag_trace;
 #[serde(default)]
 struct Saved {
     tracks: Vec<Track>,
+    queue_label: Option<String>,
     sources: Vec<FtpSource>,
     folders: Vec<PathBuf>,
     active_source: Option<String>,
@@ -74,6 +78,7 @@ struct Saved {
     facet_fields: [crate::facets::Field; 3],
     library_sort: crate::facets::Sort,
     volume_db: f32,
+    rating_tag_scale: musiccraft_tags::Scale,
     online_covers: bool,
     save_covers: bool,
     dsp: crate::dsp::Config,
@@ -94,6 +99,7 @@ impl Default for Saved {
     fn default() -> Self {
         Self {
             tracks: Vec::new(),
+            queue_label: None,
             sources: Vec::new(),
             folders: Vec::new(),
             active_source: None,
@@ -121,6 +127,7 @@ impl Default for Saved {
             ],
             library_sort: Default::default(),
             volume_db: -12.0,
+            rating_tag_scale: Default::default(),
             online_covers: true,
             save_covers: true,
             dsp: Default::default(),
@@ -161,6 +168,18 @@ pub struct Aurea {
     credential_pending: HashSet<String>,
     icons: Icons,
     browser: crate::facets::Browser,
+    library_follow: follow::State,
+    playlist_book: crate::playlists::Book,
+    playlist_ui: playlists::State,
+    playlist_path: PathBuf,
+    playlist_error: Option<String>,
+    playlist_dirty: bool,
+    track_stats: crate::track_stats::Stats,
+    stats_path: PathBuf,
+    stats_error: Option<String>,
+    stats_dirty: bool,
+    stats_revision: u64,
+    listening_counter: crate::track_stats::Counter,
     mini_index: miniplayer::MiniIndex,
     vinyl_index: miniplayer::VinylIndex,
     remote_tags: crate::remote_tags::Library,
@@ -374,6 +393,25 @@ impl Aurea {
         let remote_tags =
             crate::remote_tags::Library::new(data.join("metadata-index"), &mut saved.tracks);
         let aliases = library::deduplicate_tracks(&mut saved.tracks);
+        let playlist_path = data.join("playlists.json");
+        let (mut playlist_book, playlist_error) = match crate::playlists::Book::load(&playlist_path)
+        {
+            Ok(book) => (book, None),
+            Err(_) => (
+                Default::default(),
+                Some(tr!("Playlists unavailable.").to_string()),
+            ),
+        };
+        let playlist_dirty = playlist_book.remap(|s| aliases.get(s).cloned());
+        let stats_path = data.join("listening-stats.json");
+        let (mut track_stats, stats_error) = match crate::track_stats::Stats::load(&stats_path) {
+            Ok(s) => (s, None),
+            Err(_) => (
+                Default::default(),
+                Some(tr!("Listening statistics unavailable.").into()),
+            ),
+        };
+        let stats_dirty = track_stats.remap(|s| aliases.get(s).cloned());
         if let Some(session) = &mut saved.shuffle_session {
             session.cycle.remap_sources(&aliases);
             if let Some(selection) = &mut session.selection {
@@ -396,6 +434,18 @@ impl Aurea {
             credential_pending,
             icons: Icons::new(&cc.egui_ctx),
             browser: Default::default(),
+            library_follow: Default::default(),
+            playlist_book,
+            playlist_ui: Default::default(),
+            playlist_path,
+            playlist_error,
+            playlist_dirty,
+            track_stats,
+            stats_path,
+            stats_error,
+            stats_dirty,
+            stats_revision: 0,
+            listening_counter: Default::default(),
             mini_index: Default::default(),
             vinyl_index: Default::default(),
             remote_tags,
@@ -509,6 +559,8 @@ impl Aurea {
         app.settings_geometry.load(app.saved.settings_window);
         app.auxiliary_geometry.load(&app.saved.auxiliary_windows);
         app.browser.sort = app.saved.library_sort;
+        app.persist_playlists();
+        app.persist_track_stats();
         app.gain();
         if !paths.is_empty() {
             app.open_external_files(paths);
@@ -642,6 +694,12 @@ impl Aurea {
         if self.saved.active_source == id {
             return;
         }
+        if self.saved.queue_label.is_some() {
+            self.saved.active_source = id;
+            self.browser.clear();
+            self.query.clear();
+            return;
+        }
         self.stop();
         self.history = History::default();
         self.shuffle_cycle.clear();
@@ -685,6 +743,7 @@ impl Aurea {
             ids.iter().cloned().map(Track::placeholder).collect(),
         );
         self.library_revision = self.library_revision.wrapping_add(1);
+        self.saved.queue_label = None;
         self.playback_selection = Some(ids.clone());
         // Opening multiple documents is an explicitly ordered listening action.
         // Do not inherit shuffle or repeat-one from the previous session.
@@ -899,6 +958,9 @@ impl Aurea {
                 *value = rebased;
             }
         }
+        self.remap_track_stats(|s| network::rebase(s, old, &new));
+        self.playlist_dirty |= self.playlist_book.remap(|s| network::rebase(s, old, &new));
+        self.persist_playlists();
         self.history.rebase(old, &new);
         self.shuffle_cycle.rebase(old, &new);
         if let Some(id) = &mut self.browser.selected_track
@@ -1004,7 +1066,12 @@ impl Aurea {
             self.message = tr!("Authorize Keychain or enter the password in Network").into();
             return;
         }
-        let track = self.scoped_tracks().find(|t| t.source == id).cloned();
+        let track = if self.saved.queue_label.is_some() {
+            self.saved.tracks.iter().find(|t| t.source == id)
+        } else {
+            self.scoped_tracks().find(|t| t.source == id)
+        }
+        .cloned();
         if let Some(track) = track {
             self.playback_error = None;
             self.ticket = self.audio.load(
@@ -1101,7 +1168,11 @@ impl Aurea {
         self.prepare_next();
     }
     fn listening_tracks(&self) -> Vec<&Track> {
-        let scoped: Vec<_> = self.scoped_tracks().collect();
+        let scoped: Vec<_> = if self.saved.queue_label.is_some() {
+            self.saved.tracks.iter().collect()
+        } else {
+            self.scoped_tracks().collect()
+        };
         if let Some(ids) = &self.playback_selection {
             let map: HashMap<_, _> = scoped.into_iter().map(|t| (t.source.as_str(), t)).collect();
             ids.iter()
@@ -1222,6 +1293,8 @@ impl Aurea {
                     {
                         self.browser.selected_track = Some(track.source.clone());
                     }
+                    self.listening_counter
+                        .start(track.source.clone(), track.duration);
                     self.current = Some(track.source.clone());
                     self.requested = None;
                     self.history.record(track.source.clone());
@@ -1263,7 +1336,16 @@ impl Aurea {
                     self.prepare_next();
                 }
                 Event::Notice(text) => self.message = text,
+                Event::Seeked(ticket) if ticket == self.ticket => self.listening_counter.seeked(),
                 Event::Position(pos, paused) if !self.loading && self.playback_error.is_none() => {
+                    if let Some(source) = self.listening_counter.position(pos, paused)
+                        && self.stats_error.is_none()
+                        && self.track_stats.played(&source)
+                    {
+                        self.stats_dirty = true;
+                        self.stats_revision = self.stats_revision.wrapping_add(1);
+                        self.persist_track_stats();
+                    }
                     self.position = pos;
                     self.paused = paused;
                 }
@@ -1556,6 +1638,11 @@ impl Aurea {
                             let mut seen = HashSet::new();
                             ids.retain(|id| seen.insert(id.clone()));
                         }
+                        self.remap_track_stats(|s| (s == source).then(|| target.clone()));
+                        self.playlist_dirty |= self
+                            .playlist_book
+                            .remap(|s| (s == source).then(|| target.clone()));
+                        self.persist_playlists();
                         self.root_aliases.push((source, target));
                         if self.root_aliases.len() > 32 {
                             self.root_aliases.remove(0);
@@ -1573,11 +1660,47 @@ impl Aurea {
                         .tracks
                         .iter_mut()
                         .find(|t| t.source == track.source)
-                        && stored.rate == 0
-                        && !stored.metadata_loaded
+                        && stored.needs_tag_read()
                     {
-                        stored.adopt_tags(track);
+                        if stored.metadata_loaded || stored.rate > 0 {
+                            stored.rating_tags = track.rating_tags;
+                        } else {
+                            stored.adopt_tags(track);
+                        }
                         self.library_revision = self.library_revision.wrapping_add(1);
+                    }
+                }
+                Job::RatingWritten {
+                    revision,
+                    source,
+                    rating,
+                    result,
+                } => {
+                    if self.track_stats.get(&source).rating == rating
+                        && self.track_stats.get(&source).edit_revision == revision
+                    {
+                        match result {
+                            Ok(tags) => {
+                                if let Some(t) =
+                                    self.saved.tracks.iter_mut().find(|t| t.source == source)
+                                {
+                                    t.rating_tags = Some(tags);
+                                }
+                                crate::cache::invalidate_remote(&source, &self.cache);
+                                self.track_stats.pending(&source, false);
+                                self.message = tr!("Rating saved in audio tags.").into();
+                            }
+                            Err(error) => {
+                                self.message = format!(
+                                    "{}: {error}",
+                                    tr!("Rating kept in MusicCraft; audio tag update pending")
+                                )
+                            }
+                        }
+                        self.stats_dirty = true;
+                        self.stats_revision = self.stats_revision.wrapping_add(1);
+                        self.library_revision = self.library_revision.wrapping_add(1);
+                        self.persist_track_stats();
                     }
                 }
                 Job::TagsDone(epoch, success) => self.remote_tags.finished(epoch, success),
@@ -1662,7 +1785,11 @@ impl Aurea {
                     }
                     let id = track.source.clone();
                     if let Some(stored) = self.saved.tracks.iter_mut().find(|t| t.source == id) {
+                        let rating_tags = stored.rating_tags.clone();
                         *stored = track;
+                        if rating_tags.is_some() {
+                            stored.rating_tags = rating_tags;
+                        }
                         self.library_revision = self.library_revision.wrapping_add(1);
                     }
                     if !self.loading && self.current.as_ref() == Some(&id) && self.art.is_none() {
@@ -1793,6 +1920,10 @@ impl Aurea {
         let _ = self.auth.insert(&source);
         if let Some(old) = old.as_ref().filter(|old| old.as_str() != url) {
             self.stop();
+            self.remap_track_stats(|s| network::rebase(s, old, url));
+            self.playlist_dirty |= self.playlist_book.remap(|s| network::rebase(s, old, url));
+            self.persist_playlists();
+            self.saved.queue_label = None;
             for track in &mut self.saved.tracks {
                 if let Some(new) = network::rebase(&track.source, old, url) {
                     track.source = new;
@@ -2202,6 +2333,7 @@ impl Aurea {
         }
     }
     fn stop(&mut self) {
+        self.listening_counter.stop();
         self.playback_error = None;
         self.output_exclusive = false;
         self.output = tr!("Select a track to open audio output").into();
@@ -2609,6 +2741,8 @@ impl eframe::App for Aurea {
         });
     }
     fn save(&mut self, storage: &mut dyn eframe::Storage) {
+        self.persist_track_stats();
+        self.persist_playlists();
         if let Some(size) = self.ctx.input_for(egui::ViewportId::ROOT, |i| {
             i.viewport().inner_rect.map(|r| r.size())
         }) {
@@ -2635,6 +2769,8 @@ impl eframe::App for Aurea {
         self.playback_selection = session.selection;
     }
     fn on_exit(&mut self, _: Option<&eframe::glow::Context>) {
+        self.persist_track_stats();
+        self.persist_playlists();
         window_drag::shutdown();
         self.embedded_server.stop();
         self.media_server = None;
@@ -2749,6 +2885,7 @@ mod source_tests {
         result.artist = "Actual artist".into();
         result.album = "Actual album".into();
         result.number = 2;
+        result.rating_tags = Some(Default::default());
         app.tx.send(Job::Tags(result.clone(), 0)).unwrap();
         app.poll(&ctx);
         assert_eq!(app.saved.tracks[0].title, "Actual title");
@@ -3169,6 +3306,11 @@ mod source_tests {
         app.saved.facet_fields[0] = crate::facets::Field::Folder;
         app.browser.selected[0].insert(format!("{old}Album"));
         app.browser.selected_track = Some(p2.clone());
+        app.create_playlist(
+            "Saved phone order",
+            vec![p1.clone(), foreign.clone(), p2.clone()],
+        );
+        let playlist_id = app.playlist_ui.selected.unwrap();
         let ticket = app.ticket;
         let mut found = phone.clone();
         found.host = "new.local".into();
@@ -3176,6 +3318,15 @@ mod source_tests {
         let n1 = network::rebase(&p1, &old, &new).unwrap();
         let n2 = network::rebase(&p2, &old, &new).unwrap();
         app.apply_discovered(found, &old);
+        assert_eq!(
+            *app.playlist_book.get(playlist_id).unwrap().tracks,
+            vec![n1.clone(), foreign.clone(), n2.clone()]
+        );
+        assert_eq!(
+            crate::playlists::Book::load(&app.playlist_path).unwrap(),
+            app.playlist_book,
+            "new phone route persisted immediately"
+        );
         assert_eq!(
             app.ticket, ticket,
             "the current audio generation must not be stopped"

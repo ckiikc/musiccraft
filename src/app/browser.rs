@@ -5,6 +5,9 @@ impl Aurea {
     pub(super) fn capture_start_selection(&mut self) {
         // The restored listening selection is independent of the library view.
         // Explicit result clicks or a new query/filter replace it as usual.
+        if self.saved.queue_label.is_some() {
+            return;
+        }
         if !self.restored_selection || !self.query.is_empty() || self.browser.active() {
             self.capture_selection();
         }
@@ -20,6 +23,9 @@ impl Aurea {
         );
     }
     pub(super) fn capture_selection(&mut self) {
+        if self.saved.queue_label.take().is_some() {
+            self.shuffle_cycle.clear();
+        }
         self.restored_selection = false;
         let ids: Vec<String> = if self.saved.mini {
             self.refresh_mini_index();
@@ -60,9 +66,9 @@ impl Aurea {
     }
     pub(super) fn library(&mut self, ui: &mut egui::Ui) {
         let short = ui.available_height() < 280.0;
-        ui.horizontal(|ui| {
+        ui.horizontal_wrapped(|ui| {
             ui.add(self.icons.image("search", 16.0, palette::muted()));
-            let search_width = (ui.available_width() - 270.0).max(100.0);
+            let search_width = (ui.available_width() - 410.0).max(100.0);
             ui.add_sized(
                 [search_width, 30.0],
                 egui::TextEdit::singleline(&mut self.query)
@@ -86,6 +92,7 @@ impl Aurea {
                 self.query.clear();
                 self.restored_selection = false;
             }
+            self.add_results_menu(ui);
             egui::ComboBox::from_id_salt("track-sort")
                 .width(100.0)
                 .selected_text(self.browser.sort.label())
@@ -370,18 +377,25 @@ impl Aurea {
     fn track_table(&mut self, ui: &mut egui::Ui) {
         let wide = ui.available_width() >= 700.0;
         let width = ui.available_width();
+        let text_width = width - super::track_stats::STAR_WIDTH - 12.0;
+        let rating_x = width - super::track_stats::STAR_WIDTH - 78.0;
         let title_w = if wide {
-            (width - 150.0) * 0.44
+            (text_width - 150.0) * 0.44
         } else {
-            width - 118.0
+            text_width - 118.0
         };
         let artist_x = 44.0 + title_w;
-        let album_x = artist_x + (width - 150.0) * 0.25;
+        let album_x = artist_x + (text_width - 150.0) * 0.25;
         let (header, _) = ui.allocate_exact_size(vec2(width, 22.0), egui::Sense::hover());
         for (x, w, label) in [
             (10.0, 28.0, "#"),
             (44.0, title_w, tr!("TITLE")),
             (width - 66.0, 60.0, tr!("DURATION")),
+            (
+                rating_x + 4.0,
+                super::track_stats::STAR_WIDTH,
+                tr!("Rating"),
+            ),
         ] {
             clipped(
                 ui,
@@ -406,7 +420,7 @@ impl Aurea {
                 ui,
                 egui::Rect::from_min_size(
                     header.min + vec2(album_x, 2.0),
-                    vec2(width - album_x - 84.0, 18.0),
+                    vec2(text_width - album_x - 84.0, 18.0),
                 ),
                 tr!("ALBUM"),
                 10.0,
@@ -442,11 +456,35 @@ impl Aurea {
             return;
         }
         let mut play = None;
+        let mut rating_change = None;
+        let stats = &self.track_stats;
+        let stats_ready = self.stats_error.is_none();
         let mut scroll = egui::ScrollArea::vertical()
             .id_salt("library-tracks")
             .auto_shrink([false, false]);
         if std::mem::take(&mut self.browser.reset_scroll) {
             scroll = scroll.vertical_scroll_offset(0.0);
+        }
+        let reveal = self.library_follow.row(
+            self.current.as_deref(),
+            self.browser.rebuilds as u64,
+            self.browser.indices.len(),
+            ui.ctx().cumulative_frame_nr(),
+            |source| {
+                self.browser
+                    .indices
+                    .iter()
+                    .position(|&i| self.saved.tracks[i].source == source)
+            },
+        );
+        if let Some(row) = reveal {
+            scroll = scroll
+                .vertical_scroll_offset(super::follow::offset(
+                    row,
+                    48.0 + ui.spacing().item_spacing.y,
+                    ui.available_height(),
+                ))
+                .animated(false);
         }
         scroll.show_rows(ui, 48.0, self.browser.indices.len(), |ui, range| {
             // The table row owns selection, double-click and keyboard focus.
@@ -456,8 +494,14 @@ impl Aurea {
                 let t = &self.saved.tracks[self.browser.indices[row]];
                 let current = self.current.as_ref() == Some(&t.source);
                 let selected = self.browser.selected_track.as_ref() == Some(&t.source);
-                let (rect, response) =
-                    ui.allocate_exact_size(vec2(ui.available_width(), 48.0), egui::Sense::click());
+                let (rect, space) =
+                    ui.allocate_exact_size(vec2(ui.available_width(), 48.0), egui::Sense::hover());
+                let row_hit = egui::Rect::from_min_max(
+                    rect.min,
+                    pos2(rect.left() + rating_x - 8.0, rect.bottom()),
+                );
+                let response =
+                    ui.interact(row_hit, space.id.with("track-title"), egui::Sense::click());
                 response.widget_info(|| {
                     egui::WidgetInfo::labeled(
                         egui::WidgetType::SelectableLabel,
@@ -478,6 +522,19 @@ impl Aurea {
                         palette::bg()
                     },
                 );
+                let star_rect = egui::Rect::from_min_size(
+                    rect.min + vec2(rating_x, 10.0),
+                    vec2(super::track_stats::STAR_WIDTH, 28.0),
+                );
+                if let Some(rating) = super::track_stats::rating_stars(
+                    ui,
+                    star_rect,
+                    &t.source,
+                    stats.effective(t, self.saved.rating_tag_scale).rating,
+                    stats_ready,
+                ) {
+                    rating_change = Some((t.source.clone(), rating));
+                }
                 if selected && !current {
                     ui.painter().rect_stroke(
                         rect.shrink(0.5),
@@ -580,7 +637,7 @@ impl Aurea {
                         ui,
                         egui::Rect::from_min_size(
                             rect.min + vec2(album_x, 14.0),
-                            vec2(width - album_x - 84.0, 22.0),
+                            vec2(text_width - album_x - 84.0, 22.0),
                         ),
                         if t.album.is_empty() { "—" } else { &t.album },
                         12.0,
@@ -608,6 +665,16 @@ impl Aurea {
                     play = Some(t.source.clone());
                 }
                 response.context_menu(|ui| {
+                    super::track_stats::tag_rating_info(ui, t, self.saved.rating_tag_scale);
+                    ui.add_enabled_ui(stats_ready, |ui| {
+                        if let Some(rating) = super::track_stats::rating_menu(
+                            ui,
+                            stats.effective(t, self.saved.rating_tag_scale),
+                        ) {
+                            rating_change = Some((t.source.clone(), rating));
+                        }
+                    });
+                    ui.separator();
                     if ui.button(tr!("Play from here")).clicked() {
                         play = Some(t.source.clone());
                         ui.close();
@@ -615,6 +682,9 @@ impl Aurea {
                 });
             }
         });
+        if let Some((source, rating)) = rating_change {
+            self.rate_track(&source, rating);
+        }
         if let Some(id) = play {
             self.play_results(id);
         }

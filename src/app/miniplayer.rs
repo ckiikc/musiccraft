@@ -242,6 +242,15 @@ impl Aurea {
                 });
                 egui::Popup::menu(&response).show(|ui| {
                     ui.set_min_width(210.0);
+                    if ui.button(tr!("Playlists")).clicked() {
+                        self.open_playlists(playlists::Page::Playlists);
+                        ui.close();
+                    }
+                    if ui.button(tr!("Playback queue")).clicked() {
+                        self.open_playlists(playlists::Page::Queue);
+                        ui.close();
+                    }
+                    ui.separator();
                     if ui.button(tr!("All settings…")).clicked() {
                         self.open_settings(0);
                         ui.close();

@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Eşleştirme isteğini telefon
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon bulunamadı. Cihazların aynı Wi-Fi ağını kullandığını kontrol edin.
 Pair	Eşleştir
 Pairing code incorrect or expired. Reopen pairing on the phone.	Kod yanlış veya süresi doldu. Telefonda eşleştirmeyi yeniden açın.
+Playlists	Çalma listeleri
+Playback queue	Çalma kuyruğu
+New playlist	Yeni çalma listesi
+Playlist name	Çalma listesi adı
+Rename	Yeniden adlandır
+Duplicate	Çoğalt
+Delete	Sil
+Delete playlist?	Çalma listesi silinsin mi?
+Add	Ekle
+Add to playlist…	Çalma listesine ekle…
+Add tracks…	Parça ekle…
+Choose tracks from your library.	Kitaplığınızdan parçalar seçin.
+Clear queue	Kuyruğu temizle
+Could not save playlist.	Çalma listesi kaydedilemedi.
+Export playlist…	Çalma listesini dışa aktar…
+Import playlist…	Çalma listesi içe aktar…
+Move down	Aşağı taşı
+Move up	Yukarı taşı
+No playlists yet	Henüz çalma listesi yok
+Playlist changes do not change the playback queue.	Çalma listesi değişiklikleri çalma kuyruğunu değiştirmez.
+Playlists unavailable.	Çalma listeleri kullanılamıyor.
+Remove from playlist	Çalma listesinden kaldır
+Remove from queue	Kuyruktan kaldır
+Save queue as playlist	Kuyruğu çalma listesi olarak kaydet
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	Çalma listelerinde kayıtlı listeler oluşturun, adlandırın ve sıralayın. Çal, listeyi çalma kuyruğuna kopyalar. Listeyi düzenlemek etkin kuyruğu değiştirmez. İçe ve dışa aktarma M3U/M3U8 biçimlerini destekler.
+New dynamic playlist	Yeni dinamik çalma listesi
+Dynamic playlist	Dinamik çalma listesi
+Edit rules…	Kuralları düzenle…
+Updates automatically with the library.	Kitaplık değiştiğinde otomatik güncellenir.
+All rules	Tüm kurallar
+Any rule	En az bir kural
+Add rule	Kural ekle
+Save rules	Kuralları kaydet
+Remove rule	Kuralı kaldır
+Tag value	Etiket değeri
+Contains	İçerir
+Equals	Eşittir
+Does not contain	İçermez
+Does not equal	Eşit değildir
+At least	En az
+At most	En fazla
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Dinamik listeler etiket kurallarını kaydeder. Tüm kuralları veya en az bir kuralı seçin. Yıl sınırları dahildir. Sonuçlar kitaplıkla güncellenir; çalma kuyrukta bir kopya tutar.
+Rating	Puan
+Play count	Dinleme sayısı
+Unrated	Puanlanmamış
+Rating (0–5)	Puan (0–5)
+Listening statistics unavailable.	Dinleme istatistikleri kullanılamıyor.
+Could not save listening statistics.	Dinleme istatistikleri kaydedilemedi.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Parçayı sağ tıklayarak puanlayın. Dinamik kurallar puan ve dinleme sayısını destekler. Dinleme 30 saniye veya kısa parçanın yarısı, en az bir saniye sonra sayılır; duraklama ve atlama sayılmaz. Önceki geçmiş yeniden oluşturulmaz.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Puanı değiştirmek için parçanın yanındaki yıldızlara tıklayın. Geçerli puana tekrar tıklamak puanı kaldırır. Yıldızlar çalmayı başlatmaz veya kuyruğu değiştirmez.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

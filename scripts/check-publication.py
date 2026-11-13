@@ -12,12 +12,15 @@ EXCLUDED = {".git", "target", "dist", "vendor", ".venv", "__pycache__", "test-ou
 # These exact synthetic tones and official Gradle wrapper are public test/build
 # inputs. Hash pinning prevents personal media or a replacement binary slipping in.
 PUBLIC_BINARIES = {
+    "tests/fixtures/invalid-subframe.flac": "d1370ebf6a3984779ac38768459ea2ef72d53068f169b75d5ba9948002a995a7",
+    'android/app/src/androidTest/assets/ratings/test.mp3': 'e4812fc3343cffa45e59eed158502975117dc27fcd3a9aabeba9990fc27a0359',
+    'android/app/src/androidTest/assets/ratings/test.flac': '99e8cfdd8d460764ce629a4350976436600f5d6dcac239270d0d10d65590900a',
     "android/app/src/androidTest/assets/QA Alpha.flac": "95d1bc68f2348266c8e0cee4046d289a495eae4903dc403c74366b976b26fab6",
     "android/app/src/androidTest/assets/QA Beta.flac": "ecf635404f6c6b8a764fcfa0ab3c51bb6c4f8853d6733afb2166d8f1fae33fc9",
     "android/app/src/androidTest/assets/QA Gamma.flac": "6fc5804671be1f34cb8eca8616d4e1b779a5466c14d3942a0540d29e6246d461",
     "android/gradle/wrapper/gradle-wrapper.jar": "7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172",
 }
-PRIVATE_NAMES = {"state.ron", "ftp-sources.json", "tracks-seed.json", "tags.jsonl", "retries.json"}
+PRIVATE_NAMES = {"listening-stats.json", "playlists.json", "listening-v1.json", "rating-tag-journal.json", "rating-tags-v1.db", "state.ron", "ftp-sources.json", "tracks-seed.json", "tags.jsonl", "retries.json"}
 MEDIA_SUFFIXES = {".dmg", ".wav", ".flac", ".mp3", ".m4a", ".audio", ".ron", ".log", ".key", ".p12", ".jks", ".keystore", ".apk"}
 PATTERNS = {
     "home-directory": re.compile(r"/Users/[A-Za-z0-9_.-]+/|/home/[A-Za-z0-9_.-]+/"),

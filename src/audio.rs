@@ -51,6 +51,7 @@ pub enum Event {
     },
     Notice(String),
     Position(f64, bool),
+    Seeked(u64),
     Ended,
     Error(u64, String),
     TrackError {
@@ -526,22 +527,30 @@ fn worker(
                 active = false;
             }
             Ok(Command::Seek(pos)) => {
-                if let Some(h) = &mut hal
-                    && pos.is_finite()
-                    && pos >= 0.0
-                    && let Err(e) = h.seek(pos)
-                {
-                    let _ = events.send(Event::Error(session_ticket, e));
-                }
-                if pos.is_finite()
-                    && pos >= 0.0
-                    && let Some(p) = &player
-                    && p.try_seek(Duration::from_secs_f64(pos)).is_err()
-                {
-                    let _ = events.send(Event::Error(
-                        0,
-                        "Seek non disponibile per questo file".into(),
-                    ));
+                if pos.is_finite() && pos >= 0.0 {
+                    if let Some(h) = &mut hal {
+                        match h.seek(pos) {
+                            Ok(()) => {
+                                let _ = events.send(Event::Seeked(session_ticket));
+                            }
+                            Err(e) => {
+                                let _ = events.send(Event::Error(session_ticket, e));
+                            }
+                        }
+                    }
+                    if let Some(p) = &player {
+                        match p.try_seek(Duration::from_secs_f64(pos)) {
+                            Ok(()) => {
+                                let _ = events.send(Event::Seeked(session_ticket));
+                            }
+                            Err(_) => {
+                                let _ = events.send(Event::Error(
+                                    0,
+                                    "Seek non disponibile per questo file".into(),
+                                ));
+                            }
+                        }
+                    }
                 }
             }
             Err(mpsc::RecvTimeoutError::Timeout) => {}

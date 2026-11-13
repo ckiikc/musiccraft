@@ -1,80 +1,117 @@
-# MusicCraft per Android — 0.3.0
+# MusicCraft for Android — 0.4.1
 
-Prima versione nativa Android di MusicCraft. Progetto separato dall’app macOS, senza modifiche al suo profilo o al suo motore audio. Non è una release ufficiale di ArtCraft.
+## Rating tags and paired desktop edits — 0.4.1
 
-## Funzioni
+The menu **Voti nei tag** chooses the numeric VOTE/RATING scale. Indexing is read-only and caches raw values separately from manual ratings; existing ratings and explicit zero remain authoritative. Paired desktop computers can request a rating change, which names the song and requires approval in MusicCraft plus Android media-write permission. No arbitrary file-write/upload endpoint is exposed. The initial safe writer handles FLAC and MP3 metadata prefixes, journals interrupted edits and preserves audio bytes; unsupported layouts remain unchanged. See [the shared engine documentation](../crates/musiccraft-tags/README.md). This build contains arm64-v8a and x86_64 native libraries.
 
-- Libreria musicale locale indicizzata da Android (MediaStore), su memoria condivisa e schede rimovibili indicizzate: brani, album, artisti e ricerca.
-- Riproduzione tramite Media3/ExoPlayer in un unico `MediaLibraryService`, condiviso fra telefono, notifica, controlli di sistema e Android Auto.
-- Play/pausa, precedente/successivo, seek e sequenza automatica. L’audio continua quando la schermata dell’app viene chiusa; audio focus e scollegamento delle cuffie sono gestiti dal player.
-- Copertina, titolo, artista e album; aggiornamento manuale della libreria. Nessun invio dei dati musicali a server esterni; condivisione opzionale sulla rete locale tramite HTTPS.
-- Catalogo e ricerca esposti sia ai client Media3 sia al protocollo `MediaBrowserService` usato da Android Auto. Le connessioni sono controllate da `MediaSession`; sono ammessi l’app stessa, il controller della notifica e i controller considerati attendibili dal sistema.
-- Ricerca vocale tramite sessione multimediale e azione `MEDIA_PLAY_FROM_SEARCH`.
 
-Interfaccia iniziale in italiano. Vinile/VU meter, FTP/NAS e importazione di cartelle tramite SAF restano fuori da questa versione. I formati effettivamente riproducibili dipendono anche dai decoder del dispositivo. La libreria mostra l’audio condiviso indicizzato da Android, non i file privati di altre applicazioni.
+The first native Android version of MusicCraft. This is a separate project from the macOS app and does not change its profile or audio engine. It is not an official ArtCraft release.
 
-## Cerca, Playlist e Player
+## Features
 
-La barra inferiore distingue tre viste. **Cerca** esplora e filtra la libreria senza cambiare la coda: ogni brano offre Riproduci ora, Riproduci dopo, Aggiungi in coda, Aggiungi a playlist e Valuta. La sostituzione di una coda esistente richiede conferma. **Playlist** contiene liste salvate e mix dinamici; **Player** ha una vista autonoma con copertina, seek e comandi. Ruotando il telefono, il Player dispone copertina e controlli affiancati; il servizio mantiene l’audio durante la ricreazione della schermata. Dalle altre viste il mini player riapre il Player completo.
+- A local music library indexed by Android MediaStore, including indexed shared storage and removable cards: tracks, albums, artists and search.
+- Media3/ExoPlayer playback through a single `MediaLibraryService`, shared by the phone, notification, system controls and Android Auto.
+- Play/pause, previous/next, seeking and automatic track transitions. Audio continues when the app screen closes; the player handles audio focus and headphone disconnection.
+- Artwork, title, artist and album; manual library refresh. Online lookup for missing artwork is optional and disabled by default; optional local-network sharing uses HTTPS.
+- Catalog browsing and search through both Media3 clients and the `MediaBrowserService` protocol used by Android Auto. `MediaSession` checks connections: the app itself, the notification controller and controllers trusted by the system are allowed.
+- Voice search through the media session and `MEDIA_PLAY_FROM_SEARCH`.
 
-Dal Player si apre la **Coda** per spostare, rimuovere, riprodurre o salvare i brani. Coda e posizione vengono salvate periodicamente e ripristinate in pausa dopo il riavvio del processo; non viene avviato audio automaticamente. I file non più presenti vengono esclusi dal ripristino.
+The initial UI is in Italian; translated labels below describe the functions, while the app may show their Italian names. Vinyl/VU visualizations, FTP/NAS and folder import through SAF are outside this version. Actual format support also depends on the device's decoders. The library shows shared audio indexed by Android, not other apps' private files.
 
-### Playlist dinamiche
+## Continuity — 0.4.0
 
-Otto modelli iniziali e un editor di criteri: brani, album o artisti; genere; anno o intervallo/decennio; voto da 0 a 5; testo; già ascoltati, mai ascoltati e gruppi ascoltati in parte. Ordinamento casuale, conteggio totale/medio, voto totale/medio, numero di brani votati o ascolto recente. Prima dell’avvio è disponibile un’anteprima. I filtri sui metadati e sui voti selezionano i brani prima del raggruppamento; gli album/artisti sono valutati sul sottoinsieme selezionato. Anni sconosciuti sono esclusi quando si imposta un limite sugli anni.
+The **Playlists** home screen offers Resume listening, two useful mixes and access to all playlists, separated into Dynamic and Saved. Search does not change the queue; the standalone Player shows artwork, transport and the next two tracks. The landscape layout keeps transport controls at the top; secondary content scrolls even with larger fonts. Phone/car context and the queue name remain visible. Cars and queues has a dedicated screen. Sharing remains directly accessible.
 
-Il mix aggiunge un numero limitato di brani in anticipo e conserva al massimo venti elementi precedenti nella coda. Evita duplicati nello stesso ciclo e fra i brani già in attesa; terminato il ciclo può ricominciare. I mix di brani mai ascoltati si esauriscono. **Interrompi aggiunta automatica** ferma il generatore e conserva la coda esistente. Le modifiche ai criteri si applicano al prossimo avvio del mix.
+Android Auto exposes four main destinations: **Now playing, Mixes, Playlists, Library**. Hosts allowing fewer tabs retain access through intermediate menus. The car display uses system templates: the design proposal is illustrative. Creating/editing mixes and configuring Bluetooth remain phone operations; existing mixes can be started from the car.
 
-Un ascolto conta dopo 30 secondi effettivi o metà brano, se più breve (minimo un secondo); pause e seek non aggiungono tempo. Voti, statistiche, regole e playlist sono privati dell’installazione. Il comportamento si ispira alle playlist dinamiche di Lyrion, senza collegamento a un server LMS né importazione delle sue statistiche o replica di tutti i suoi preset. I mix sono disponibili anche nella navigazione MediaBrowser per Android Auto; crearli e modificarli richiede l’interfaccia del telefono.
+Updates retain the applicationId, signing identity, listening-state format, playlists, queues, Bluetooth profiles and HTTPS/pairing identity. Install as an update to retain data; do not uninstall or clear app data.
 
-## Condivisione diretta con il computer
+## Persistent artwork
 
-Disponibile per ogni installazione, senza IP o password preimpostati: dal menu **⋮** attivare **Condividi con il computer**, scegliere **Abbina computer** e inserire le quattro cifre in MusicCraft desktop 0.10.49 o successivo, che trova il telefono automaticamente. Confermare poi **Autorizza** sul telefono. Accesso in sola lettura, sospeso mentre il telefono riproduce audio, con notifica e revoca degli abbinamenti. Non occorre un’app FTP. Procedura, protocollo, limiti e sicurezza sono documentati in [SHARING.md](../docs/SHARING.md).
+Under **⋮ → Artwork** (`Copertine`), enable missing-artwork lookup and view storage usage. Initial lookup priority is: artwork embedded in the individual file, local MediaStore artwork for identifiable albums, previously stored artwork, then optional online lookup. Existing positive results are reused immediately; a change to the file or metadata creates a new association.
 
-## Requisiti e compilazione
+The store uses a private SQLite index and JPEG files under `files/artwork`, outside Android's disposable cache. Each music file has its own identity; lookups for the same album and identical image content are shared without duplicating artwork. Tracks with unknown albums use artist/title lookup rather than folder grouping. Distinct embedded images remain distinct even when tracks have the same album. Images are not written into music folders: no write permission is needed, and a folder containing unrelated tracks is never treated as one album. Uninstalling or clearing all app data also removes this store.
 
-Android 8.0/API 26 o successivo. Build con SDK/target 36, JDK 21, Gradle 8.14.3, AGP 8.10.1, Kotlin 2.2.20 e Media3 1.11.1. Le versioni sono fissate nel progetto.
+When lookup is enabled, only the required metadata is sent to MusicBrainz: artist/album, or artist/title. Paths, filenames and pairing information are not sent. Images come from Cover Art Archive. Loading is on demand for tracks displayed or requested by a media client, with a bounded worker; it does not start an online scan of the entire library. Uncertain matches are left without artwork. Availability is not guaranteed for every album or incomplete metadata.
 
-Impostare `ANDROID_HOME` o creare un `local.properties` ignorato con `sdk.dir=...`, quindi:
+Images are validated, resized and deduplicated. The store is limited to 256 MiB, without automatically deleting retained artwork. Missing results are remembered for seven days and temporary errors for at least fifteen minutes; service limits and Retry-After impose a pause that survives restart. Requests to the MusicBrainz API are spaced at least 1.1 seconds apart. The provider exposes only local, read-only artwork URIs; access is granted to trusted media controllers without exposing the app's private files.
+
+References: [Android Auto artwork](https://developer.android.com/training/cars/media/create-media-browser/media-artwork), [Cover Art Archive API](https://musicbrainz.org/doc/Cover_Art_Archive/API), [MusicBrainz rate limits](https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting).
+
+## Search, Playlists and Player
+
+The bottom navigation separates three views. **Search** (`Cerca`) explores and filters the library without changing the queue: each track offers Play now, Play next, Add to queue, Add to playlist and Rate. Replacing an existing queue requires confirmation. **Playlists** contains saved lists and dynamic mixes; **Player** is a standalone view with artwork, seeking and transport controls. In landscape, artwork and controls are arranged side by side; the service maintains audio while the screen is recreated. The mini player in other views opens the full Player.
+
+Open **Queue** from the Player to move, remove, play or save tracks. Queue and position are saved periodically and restored paused after a process restart; audio never starts automatically. Missing files are excluded from restoration.
+
+### Dynamic playlists
+
+Eight initial templates and a criteria editor support tracks, albums or artists; genre; year or range/decade; ratings from 0 to 5; text; played, unplayed and partly played groups. Ordering supports random, total/average play count, total/average rating, number of rated tracks and recent listening. A preview is available before starting. Metadata and rating filters select tracks before grouping; albums/artists are evaluated on that selected subset. Unknown years are excluded when year limits are set.
+
+A mix adds a bounded number of tracks ahead and retains at most twenty previous queue entries. It avoids duplicates within a cycle and among upcoming tracks; it can restart after a cycle ends. Unplayed-only mixes eventually run out. **Stop adding automatically** stops the generator while preserving the existing queue. Criteria changes apply the next time the mix starts.
+
+A play counts after 30 seconds of actual listening or half the track, whichever is shorter, with a one-second minimum; pauses and seeking do not add listening time. Ratings, statistics, rules and playlists are private to the installation. This behavior is inspired by Lyrion dynamic playlists, without an LMS server connection, imported LMS statistics or all of its presets. Mixes are also available through Android Auto's MediaBrowser navigation; creating/editing them requires the phone UI.
+
+## Android Auto: playlists and car queues — 0.3.2
+
+**Now playing** shows the playlist/profile and queued tracks. Dynamic mixes and saved playlists can be started directly from the car. Each profile retains a separate session, including position and mix state. From the phone Player, open **Cars and queues** (`Auto e code`), create a profile, associate the head unit's Bluetooth device and enable optional recognition. Manual selection remains available on the car display. Connecting never starts music by itself; previous listening data is retained in the Phone queue. See [CAR_QUEUES.md](CAR_QUEUES.md) for the procedure and limitations.
+
+## Visible sharing — 0.3.1
+
+The **Share** (`Condividi`) button and sharing status remain visible in all three views. Compact status distinguishes Off, Active and Suspended; the panel explains why the computer cannot find the phone when the service is off. It stays open after **Enable** (`Attiva`) and shows startup, availability, suspension or waiting for Wi-Fi. Once ready it directly offers **Pair computer** (`Abbina computer`); previously paired computers reconnect without another code. Reopening the overflow menu is unnecessary. Enabling sharing remains an explicit user choice.
+
+## Direct computer sharing
+
+Available to every installation, without preconfigured IP addresses or passwords: press **Share → Enable**, choose **Pair computer**, then enter the four digits in MusicCraft desktop 0.10.49 or later, which discovers the phone automatically. Confirm **Authorize** (`Autorizza`) on the phone. Access is read-only and suspended during phone audio playback, with a notification and pairing revocation. No separate FTP app is needed. The procedure, protocol, limits and security are documented in [SHARING.md](../docs/SHARING.md).
+
+## Requirements and build
+
+Android 8.0/API 26 or later. The project pins compile/target SDK 36, JDK 21, Gradle 8.14.3, AGP 8.10.1, Kotlin 2.2.20 and Media3 1.11.1.
+
+Set `ANDROID_HOME` or create an ignored `local.properties` containing `sdk.dir=...`, then run:
 
 ```sh
 ./gradlew :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
 ```
 
-APK: `app/build/outputs/apk/debug/app-debug.apk`. L’APK debug è firmato per i collaudi locali; non è un pacchetto pubblicato su Google Play. La chiave privata e i percorsi locali non vanno pubblicati. Per aggiornare un’installazione servono lo stesso certificato e un versionCode compatibile.
+APK: `app/build/outputs/apk/debug/app-debug.apk`. The debug APK is signed for local testing; it is not a Google Play release. Private signing keys and local paths must not be published. Updating an installation requires the same certificate and a compatible versionCode.
 
-## Prova sul telefono
+## Phone test
 
-1. Installare l’APK e aprire MusicCraft.
-2. Premere **Consenti accesso alla musica** e autorizzare audio/musica nella richiesta Android. La richiesta delle notifiche è distinta: la sua negazione non sostituisce il permesso sulla libreria.
-3. Aprire un brano, premere Home o chiudere la schermata, poi controllare notifica e avanzamento al brano successivo.
-4. Se la libreria è vuota, verificare che i file siano nella memoria condivisa e indicizzati da Android, quindi scegliere **⋮ → Aggiorna libreria**.
+1. Install the APK and open MusicCraft.
+2. Press **Allow music access** (`Consenti accesso alla musica`) and grant audio/music permission in Android's prompt. Notification permission is separate; denying it does not replace the library permission.
+3. Open a track, press Home or close the screen, then check the notification and automatic transition to the next track.
+4. If the library is empty, check that files are in shared storage and indexed by Android, then choose **⋮ → Refresh library** (`Aggiorna libreria`).
 
-Non concedere i permessi del telefono via script: le richieste vanno approvate dall’utente sul dispositivo. I test automatici che creano/rimuovono fixture si rifiutano di girare su telefoni reali.
+Do not grant phone permissions through scripts: the user must approve prompts on the device. Automated tests that create/remove fixtures refuse to run on physical phones.
 
 ## Android Auto
 
-Il manifest dichiara l’app come servizio musicale Android Auto. Concedere prima il permesso audio nell’app sul telefono. Una build installata direttamente tramite APK può richiedere l’opzione **Origini sconosciute** nelle impostazioni sviluppatore di Android Auto; non va confusa con la schermata Android per installare APK. Per la distribuzione ordinaria e ulteriori test sono disponibili Google Play e i canali interni.
+The manifest declares MusicCraft as an Android Auto media service. First grant audio permission in the phone app. A sideloaded APK may require **Unknown sources** in Android Auto's developer settings; this is separate from Android's APK installation settings. Google Play and internal channels are available for ordinary distribution and further testing.
 
-Il collaudo dei protocolli multimediali non certifica da solo la comparsa nel launcher dell’automobile. Il display e i comandi di un’auto reale o del Desktop Head Unit richiedono una prova distinta.
+Media-protocol testing alone does not establish that the app appears in a car launcher. A real head unit or Desktop Head Unit display and controls require a separate test.
 
-Fonti ufficiali:
+Official references:
 
 - https://developer.android.com/media/implement/surfaces/cars
 - https://developer.android.com/training/cars/testing
 - https://developer.android.com/media/media3/session/background-playback
 
-## Architettura
+## Architecture
 
-`Catalog.kt` legge MediaStore su un worker, conserva una snapshot e serve identificativi stabili e pagine con confini controllati. `PlaybackService.kt` possiede l’unico player e risolve gli ID delle richieste contro la libreria: i client non possono imporre URI arbitrari. `PlaybackCoordinator.kt` gestisce coda, ascolti e generatore dinamico nello stesso servizio. `ListeningStore.kt` salva snapshot con AtomicFile su un worker; un file illeggibile viene conservato e segnalato. `SmartRules.kt` contiene la selezione pura e testabile. `MainActivity.kt` usa un MediaBrowser/MediaController e non apre un secondo player. Il rilascio del controller della schermata non rilascia il servizio in riproduzione.
+`Catalog.kt` reads MediaStore on a worker, retains a snapshot and serves stable identifiers with bounded pagination. `PlaybackService.kt` owns the single player and resolves request IDs against the library: clients cannot supply arbitrary URIs. `PlaybackCoordinator.kt` manages the queue, listening statistics and dynamic generator in that same service. `CarRouteMonitor.kt` observes Android Auto connections and associated Bluetooth devices without scanning. `ListeningStore.kt` writes snapshots using AtomicFile on a worker; unreadable files are retained and reported. `SmartRules.kt` implements pure, testable selection. `MainActivity.kt` uses a MediaBrowser/MediaController and never opens a second player. Releasing a screen's controller does not release the playing service.
 
-## Verifiche
+## Verification
 
-Consultare `VALIDAZIONE.md` per gli esiti effettivi. I test strumentali usano tre FLAC sintetici e un emulatore separato. Per eseguirli, compilare `:app:assembleDebugAndroidTest`, installare applicazione e APK test sull’emulatore, concedere lì i permessi audio/notifiche e lanciare:
+See [VALIDAZIONE.md](VALIDAZIONE.md) for actual results. Instrumentation tests use three synthetic FLAC files and a separate emulator. Build `:app:assembleDebugAndroidTest`, install the app and test APK on the emulator, grant audio/notification permissions there, then run:
 
 ```sh
-adb -s SERIAL_EMULATORE shell am instrument -w -r \
+adb -s EMULATOR_SERIAL shell am instrument -w -r \
   it.ckiikc.musiccraft.test/it.ckiikc.musiccraft.MusicCraftInstrumentation
 ```
 
-Non installare l’APK test sul telefono personale. Il runner azzera solo lo stato MusicCraft dell’emulatore dedicato. Le fixture sono isolate in `Music/MusicCraft QA` e vengono ripulite prima della fine del test.
+Do not install the test APK on a personal phone. The runner resets only MusicCraft state on the dedicated emulator. Fixtures are isolated under `Music/MusicCraft QA` and cleaned up before the test ends.
+
+### Numeric play-count criteria — 0.4.1
+
+Dynamic playlist rules also support inclusive minimum and maximum play counts, combined with the rating range and other criteria. Blank minimum means zero; blank maximum means no upper bound; maximum zero selects never-played tracks. For example: minimum rating 4, maximum plays 2. Counts are qualified plays recorded on this device, not a combined Mac/phone history. Existing saved rules without count bounds retain their earlier behavior. Android Auto can start these saved mixes; editing criteria remains a phone operation.

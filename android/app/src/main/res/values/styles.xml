@@ -1,11 +1,19 @@
 <resources>
     <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:alertDialogTheme">@style/MusicCraftDialog</item>
         <item name="android:fontFamily">sans</item>
         <item name="android:colorAccent">#E0B36B</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:statusBarColor">#101519</item>
-        <item name="android:navigationBarColor">#101519</item>
+        <item name="android:statusBarColor">#121313</item>
+        <item name="android:navigationBarColor">#121313</item>
         <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:windowBackground">#101519</item>
+        <item name="android:windowBackground">#121313</item>
+    </style>
+    <style name="MusicCraftDialog" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">#222322</item>
+        <item name="android:colorBackground">#222322</item>
+        <item name="android:textColorPrimary">#F5F0E6</item>
+        <item name="android:textColorSecondary">#B1B1A9</item>
+        <item name="android:colorAccent">#E0B36B</item>
     </style>
 </resources>

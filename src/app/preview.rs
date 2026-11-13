@@ -2,6 +2,45 @@
 use super::*;
 impl Aurea {
     pub(crate) fn preview(&mut self, scene: &str) {
+        if matches!(scene, "follow-library" | "follow-queue") {
+            self.saved.sources.clear();
+            self.saved.folders.clear();
+            self.saved.active_source = None;
+            self.saved.auto_sync = false;
+            self.saved.mini = false;
+            self.saved.pinned = false;
+            self.saved.facets_visible = false;
+            self.saved.online_covers = false;
+            self.saved.save_covers = false;
+            self.saved.tracks = (0..500)
+                .map(|n| {
+                    let mut t = Track::placeholder(format!("/synthetic-follow/{n}.flac"));
+                    t.title = format!("Brano di prova {n:03}");
+                    t.artist = "MusicCraft QA".into();
+                    t.metadata_loaded = true;
+                    t.rating_tags = Some(Default::default());
+                    t.rate = 44100;
+                    t.bits = 16;
+                    t.channels = 2;
+                    t.duration = 180.0;
+                    t
+                })
+                .collect();
+            self.current = Some("/synthetic-follow/400.flac".into());
+            self.paused = true;
+            self.playback_selection =
+                Some(self.saved.tracks.iter().map(|t| t.source.clone()).collect());
+            self.saved.queue_label = Some("Coda sintetica di 500 brani".into());
+            self.playlist_ui.page = if scene == "follow-queue" {
+                playlists::Page::Queue
+            } else {
+                playlists::Page::Library
+            };
+            self.library_revision = self.library_revision.wrapping_add(1);
+            self.message = "Collaudo visivo sintetico: brano 401 di 500".into();
+            return;
+        }
+
         if let Some(action) = match scene {
             "native-menu-guide" => Some(crate::native_menu::Action::Guide),
             "native-menu-settings" => Some(crate::native_menu::Action::Settings),
@@ -145,6 +184,66 @@ impl Aurea {
             if scene == "long" {
                 self.saved.tracks[0].title="Una composizione dal titolo molto lungo per verificare il troncamento dei metadati e la visibilità di tutti i controlli".into();
             }
+        }
+        if matches!(
+            scene,
+            "playlists"
+                | "playlist-picker"
+                | "playback-queue"
+                | "inline-stars-playlist"
+                | "inline-stars-queue"
+        ) {
+            let ids: Vec<_> = self
+                .saved
+                .tracks
+                .iter()
+                .take(10)
+                .map(|t| t.source.clone())
+                .collect();
+            self.create_playlist("Evening sessions", ids.clone());
+            self.create_playlist(
+                "Weekend drive",
+                self.saved
+                    .tracks
+                    .iter()
+                    .skip(10)
+                    .take(6)
+                    .map(|t| t.source.clone())
+                    .collect(),
+            );
+            let id = self.playlist_book.lists[0].id;
+            self.select_playlist(id);
+            self.playlist_ui.page = playlists::Page::Playlists;
+            self.playlist_ui.row = Some(1);
+            if scene == "playlist-picker" {
+                self.playlist_ui.picker = true;
+            }
+            if scene == "playback-queue" || scene == "inline-stars-queue" {
+                self.playlist_ui.page = playlists::Page::Queue;
+                self.saved.queue_label = Some("Evening sessions".into());
+                self.playback_selection = Some(ids);
+            }
+        }
+        if scene.starts_with("inline-stars-") {
+            let ids: Vec<_> = self
+                .saved
+                .tracks
+                .iter()
+                .take(3)
+                .map(|t| t.source.clone())
+                .collect();
+            for (n, id) in ids.iter().enumerate() {
+                self.rate_track(id, [4, 0, 2][n]);
+            }
+        }
+        if matches!(scene, "dynamic-playlist" | "dynamic-rules") {
+            self.preview_dynamic_playlist(scene == "dynamic-rules");
+        }
+        if matches!(scene, "dynamic-stats" | "dynamic-stats-rules") {
+            self.preview_stats_playlist(scene == "dynamic-stats-rules");
+        }
+        if scene == "playlists-empty" {
+            self.playlist_ui.page = playlists::Page::Playlists;
         }
         if scene.starts_with("playing-selection-") {
             self.current = Some(self.saved.tracks[1].source.clone());

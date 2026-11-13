@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Потвърдете заяв�
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Няма намерен телефон. Проверете дали устройствата използват една Wi-Fi мрежа.
 Pair	Сдвои
 Pairing code incorrect or expired. Reopen pairing on the phone.	Кодът е грешен или е изтекъл. Отворете отново сдвояването на телефона.
+Playlists	Плейлисти
+Playback queue	Опашка за възпроизвеждане
+New playlist	Нов плейлист
+Playlist name	Име на плейлиста
+Rename	Преименуване
+Duplicate	Дублиране
+Delete	Изтриване
+Delete playlist?	Изтриване на плейлиста?
+Add	Добавяне
+Add to playlist…	Добавяне към плейлист…
+Add tracks…	Добавяне на песни…
+Choose tracks from your library.	Изберете песни от библиотеката си.
+Clear queue	Изчистване на опашката
+Could not save playlist.	Плейлистът не може да се запази.
+Export playlist…	Експортиране на плейлист…
+Import playlist…	Импортиране на плейлист…
+Move down	Преместване надолу
+Move up	Преместване нагоре
+No playlists yet	Все още няма плейлисти
+Playlist changes do not change the playback queue.	Промените в плейлиста не променят опашката за възпроизвеждане.
+Playlists unavailable.	Плейлистите са недостъпни.
+Remove from playlist	Премахване от плейлиста
+Remove from queue	Премахване от опашката
+Save queue as playlist	Запазване на опашката като плейлист
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	В Плейлисти можете да създавате, преименувате и подреждате запазени списъци. Възпроизвеждане копира списъка в опашката. Редактирането не променя активната опашка. Поддържат се импорт и експорт на M3U/M3U8.
+New dynamic playlist	Нов динамичен плейлист
+Dynamic playlist	Динамичен плейлист
+Edit rules…	Редактиране на правила…
+Updates automatically with the library.	Обновява се автоматично с библиотеката.
+All rules	Всички правила
+Any rule	Поне едно правило
+Add rule	Добавяне на правило
+Save rules	Запазване на правила
+Remove rule	Премахване на правило
+Tag value	Стойност на етикета
+Contains	Съдържа
+Equals	Е равно на
+Does not contain	Не съдържа
+Does not equal	Не е равно на
+At least	Поне
+At most	Най-много
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Динамичните плейлисти запазват правила за етикети. Изберете всички правила или поне едно. Границите на годините се включват. Резултатите следват библиотеката; възпроизвеждането запазва копие в опашката.
+Rating	Оценка
+Play count	Брой слушания
+Unrated	Без оценка
+Rating (0–5)	Оценка (0–5)
+Listening statistics unavailable.	Статистиката за слушане не е налична.
+Could not save listening statistics.	Статистиката за слушане не може да се запази.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Оценявайте песен с десен бутон. Динамичните правила поддържат оценки и брой слушания. Слушане се брои след 30 секунди или половината кратка песен, минимум секунда; паузите и превъртането не се броят. Предишната история не се възстановява.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Щракнете върху звездите до песента, за да промените оценката. Повторно щракване върху текущата оценка я премахва. Звездите не започват възпроизвеждане и не променят опашката.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

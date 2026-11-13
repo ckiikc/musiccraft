@@ -126,3 +126,7 @@ gaplessness, Intel macOS and other operating systems are not certified by these
 checks. New translations require native-language editorial review. Analog
 meters display existing peak telemetry rather than calibrated VU measurements.
 See RELEASING.md for distribution status and ArtCraft Launcher requirements.
+
+## 0.10.62 / Android 0.4.1
+
+Development validation: 245 macOS tests (43 explicit hardware/integration tests ignored), formatting and Clippy; 4 shared-engine tests; 25 Android JVM tests, Lint and API-33 emulator instrumentation. Native isolated star edits were checked with independent ffprobe and byte-identical decoded PCM. FLAC/MP3 payload preservation, recovery, request authorization, numeric rule serialization and explicit vote precedence were checked in the emulator. The real desktop HTTPS client completed a rating edit after app/system approval. Native 500-row library and queue fixtures and ReFacets-open/closed virtualized layout tests verified following. Private raw evidence is not distributed. Physical-device installation validation is reported in release notes after completion. No hardware bit-perfect or Android Auto driving claim follows from these tests.

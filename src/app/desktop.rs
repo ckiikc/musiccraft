@@ -544,7 +544,7 @@ impl Aurea {
                     .inner_margin(egui::Margin::symmetric(18, 12)),
             )
             .show(root, |ui| self.desktop_transport(ui));
-        if root.max_rect().width() >= 960.0 {
+        if root.max_rect().width() >= 960.0 && self.playlist_ui.page == playlists::Page::Library {
             egui::Panel::left("main-sources")
                 .default_size(220.0)
                 .size_range(210.0..=280.0)
@@ -565,6 +565,58 @@ impl Aurea {
                 },
             ))
             .show(root, |ui| {
+                let compact_navigation = ui.available_height() < 280.0;
+                if compact_navigation {
+                    ui.spacing_mut().item_spacing.y = 4.0;
+                }
+                ui.horizontal_wrapped(|ui| {
+                    for (page, label) in [
+                        (playlists::Page::Library, tr!("Library")),
+                        (playlists::Page::Playlists, tr!("Playlists")),
+                        (playlists::Page::Queue, tr!("Playback queue")),
+                    ] {
+                        ui.selectable_value(&mut self.playlist_ui.page, page, label);
+                    }
+                    if compact_navigation {
+                        if self
+                            .icons
+                            .button(ui, "sliders-horizontal", tr!("Sources"), false)
+                            .clicked()
+                        {
+                            self.sources_dialog = true;
+                        }
+                        if self
+                            .icons
+                            .button(ui, "headphones", tr!("Audio"), false)
+                            .clicked()
+                        {
+                            self.audio_dialog = true;
+                        }
+                        if self
+                            .icons
+                            .button(ui, "arrow-down-left", tr!("Mini player"), false)
+                            .clicked()
+                        {
+                            self.show_mini();
+                        }
+                    }
+                });
+                ui.separator();
+                match self.playlist_ui.page {
+                    playlists::Page::Playlists => {
+                        self.playlists_page(ui);
+                        return;
+                    }
+                    playlists::Page::Queue => {
+                        self.queue_page(ui);
+                        return;
+                    }
+                    playlists::Page::Library => {}
+                }
+                if compact_navigation {
+                    self.library(ui);
+                    return;
+                }
                 let short = ui.max_rect().height() < 360.0;
                 ui.horizontal(|ui| {
                     ui.vertical(|ui| {

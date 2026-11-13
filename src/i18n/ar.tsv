@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	أكّد طلب الاقترا
 Guide: No phone found. Check that both devices use the same Wi-Fi.	لم يُعثر على هاتف. تحقق من استخدام الجهازين لشبكة Wi-Fi نفسها.
 Pair	اقتران
 Pairing code incorrect or expired. Reopen pairing on the phone.	الرمز غير صحيح أو انتهت صلاحيته. أعد فتح الاقتران على الهاتف.
+Playlists	قوائم التشغيل
+Playback queue	قائمة انتظار التشغيل
+New playlist	قائمة تشغيل جديدة
+Playlist name	اسم قائمة التشغيل
+Rename	إعادة تسمية
+Duplicate	نسخ
+Delete	حذف
+Delete playlist?	حذف قائمة التشغيل؟
+Add	إضافة
+Add to playlist…	إضافة إلى قائمة التشغيل…
+Add tracks…	إضافة مقاطع…
+Choose tracks from your library.	اختر مقاطع من مكتبتك.
+Clear queue	إفراغ قائمة الانتظار
+Could not save playlist.	تعذر حفظ قائمة التشغيل.
+Export playlist…	تصدير قائمة تشغيل…
+Import playlist…	استيراد قائمة تشغيل…
+Move down	نقل لأسفل
+Move up	نقل لأعلى
+No playlists yet	لا توجد قوائم تشغيل بعد
+Playlist changes do not change the playback queue.	لا تغيّر تعديلات قائمة التشغيل قائمة انتظار التشغيل.
+Playlists unavailable.	قوائم التشغيل غير متاحة.
+Remove from playlist	إزالة من قائمة التشغيل
+Remove from queue	إزالة من قائمة الانتظار
+Save queue as playlist	حفظ قائمة الانتظار كقائمة تشغيل
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	في قوائم التشغيل يمكنك إنشاء القوائم المحفوظة وإعادة تسميتها وترتيبها. ينسخ التشغيل القائمة إلى قائمة انتظار التشغيل. لا يغير تعديل القوائم قائمة الانتظار النشطة. يدعم الاستيراد والتصدير تنسيق M3U/M3U8.
+New dynamic playlist	قائمة تشغيل ديناميكية جديدة
+Dynamic playlist	قائمة تشغيل ديناميكية
+Edit rules…	تحرير القواعد…
+Updates automatically with the library.	تتحدث تلقائيا عند تغير المكتبة.
+All rules	جميع القواعد
+Any rule	قاعدة واحدة على الأقل
+Add rule	إضافة قاعدة
+Save rules	حفظ القواعد
+Remove rule	إزالة القاعدة
+Tag value	قيمة الوسم
+Contains	يحتوي على
+Equals	يساوي
+Does not contain	لا يحتوي على
+Does not equal	لا يساوي
+At least	على الأقل
+At most	على الأكثر
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	تحفظ قوائم التشغيل الديناميكية قواعد الوسوم. اختر جميع القواعد أو قاعدة واحدة على الأقل. يشمل نطاق السنوات الحدين. تتحدث النتائج مع المكتبة ويحتفظ التشغيل بنسخة في قائمة الانتظار.
+Rating	التقييم
+Play count	عدد مرات الاستماع
+Unrated	بلا تقييم
+Rating (0–5)	التقييم (0–5)
+Listening statistics unavailable.	إحصاءات الاستماع غير متاحة.
+Could not save listening statistics.	تعذر حفظ إحصاءات الاستماع.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	انقر بزر الفأرة الأيمن على المقطع لتقييمه. تدعم القواعد الديناميكية التقييم وعدد مرات الاستماع. يحسب الاستماع بعد 30 ثانية أو نصف مقطع قصير بحد أدنى ثانية؛ لا تحسب فترات الإيقاف والتقديم. لا يعاد إنشاء السجل السابق.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	انقر على النجوم بجانب المقطع لتغيير تقييمه. انقر على التقييم الحالي مرة أخرى لإزالته. لا تبدأ النجوم التشغيل ولا تغير قائمة الانتظار.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

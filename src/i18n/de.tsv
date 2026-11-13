@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Bestätige die Kopplungsanfrag
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Kein Telefon gefunden. Prüfe, ob beide Geräte dasselbe WLAN verwenden.
 Pair	Koppeln
 Pairing code incorrect or expired. Reopen pairing on the phone.	Code falsch oder abgelaufen. Öffne die Kopplung am Telefon erneut.
+Playlists	Wiedergabelisten
+Playback queue	Warteschlange
+New playlist	Neue Wiedergabeliste
+Playlist name	Name der Wiedergabeliste
+Rename	Umbenennen
+Duplicate	Duplizieren
+Delete	Löschen
+Delete playlist?	Wiedergabeliste löschen?
+Add	Hinzufügen
+Add to playlist…	Zur Wiedergabeliste hinzufügen…
+Add tracks…	Titel hinzufügen…
+Choose tracks from your library.	Wählen Sie Titel aus Ihrer Mediathek.
+Clear queue	Warteschlange leeren
+Could not save playlist.	Wiedergabeliste konnte nicht gespeichert werden.
+Export playlist…	Wiedergabeliste exportieren…
+Import playlist…	Wiedergabeliste importieren…
+Move down	Nach unten
+Move up	Nach oben
+No playlists yet	Noch keine Wiedergabelisten
+Playlist changes do not change the playback queue.	Änderungen an der Wiedergabeliste verändern die Warteschlange nicht.
+Playlists unavailable.	Wiedergabelisten nicht verfügbar.
+Remove from playlist	Aus Wiedergabeliste entfernen
+Remove from queue	Aus Warteschlange entfernen
+Save queue as playlist	Warteschlange als Wiedergabeliste speichern
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	Unter Wiedergabelisten können Sie gespeicherte Listen erstellen, umbenennen und umordnen. Wiedergabe kopiert eine Liste in die Warteschlange. Änderungen an der Liste verändern die aktive Warteschlange nicht. Import und Export unterstützen M3U/M3U8.
+New dynamic playlist	Neue dynamische Wiedergabeliste
+Dynamic playlist	Dynamische Wiedergabeliste
+Edit rules…	Regeln bearbeiten…
+Updates automatically with the library.	Wird automatisch mit der Bibliothek aktualisiert.
+All rules	Alle Regeln
+Any rule	Mindestens eine Regel
+Add rule	Regel hinzufügen
+Save rules	Regeln speichern
+Remove rule	Regel entfernen
+Tag value	Tag-Wert
+Contains	Enthält
+Equals	Ist gleich
+Does not contain	Enthält nicht
+Does not equal	Ist ungleich
+At least	Mindestens
+At most	Höchstens
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Dynamische Listen speichern Tag-Regeln. Wählen Sie Alle Regeln oder Mindestens eine Regel. Jahresgrenzen sind eingeschlossen. Ergebnisse folgen Bibliotheksänderungen; Wiedergabe übernimmt eine Kopie in die Warteschlange.
+Rating	Bewertung
+Play count	Wiedergaben
+Unrated	Unbewertet
+Rating (0–5)	Bewertung (0–5)
+Listening statistics unavailable.	Hörstatistiken nicht verfügbar.
+Could not save listening statistics.	Hörstatistiken konnten nicht gespeichert werden.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Bewerten Sie Titel per Rechtsklick. Dynamische Regeln unterstützen Bewertungen und Wiedergabezahlen. Eine Wiedergabe zählt nach 30 Sekunden oder der Hälfte eines kurzen Titels, mindestens einer Sekunde; Pausen und Springen zählen nicht. Frühere Wiedergaben werden nicht rekonstruiert.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Klicken Sie auf die Sterne neben einem Titel, um ihn zu bewerten. Ein erneuter Klick auf die aktuelle Bewertung entfernt sie. Die Sterne starten keine Wiedergabe und ändern die Warteschlange nicht.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

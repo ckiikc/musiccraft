@@ -358,6 +358,35 @@ mod tests {
 mod integration {
     use super::*;
     #[test]
+    #[ignore = "requires the emulator-only rating server and explicit phone approval"]
+    fn live_android_rating_edit_with_phone_approval() {
+        let link =
+            std::fs::read_to_string(std::env::var_os("MUSICCRAFT_QA_PAIRING").unwrap()).unwrap();
+        let source = pairing(&link).unwrap();
+        assert_eq!(source.host, "127.0.0.1");
+        let auth = AuthStore::default();
+        auth.insert(&source).unwrap();
+        let tracks = catalog(
+            &source.url().unwrap(),
+            &auth,
+            &AtomicBool::new(false),
+            Duration::from_secs(10),
+        )
+        .unwrap();
+        let t = tracks
+            .iter()
+            .find(|t| t.title == "Synthetic rating check")
+            .unwrap();
+        eprintln!("Waiting for explicit rating approval in the emulator");
+        let summary = write_rating(&t.source, 3, musiccraft_tags::Scale::Five, &auth).unwrap();
+        assert_eq!(
+            summary.rating(musiccraft_tags::Scale::Five).unwrap(),
+            Some(3)
+        );
+        let again = write_rating(&t.source, 3, musiccraft_tags::Scale::Five, &auth).unwrap();
+        assert_eq!(again.rating(musiccraft_tags::Scale::Five).unwrap(), Some(3));
+    }
+    #[test]
     #[ignore = "requires the emulator-only HTTPS server and a private pairing-link file"]
     fn live_android_catalog_sync_and_progressive_pcm() {
         use crate::streaming::{Cancellation, Pull, Stream};
@@ -447,4 +476,105 @@ mod integration {
             );
         }
     }
+}
+
+/// Existing pinned HTTPS identity; no FTP uploads or generic remote file writes.
+#[cfg_attr(test, allow(dead_code))]
+pub fn write_rating(
+    source: &str,
+    rating: u8,
+    scale: musiccraft_tags::Scale,
+    auth: &AuthStore,
+) -> Result<musiccraft_tags::Summary, String> {
+    let mut url = Url::parse(source).map_err(|_| "Invalid track address")?;
+    let id = url
+        .path()
+        .strip_prefix("/v1/audio/")
+        .and_then(|s| s.split_once('.'))
+        .map(|s| s.0.to_owned())
+        .filter(|s| !s.is_empty() && s.bytes().all(|b| b.is_ascii_digit()))
+        .ok_or("This remote source does not support rating edits")?;
+    auth.peer(source)
+        .ok_or("This remote source does not support authenticated rating edits")?;
+    let scale = match scale {
+        musiccraft_tags::Scale::Five => 5,
+        musiccraft_tags::Scale::Hundred => 100,
+        _ => return Err("Choose the numeric tag scale in Settings".into()),
+    };
+    url.set_path(&format!("/v1/ratings/{id}"));
+    let body = serde_json::json!({"rating":rating,"scale":scale,"request":format!("{:032x}",rand::random::<u128>())}).to_string();
+    let mut easy = curl::easy::Easy::new();
+    let setup = (|| -> Result<(), curl::Error> {
+        easy.url(url.as_str())?;
+        auth.configure(&mut easy, source)?;
+        easy.post(true)?;
+        easy.post_fields_copy(body.as_bytes())?;
+        easy.connect_timeout(Duration::from_secs(3))?;
+        easy.timeout(Duration::from_secs(10))?;
+        easy.signal(false)?;
+        Ok(())
+    })();
+    setup.map_err(|_| "Could not configure rating request")?;
+    let mut response = vec![];
+    {
+        let mut transfer = easy.transfer();
+        transfer
+            .write_function(|b| {
+                if response.len() + b.len() > 4096 {
+                    return Ok(0);
+                }
+                response.extend_from_slice(b);
+                Ok(b.len())
+            })
+            .map_err(|_| "Invalid rating response")?;
+        transfer
+            .perform()
+            .map_err(|_| "Phone unavailable; audio tag update pending")?;
+    }
+    let code = easy.response_code().unwrap_or(0);
+    if code == 202 {
+        let request: serde_json::Value =
+            serde_json::from_str(&body).map_err(|_| "Invalid rating request")?;
+        let key = request["request"]
+            .as_str()
+            .ok_or("Invalid rating request")?;
+        for _ in 0..90 {
+            std::thread::sleep(Duration::from_secs(1));
+            let (status, bytes) = request_status(source, &format!("/v1/ratings/{id}/{key}"), auth)?;
+            if status != 200 {
+                continue;
+            }
+            let result: serde_json::Value =
+                serde_json::from_slice(&bytes).map_err(|_| "Invalid rating response")?;
+            match result["state"].as_str() {
+                Some("done") => {
+                    return serde_json::from_value(result["summary"].clone())
+                        .map_err(|_| "Invalid tag confirmation".into());
+                }
+                Some("error") => {
+                    return Err(result["error"]
+                        .as_str()
+                        .unwrap_or("Phone tag write failed")
+                        .into());
+                }
+                _ => {}
+            }
+        }
+        return Err("Open MusicCraft on the phone to approve the audio tag edit".into());
+    }
+    if code != 200 {
+        return Err("Phone refused the audio tag edit; original retained".into());
+    }
+    serde_json::from_slice(&response).map_err(|_| "Invalid rating response".into())
+}
+
+#[cfg_attr(test, allow(dead_code))]
+fn request_status(source: &str, path: &str, auth: &AuthStore) -> Result<(u32, Vec<u8>), String> {
+    request(
+        source,
+        path,
+        auth,
+        &AtomicBool::new(false),
+        Duration::from_secs(5),
+    )
 }

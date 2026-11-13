@@ -283,7 +283,17 @@ pub(crate) fn read(
     epoch: Arc<AtomicU64>,
     ticket: u64,
 ) -> io::Result<Track> {
+    if !crate::library::is_remote(&track.source) {
+        if epoch.load(Ordering::Relaxed) != ticket {
+            return Err(io::ErrorKind::Interrupted.into());
+        }
+        let mut file = std::fs::File::open(&track.source)?;
+        track.rating_tags = Some(musiccraft_tags::inspect(&mut file));
+        return Ok(track);
+    }
     let mut reader = Ranged::open(&track.source, auth, epoch, ticket)?;
+    track.rating_tags = Some(musiccraft_tags::inspect(&mut reader));
+    reader.seek(SeekFrom::Start(0))?;
     let length = reader.length;
     if let Some(tag) = metadata::read(&mut reader, length)? {
         if let Some(tag) = tag {

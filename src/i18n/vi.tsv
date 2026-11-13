@@ -360,3 +360,70 @@ Guide: Confirm the pairing request on your phone.	Xác nhận yêu cầu ghép n
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Không tìm thấy điện thoại. Kiểm tra hai thiết bị dùng cùng Wi-Fi.
 Pair	Ghép nối
 Pairing code incorrect or expired. Reopen pairing on the phone.	Mã sai hoặc đã hết hạn. Mở lại màn hình ghép nối trên điện thoại.
+Playlists	Danh sách phát
+Playback queue	Hàng đợi phát
+New playlist	Danh sách phát mới
+Playlist name	Tên danh sách phát
+Rename	Đổi tên
+Duplicate	Nhân bản
+Delete	Xóa
+Delete playlist?	Xóa danh sách phát?
+Add	Thêm
+Add to playlist…	Thêm vào danh sách phát…
+Add tracks…	Thêm bài hát…
+Choose tracks from your library.	Chọn bài hát từ thư viện.
+Clear queue	Xóa hàng đợi
+Could not save playlist.	Không thể lưu danh sách phát.
+Export playlist…	Xuất danh sách phát…
+Import playlist…	Nhập danh sách phát…
+Move down	Di chuyển xuống
+Move up	Di chuyển lên
+No playlists yet	Chưa có danh sách phát
+Playlist changes do not change the playback queue.	Chỉnh sửa danh sách phát không làm thay đổi hàng đợi phát.
+Playlists unavailable.	Danh sách phát không khả dụng.
+Remove from playlist	Xóa khỏi danh sách phát
+Remove from queue	Xóa khỏi hàng đợi
+Save queue as playlist	Lưu hàng đợi thành danh sách phát
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	Trong Danh sách phát, tạo, đổi tên và sắp xếp các danh sách đã lưu. Phát sẽ sao chép danh sách vào hàng đợi phát. Chỉnh sửa danh sách không thay đổi hàng đợi hiện tại. Hỗ trợ nhập và xuất M3U/M3U8.
+New dynamic playlist	Danh sách phát động mới
+Dynamic playlist	Danh sách phát động
+Edit rules…	Sửa quy tắc…
+Updates automatically with the library.	Tự động cập nhật khi thư viện thay đổi.
+All rules	Tất cả quy tắc
+Any rule	Ít nhất một quy tắc
+Add rule	Thêm quy tắc
+Save rules	Lưu quy tắc
+Remove rule	Xóa quy tắc
+Tag value	Giá trị thẻ
+Contains	Chứa
+Equals	Bằng
+Does not contain	Không chứa
+Does not equal	Không bằng
+At least	Ít nhất
+At most	Nhiều nhất
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Danh sách phát động lưu các quy tắc thẻ. Chọn tất cả quy tắc hoặc ít nhất một quy tắc. Khoảng năm bao gồm cả hai đầu. Kết quả cập nhật theo thư viện; phát giữ một bản sao trong hàng đợi.
+Rating	Đánh giá
+Play count	Số lượt nghe
+Unrated	Chưa đánh giá
+Rating (0–5)	Đánh giá (0–5)
+Listening statistics unavailable.	Không có thống kê nghe.
+Could not save listening statistics.	Không thể lưu thống kê nghe.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Nhấp chuột phải vào bài hát để đánh giá. Quy tắc động hỗ trợ đánh giá và số lượt nghe. Một lượt được tính sau 30 giây hoặc nửa bài ngắn, tối thiểu một giây; tạm dừng và tua không được tính. Lịch sử trước đây không được tạo lại.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Nhấp vào các ngôi sao bên cạnh bài hát để đổi đánh giá. Nhấp lại vào mức hiện tại để xóa đánh giá. Các ngôi sao không bắt đầu phát hoặc thay đổi hàng đợi.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

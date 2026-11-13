@@ -693,6 +693,8 @@ mod tests {
             include_str!("../app/player_visual.rs"),
             include_str!("../app/cover_viewer.rs"),
             include_str!("../app/browser.rs"),
+            include_str!("../app/playlists.rs"),
+            include_str!("../app/track_stats.rs"),
             include_str!("../app/listening_ui.rs"),
             include_str!("../facets.rs"),
         ] {

@@ -25,10 +25,11 @@ object LibraryRules {
 }
 
 data class Song(val id: String, val title: String, val artist: String, val album: String, val albumKey: String, val duration: Long, val uri: android.net.Uri, val artwork: android.net.Uri?, val trackNumber: Int, val displayName:String = "", val size:Long = 0, val modified:Long = 0,val year:Int=0,val genre:String="",val added:Long=0) {
+    val coverKey:String by lazy { ArtworkKeys.file(id,added,size,modified,artist,album,title) }
     val statKey:String get()="$id@$added"
     fun facts()=TrackFacts(id,title,artist,albumKey,genre,year,trackNumber,statKey,album)
     fun item(): MediaItem = MediaItem.Builder().setMediaId(id).setUri(uri).setMediaMetadata(
-        MediaMetadata.Builder().setTitle(title).setArtist(artist).setAlbumTitle(album).setArtworkUri(artwork)
+        MediaMetadata.Builder().setTitle(title).setArtist(artist).setAlbumTitle(album).setArtworkUri(ArtworkLibrary.uri(this))
             .setIsBrowsable(false).setIsPlayable(true).setMediaType(MediaMetadata.MEDIA_TYPE_MUSIC).build()
     ).build()
 }
@@ -54,6 +55,7 @@ class Catalog private constructor(private val context: Context) {
                 hadPermission = allowed
                 loadedAt = android.os.SystemClock.elapsedRealtime()
                 result.set(songs)
+                RatingTags.index(context,songs)
             } catch (e: Exception) {
                 songs = emptyList()
                 lastError = if (e is SecurityException) "Autorizza l’accesso alla musica sul telefono." else "Lettura della libreria non riuscita. Riprova."
@@ -77,11 +79,15 @@ class Catalog private constructor(private val context: Context) {
         }
         return out
     }
-    fun folder(id: String, title: String, type: Int): MediaItem = MediaItem.Builder().setMediaId(id).setMediaMetadata(MediaMetadata.Builder().setTitle(title).setIsBrowsable(true).setIsPlayable(false).setMediaType(type).build()).build()
+    fun folder(id: String, title: String, type: Int): MediaItem {
+        val icon=when(id){"now-playing"->"ic_player";"dynamic"->"ic_shuffle";"playlists","playlist-menu"->"ic_playlist";"cars"->"ic_car";"artists"->"ic_artist";"songs"->"ic_player";else->"ic_album"}
+        return MediaItem.Builder().setMediaId(id).setMediaMetadata(MediaMetadata.Builder().setTitle(title).setArtworkUri(android.net.Uri.parse("android.resource://${context.packageName}/drawable/$icon")).setIsBrowsable(true).setIsPlayable(false).setMediaType(type).build()).build()
+    }
     fun artistId(artist: String) = "artist:" + Base64.encodeToString(artist.toByteArray(Charsets.UTF_8), Base64.URL_SAFE or Base64.NO_WRAP)
     fun children(parent: String): List<MediaItem> = when (parent) {
-        "root" -> listOf(folder("songs", "Brani", MediaMetadata.MEDIA_TYPE_FOLDER_MIXED), folder("albums", "Album", MediaMetadata.MEDIA_TYPE_FOLDER_ALBUMS), folder("artists", "Artisti", MediaMetadata.MEDIA_TYPE_FOLDER_ARTISTS),folder("dynamic","Playlist dinamiche",MediaMetadata.MEDIA_TYPE_FOLDER_PLAYLISTS))
+        "root" -> listOf(folder("songs", "Brani", MediaMetadata.MEDIA_TYPE_FOLDER_MIXED), folder("albums", "Album", MediaMetadata.MEDIA_TYPE_FOLDER_ALBUMS), folder("artists", "Artisti", MediaMetadata.MEDIA_TYPE_FOLDER_ARTISTS),folder("dynamic","Playlist dinamiche",MediaMetadata.MEDIA_TYPE_FOLDER_PLAYLISTS),folder("playlists","Playlist salvate",MediaMetadata.MEDIA_TYPE_FOLDER_PLAYLISTS))
         "dynamic" -> ListeningStore.get(context).rules.map{MediaItem.Builder().setMediaId("mix:"+it.id).setMediaMetadata(MediaMetadata.Builder().setTitle(it.name).setIsBrowsable(false).setIsPlayable(true).setMediaType(MediaMetadata.MEDIA_TYPE_PLAYLIST).build()).build()}
+        "playlists" -> ListeningStore.get(context).playlists.map{MediaItem.Builder().setMediaId("playlist:"+it.id).setMediaMetadata(MediaMetadata.Builder().setTitle(it.name).setIsBrowsable(false).setIsPlayable(true).setMediaType(MediaMetadata.MEDIA_TYPE_PLAYLIST).build()).build()}
         "songs" -> songs.map { it.item() }
         "albums" -> songs.distinctBy { it.albumKey }.sortedBy { it.album.lowercase() }.map { folder(it.albumKey, it.album, MediaMetadata.MEDIA_TYPE_ALBUM) }
         "artists" -> songs.map { it.artist }.distinct().sortedBy { it.lowercase() }.map { folder(artistId(it), it, MediaMetadata.MEDIA_TYPE_ARTIST) }
@@ -89,8 +95,8 @@ class Catalog private constructor(private val context: Context) {
     }
     fun item(id: String): MediaItem? = songs.firstOrNull { it.id == id }?.item() ?: when (id) {
         "root" -> folder("root", "MusicCraft", MediaMetadata.MEDIA_TYPE_FOLDER_MIXED)
-        "songs", "albums", "artists", "dynamic" -> children("root").find { it.mediaId == id }
-        else -> (children("albums") + children("artists") + children("dynamic")).find { it.mediaId == id }
+        "songs", "albums", "artists", "dynamic", "playlists" -> children("root").find { it.mediaId == id }
+        else -> (children("albums") + children("artists") + children("dynamic") + children("playlists")).find { it.mediaId == id }
     }
     companion object {
         @Volatile private var instance: Catalog? = null

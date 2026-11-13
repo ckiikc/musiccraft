@@ -18,12 +18,15 @@ import javax.net.ssl.SSLSocket
 class SharingServer(private val context:Context, private val identity:SharingIdentity, host:InetAddress):Closeable {
     private val workers=ThreadPoolExecutor(4,4,10,TimeUnit.SECONDS,ArrayBlockingQueue(8))
     private val clients=Collections.synchronizedSet(mutableSetOf<Socket>())
+    private val lifecycle=Any()
+    private val cleanup=AsyncClose()
     private val listeners=mutableListOf<SSLServerSocket>()
     private val catalog=Catalog.get(context)
     @Volatile private var closed=false
     private val hostAddress=host.hostAddress!!
     val port:Int
     init {
+        check(RatingTags.recoverNow(context)){"Rating metadata recovery required"}
         fun bind(address:InetAddress,port:Int):SSLServerSocket=(identity.tls.serverSocketFactory.createServerSocket() as SSLServerSocket).apply {
             useClientMode=false;needClientAuth=false;reuseAddress=true;bind(InetSocketAddress(address,port),8);enabledProtocols=supportedProtocols.filter{it=="TLSv1.2" || it=="TLSv1.3"}.toTypedArray()
         }
@@ -35,15 +38,22 @@ class SharingServer(private val context:Context, private val identity:SharingIde
         for(listener in listeners) Thread({
             while(!closed) {
                 try {
-                    val socket=listener.accept() as SSLSocket;socket.useClientMode=false;socket.soTimeout=6000;clients.add(socket)
+                    val socket=listener.accept() as SSLSocket;socket.useClientMode=false;socket.soTimeout=6000
+                    val accepted=synchronized(lifecycle){if(closed)false else{clients.add(socket);true}}
+                    if(!accepted){socket.close();continue}
                     try {workers.execute {socket.use {try{serve(it)}catch(e:Exception){if(BuildConfig.DEBUG) android.util.Log.w("MusicCraftSharing","Transfer failed",e)}finally{clients.remove(it)}}}}
                     catch(_:java.util.concurrent.RejectedExecutionException){clients.remove(socket);socket.close()}
                 } catch(_:IOException){if(closed) break}
             }
         },"MusicCraft sharing listener").apply {isDaemon=true;start()}
     }
-    fun suspendTransfers() {synchronized(clients) {for(socket in clients) try {socket.close()}catch(_:IOException){}}}
-    override fun close() {PairingWindow.close();closed=true;listeners.forEach {try{it.close()}catch(_:IOException){}};suspendTransfers();workers.shutdownNow()}
+    private fun detachClients():List<Socket> = synchronized(clients){clients.toList().also{clients.clear()}}
+    fun suspendTransfers() {synchronized(lifecycle){if(!closed)cleanup.release(detachClients())}}
+    override fun close() {synchronized(lifecycle){
+        if(closed)return
+        closed=true;PairingWindow.close()
+        cleanup.release(listeners+detachClients());cleanup.close();workers.shutdownNow()
+    }}
     private fun line(input:InputStream,limit:Int):String {
         val out=ByteArrayOutputStream()
         while(out.size()<limit) {
@@ -81,6 +91,23 @@ class SharingServer(private val context:Context, private val identity:SharingIde
         }
         val expected="Basic "+Base64.encodeToString("musiccraft:${identity.token}".toByteArray(),Base64.NO_WRAP)
         if(!MessageDigest.isEqual(expected.toByteArray(),headers["authorization"].orEmpty().toByteArray())) {response(401);return}
+        val ratingRoute=Regex("/v1/ratings/(\\d+)(?:/([a-f0-9]{32}))?").matchEntire(path)
+        if(ratingRoute!=null){
+            if(SharingGate.busy(context)){response(503);return}
+            if(!catalog.permitted()){response(503);return}
+            val song=catalog.refresh().get(20,TimeUnit.SECONDS).find{it.id=="song:${ratingRoute.groupValues[1]}"}
+            if(song==null){response(404);return}
+            if(method=="POST" && ratingRoute.groupValues[2].isEmpty()){
+                val length=headers["content-length"]?.toIntOrNull() ?: 0
+                if(headers.containsKey("transfer-encoding") || length !in 1..1024){response(405);return}
+                try{val b=ByteArray(length);var at=0;while(at<length){val n=input.read(b,at,length-at);if(n<0)return;at+=n}
+                    val v=JSONObject(String(b,Charsets.UTF_8));val result=RatingTags.enqueue(context,ratingRoute.groupValues[1],v.getInt("rating"),v.getInt("scale"),v.getString("request"));response(202,result.toString().toByteArray())
+                }catch(_:Exception){response(405)}
+            }else if(method=="GET" && ratingRoute.groupValues[2].isNotEmpty()){
+                val result=RatingTags.status(context,ratingRoute.groupValues[2]);if(result==null || result.optString("song")!=ratingRoute.groupValues[1])response(404) else response(200,result.toString().toByteArray())
+            }else response(405)
+            return
+        }
         if(method!="GET" && method!="HEAD") {response(405,extra="Allow: GET, HEAD\r\n");return}
         if(path=="/v1/status") {response(200,JSONObject().put("protocol",1).put("device_id",identity.id).put("sharing",!SharingGate.busy(context)).toString().toByteArray());return}
         if(SharingGate.busy(context)) {response(503,"{\"error\":\"local_playback\"}".toByteArray(),extra="Retry-After: 5\r\n");return}

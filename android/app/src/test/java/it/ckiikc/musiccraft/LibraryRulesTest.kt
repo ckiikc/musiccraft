@@ -9,8 +9,8 @@ class LibraryRulesTest {
         assertEquals(listOf(8,9),LibraryRules.pageBounds(10,2,4)!!.toList())
     }
     @Test fun searchCoversTitleArtistAndAlbum() {
-        assertTrue(LibraryRules.matches("Fixture Song","Fixture Artist","Fixture Album"," aRTiST "))
-        assertTrue(LibraryRules.matches("Fixture Song","Fixture Artist","Fixture Album","album"))
-        assertFalse(LibraryRules.matches("Fixture Song","Fixture Artist","Fixture Album","unrelated"))
+        assertTrue(LibraryRules.matches("Chewing Gum","Amyl","Cartoon Darkness"," amYL "))
+        assertTrue(LibraryRules.matches("Chewing Gum","Amyl","Cartoon Darkness","darkness"))
+        assertFalse(LibraryRules.matches("Chewing Gum","Amyl","Cartoon Darkness","unrelated"))
     }
 }

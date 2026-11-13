@@ -9,21 +9,31 @@ import java.security.cert.X509Certificate
 import javax.net.ssl.*
 import org.json.JSONObject
 /** Synthetic, emulator-only caller supplied by the instrumentation runner. */
-class SharingChecks(private val context:Context):java.io.Closeable {
+class SharingChecks(private val context:Context,serviceEndpoint:String?=null):java.io.Closeable {
     private val identity=SharingIdentity(context)
-    private val server=SharingServer(context,identity,InetAddress.getByName("127.0.0.1"))
+    private val server=if(serviceEndpoint==null)SharingServer(context,identity,InetAddress.getByName("127.0.0.1")) else null
+    private val endpoint=serviceEndpoint ?: "https://127.0.0.1:${server!!.port}"
     private val tls=SSLContext.getInstance("TLS").apply {init(null,arrayOf(object:X509TrustManager {
         override fun getAcceptedIssuers()=emptyArray<X509Certificate>()
         override fun checkClientTrusted(c:Array<X509Certificate>,a:String){error("Not a client trust manager")}
         override fun checkServerTrusted(c:Array<X509Certificate>,a:String){check(c.isNotEmpty());check(Base64.encodeToString(MessageDigest.getInstance("SHA-256").digest(c[0].publicKey.encoded),Base64.NO_WRAP)==identity.pin)}
     }),SecureRandom())}
     data class Reply(val code:Int,val bytes:ByteArray,val length:Long)
-    private fun request(path:String,method:String="GET",auth:Boolean=true,range:String?=null):Reply {
-        val connection=URL("https://127.0.0.1:${server.port}$path").openConnection() as HttpsURLConnection
+    private fun request(path:String,method:String="GET",auth:Boolean=true,range:String?=null,body:String?=null):Reply {
+        val connection=URL("$endpoint$path").openConnection() as HttpsURLConnection
         connection.sslSocketFactory=tls.socketFactory;connection.hostnameVerifier=HostnameVerifier{_,_->true};connection.connectTimeout=3000;connection.readTimeout=10000;connection.requestMethod=method;connection.instanceFollowRedirects=false
         if(auth) connection.setRequestProperty("Authorization","Basic "+Base64.encodeToString("musiccraft:${identity.token}".toByteArray(),Base64.NO_WRAP))
         if(range!=null) connection.setRequestProperty("Range",range)
+        if(body!=null){connection.doOutput=true;connection.outputStream.use{it.write(body.toByteArray())}}
         return try {val code=connection.responseCode;val bytes=(if(code<400)connection.inputStream else connection.errorStream)?.use{it.readBytes()} ?: ByteArray(0);Reply(code,bytes,connection.contentLengthLong)} finally {connection.disconnect()}
+    }
+    fun ratingFailures(id:String){
+        check(request("/v1/ratings/$id",method="POST",auth=false).code==401)
+        for(body in listOf("{}","{\"rating\":6,\"scale\":5,\"request\":\"${"a".repeat(32)}\"}","{\"rating\":4,\"scale\":255,\"request\":\"${"b".repeat(32)}\"}")){
+            check(request("/v1/ratings/$id",method="POST",body=body).code==405)
+        }
+        check(request("/v1/ratings/$id/${"c".repeat(32)}").code==404)
+        check(request("/v1/ratings/99999999999999999",method="POST",body="{}").code==404)
     }
     fun idle() {
         val code=PairingWindow.open();check(code.length==4 && code.all{it.isDigit()});check(!PairingWindow.pending())
@@ -51,5 +61,23 @@ class SharingChecks(private val context:Context):java.io.Closeable {
     }
     fun suspended() {check(request("/v1/catalog").code==503);check(!JSONObject(String(request("/v1/status").bytes)).getBoolean("sharing"))}
     fun resumed() {check(request("/v1/catalog").code==200)}
-    override fun close(){server.close()}
+    fun pendingTlsClient():SSLSocket {
+        val url=URL(endpoint)
+        return (tls.socketFactory.createSocket(url.host,url.port) as SSLSocket).apply {
+            soTimeout=10000;startHandshake()
+            outputStream.write("GET /v1/status HTTP/1.1\r\n".toByteArray());outputStream.flush()
+        }
+    }
+    fun awaitDisconnected(socket:SSLSocket) {
+        try {check(socket.inputStream.read()==-1){"Pending request should be cancelled"}}
+        catch(e:java.net.SocketTimeoutException){throw e}
+        catch(_:java.io.IOException){}
+    }
+    fun cancelConnectedTransfers(onMain:(()->Unit)->Unit) {
+        val owned=checkNotNull(server)
+        pendingTlsClient().use {socket->onMain{owned.suspendTransfers()};awaitDisconnected(socket)}
+        check(request("/v1/status").code==200)
+        pendingTlsClient().use {socket->onMain{owned.close()};awaitDisconnected(socket)}
+    }
+    override fun close(){server?.close()}
 }

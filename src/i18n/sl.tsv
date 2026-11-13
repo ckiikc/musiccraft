@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Potrdite zahtevo za seznanjanj
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefon ni najden. Preverite, ali napravi uporabljata isti Wi-Fi.
 Pair	Seznani
 Pairing code incorrect or expired. Reopen pairing on the phone.	Koda je napačna ali je potekla. Znova odprite seznanjanje v telefonu.
+Playlists	Seznami predvajanja
+Playback queue	Čakalna vrsta
+New playlist	Nov seznam
+Playlist name	Ime seznama
+Rename	Preimenuj
+Duplicate	Podvoji
+Delete	Izbriši
+Delete playlist?	Izbrišem seznam?
+Add	Dodaj
+Add to playlist…	Dodaj na seznam…
+Add tracks…	Dodaj skladbe…
+Choose tracks from your library.	Izberite skladbe iz knjižnice.
+Clear queue	Počisti čakalno vrsto
+Could not save playlist.	Seznama ni bilo mogoče shraniti.
+Export playlist…	Izvozi seznam…
+Import playlist…	Uvozi seznam…
+Move down	Premakni navzdol
+Move up	Premakni navzgor
+No playlists yet	Ni še seznamov
+Playlist changes do not change the playback queue.	Spremembe seznama ne spremenijo čakalne vrste.
+Playlists unavailable.	Seznami niso na voljo.
+Remove from playlist	Odstrani s seznama
+Remove from queue	Odstrani iz čakalne vrste
+Save queue as playlist	Shrani čakalno vrsto kot seznam
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	V Seznamih predvajanja ustvarite, preimenujte in preuredite shranjene sezname. Predvajaj kopira seznam v čakalno vrsto. Urejanje seznamov ne spremeni aktivne čakalne vrste. Uvoz in izvoz podpirata M3U/M3U8.
+New dynamic playlist	Nov dinamični seznam
+Dynamic playlist	Dinamični seznam
+Edit rules…	Uredi pravila…
+Updates automatically with the library.	Samodejno se posodablja s knjižnico.
+All rules	Vsa pravila
+Any rule	Vsaj eno pravilo
+Add rule	Dodaj pravilo
+Save rules	Shrani pravila
+Remove rule	Odstrani pravilo
+Tag value	Vrednost oznake
+Contains	Vsebuje
+Equals	Je enako
+Does not contain	Ne vsebuje
+Does not equal	Ni enako
+At least	Najmanj
+At most	Največ
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Dinamični seznami shranijo pravila oznak. Izberite vsa pravila ali vsaj eno. Meje let so vključene. Rezultati sledijo knjižnici; predvajanje ohrani kopijo v čakalni vrsti.
+Rating	Ocena
+Play count	Število predvajanj
+Unrated	Brez ocene
+Rating (0–5)	Ocena (0–5)
+Listening statistics unavailable.	Statistika poslušanja ni na voljo.
+Could not save listening statistics.	Statistike poslušanja ni mogoče shraniti.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Z desnim klikom ocenite skladbo. Dinamična pravila podpirajo ocene in število predvajanj. Predvajanje šteje po 30 sekundah ali polovici kratke skladbe, najmanj sekundi; premori in premiki ne štejejo. Prejšnja zgodovina se ne obnovi.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Kliknite zvezdice ob skladbi, da spremenite oceno. Ponoven klik trenutne ocene jo odstrani. Zvezdice ne zaženejo predvajanja in ne spremenijo čakalne vrste.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

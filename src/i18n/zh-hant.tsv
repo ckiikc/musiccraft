@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	請在手機上確認配對要
 Guide: No phone found. Check that both devices use the same Wi-Fi.	找不到手機。請檢查兩台裝置是否連接相同 Wi-Fi。
 Pair	配對
 Pairing code incorrect or expired. Reopen pairing on the phone.	代碼錯誤或已過期。請在手機上重新開啟配對。
+Playlists	播放清單
+Playback queue	播放佇列
+New playlist	新增播放清單
+Playlist name	播放清單名稱
+Rename	重新命名
+Duplicate	製作副本
+Delete	刪除
+Delete playlist?	刪除播放清單？
+Add	加入
+Add to playlist…	加入播放清單…
+Add tracks…	加入歌曲…
+Choose tracks from your library.	從音樂庫選擇歌曲。
+Clear queue	清空佇列
+Could not save playlist.	無法儲存播放清單。
+Export playlist…	匯出播放清單…
+Import playlist…	匯入播放清單…
+Move down	下移
+Move up	上移
+No playlists yet	尚無播放清單
+Playlist changes do not change the playback queue.	修改播放清單不會改變播放佇列。
+Playlists unavailable.	播放清單無法使用。
+Remove from playlist	從播放清單移除
+Remove from queue	從佇列移除
+Save queue as playlist	將佇列儲存為播放清單
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	在播放清單中建立、重新命名及調整已儲存清單的順序。點選播放會將清單複製到播放佇列。編輯清單不會改變目前佇列。支援匯入及匯出M3U/M3U8。
+New dynamic playlist	新增動態播放清單
+Dynamic playlist	動態播放清單
+Edit rules…	編輯規則…
+Updates automatically with the library.	隨曲庫變更自動更新。
+All rules	所有規則
+Any rule	任一規則
+Add rule	新增規則
+Save rules	儲存規則
+Remove rule	移除規則
+Tag value	標籤值
+Contains	包含
+Equals	等於
+Does not contain	不包含
+Does not equal	不等於
+At least	至少
+At most	至多
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	動態播放清單儲存標籤規則。可選擇所有規則或任一規則。年份範圍包含上下限。結果隨曲庫變更更新；播放時保留佇列快照。
+Rating	評分
+Play count	播放次數
+Unrated	未評分
+Rating (0–5)	評分（0–5）
+Listening statistics unavailable.	播放統計無法使用。
+Could not save listening statistics.	無法儲存播放統計。
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	以右鍵點選歌曲即可評分。動態規則支援評分與播放次數。播放30秒或短曲的一半（至少1秒）計為一次；暫停與跳轉不計入。不會重建先前的歷史。
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	點選歌曲旁的星星可修改評分。再次點選目前評分即可清除。點選星星不會開始播放或改變佇列。
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

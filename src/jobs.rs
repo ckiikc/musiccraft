@@ -32,6 +32,13 @@ pub enum Job {
     },
     SyncDone(crate::sync::Report),
     Tracks(Vec<Track>),
+    #[cfg_attr(test, allow(dead_code))]
+    RatingWritten {
+        revision: u64,
+        source: String,
+        rating: u8,
+        result: Result<musiccraft_tags::Summary, String>,
+    },
     Tags(Track, u64),
     TagAlias {
         source: String,
@@ -931,4 +938,46 @@ mod cover_tests {
             0
         );
     }
+}
+
+#[cfg(not(test))]
+pub struct RatingEdit {
+    pub source: String,
+    pub rating: u8,
+    pub revision: u64,
+    pub scale: musiccraft_tags::Scale,
+    pub backups: PathBuf,
+    pub auth: AuthStore,
+    pub tx: Sender<Job>,
+    pub ctx: eframe::egui::Context,
+}
+#[cfg(not(test))]
+pub fn rating_edit(edit: RatingEdit) {
+    static QUEUE: std::sync::OnceLock<Sender<RatingEdit>> = std::sync::OnceLock::new();
+    let queue = QUEUE.get_or_init(|| {
+        let (tx, rx) = std::sync::mpsc::channel::<RatingEdit>();
+        std::thread::spawn(move || {
+            for edit in rx {
+                let result = if library::is_remote(&edit.source) {
+                    crate::phone::write_rating(&edit.source, edit.rating, edit.scale, &edit.auth)
+                } else {
+                    musiccraft_tags::write_local(
+                        Path::new(&edit.source),
+                        edit.rating,
+                        edit.scale,
+                        &edit.backups,
+                    )
+                };
+                let _ = edit.tx.send(Job::RatingWritten {
+                    revision: edit.revision,
+                    source: edit.source,
+                    rating: edit.rating,
+                    result,
+                });
+                edit.ctx.request_repaint();
+            }
+        });
+        tx
+    });
+    let _ = queue.send(edit);
 }

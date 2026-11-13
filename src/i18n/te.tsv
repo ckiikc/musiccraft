@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	మీ ఫోన్‌లో �
 Guide: No phone found. Check that both devices use the same Wi-Fi.	ఫోన్ కనబడలేదు. రెండు పరికరాలు ఒకే Wi-Fi వాడుతున్నాయో చూడండి.
 Pair	జత చేయి
 Pairing code incorrect or expired. Reopen pairing on the phone.	కోడ్ తప్పు లేదా గడువు ముగిసింది. ఫోన్‌లో జత చేసే స్క్రీన్‌ను మళ్లీ తెరవండి.
+Playlists	ప్లేలిస్ట్‌లు
+Playback queue	ప్లేబ్యాక్ క్యూ
+New playlist	కొత్త ప్లేలిస్ట్
+Playlist name	ప్లేలిస్ట్ పేరు
+Rename	పేరు మార్చు
+Duplicate	నకలు చేయి
+Delete	తొలగించు
+Delete playlist?	ప్లేలిస్ట్‌ను తొలగించాలా?
+Add	జోడించు
+Add to playlist…	ప్లేలిస్ట్‌కు జోడించు…
+Add tracks…	పాటలను జోడించు…
+Choose tracks from your library.	మీ లైబ్రరీ నుండి పాటలను ఎంచుకోండి.
+Clear queue	క్యూను ఖాళీ చేయి
+Could not save playlist.	ప్లేలిస్ట్‌ను సేవ్ చేయలేకపోయాము.
+Export playlist…	ప్లేలిస్ట్‌ను ఎగుమతి చేయి…
+Import playlist…	ప్లేలిస్ట్‌ను దిగుమతి చేయి…
+Move down	కిందకు జరుపు
+Move up	పైకి జరుపు
+No playlists yet	ఇంకా ప్లేలిస్ట్‌లు లేవు
+Playlist changes do not change the playback queue.	ప్లేలిస్ట్ మార్పులు ప్లేబ్యాక్ క్యూను మార్చవు.
+Playlists unavailable.	ప్లేలిస్ట్‌లు అందుబాటులో లేవు.
+Remove from playlist	ప్లేలిస్ట్ నుండి తొలగించు
+Remove from queue	క్యూ నుండి తొలగించు
+Save queue as playlist	క్యూను ప్లేలిస్ట్‌గా సేవ్ చేయి
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	ప్లేలిస్ట్‌లలో సేవ్ చేసిన జాబితాలను సృష్టించండి, పేరు మార్చండి, క్రమాన్ని మార్చండి. ప్లే జాబితాను ప్లేబ్యాక్ క్యూకు కాపీ చేస్తుంది. ప్లేలిస్ట్ మార్పులు ప్రస్తుత క్యూను మార్చవు. M3U/M3U8 దిగుమతి, ఎగుమతికి మద్దతు ఉంది.
+New dynamic playlist	కొత్త డైనమిక్ ప్లేలిస్ట్
+Dynamic playlist	డైనమిక్ ప్లేలిస్ట్
+Edit rules…	నియమాలను సవరించు…
+Updates automatically with the library.	లైబ్రరీ మారినప్పుడు స్వయంచాలకంగా నవీకరిస్తుంది.
+All rules	అన్ని నియమాలు
+Any rule	కనీసం ఒక నియమం
+Add rule	నియమం జోడించు
+Save rules	నియమాలను సేవ్ చేయి
+Remove rule	నియమం తొలగించు
+Tag value	ట్యాగ్ విలువ
+Contains	కలిగి ఉంది
+Equals	సమానం
+Does not contain	కలిగి లేదు
+Does not equal	సమానం కాదు
+At least	కనీసం
+At most	గరిష్ఠంగా
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	డైనమిక్ ప్లేలిస్ట్‌లు ట్యాగ్ నియమాలను సేవ్ చేస్తాయి. అన్ని నియమాలు లేదా కనీసం ఒక నియమాన్ని ఎంచుకోండి. సంవత్సరాల పరిధిలో రెండు హద్దులూ ఉంటాయి. లైబ్రరీతో ఫలితాలు మారుతాయి; ప్లే క్యూలో ఒక కాపీని ఉంచుతుంది.
+Rating	రేటింగ్
+Play count	విన్న సార్లు
+Unrated	రేటింగ్ లేదు
+Rating (0–5)	రేటింగ్ (0–5)
+Listening statistics unavailable.	వినికిడి గణాంకాలు అందుబాటులో లేవు.
+Could not save listening statistics.	వినికిడి గణాంకాలను సేవ్ చేయలేకపోయాము.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	పాటపై కుడి క్లిక్ చేసి రేటింగ్ ఇవ్వండి. డైనమిక్ నియమాలు రేటింగ్‌లు, విన్న సార్లను ఉపయోగిస్తాయి. 30 సెకన్లు లేదా చిన్న పాటలో సగం, కనీసం ఒక సెకను తర్వాత ఒకసారి లెక్కిస్తుంది; విరామాలు, ముందుకు జరపడం లెక్కించవు. పాత చరిత్రను తిరిగి సృష్టించదు.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	రేటింగ్ మార్చడానికి పాట పక్కన ఉన్న నక్షత్రాలను క్లిక్ చేయండి. ప్రస్తుత రేటింగ్‌ను మళ్లీ క్లిక్ చేస్తే తొలగిస్తుంది. నక్షత్రాలు ప్లేబ్యాక్ ప్రారంభించవు లేదా క్యూను మార్చవు.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

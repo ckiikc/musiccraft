@@ -110,10 +110,13 @@ impl Library {
                     if let Ok(track) = serde_json::from_slice::<Track>(row)
                         && track.metadata_loaded
                         && let Some(&i) = positions.get(&track.source)
-                        && !tracks[i].metadata_loaded
-                        && tracks[i].rate == 0
+                        && tracks[i].needs_tag_read()
                     {
-                        tracks[i].adopt_tags(track);
+                        if tracks[i].metadata_loaded || tracks[i].rate > 0 {
+                            tracks[i].rating_tags = track.rating_tags;
+                        } else {
+                            tracks[i].adopt_tags(track);
+                        }
                     }
                 }
             }
@@ -252,6 +255,12 @@ impl Library {
         mut roots: Vec<String>,
         busy: bool,
     ) {
+        if tracks
+            .iter()
+            .any(|t| !crate::library::is_remote(&t.source) && t.rating_tags.is_none())
+        {
+            roots.push("/".into());
+        }
         roots.sort();
         roots.dedup();
         if roots != self.roots || tracks.len() != self.count || !self.initialized {
@@ -273,7 +282,7 @@ impl Library {
             for (i, track) in tracks
                 .iter()
                 .enumerate()
-                .filter(|(_, t)| !t.metadata_loaded && t.rate == 0)
+                .filter(|(_, t)| t.needs_tag_read())
             {
                 if self
                     .active
@@ -320,7 +329,7 @@ impl Library {
                 };
                 let Some(track) = tracks
                     .get(index)
-                    .filter(|t| !t.metadata_loaded && t.rate == 0 && t.source.starts_with(root))
+                    .filter(|t| t.needs_tag_read() && t.source.starts_with(root))
                 else {
                     continue;
                 };
@@ -461,7 +470,9 @@ mod tests {
             track("b/decoded.flac"),
         ];
         tracks[4].metadata_loaded = true;
+        tracks[4].rating_tags = Some(Default::default());
         tracks[5].rate = 44100;
+        tracks[5].rating_tags = Some(Default::default());
         let roots = vec![
             "ftp://127.0.0.1:9/a/".into(),
             "ftp://127.0.0.1:9/a/nested/".into(),
@@ -477,6 +488,7 @@ mod tests {
         assert!(index.active.is_none());
         // Completed rows are skipped lazily, without rebuilding the entire library per result.
         tracks[0].metadata_loaded = true;
+        tracks[0].rating_tags = Some(Default::default());
         index.tick(&tracks, &AuthStore::default(), &tx, roots, true);
         assert_eq!(index.groups.values().map(VecDeque::len).sum::<usize>(), 3);
     }

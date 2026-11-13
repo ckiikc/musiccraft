@@ -35,3 +35,13 @@ jobs:
           python3 -m venv .venv
           .venv/bin/python -m pip install -r scripts/requirements-test.txt
           .venv/bin/python scripts/test_ftp.py
+
+  rating-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
+      - run: cargo +1.97.1 test --manifest-path crates/musiccraft-tags/Cargo.toml --locked -j 2
+      - run: cargo +1.97.1 clippy --manifest-path crates/musiccraft-tags/Cargo.toml --locked --all-targets -j 2 -- -D warnings

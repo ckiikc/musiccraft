@@ -4,22 +4,22 @@ import kotlin.random.Random
 
 /** Pure selection rules; browsing and text searches never mutate a playback queue. */
 data class TrackFacts(val id:String,val title:String,val artist:String,val album:String,val genre:String="",val year:Int=0,val number:Int=0,val statKey:String=id,val albumTitle:String=album)
-data class TrackStats(val rating:Int=0,val plays:Long=0,val lastPlayed:Long=0)
+data class TrackStats(val rating:Int=0,val plays:Long=0,val lastPlayed:Long=0,val ratingSet:Boolean=false,val ratingKnown:Boolean=false)
 enum class MixUnit { SONGS, ALBUMS, ARTISTS }
 enum class PlayedFilter { ALL, UNPLAYED, PLAYED, PARTLY_PLAYED }
 enum class MixOrder { RANDOM, MOST_PLAYED, LEAST_PLAYED, MOST_PLAYED_AVERAGE, LEAST_PLAYED_AVERAGE, RATING_AVERAGE, RATING_TOTAL, RATED_COUNT, RECENT }
-data class SmartRule(val id:String,val name:String,val unit:MixUnit=MixUnit.SONGS,val order:MixOrder=MixOrder.RANDOM,val played:PlayedFilter=PlayedFilter.ALL,val genre:String="",val fromYear:Int=0,val toYear:Int=0,val minimumRating:Int=0,val maximumRating:Int=5,val query:String="") {
-    fun valid()=id.isNotBlank() && name.isNotBlank() && name.length<=100 && genre.length<=200 && query.length<=200 && fromYear in 0..9999 && toYear in 0..9999 && (fromYear==0 || toYear==0 || fromYear<=toYear) && minimumRating in 0..5 && maximumRating in minimumRating..5 && !(unit==MixUnit.SONGS && played==PlayedFilter.PARTLY_PLAYED)
+data class SmartRule(val id:String,val name:String,val unit:MixUnit=MixUnit.SONGS,val order:MixOrder=MixOrder.RANDOM,val played:PlayedFilter=PlayedFilter.ALL,val genre:String="",val fromYear:Int=0,val toYear:Int=0,val minimumRating:Int=0,val maximumRating:Int=5,val query:String="",val minimumPlays:Long=0,val maximumPlays:Long?=null) {
+    fun valid()=id.isNotBlank() && name.isNotBlank() && name.length<=100 && genre.length<=200 && query.length<=200 && fromYear in 0..9999 && toYear in 0..9999 && (fromYear==0 || toYear==0 || fromYear<=toYear) && minimumRating in 0..5 && maximumRating in minimumRating..5 && minimumPlays>=0 && (maximumPlays==null || maximumPlays>=minimumPlays) && !(unit==MixUnit.SONGS && played==PlayedFilter.PARTLY_PLAYED)
 }
 data class NamedPlaylist(val id:String,val name:String,val ids:List<String>)
-data class QueueSnapshot(val ids:List<String> = emptyList(),val index:Int=0,val position:Long=0,val ruleId:String?=null,val pending:List<String> = emptyList(),val seen:Set<String> = emptySet())
+data class QueueSnapshot(val ids:List<String> = emptyList(),val index:Int=0,val position:Long=0,val ruleId:String?=null,val pending:List<String> = emptyList(),val seen:Set<String> = emptySet(),val name:String="Coda manuale",val sourceId:String?=null,val shuffle:Boolean=false,val repeat:Int=0)
 
 object SmartRules {
     fun select(library:List<TrackFacts>,stats:Map<String,TrackStats>,rule:SmartRule,random:Random=Random.Default):List<TrackFacts> {
         if(!rule.valid()) return emptyList()
         val filtered=library.filter {t->
             val s=stats[t.statKey] ?: TrackStats()
-            (rule.genre.isBlank() || t.genre.equals(rule.genre,true)) && (rule.fromYear==0 || t.year>=rule.fromYear) && (rule.toYear==0 || t.year in 1..rule.toYear) && s.rating in rule.minimumRating..rule.maximumRating && (rule.query.isBlank() || listOf(t.title,t.artist,t.albumTitle).any{it.contains(rule.query,true)})
+            s.plays>=rule.minimumPlays && (rule.maximumPlays==null || s.plays<=rule.maximumPlays) && (rule.genre.isBlank() || t.genre.equals(rule.genre,true)) && (rule.fromYear==0 || t.year>=rule.fromYear) && (rule.toYear==0 || t.year in 1..rule.toYear) && ((rule.minimumRating==0 && rule.maximumRating==5) || s.ratingSet || s.ratingKnown || s.rating>0) && s.rating in rule.minimumRating..rule.maximumRating && (rule.query.isBlank() || listOf(t.title,t.artist,t.albumTitle).any{it.contains(rule.query,true)})
         }.distinctBy{it.id}
         val groups=filtered.groupBy {when(rule.unit){MixUnit.SONGS->it.id;MixUnit.ALBUMS->it.album;MixUnit.ARTISTS->it.artist}}.values.filter {group->
             val played=group.count{(stats[it.statKey]?.plays ?: 0)>0}

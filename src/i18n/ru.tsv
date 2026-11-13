@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Подтвердите зап�
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Телефон не найден. Проверьте, что устройства используют одну сеть Wi-Fi.
 Pair	Сопрячь
 Pairing code incorrect or expired. Reopen pairing on the phone.	Код неверен или истёк. Откройте сопряжение на телефоне заново.
+Playlists	Плейлисты
+Playback queue	Очередь воспроизведения
+New playlist	Новый плейлист
+Playlist name	Название плейлиста
+Rename	Переименовать
+Duplicate	Дублировать
+Delete	Удалить
+Delete playlist?	Удалить плейлист?
+Add	Добавить
+Add to playlist…	Добавить в плейлист…
+Add tracks…	Добавить композиции…
+Choose tracks from your library.	Выберите композиции из медиатеки.
+Clear queue	Очистить очередь
+Could not save playlist.	Не удалось сохранить плейлист.
+Export playlist…	Экспорт плейлиста…
+Import playlist…	Импорт плейлиста…
+Move down	Переместить вниз
+Move up	Переместить вверх
+No playlists yet	Плейлистов пока нет
+Playlist changes do not change the playback queue.	Изменения плейлиста не меняют очередь воспроизведения.
+Playlists unavailable.	Плейлисты недоступны.
+Remove from playlist	Удалить из плейлиста
+Remove from queue	Удалить из очереди
+Save queue as playlist	Сохранить очередь как плейлист
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	В разделе «Плейлисты» создавайте, переименовывайте и упорядочивайте сохранённые списки. Воспроизведение копирует список в очередь. Изменения плейлиста не меняют активную очередь. Поддерживаются импорт и экспорт M3U/M3U8.
+New dynamic playlist	Новый динамический плейлист
+Dynamic playlist	Динамический плейлист
+Edit rules…	Изменить правила…
+Updates automatically with the library.	Автоматически обновляется при изменении библиотеки.
+All rules	Все правила
+Any rule	Хотя бы одно правило
+Add rule	Добавить правило
+Save rules	Сохранить правила
+Remove rule	Удалить правило
+Tag value	Значение тега
+Contains	Содержит
+Equals	Равно
+Does not contain	Не содержит
+Does not equal	Не равно
+At least	Не менее
+At most	Не более
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Динамические плейлисты сохраняют правила тегов. Выберите все правила или хотя бы одно. Границы годов включены. Результаты обновляются с библиотекой; воспроизведение сохраняет копию в очереди.
+Rating	Оценка
+Play count	Число прослушиваний
+Unrated	Без оценки
+Rating (0–5)	Оценка (0–5)
+Listening statistics unavailable.	Статистика прослушивания недоступна.
+Could not save listening statistics.	Не удалось сохранить статистику прослушивания.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Оцените трек правой кнопкой мыши. Динамические правила учитывают оценки и число прослушиваний. Прослушивание засчитывается после 30 секунд или половины короткого трека, минимум секунды; паузы и перемотка не учитываются. Прежняя история не восстанавливается.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Нажмите на звёзды рядом с треком, чтобы изменить оценку. Повторное нажатие на текущую оценку удалит её. Звёзды не запускают воспроизведение и не меняют очередь.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

@@ -424,3 +424,13 @@ mod tests {
         assert_eq!(fs::read(p).unwrap(), b"different content");
     }
 }
+
+/// A confirmed remote tag edit changes the cached header under the same URL.
+/// Existing decoders retain their open file; future opens must fetch the new bytes.
+pub(crate) fn invalidate_remote(source: &str, root: &Path) {
+    if is_remote(source) {
+        let mut hash = std::collections::hash_map::DefaultHasher::new();
+        source.hash(&mut hash);
+        let _ = fs::remove_file(root.join(format!("{:016x}.audio", hash.finish())));
+    }
+}

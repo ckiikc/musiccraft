@@ -131,6 +131,8 @@ pub struct Track {
     pub source: String,
     #[serde(default)]
     pub metadata_loaded: bool,
+    #[serde(default)]
+    pub rating_tags: Option<musiccraft_tags::Summary>,
     pub title: String,
     pub artist: String,
     pub album: String,
@@ -175,6 +177,7 @@ impl Track {
                 .to_uppercase(),
             source,
             metadata_loaded: false,
+            rating_tags: None,
             artist: String::new(),
             album: String::new(),
             album_artist: String::new(),
@@ -189,6 +192,10 @@ impl Track {
         }
     }
 
+    pub(crate) fn needs_tag_read(&self) -> bool {
+        (!self.metadata_loaded && self.rate == 0) || self.rating_tags.is_none()
+    }
+
     pub fn read(source: String) -> Self {
         let mut track = Self::placeholder(source);
         if !is_remote(&track.source) {
@@ -199,6 +206,9 @@ impl Track {
 
     pub fn update_metadata(&mut self, path: &Path) {
         use lofty::file::{AudioFile, TaggedFileExt};
+        self.rating_tags = std::fs::File::open(path)
+            .ok()
+            .map(|mut f| musiccraft_tags::inspect(&mut f));
         let parsed = (|| {
             lofty::probe::Probe::open(path)
                 .ok()?
@@ -223,6 +233,7 @@ impl Track {
 
     /// Merge descriptive metadata only; the playing decoder owns the audio properties.
     pub(crate) fn adopt_tags(&mut self, incoming: Self) {
+        self.rating_tags = incoming.rating_tags;
         self.title = incoming.title;
         self.artist = incoming.artist;
         self.album = incoming.album;

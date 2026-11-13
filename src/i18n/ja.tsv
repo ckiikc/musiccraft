@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	電話でペアリング要求
 Guide: No phone found. Check that both devices use the same Wi-Fi.	電話が見つかりません。両方の端末が同じWi-Fiを使用しているか確認してください。
 Pair	ペアリング
 Pairing code incorrect or expired. Reopen pairing on the phone.	コードが正しくないか期限切れです。電話でペアリングを開き直してください。
+Playlists	プレイリスト
+Playback queue	再生キュー
+New playlist	新しいプレイリスト
+Playlist name	プレイリスト名
+Rename	名前を変更
+Duplicate	複製
+Delete	削除
+Delete playlist?	プレイリストを削除しますか？
+Add	追加
+Add to playlist…	プレイリストに追加…
+Add tracks…	曲を追加…
+Choose tracks from your library.	ライブラリから曲を選択してください。
+Clear queue	キューを空にする
+Could not save playlist.	プレイリストを保存できませんでした。
+Export playlist…	プレイリストを書き出す…
+Import playlist…	プレイリストを読み込む…
+Move down	下へ移動
+Move up	上へ移動
+No playlists yet	プレイリストはありません
+Playlist changes do not change the playback queue.	プレイリストを編集しても再生キューは変わりません。
+Playlists unavailable.	プレイリストを利用できません。
+Remove from playlist	プレイリストから削除
+Remove from queue	キューから削除
+Save queue as playlist	キューをプレイリストとして保存
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	プレイリストで保存したリストの作成、名前変更、並べ替えができます。再生するとリストが再生キューにコピーされます。編集しても現在のキューは変わりません。M3U/M3U8の読み込みと書き出しに対応しています。
+New dynamic playlist	新しい動的プレイリスト
+Dynamic playlist	動的プレイリスト
+Edit rules…	ルールを編集…
+Updates automatically with the library.	ライブラリの変更に合わせて自動更新します。
+All rules	すべてのルール
+Any rule	いずれかのルール
+Add rule	ルールを追加
+Save rules	ルールを保存
+Remove rule	ルールを削除
+Tag value	タグの値
+Contains	含む
+Equals	等しい
+Does not contain	含まない
+Does not equal	等しくない
+At least	以上
+At most	以下
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	動的プレイリストにはタグのルールを保存します。すべてのルール、またはいずれかのルールを選びます。年の範囲には両端を含みます。結果はライブラリの変更に従って更新され、再生時のキューのコピーは保持されます。
+Rating	評価
+Play count	再生回数
+Unrated	未評価
+Rating (0–5)	評価（0～5）
+Listening statistics unavailable.	再生統計を利用できません。
+Could not save listening statistics.	再生統計を保存できませんでした。
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	曲を右クリックして評価できます。動的ルールは評価と再生回数に対応します。30秒、または短い曲の半分（最低1秒）を再生すると1回と数えます。一時停止やシークは含みません。過去の履歴は復元しません。
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	曲の横の星をクリックして評価を変更できます。現在の評価をもう一度クリックすると解除します。星の操作で再生が始まったりキューが変わったりすることはありません。
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

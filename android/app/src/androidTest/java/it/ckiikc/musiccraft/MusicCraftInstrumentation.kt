@@ -16,10 +16,17 @@ import java.util.concurrent.atomic.AtomicReference
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 class MusicCraftInstrumentation : Instrumentation() {
+    private var ratingsServer=false
+    private var ratingsOnly=false
     private var keepFixtures = false
     private var shareServer = false
     private var restoreOnly=false
-    override fun onCreate(arguments: Bundle?) { super.onCreate(arguments);keepFixtures=arguments?.getString("keepFixtures")=="true";shareServer=arguments?.getString("sharingServer")=="true";restoreOnly=arguments?.getString("restoreOnly")=="true";start() }
+    private var migrationOnly=false
+    private var lifecycleOnly=false
+    private var cleanupOnly=false
+    private var artworkOnly=false
+    private var onlineArtworkOnly=false
+    override fun onCreate(arguments: Bundle?) { super.onCreate(arguments);ratingsOnly=arguments?.getString("ratingsOnly")=="true";ratingsServer=arguments?.getString("ratingsServer")=="true";onlineArtworkOnly=arguments?.getString("onlineArtworkOnly")=="true";artworkOnly=arguments?.getString("artworkOnly")=="true";keepFixtures=arguments?.getString("keepFixtures")=="true";shareServer=arguments?.getString("sharingServer")=="true";restoreOnly=arguments?.getString("restoreOnly")=="true";migrationOnly=arguments?.getString("migrationOnly")=="true";lifecycleOnly=arguments?.getString("lifecycleOnly")=="true";cleanupOnly=arguments?.getString("cleanupOnly")=="true";start() }
     private fun <T> main(block:()->T):T {
         val value=AtomicReference<T>();val error=AtomicReference<Throwable>()
         runOnMainSync {try {value.set(block())}catch(e:Throwable){error.set(e)}}
@@ -41,6 +48,10 @@ class MusicCraftInstrumentation : Instrumentation() {
             await("Cold restart did not restore the saved queue"){main{b.mediaItemCount==2 && b.currentPosition>=1100}}
             check(main{!b.isPlaying && !b.playWhenReady}){"Restored queue played without a user action"}
             val saved=ListeningStore.get(targetContext)
+            if(migrationOnly){
+                check(saved.cars==CarQueues.defaults() && !saved.automaticCars)
+                check(saved.queue.name=="Coda manuale" && saved.queue.sourceId==null)
+            }else check(saved.cars.any{it.id=="car:qa-a"} && saved.queues["car:qa-a"]?.name=="QA Car Playlist")
             check(saved.playlists.any{it.name=="QA Saved"} && saved.rules.any{it.id=="qa-dynamic"} && saved.stats.values.any{it.rating==5})
             check(main{activity?.findViewById<android.widget.LinearLayout>(R.id.player_stage)!=null})
             code=Activity.RESULT_OK;report.putString("stream","PASS: queue/position, saved playlists, dynamic rules and ratings restored after process death; no automatic audio start\n")
@@ -49,7 +60,24 @@ class MusicCraftInstrumentation : Instrumentation() {
         finish(code,report)
     }
     override fun onStart() {
-        if(restoreOnly){verifyRestore();return}
+        if(ratingsServer){val report=Bundle();var code=Activity.RESULT_CANCELED;try{RatingChecks(targetContext,context).serve(this);code=Activity.RESULT_OK;report.putString("stream","PASS: authenticated rating server fixture closed\n")}catch(e:Throwable){report.putString("stream",e.stackTraceToString())};finish(code,report);return}
+
+        if(ratingsOnly){val report=Bundle();var code=Activity.RESULT_CANCELED;try{RatingChecks(targetContext,context).run();code=Activity.RESULT_OK;report.putString("stream","PASS: shared native FLAC/MP3 rating import, approved metadata-only writes, identical audio payload, original metadata recovery, conflicts and explicit vote precedence\n")}catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")};finish(code,report);return}
+
+        if(onlineArtworkOnly){val report=Bundle();var code=Activity.RESULT_CANCELED;try{ArtworkChecks(targetContext).online();code=Activity.RESULT_OK;report.putString("stream","PASS: actual public MusicBrainz/Cover Art Archive retrieval, validated JPEG persisted and reopened without another request\n")}catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")};finish(code,report);return}
+        if(artworkOnly){val report=Bundle();var code=Activity.RESULT_CANCELED;try{ArtworkChecks(targetContext).run();code=Activity.RESULT_OK;report.putString("stream","PASS: persistent artwork index/reopen, deduplicated blobs, separate per-track art, negative entries, album aliases, storage budget, malformed image/size limits, provider write/traversal rejection\n")}catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")};finish(code,report);return}
+
+        if(cleanupOnly){
+            val report=Bundle();var code=Activity.RESULT_CANCELED
+            try {
+                check(Build.HARDWARE.contains("ranchu") || Build.MODEL.contains("sdk")){"Emulator-only"}
+                SharingChecks(targetContext).use{it.cancelConnectedTransfers{block->main{block()}}}
+                code=Activity.RESULT_OK;report.putString("stream","PASS: live TLS clients can be cancelled and server closed from main without network I/O on main\n")
+            }catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")}
+            finish(code,report);return
+        }
+        if(lifecycleOnly){verifyServiceLifecycle();return}
+        if(restoreOnly || migrationOnly){verifyRestore();return}
         val report=Bundle();val inserted=mutableListOf<android.net.Uri>();var browser:MediaBrowser?=null;var activity:Activity?=null;var sharing:SharingChecks?=null;var resultCode=Activity.RESULT_CANCELED
         try {
             check(Build.HARDWARE.contains("ranchu") || Build.MODEL.contains("sdk")) {"These synthetic tests are emulator-only"}
@@ -83,7 +111,7 @@ class MusicCraftInstrumentation : Instrumentation() {
             await("Phone UI did not show the indexed tracks") {main{activity?.findViewById<android.widget.ListView>(R.id.library_list)?.adapter?.count==3}}
             val b=browser
             val root=main {b.getLibraryRoot(null)}.get(10,TimeUnit.SECONDS);check(root.resultCode==LibraryResult.RESULT_SUCCESS && root.value?.mediaId=="root"){"Root failed: code=${root.resultCode}, id=${root.value?.mediaId}"}
-            val folders=main {b.getChildren("root",0,100,null)}.get(10,TimeUnit.SECONDS).value!!;check(folders.map{it.mediaId}==listOf("songs","albums","artists","dynamic"))
+            val folders=main {b.getChildren("root",0,100,null)}.get(10,TimeUnit.SECONDS).value!!;check(folders.map{it.mediaId}==listOf("now-playing","dynamic","playlists","library"))
             val legacyConnected=java.util.concurrent.CountDownLatch(1)
             val legacyChildren=java.util.concurrent.CountDownLatch(1)
             val legacyIds=AtomicReference<List<String>>()
@@ -92,7 +120,7 @@ class MusicCraftInstrumentation : Instrumentation() {
             check(main{legacy.root}=="root")
             main{legacy.subscribe("root",object:android.media.browse.MediaBrowser.SubscriptionCallback(){override fun onChildrenLoaded(parentId:String,children:MutableList<android.media.browse.MediaBrowser.MediaItem>){legacyIds.set(children.map{it.mediaId.orEmpty()});legacyChildren.countDown()}})}
             check(legacyChildren.await(10,TimeUnit.SECONDS)){"Legacy Android Auto browse did not return children"}
-            check(legacyIds.get()==listOf("songs","albums","artists","dynamic"))
+            check(legacyIds.get()==listOf("now-playing","dynamic","playlists","library"))
             main{legacy.disconnect()}
             val songs=main {b.getChildren("songs",0,100,null)}.get(10,TimeUnit.SECONDS).value!!.filter {it.mediaMetadata.artist=="MusicCraft QA"};check(songs.size==3) { "Expected three tagged fixtures, got ${songs.map { it.mediaMetadata.title to it.mediaMetadata.artist }}" }
             check(main {b.getChildren("songs",1,2,null)}.get(10,TimeUnit.SECONDS).value!!.size==1)
@@ -112,15 +140,16 @@ class MusicCraftInstrumentation : Instrumentation() {
             main {b.pause()};val paused=main {b.currentPosition};Thread.sleep(450);check(kotlin.math.abs(main{b.currentPosition}-paused)<100)
             transitions.clear()
             main {b.stop();b.clearMediaItems();b.setMediaItems(queue);b.prepare();b.play()}
-            await("Second playback did not start"){main{b.isPlaying}}
+            await("Second playback did not actually start"){main{b.isPlaying && b.playbackState==Player.STATE_READY && b.currentPosition>=100}}
             Thread.sleep(500);main {activity?.finish()};activity=null
             val before=main{b.currentMediaItemIndex to b.currentPosition};Thread.sleep(600);check(main{b.isPlaying && (b.currentMediaItemIndex>before.first || b.currentMediaItemIndex==before.first && b.currentPosition>before.second)}){"Background state: ${main{listOf(b.playbackState,b.isPlaying,b.playWhenReady,b.currentMediaItemIndex,b.currentPosition,b.mediaItemCount,b.playerError?.message)}} transitions=$transitions"}
             try {await("Automatic queue did not finish",20000){main{b.playbackState==Player.STATE_ENDED}}} catch(e:Exception) {error("${e.message}: ${main{listOf(b.playbackState,b.isPlaying,b.playWhenReady,b.currentMediaItemIndex,b.currentPosition,b.mediaItemCount,b.repeatMode,b.playerError?.message)}} transitions=$transitions") }
             check(transitions.toList()==listOf("QA Gamma","QA Alpha","QA Beta")){"Wrong automatic order: $transitions"}
-            main {b.stop()};Thread.sleep(300);sharing.resumed()
+            main {b.stop()};await("Sharing did not resume after the system released audio"){!SharingGate.busy(targetContext)};sharing.resumed()
             activity=startActivitySync(Intent(targetContext,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             activity=DynamicChecks(this).run(b,activity!!)
-            report.putString("stream","PASS: independent search/queue; standalone portrait/landscape player; rotation while playing; queue editing; ratings; persistent playlists/position; dynamic replenishment/no adjacent repeats/stop adding; HTTPS sharing authentication/identity/GET/HEAD/ranges/read-only/suspension/resumption;  Media3 and legacy Android Auto browser; media browser root/categories/pagination/search; previous/next/seek/pause; playback after Activity finish; automatic three-track sequence and stop\n")
+            CarChecks(this).run(b)
+            report.putString("stream","PASS: per-car queues/positions/mix state; named playlist in Media3 and legacy queue metadata; Android Auto browse selection and dynamic playlist start; independent search/queue; standalone portrait/landscape player; rotation while playing; queue editing; ratings; persistent playlists/position; dynamic replenishment/no adjacent repeats/stop adding; HTTPS sharing authentication/identity/GET/HEAD/ranges/read-only/suspension/resumption;  Media3 and legacy Android Auto browser; media browser root/categories/pagination/search; previous/next/seek/pause; playback after Activity finish; automatic three-track sequence and stop\n")
             }
             resultCode=Activity.RESULT_OK
         } catch(e:Throwable) {
@@ -131,5 +160,46 @@ class MusicCraftInstrumentation : Instrumentation() {
             for(uri in if(keepFixtures) emptyList() else inserted) try {targetContext.contentResolver.delete(uri,null,null)}catch(_:Exception){}
         }
         finish(resultCode,report)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun verifyServiceLifecycle() {
+        val report=Bundle();var code=Activity.RESULT_CANCELED
+        var activity:Activity?=null;var browser:MediaBrowser?=null
+        val service=Intent(targetContext,SharingService::class.java)
+        try {
+            check(Build.HARDWARE.contains("ranchu") || Build.MODEL.contains("sdk")){"Emulator-only"}
+            for(cycle in 1..3) {
+                activity=startActivitySync(Intent(targetContext,MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                browser=main {MediaBrowser.Builder(targetContext,SessionToken(targetContext,ComponentName(targetContext,PlaybackService::class.java))).buildAsync()}.get(20,TimeUnit.SECONDS)
+                main{browser?.pause();activity!!.startForegroundService(service)}
+                await("Sharing service did not become ready"){SharingGate.running && SharingGate.pairLink!=null && !SharingGate.localPlayback}
+                val link=android.net.Uri.parse(SharingGate.pairLink!!)
+                val endpoint="https://${link.getQueryParameter("host")}:${link.getQueryParameter("port") }"
+                SharingChecks(targetContext,endpoint).use {check ->
+                    check.resumed()
+                    check.pendingTlsClient().use {socket->
+                        main{SharingGate.localPlayback=true}
+                        await("Sharing did not suspend while local audio was active"){SharingGate.state.startsWith("Sospesa")}
+                        check.awaitDisconnected(socket)
+                        check.suspended()
+                    }
+                    main{SharingGate.localPlayback=false}
+                    check.resumed()
+                    main{browser?.release();browser=null;activity?.finish();activity=null;targetContext.stopService(Intent(targetContext,PlaybackService::class.java))}
+                    await("Playback service was not destroyed") {
+                        targetContext.getSystemService(android.app.ActivityManager::class.java).getRunningServices(20).none{it.service.className==PlaybackService::class.java.name}
+                    }
+                    repeat(5){
+                        check(SharingGate.running && SharingGate.pairLink!=null){"Sharing stopped with playback service"}
+                        check.resumed();Thread.sleep(1000)
+                    }
+                }
+            }
+            code=Activity.RESULT_OK
+            report.putString("stream","PASS: real foreground SharingService cancels live TLS clients during local audio, resumes authenticated HTTPS, and remains available across three PlaybackService creation/destruction cycles with Activity closed\n")
+        }catch(e:Throwable){report.putString("stream","FAIL: ${e.stackTraceToString()}\n")}
+        finally{main{browser?.release();activity?.finish();targetContext.stopService(service)}}
+        finish(code,report)
     }
 }

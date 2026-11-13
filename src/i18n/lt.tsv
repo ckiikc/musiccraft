@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Patvirtinkite susiejimo užkla
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Telefonas nerastas. Patikrinkite, ar įrenginiai naudoja tą patį Wi-Fi.
 Pair	Susieti
 Pairing code incorrect or expired. Reopen pairing on the phone.	Kodas neteisingas arba pasibaigė. Telefone iš naujo atidarykite susiejimą.
+Playlists	Grojaraščiai
+Playback queue	Atkūrimo eilė
+New playlist	Naujas grojaraštis
+Playlist name	Grojaraščio pavadinimas
+Rename	Pervadinti
+Duplicate	Dubliuoti
+Delete	Ištrinti
+Delete playlist?	Ištrinti grojaraštį?
+Add	Pridėti
+Add to playlist…	Pridėti į grojaraštį…
+Add tracks…	Pridėti kūrinių…
+Choose tracks from your library.	Pasirinkite kūrinius iš bibliotekos.
+Clear queue	Išvalyti eilę
+Could not save playlist.	Nepavyko išsaugoti grojaraščio.
+Export playlist…	Eksportuoti grojaraštį…
+Import playlist…	Importuoti grojaraštį…
+Move down	Perkelti žemyn
+Move up	Perkelti aukštyn
+No playlists yet	Grojaraščių dar nėra
+Playlist changes do not change the playback queue.	Grojaraščio pakeitimai nekeičia atkūrimo eilės.
+Playlists unavailable.	Grojaraščiai nepasiekiami.
+Remove from playlist	Pašalinti iš grojaraščio
+Remove from queue	Pašalinti iš eilės
+Save queue as playlist	Išsaugoti eilę kaip grojaraštį
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	Grojaraščiuose kurkite, pervadinkite ir rikiuokite išsaugotus sąrašus. Paleidus sąrašas nukopijuojamas į atkūrimo eilę. Grojaraščio pakeitimai nekeičia aktyvios eilės. Palaikomas M3U/M3U8 importas ir eksportas.
+New dynamic playlist	Naujas dinaminis grojaraštis
+Dynamic playlist	Dinaminis grojaraštis
+Edit rules…	Keisti taisykles…
+Updates automatically with the library.	Automatiškai atnaujinamas pasikeitus bibliotekai.
+All rules	Visos taisyklės
+Any rule	Bent viena taisyklė
+Add rule	Pridėti taisyklę
+Save rules	Išsaugoti taisykles
+Remove rule	Pašalinti taisyklę
+Tag value	Žymos reikšmė
+Contains	Turi
+Equals	Lygu
+Does not contain	Neturi
+Does not equal	Nelygu
+At least	Bent
+At most	Ne daugiau
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Dinaminiai grojaraščiai saugo žymų taisykles. Pasirinkite visas taisykles arba bent vieną. Metų ribos įtraukiamos. Rezultatai atnaujinami su biblioteka; atkūrimas išlaiko kopiją eilėje.
+Rating	Įvertinimas
+Play count	Perklausų skaičius
+Unrated	Neįvertinta
+Rating (0–5)	Įvertinimas (0–5)
+Listening statistics unavailable.	Klausymo statistika nepasiekiama.
+Could not save listening statistics.	Nepavyko išsaugoti klausymo statistikos.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Dešiniuoju mygtuku įvertinkite kūrinį. Dinaminės taisyklės palaiko įvertinimus ir perklausų skaičių. Perklausa skaičiuojama po 30 sekundžių arba pusės trumpo kūrinio, bent vienos sekundės; pauzės ir persukimas neskaičiuojami. Ankstesnė istorija neatkuriama.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Spustelėkite žvaigždutes prie kūrinio ir pakeiskite įvertinimą. Dar kartą spustelėjus dabartinį įvertinimą jis pašalinamas. Žvaigždutės nepradeda atkūrimo ir nekeičia eilės.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

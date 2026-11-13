@@ -358,3 +358,70 @@ Guide: Confirm the pairing request on your phone.	Confirmez la demande d’assoc
 Guide: No phone found. Check that both devices use the same Wi-Fi.	Aucun téléphone trouvé. Vérifiez que les appareils utilisent le même Wi-Fi.
 Pair	Associer
 Pairing code incorrect or expired. Reopen pairing on the phone.	Code incorrect ou expiré. Rouvrez l’association sur le téléphone.
+Playlists	Listes de lecture
+Playback queue	File de lecture
+New playlist	Nouvelle liste
+Playlist name	Nom de la liste
+Rename	Renommer
+Duplicate	Dupliquer
+Delete	Supprimer
+Delete playlist?	Supprimer la liste ?
+Add	Ajouter
+Add to playlist…	Ajouter à la liste…
+Add tracks…	Ajouter des morceaux…
+Choose tracks from your library.	Choisissez des morceaux dans votre bibliothèque.
+Clear queue	Vider la file
+Could not save playlist.	Impossible d’enregistrer la liste.
+Export playlist…	Exporter une liste…
+Import playlist…	Importer une liste…
+Move down	Descendre
+Move up	Monter
+No playlists yet	Aucune liste pour le moment
+Playlist changes do not change the playback queue.	Modifier une liste ne change pas la file de lecture.
+Playlists unavailable.	Listes de lecture indisponibles.
+Remove from playlist	Retirer de la liste
+Remove from queue	Retirer de la file
+Save queue as playlist	Enregistrer la file comme liste
+Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.	Dans Listes de lecture, créez, renommez et réorganisez vos listes. Lire copie une liste dans la file de lecture. Les modifications ne changent pas la file active. L’importation et l’exportation prennent en charge M3U/M3U8.
+New dynamic playlist	Nouvelle liste dynamique
+Dynamic playlist	Liste dynamique
+Edit rules…	Modifier les règles…
+Updates automatically with the library.	Mise à jour automatique avec la bibliothèque.
+All rules	Toutes les règles
+Any rule	Au moins une règle
+Add rule	Ajouter une règle
+Save rules	Enregistrer les règles
+Remove rule	Supprimer la règle
+Tag value	Valeur du tag
+Contains	Contient
+Equals	Est égal à
+Does not contain	Ne contient pas
+Does not equal	Est différent de
+At least	Au moins
+At most	Au plus
+Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.	Les listes dynamiques enregistrent des règles de tags. Choisissez Toutes les règles ou Au moins une règle. Les bornes des années sont inclusives. Les résultats suivent la bibliothèque ; Lire conserve une copie dans la file.
+Rating	Note
+Play count	Nombre d’écoutes
+Unrated	Sans note
+Rating (0–5)	Note (0–5)
+Listening statistics unavailable.	Statistiques d’écoute indisponibles.
+Could not save listening statistics.	Impossible d’enregistrer les statistiques d’écoute.
+Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.	Un clic droit sur un titre permet de le noter. Les règles dynamiques acceptent notes et nombres d’écoutes. Une écoute compte après 30 secondes ou la moitié d’un titre court, avec un minimum d’une seconde ; pauses et déplacements ne comptent pas. L’historique antérieur n’est pas reconstitué.
+Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.	Cliquez sur les étoiles à côté d’un titre pour changer sa note. Cliquez à nouveau sur la note actuelle pour la retirer. Les étoiles ne lancent pas la lecture et ne modifient pas la file.
+
+Ratings in audio tags	Ratings in audio tags
+Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.	Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending.
+Explicit scale only	Explicit scale only
+0–5 stars	0–5 stars
+0–100	0–100
+Rating saved in audio tags.	Rating saved in audio tags.
+Rating kept in MusicCraft; audio tag update pending	Rating kept in MusicCraft; audio tag update pending
+Audio tag update pending	Audio tag update pending
+
+Retry audio tag update	Retry audio tag update
+
+Audio tag ratings have not been read yet.	Audio tag ratings have not been read yet.
+
+Audio tag rating is unknown: check the scale or conflicting values.	Audio tag rating is unknown: check the scale or conflicting values.
+
+Refresh audio tag ratings	Refresh audio tag ratings

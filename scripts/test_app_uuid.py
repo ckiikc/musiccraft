@@ -17,7 +17,7 @@ class AppUuidTests(unittest.TestCase):
     def test_app_and_qa_ids_differ_and_only_uuid_changes(self):
         original = self.fixture()
         prod, prod_uuid = module.app_uuid(original, "io.github.ckiikc.musiccraft")
-        test, test_uuid = module.app_uuid(original, "io.github.ckiikc.musiccraft.gapless-test")
+        test, test_uuid = module.app_uuid(original, "it.ckiikc.musiccraft.gapless-test")
         self.assertNotEqual(prod_uuid, test_uuid)
         self.assertEqual(original[:40], prod[:40])
         self.assertEqual(original[56:], prod[56:])

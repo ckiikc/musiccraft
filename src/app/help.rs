@@ -1,11 +1,20 @@
 use super::*;
 use unicode_normalization::UnicodeNormalization;
 
-const CHAPTERS: [(&str, &[&str]); 10] = [
+const CHAPTERS: [(&str, &[&str]); 11] = [
     (
         "Library",
         &[
             "Guide: add folders or mounted NAS volumes from File. Select a source to listen only to its tracks; All music includes every source. Double-click a track to play.",
+        ],
+    ),
+    (
+        "Playlists",
+        &[
+            "Guide: Click the stars beside a track to change its rating. Click the current rating again to clear it. Stars do not start playback or change the queue.",
+            "Guide: In Playlists create, rename and reorder saved lists. Play copies a list to Playback queue. Playlist edits never change the active queue. Import/export supports M3U/M3U8.",
+            "Guide: Dynamic playlists store tag rules. Choose All rules or Any rule. Years support inclusive bounds. Library changes refresh results; Play keeps a queue snapshot.",
+            "Guide: Right-click a track to rate it. Dynamic rules support ratings and play counts. A play counts after 30 seconds or half a short track, at least one second; pauses and seeks do not count. Earlier history is not reconstructed.",
         ],
     ),
     (

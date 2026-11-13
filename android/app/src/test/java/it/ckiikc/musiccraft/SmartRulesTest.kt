@@ -5,6 +5,19 @@ import kotlin.random.Random
 class SmartRulesTest {
     private val songs=listOf(TrackFacts("a2","Two","A","albumA","Rock",1992,2),TrackFacts("a1","One","A","albumA","Rock",1992,1),TrackFacts("b","Other","B","albumB","Jazz",1980,1),TrackFacts("c","Unknown","C","albumC","",0,1))
     private val stats=mapOf("a1" to TrackStats(5,3,20),"b" to TrackStats(2,1,40))
+    @Test fun exactPlayCountBoundsCombineWithRatingsAndRefresh(){
+        val r=SmartRule("test","Four stars, no more than two plays",minimumRating=4,maximumPlays=2)
+        val initial=mapOf("a1" to TrackStats(rating=5,plays=2),"b" to TrackStats(rating=4,plays=0))
+        assertEquals(setOf("a1","b"),SmartRules.select(songs,initial,r).map{it.id}.toSet())
+        assertEquals(listOf("b"),SmartRules.select(songs,initial+("a1" to initial.getValue("a1").copy(plays=3)),r).map{it.id})
+        assertEquals(listOf("a1"),SmartRules.select(songs,initial,r.copy(minimumPlays=2)).map{it.id})
+        assertTrue(SmartRules.select(songs,initial,r.copy(maximumPlays=0,minimumPlays=1)).isEmpty())
+    }
+    @Test fun ratingUnknownIsDifferentFromExplicitZero(){
+        val r=SmartRule("r","Unrated",maximumRating=0)
+        assertTrue(SmartRules.select(songs,emptyMap(),r).isEmpty())
+        assertEquals(listOf("a1"),SmartRules.select(songs,mapOf("a1" to TrackStats(ratingSet=true)),r).map{it.id})
+    }
     @Test fun filtersAndUnknownYearsArePrecise(){
         val selected=SmartRules.select(songs,stats,SmartRule("test","Rock nineties",genre="rock",fromYear=1990,toYear=1999),Random(1));assertEquals(setOf("a1","a2"),selected.map{it.id}.toSet())
         assertFalse(SmartRules.select(songs,stats,SmartRule("test","Before",toYear=1999)).any{it.id=="c"})

@@ -22,10 +22,13 @@ mod native_menu;
 mod network;
 mod open_documents;
 mod phone;
+mod playlist_rules;
+mod playlists;
 mod remote_tags;
 mod shuffle;
 mod streaming;
 mod sync;
+mod track_stats;
 
 fn main() -> eframe::Result {
     let all_args: Vec<_> = std::env::args().collect();

@@ -100,9 +100,10 @@ impl Aurea {
     }
     pub(super) fn navigation_ready(&self) -> bool {
         !self.loading
-            && self
-                .selected_connection()
-                .is_none_or(|s| self.connections.ready(s))
+            && (self.saved.queue_label.is_some()
+                || self
+                    .selected_connection()
+                    .is_none_or(|s| self.connections.ready(s)))
     }
     pub(super) fn can_toggle(&self) -> bool {
         !self.loading && (self.current.is_some() || self.navigation_ready())

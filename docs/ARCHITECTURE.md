@@ -28,3 +28,9 @@ The user-started Android sharing service uses a foreground notification, a per-i
 The native macOS menu actions dispatch to the same UI/player paths. Auxiliary windows use independent native viewports. Network audio keeps the initially verified HTTP(S) route for each file; native DNS-SD resolves paired phones to verified local addresses while preserving identity/pin checks. Stream failures remain distinct from clean EOF and decoder failures.
 
 The album-side list identifies the current album within its source rather than using a flat HTTP parent path as the album. Table selection follows accepted Started events unless the user is browsing another row. A two-channel row indicator consumes the existing audio peak telemetry, with no new audio callback, decoder or repaint timer. Its hover-only accessibility marker does not take row clicks.
+
+## Rating interoperability and active-row following
+
+`crates/musiccraft-tags` is a shared Rust library and Android JNI engine for bounded read-only rating inspection and fixed-size FLAC/MP3 metadata patches. Descriptive metadata, raw rating tags and private manual overrides are separate. Explicit scales and conflicts are handled before playlist evaluation; no guessed rating is used by a restrictive rule. Desktop writes preserve a verified backup and replace a same-directory copy atomically; Android journals metadata prefixes and requires phone/MediaStore approval. Existing paired TLS identity protects a narrowly scoped rating API, never a generic file-upload path. Queues remain playback snapshots.
+
+`app/follow.rs` tracks current-source/view/list revisions and resolves an off-screen virtualized row only when needed. It does not send audio commands, clear filters or rewrite queues. Android count bounds are persisted with backward-compatible unbounded defaults.

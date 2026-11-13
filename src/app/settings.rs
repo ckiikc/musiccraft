@@ -450,6 +450,41 @@ impl Aurea {
 
     fn interface_settings(&mut self, ui: &mut egui::Ui) {
         settings_card(ui, |ui| {
+            section(
+                ui,
+                tr!("Ratings in audio tags"),
+                tr!(
+                    "Choose the scale used by your files. Reading never changes audio files. Star edits update supported writable tags; other edits remain pending."
+                ),
+            );
+            if ui.button(tr!("Refresh audio tag ratings")).clicked() {
+                for track in &mut self.saved.tracks {
+                    track.rating_tags = None;
+                }
+                self.library_revision = self.library_revision.wrapping_add(1);
+                self.remote_tags.library_changed();
+            }
+            let before = self.saved.rating_tag_scale;
+            egui::ComboBox::from_id_salt("rating-tag-scale")
+                .selected_text(match before {
+                    musiccraft_tags::Scale::Explicit => tr!("Explicit scale only"),
+                    musiccraft_tags::Scale::Five => tr!("0–5 stars"),
+                    musiccraft_tags::Scale::Hundred => tr!("0–100"),
+                })
+                .show_ui(ui, |ui| {
+                    for (scale, label) in [
+                        (musiccraft_tags::Scale::Explicit, tr!("Explicit scale only")),
+                        (musiccraft_tags::Scale::Five, tr!("0–5 stars")),
+                        (musiccraft_tags::Scale::Hundred, tr!("0–100")),
+                    ] {
+                        ui.selectable_value(&mut self.saved.rating_tag_scale, scale, label);
+                    }
+                });
+            if before != self.saved.rating_tag_scale {
+                self.stats_revision = self.stats_revision.wrapping_add(1);
+            }
+        });
+        settings_card(ui, |ui| {
             section(ui, tr!("Application theme"), "");
             ui.columns(3, |columns| {
                 for (theme, label) in [(0, tr!("Gold")), (1, tr!("Graphite")), (2, tr!("Light"))] {
