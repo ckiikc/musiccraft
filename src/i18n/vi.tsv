@@ -464,3 +464,10 @@ Guide: one-way mode mirrors the origin, including deletions. Bidirectional mode 
 Guide: on Android grant one music folder and enable computer access in Synchronization. Keep sharing enabled, review each preview on the computer and approve it on the phone. Replaced and deleted files stay in the hidden .musiccraft-sync/recovery directory; recovery is currently manual.	Guide: on Android grant one music folder and enable computer access in Synchronization. Keep sharing enabled, review each preview on the computer and approve it on the phone. Replaced and deleted files stay in the hidden .musiccraft-sync/recovery directory; recovery is currently manual.
 Apply preview	Apply preview
 Validating the reviewed preview…	Validating the reviewed preview…
+The paired source changed. Reopen its settings.	The paired source changed. Reopen its settings.
+Authorize Keychain to access the saved pairing.	Authorize Keychain to access the saved pairing.
+Enter a private IPv4 address, optionally followed by a port.	Enter a private IPv4 address, optionally followed by a port.
+Could not verify the paired phone at this address. Check its IP, port and sharing status.	Could not verify the paired phone at this address. Check its IP, port and sharing status.
+Update paired phone address	Update paired phone address
+Enter the phone's current Wi-Fi address to reuse its existing pairing.	Enter the phone's current Wi-Fi address to reuse its existing pairing.
+Pair again	Pair again

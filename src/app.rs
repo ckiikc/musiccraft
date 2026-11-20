@@ -2015,8 +2015,10 @@ impl Aurea {
         self.open_ftp_editor(selected.or_else(|| (!self.saved.sources.is_empty()).then_some(0)));
     }
     fn open_ftp_editor(&mut self, index: Option<usize>) {
-        if index.is_some_and(|i| self.saved.sources[i].scheme == "https") {
-            self.open_phone_pair();
+        if let Some(index) = index
+            && self.saved.sources[index].scheme == "https"
+        {
+            self.open_phone_address(index);
             return;
         }
         if self.saved.mini {

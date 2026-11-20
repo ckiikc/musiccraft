@@ -16,6 +16,10 @@ The service shares only supported audio already indexed by Android MediaStore. I
 
 Sharing is user-started, with a dedicated connected-device foreground notification. It is not a fake audio playback service and does not start at boot. Phone battery/network restrictions can still stop a background service. Android UI is currently Italian, as in version 0.1.0; desktop pairing and guide text use the existing 23-language system.
 
+## Update an existing phone address over Ethernet
+
+If the computer can reach the phone by HTTPS but Bonjour announcements do not cross the network segments, open the paired Android source settings. Enter the phone's current private IPv4 address, with the port if it changed, then choose **Check and save**. The connection must pass the saved TLS key, phone identity and credential checks before MusicCraft moves the source. Library entries, playlist references and the current queue follow the address change. MusicCraft does not scan the other network segment. Repeat the update if DHCP changes the address again.
+
 ## Discovery and security
 
 The phone binds a private IPv4 Wi-Fi/Ethernet address, preferring port 8737 and choosing another free port on collision. An authenticated loopback listener permits isolated USB QA, but USB is not needed for ordinary use. No cellular or wildcard listener is opened. Bonjour/Android NSD advertises `_musiccraft._tcp.` and a device identifier, never credentials. A paired desktop can resolve a changed address without scanning an entire subnet. Initial automatic pairing requires local multicast discovery. If the network blocks Bonjour/NSD, enable local device communication or use another private Wi-Fi network. IPv6-only networks and routed public access are not supported in this first version.

@@ -1,6 +1,6 @@
 [package]
 name = "musiccraft"
-version = "0.10.63"
+version = "0.10.64"
 edition = "2024"
 license = "MIT"
 description = "Native music player for local, NAS, FTP and MusicCraft Android libraries"

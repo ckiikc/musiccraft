@@ -9,6 +9,7 @@ pub use pairing_code::{Nearby, nearby, pair};
 use serde::Deserialize;
 use std::{
     collections::{HashMap, HashSet},
+    net::{Ipv4Addr, SocketAddrV4},
     sync::atomic::{AtomicBool, Ordering},
     time::Duration,
 };
@@ -241,6 +242,26 @@ pub fn online(
     value["sharing"]
         .as_bool()
         .ok_or("Invalid sharing state".into())
+}
+
+/// A manually entered address can move a paired source, but cannot change its identity.
+pub(crate) fn address_candidate(source: &FtpSource, value: &str) -> Option<FtpSource> {
+    if source.scheme != "https" || !valid_id(source.id.strip_prefix("phone:")?) {
+        return None;
+    }
+    let value = value.trim();
+    let (ip, port) = match value.parse::<SocketAddrV4>() {
+        Ok(endpoint) => (*endpoint.ip(), endpoint.port()),
+        Err(_) => (value.parse::<Ipv4Addr>().ok()?, source.port.parse().ok()?),
+    };
+    if !ip.is_private() || port == 0 {
+        return None;
+    }
+    let mut candidate = source.clone();
+    candidate.host = ip.to_string();
+    candidate.port = port.to_string();
+    candidate.url().ok()?;
+    Some(candidate)
 }
 pub fn catalog(
     root: &str,

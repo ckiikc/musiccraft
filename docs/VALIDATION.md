@@ -138,3 +138,7 @@ Development build: 250 desktop tests passed (44 integrations/hardware checks exp
 ## Android 0.4.3
 
 The 0.4.2 regression was reproduced as ArtworkProvider FileNotFoundException using generated embedded JPEGs in synthetic FLACs. The corrected build passed 26 JVM tests and Lint. An isolated API33 emulator verified legacy Android Auto-compatible browser song/album icons, playing-item metadata and decoded provider images; a different UID was denied before permission, could read after a prefix grant, could not write, and lost access on revocation. Existing positive/negative 0.4.2 artwork associations were reused without lookup or duplicate JPEGs. No personal-phone instrumentation or real head-unit rendering is asserted.
+
+## macOS 0.10.64
+
+The address editor regression covers private IPv4 and optional port parsing, rejection of inappropriate inputs, stale pairing changes, and preserving the pairing and queue when rebasing track URLs. The native window was checked using a synthetic profile. Automatic discovery and retry tests remain in the regular suite.

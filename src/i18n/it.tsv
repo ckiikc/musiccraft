@@ -462,3 +462,10 @@ Guide: one-way mode mirrors the origin, including deletions. Bidirectional mode 
 Guide: on Android grant one music folder and enable computer access in Synchronization. Keep sharing enabled, review each preview on the computer and approve it on the phone. Replaced and deleted files stay in the hidden .musiccraft-sync/recovery directory; recovery is currently manual.	Manuale: su Android autorizza una cartella musicale e abilita l’accesso dal computer in Sincronizzazione. Mantieni la condivisione attiva, controlla ogni anteprima sul computer e confermala sul telefono. I file sostituiti e cancellati restano in .musiccraft-sync/recovery; il ripristino è per ora manuale.
 Apply preview	Applica anteprima
 Validating the reviewed preview…	Verifica dell’anteprima confermata…
+The paired source changed. Reopen its settings.	La sorgente abbinata è cambiata. Riapri le sue impostazioni.
+Authorize Keychain to access the saved pairing.	Autorizza il Portachiavi per accedere all’abbinamento salvato.
+Enter a private IPv4 address, optionally followed by a port.	Inserisci un indirizzo IPv4 privato, seguito dalla porta se necessario.
+Could not verify the paired phone at this address. Check its IP, port and sharing status.	Impossibile verificare il telefono abbinato a questo indirizzo. Controlla IP, porta e condivisione.
+Update paired phone address	Aggiorna indirizzo del telefono abbinato
+Enter the phone's current Wi-Fi address to reuse its existing pairing.	Inserisci l’indirizzo Wi-Fi attuale del telefono per usare l’abbinamento esistente.
+Pair again	Abbina di nuovo
